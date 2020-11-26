@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation=" http://www.springframework.org/schema/security 
+  					 http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Spring Security 인증처리로직를 정의한 클래스 -->
+	<bean id="customizedAuthenticationProvider"
+		class="com.beans.roaststars.security.MemberAuthenticationProvider"/>
+	<security:authentication-manager>
+		<security:authentication-provider ref="customizedAuthenticationProvider" />
+	</security:authentication-manager>
+   <!-- 
+   		use-expressions="true" : SPEL(spring security custom tag) 사용  ex) hasRole('ROLE_ADMIN') 
+   		disable-url-rewriting="true" : url 에 jsession id 붙는 것 방지    	
+    -->
+		<security:http use-expressions="true" disable-url-rewriting="true" >
+		
+  <!-- 	spring-web.xml 에 @Secured 설정을 하여 컨트롤러에 권한체크를 Annotation 기반으로 한다.
+  		org.kosta.myapp.controller의 HomeController , MemberController , AdminController 에서 
+  		@Secured 적용사례를 확인하자. 
+  		
+  		만약 xml 기반 url pattern 으로 제어하고자 한다면 아래와 같은 옵션을 쓰면 된다. 
+  		<security:intercept-url pattern="/home.do" access="permitAll"/> 
+  		<security:intercept-url pattern="/login*.do" access="permitAll"/> 
+  		<security:intercept-url pattern="/cafe*.do" access="hasAnyRole('ROLE_USER,ROLE_ADMIN')"/> 
+  		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> 
+  		<security:intercept-url pattern="/member/**" access="hasRole('ROLE_MEMBER')"/>  		
+   -->		
+   <!-- CSRF 공격을 방어하기 위한 처리를 한다. false가 기본값 -->
+   	<security:csrf disabled="false"/>
+   <!-- 
+   		security login 설정 
+   		
+   		login-page : 로그인 폼이 있는  url 
+   		username-parameter : 로그인 폼에 있는 id의 name
+		password-parameter : 로그인 폼에 있는 password의 name 
+   		login-processing-url : 로그인 폼의 action 에 할당될 url (로그인 처리할 url)
+   		authentication-failure-url : 로그인 실패시 이동할  url
+   		default-target-url : 로그인 성공 후 이동될  url
+    -->		
+		<security:form-login
+						login-page="/home.do"
+						login-processing-url="/login.do"
+						username-parameter="id"
+						password-parameter="password"
+						authentication-failure-url="/login_fail.do"
+						default-target-url="/home.do"						
+						/>						
+	<!-- 
+		 security logout 설정 
+		 logout-url="/logout.do" : 로그아웃을 실행할 url 
+		 logout-success-url="/home.do" : 로그아웃 후 이동할  url
+	 -->					
+		<security:logout logout-url="/logout.do" logout-success-url="/home.do" />
+	<!-- 
+		  로그인 하였으나 권한이 없는 요청을 하였을 경우 보여지는 페이지를 지정  
+	 -->	
+		<security:access-denied-handler error-page="/accessDeniedView.do"/>
+	</security:http>
+	<!-- 비밀번호 암호화를 위한 설정 -->
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+</beans>
