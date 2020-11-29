@@ -8,6 +8,7 @@ public class CafeVO {
 	private String cafeLoc;
 	private MultipartFile cafePic;
 	private String cafeInfo;
+	private CafeOperatingTimeVO cafeOperatingTimeVO;
 	private UserVO userVO;
 	
 	public CafeVO() {
@@ -15,13 +16,14 @@ public class CafeVO {
 	}
 
 	public CafeVO(String cafeNo, String cafeName, String cafeLoc, MultipartFile cafePic, String cafeInfo,
-			UserVO userVO) {
+			CafeOperatingTimeVO cafeOperatingTimeVO, UserVO userVO) {
 		super();
 		this.cafeNo = cafeNo;
 		this.cafeName = cafeName;
 		this.cafeLoc = cafeLoc;
 		this.cafePic = cafePic;
 		this.cafeInfo = cafeInfo;
+		this.cafeOperatingTimeVO = cafeOperatingTimeVO;
 		this.userVO = userVO;
 	}
 
@@ -65,6 +67,14 @@ public class CafeVO {
 		this.cafeInfo = cafeInfo;
 	}
 
+	public CafeOperatingTimeVO getCafeOperatingTimeVO() {
+		return cafeOperatingTimeVO;
+	}
+
+	public void setCafeOperatingTimeVO(CafeOperatingTimeVO cafeOperatingTimeVO) {
+		this.cafeOperatingTimeVO = cafeOperatingTimeVO;
+	}
+
 	public UserVO getUserVO() {
 		return userVO;
 	}
@@ -76,6 +86,7 @@ public class CafeVO {
 	@Override
 	public String toString() {
 		return "CafeVO [cafeNo=" + cafeNo + ", cafeName=" + cafeName + ", cafeLoc=" + cafeLoc + ", cafePic=" + cafePic
-				+ ", cafeInfo=" + cafeInfo + ", userVO=" + userVO + "]";
+				+ ", cafeInfo=" + cafeInfo + ", cafeOperatingTimeVO=" + cafeOperatingTimeVO + ", userVO=" + userVO
+				+ "]";
 	}
 }

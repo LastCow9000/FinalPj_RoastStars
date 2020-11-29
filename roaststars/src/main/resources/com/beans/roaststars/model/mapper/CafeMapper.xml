@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.beans.roaststars.model.mapper.CafeMapper">
 	
 	<!-- has a 관계를 위한 userVO resultMap -->
-	<resultMap type="cafeVO" id="cafeRM">
+	<resultMap type="cafeVO" id="cafeUserRM">
 		<result property="userVO.id" column="id"/>
 		<result property="userVO.password" column="password"/>
 		<result property="userVO.name" column="name"/>
@@ -15,11 +15,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userVO.address" column="address"/>
 		<result property="userVO.enabled" column="enabled"/>
 	</resultMap>
-
+	
+	<!-- has a 관계를 위한 cafeOperatingTime resultMap -->
+	<resultMap type="cafeVO" id="cafeOperRM" extends="cafeUserRM">
+		<result property="cafeOperatingTimeVO.weekdayTime" column="weekday_time"/>
+		<result property="cafeOperatingTimeVO.weekendTime" column="weekend_time"/>
+		<result property="cafeOperatingTimeVO.holidayTime" column="holiday_time"/>
+	</resultMap>
+	
 	<!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
-	<select id="findCafeByCafeNo" resultType="cafeVO" resultMap="cafeRM">
+	<select id="findCafeByCafeNo" resultType="cafeVO" resultMap="cafeOperRM">
 		SELECT  *
-		FROM    rs_user r, cafe c
-		WHERE   r.id = c.id AND cafe_no=#{value}
+		FROM    rs_user r, cafe c, operating_time o
+		WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=#{value}
 	</select>
 </mapper>

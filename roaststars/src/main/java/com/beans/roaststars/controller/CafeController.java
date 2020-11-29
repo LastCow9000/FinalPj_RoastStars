@@ -19,5 +19,7 @@ public class CafeController {
 	public ModelAndView viewCafeDetail(String cafeNo) {
 		return new ModelAndView("cafe/cafeDetail.tiles",
 				"cafeVO", cafeMapper.findCafeByCafeNo(cafeNo));
-	}
+	}//viewCafeDetail
+	
+	
 }

@@ -426,6 +426,19 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
 
+------------------------------------
+-- 예울 test --
+
+-- 1. cafe_no = 9 에 사진 넣기
+select *
+from cafe c, OPERATING_TIME o
+where c.cafe_no = o.cafe_no AND c.cafe_no =9
+
+update cafe set cafe_pic='까치화방.jpg' where cafe_no=9
+
+commit
+
+-- 예울 test 끝 --
 
 
 

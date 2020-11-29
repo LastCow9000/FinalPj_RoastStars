@@ -48,7 +48,7 @@ public class BoardUnitTest {
 		}
 		*/
 		// test3. 카페 번호로 카페 정보 조회
-		CafeVO cafeVO = cafeService.findCafeByCafeNo("1");
+		CafeVO cafeVO = cafeService.findCafeByCafeNo("9");
 		System.out.println(cafeVO);
 	}
 	
