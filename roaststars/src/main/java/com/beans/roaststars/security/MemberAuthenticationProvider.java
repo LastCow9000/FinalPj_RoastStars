@@ -40,9 +40,12 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 	 
 	 */
 	/**
-	 * 사용자가 화면에서 로그인을 하면 아래의 메서드가 실행된다. 매개변수 : 인증시 필요한 정보 - Authentication ( 사용자가
-	 * 입력한 ID , PASSWORD가 저장되어 있음 ) 리턴 : 인증한 정보를 가진 Authentication 매개변수에 전달된
-	 * Authentication객체를 받아 인증처리를 한뒤 인증한 정보를 Authentication에 담아 리턴
+	 * 사용자가 화면에서 로그인을 하면 아래의 메서드가 실행된다. 
+	 * 매개변수
+	 * 	 : 인증시 필요한 정보 - Authentication ( 사용자가 입력한 ID , PASSWORD가 저장되어 있음 )
+	 * 리턴
+	 * 	 : 인증한 정보를 가진 Authentication 매개변수에 전달된
+	 * 	   Authentication객체를 받아 인증처리를 한 뒤 인증한 정보를 Authentication에 담아 리턴
 	 */
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		if (authentication == null) {
@@ -51,6 +54,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		
 		// 사용자가 로그인시 입력한 ID 반환
 		String id = authentication.getName();
+
 		// 입력받은 id를 이용해 사용자 정보 DB로부터 조회
 		UserVO member = userService.findUserById(id);
 		if (member == null) {
@@ -67,6 +71,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		   이용자가 로그인 폼에서 입력한 비밀번호와 DB로부터 가져온 암호화된 비밀번호를 비교한다
 		  ( 비밀번호 암호화를 이용할 경우 )
 		 */
+		
 		if (passwordEncoder.matches(password, member.getPassword()) == false)
 			throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
 		// 사용자 권한 조회 ( 회원가입시 권한 부여 , 관리자는 시스템 상에서 권한 부여 )

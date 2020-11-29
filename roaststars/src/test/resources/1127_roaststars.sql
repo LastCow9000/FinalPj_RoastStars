@@ -8,15 +8,27 @@ CREATE TABLE rs_user(
 	name          VARCHAR2(50)  NOT NULL,
 	nickname      VARCHAR2(50)  NOT NULL, -- 가입할 때 활성화회원 중복확인
 	tel           VARCHAR2(50), -- 선택입력사항
-	address       VARCHAR2(200) NOT NULL,
+	address       VARCHAR2(100) NOT NULL,
 	business_name VARCHAR2(50),  -- 선택입력사항
-	business_pic  VARCHAR2(500) DEFAULT 'NO IMAGE', -- 선택입력사항
+	business_pic  VARCHAR2(100), -- 선택입력사항
 	business_no   VARCHAR2(100), -- 선택입력사항 
-	enabled    NUMBER        DEFAULT 1 NOT NULL 
+	is_enabled    NUMBER        DEFAULT 1 NOT NULL 
 );
 
+ALTER TABLE rs_user
+RENAME COLUMN is_enabled TO enabled;
 
 delete from rs_user
+
+-- 기존 컬럼을 삭제합니다. 
+ALTER TABLE rs_user DROP COLUMN business_pic;
+-- 새로운 데이터 타입인 컬럼으로 추가합니다.
+ALTER TABLE rs_user ADD business_pic VARCHAR2(500)
+-- Default 값 수정 
+ALTER TABLE rs_user MODIFY business_pic DEFAULT 'NO IMAGE';
+
+
+
 
 
 -- 일반 고객 가입 시 SQL문
@@ -105,8 +117,8 @@ DROP TABLE cafe;
 CREATE TABLE cafe(
 	cafe_no    NUMBER        PRIMARY KEY,
 	cafe_name  VARCHAR2(50)  NOT NULL,
-	cafe_loc   VARCHAR2(200)  NOT NULL,
-	cafe_pic   VARCHAR2(500) DEFAULT 'NO IMAGE',
+	cafe_loc   VARCHAR2(50)  NOT NULL,
+	cafe_pic   VARCHAR2(100) DEFAULT '이미지 없음',
 	cafe_info  CLOB          NOT NULL,
 	cafe_tel   VARCHAR2(50)  NOT NULL,
 	id         VARCHAR2(50)  NOT NULL,
@@ -114,6 +126,16 @@ CREATE TABLE cafe(
 );
 
 delete from cafe
+
+-- 기존 컬럼을 삭제합니다. 
+ALTER TABLE cafe DROP COLUMN cafe_pic;
+-- 새로운 데이터 타입인 컬럼으로 추가합니다.
+ALTER TABLE cafe ADD cafe_pic VARCHAR2(500)
+-- Default 값 수정 
+ALTER TABLE cafe MODIFY cafe_pic DEFAULT 'NO IMAGE';
+
+-- 카페주소 컬럼 길이 늘이기
+ALTER TABLE cafe MODIFY cafe_loc VARCHAR2(200)
 
 
 DROP SEQUENCE cafe_seq;
@@ -229,11 +251,6 @@ SELECT *
 FROM   property p, cafe f
 WHERE  p.cafe_no = f.cafe_no
 
--- 리뷰 남기며 카페의 특성 점수 수정하기(리뷰 insert와 트랜잭션 처리 필요)
-update property 
-set service = service + 1, taste = taste +(-2), price = price + 0, mood = mood + (-2), diversity = diversity + 1
-where cafe_no = 1
-
 
 -- 8. beans_pick
 DROP TABLE beans_pick;
@@ -241,7 +258,6 @@ CREATE TABLE beans_pick(
    beans_no          NUMBER        PRIMARY KEY,
    beans_title       VARCHAR2(50)  NOT NULL,
    beans_content     clob          NOT NULL,
-   beans_pic         VARCHAR2(500) DEFAULT 'NO IMAGE' NOT NULL,
    beans_regdate     date          not null,
    id                VARCHAR2(50)  NOT NULL,
    constraint fk_beans_pick foreign key(id) references rs_user(id) on delete cascade
@@ -249,6 +265,19 @@ CREATE TABLE beans_pick(
 
 DROP SEQUENCE beans_pick_seq;
 CREATE SEQUENCE beans_pick_seq;
+
+-- 새 CLOB 컬럼을 추가합니다. 
+ALTER TABLE beans_pick ADD (beans_pic CLOB); 
+-- Default 값 수정 
+ALTER TABLE beans_pick MODIFY beans_pic DEFAULT 'NO IMAGE';
+
+-- 기존 컬럼을 삭제합니다. 
+ALTER TABLE beans_pick DROP COLUMN beans_pic;
+-- 새로운 데이터 타입인 컬럼으로 추가합니다.
+ALTER TABLE beans_pick ADD beans_pic VARCHAR2(500);
+-- Default 값 수정 
+ALTER TABLE beans_pick MODIFY beans_pic DEFAULT 'NO IMAGE';
+
 
 insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
 values (beans_pick_seq.nextval,'크리스마스분위기나는 카페','개쩔어',sysdate,'admin');
@@ -269,11 +298,9 @@ CREATE TABLE menu(
    constraint fk_menu_cafe foreign key(cafe_no) references cafe(cafe_no) on delete cascade,
    constraint pk_menu_cafe primary key(cafe_no, menu_name)
 );
-
 DROP SEQUENCE menu_seq;
 CREATE SEQUENCE menu_seq;
 select*from menu;
-
 --메뉴 insert
 insert into menu values('아메리카노(ICE)',3000,9);
 insert into menu values('아메리카노(HOT)',2500,9);
@@ -346,8 +373,7 @@ CREATE TABLE order_detail(
    order_no        number         not null,
    constraint fk_order_detail_order_no foreign key(order_no) references order_info(order_no) on delete cascade,
    constraint fk_order_detail_menu_name foreign key(cafe_no, menu_name) references menu(cafe_no, menu_name) on delete cascade
-); 
--- 복합프라이머리키를 참조하기 위해서는 아래와 같이 진행하시면 됩니다.
+); --병철씨.. 복합프라이머리키를 참조하기 위해서는 위와같이 진행하시면 됩니다.
 -- constraint 제약조건명 foreign key(복프키1, 복프키2) references 테이블명(복프키1, 복프키2) on delete cascade
 
 DROP SEQUENCE order_detail_seq;
@@ -399,6 +425,8 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 --삭제 테스트
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
+
+
 
 
 

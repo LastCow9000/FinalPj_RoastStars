@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beans.roaststars.model.mapper.CafeMapper">
+	
+	<!-- has a 관계를 위한 userVO resultMap -->
+	<resultMap type="cafeVO" id="cafeRM">
+		<result property="userVO.id" column="id"/>
+		<result property="userVO.password" column="password"/>
+		<result property="userVO.name" column="name"/>
+		<result property="userVO.nickname" column="nickname"/>
+		<result property="userVO.tel" column="tel"/>
+		<result property="userVO.address" column="address"/>
+		<result property="userVO.enabled" column="enabled"/>
+	</resultMap>
+
+	<!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
+	<select id="findCafeByCafeNo" resultType="cafeVO" resultMap="cafeRM">
+		SELECT  *
+		FROM    rs_user r, cafe c
+		WHERE   r.id = c.id AND cafe_no=#{value}
+	</select>
+</mapper>

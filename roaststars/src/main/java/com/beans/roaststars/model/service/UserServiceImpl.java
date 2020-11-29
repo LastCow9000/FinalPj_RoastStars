@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public UserVO findUserById(String id) {
-		return null;
+		return userMapper.findUserById(id);
 	}
 	@Override
 	public String nicknameCheck(String nickname) {
@@ -45,8 +45,6 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public List<AuthorityVO> selectAuthorityByUsername(String username) {
-		return null;
+		return userMapper.selectAuthorityByUsername(username);
 	}
-	
-	
 }

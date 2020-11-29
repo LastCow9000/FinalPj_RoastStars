@@ -5,5 +5,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beans.roaststars.model.mapper.UserMapper">
  	
+ 	<!-- SQL 기본 select -->
+ 	<sql id="selectUser">
+ 		SELECT *
+ 		FROM   rs_user
+ 	</sql>
+ 	
+ 	<!-- 로그인 시 사용 sql - findUserById -->
+ 	<select id="findUserById" resultType="userVO">
+ 		<include refid="selectUser"/>
+ 		WHERE id=#{value}
+ 	</select>
+ 	
+	<!-- Spring Security에서 권한 체크를 위해 사용 --> 
+	<select id="selectAuthorityByUsername" resultType="authorityVO">
+		SELECT  username, authority
+		FROM    authorities
+		WHERE   username=${username}
+	</select>
 </mapper>
  

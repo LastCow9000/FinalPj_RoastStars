@@ -15,6 +15,10 @@
 <title>Main</title>
 </head>
 <body>
+	<%-- (예울 test) 카페 상세보기 가기 링크 --%>
+	<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=9">카페 상세보기</a>
+	<%-- 예울 test 끝 --%>
+	
 	<%-- Main Start --%>
 	<div class="jumbotron text-center">
 		<h2>언제까지 맨날 똑같은 커피만 마실래 ?!</h2>

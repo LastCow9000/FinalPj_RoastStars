@@ -8,8 +8,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.beans.roaststars.model.service.CafeService;
+import com.beans.roaststars.model.service.UserService;
+import com.beans.roaststars.model.vo.CafeVO;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-model.xml" })
+@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml","file:src/main/webapp/WEB-INF/spring-security.xml"})
 public class BoardUnitTest {
 
 	//@Test
@@ -21,12 +25,37 @@ public class BoardUnitTest {
 	//	System.out.println("로그인 테스트 : " + mvo);
 	//}
 
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private CafeService cafeService;
+	
+	
 	@Test
-	public void boardUnitTest() {
+	public void userTest() {
+		// test1. 아이디로 회원정보 찾기
+		/*UserVO userVO = userService.findUserById("sajang");
+		System.out.println(userVO);
+		
+		UserVO userVO = userService.findUserById("java");
+		System.out.println(userVO);
+		
+		// test2. 아이디(username)으로 권한 조회
+		List<AuthorityVO> list = userMapper.selectAuthorityByUsername("java");
+		for(AuthorityVO vo:list) {
+			System.out.println(vo);
+		}
+		*/
+		// test3. 카페 번호로 카페 정보 조회
+		CafeVO cafeVO = cafeService.findCafeByCafeNo("1");
+		System.out.println(cafeVO);
 	}
+	
+	
 }
 		//        사용법 예시             //
-		/*
+		/* 
 		@Resource
 		ItemDAO itemDAO;
 		@Test
