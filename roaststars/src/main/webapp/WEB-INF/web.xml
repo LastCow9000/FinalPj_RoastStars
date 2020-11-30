@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <welcome-file-list>
     <welcome-file>home.do</welcome-file>
-  </welcome-file-list>   
+  </welcome-file-list>
   <!-- 
         DispatcherServlet 로딩에 앞서 Filter기반 Security 설정과 spring-model ( 로그인 관련 db연동을 통한 
           인증,인가 처리를 위해) 설정을 ServletContextListener를 이용해 로딩한다 
@@ -39,17 +39,18 @@
   <filter-mapping>
     <filter-name>encodeFilter</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping>  
+  
   <filter>
-    <description>스프링 파일업로드 필터 등록-스프링시큐리티설정전에 위치해야 한다</description>
-    <filter-name>MultipartFilter</filter-name>
-    <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+ 	<description>스프링 파일업로드 필터 등록-스프링시큐리티설정전에 위치해야 한다</description>
+ 	<filter-name>MultipartFilter</filter-name>
+  	<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>MultipartFilter</filter-name>
-    <url-pattern>*.do</url-pattern>
+  	<filter-name>MultipartFilter</filter-name>
+ 	<url-pattern>*.do</url-pattern>
   </filter-mapping>
-  <!-- 파일 업로드 필터 추가 -->
+  
   <filter>
     <description>스프링 시큐리티 필터 등록</description>
     <filter-name>springSecurityFilterChain</filter-name>

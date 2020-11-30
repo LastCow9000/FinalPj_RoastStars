@@ -1,6 +1,8 @@
 package com.beans.roaststars;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -9,8 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beans.roaststars.model.service.CafeService;
+import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.service.UserService;
-import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.ReviewVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml","file:src/main/webapp/WEB-INF/spring-security.xml"})
@@ -31,11 +34,13 @@ public class BoardUnitTest {
 	@Resource
 	private CafeService cafeService;
 	
+	@Resource
+	private ReviewService reviewService;
 	
-	@Test
+	/*@Test
 	public void userTest() {
 		// test1. 아이디로 회원정보 찾기
-		/*UserVO userVO = userService.findUserById("sajang");
+		UserVO userVO = userService.findUserById("sajang");
 		System.out.println(userVO);
 		
 		UserVO userVO = userService.findUserById("java");
@@ -46,14 +51,22 @@ public class BoardUnitTest {
 		for(AuthorityVO vo:list) {
 			System.out.println(vo);
 		}
-		*/
+		
 		// test3. 카페 번호로 카페 정보 조회
 		CafeVO cafeVO = cafeService.findCafeByCafeNo("9");
 		System.out.println(cafeVO);
 	}
 	
 	
-}
+}*/
+	@Test
+	public void reviewTest() {
+		//test1. 카페넘버로 리뷰 목록 불러오기
+		List<ReviewVO> list = reviewService.findReviewListByCafeNo("9");
+		for(ReviewVO vo:list) {
+			System.out.println(vo);
+		} 
+	}
 		//        사용법 예시             //
 		/* 
 		@Resource
@@ -76,3 +89,4 @@ public class BoardUnitTest {
 			System.out.println("등록완료: "+ivo);
 		}
 		*/
+}

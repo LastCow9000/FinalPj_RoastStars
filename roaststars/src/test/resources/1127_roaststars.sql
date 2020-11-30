@@ -213,15 +213,15 @@ CREATE SEQUENCE review_seq;
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
 VALUES (9, 'java', review_seq.nextval, '맛있어요', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (10, 'spring', review_seq.nextval, '역시맛없네요', sysdate);
+VALUES (9, 'spring', review_seq.nextval, '역시맛없네요', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (11, 'java1', review_seq.nextval, '맛있어요1', sysdate);
+VALUES (9, 'java1', review_seq.nextval, '맛있어요1', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (12, 'java2', review_seq.nextval, '맛있어요2', sysdate);
+VALUES (9, 'java2', review_seq.nextval, '맛있어요2', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (7, 'java3', review_seq.nextval, '맛있어요3', sysdate);
+VALUES (9, 'java3', review_seq.nextval, '맛있어요3', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (8, 'java4', review_seq.nextval, '맛있어요4', sysdate);
+VALUES (9, 'java4', review_seq.nextval, '맛있어요4', sysdate);
 -- cafe table과 review table 조인
 SELECT *
 FROM   cafe f, review r
@@ -437,6 +437,11 @@ where c.cafe_no = o.cafe_no AND c.cafe_no =9
 update cafe set cafe_pic='까치화방.jpg' where cafe_no=9
 
 commit
+
+-- 2. review 조회
+SELECT *
+FROM   cafe c, review r
+WHERE  c.cafe_no = r.cafe_no AND c.cafe_no=9
 
 -- 예울 test 끝 --
 

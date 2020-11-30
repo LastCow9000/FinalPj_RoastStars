@@ -7,7 +7,7 @@ import com.beans.roaststars.model.vo.UserVO;
 
 public interface UserService {
 	
-	void registerUser(UserVO userVO);
+	void registerUser(UserVO vo);
 	
 	void withdrawalUser(String id);
 	
@@ -15,9 +15,9 @@ public interface UserService {
 	
 	UserVO findUserById(String id);
 	
-	String nicknameCheck(String nickname);
-	
 	void grantAuthorization(String id, String authority);
 	
 	List<AuthorityVO> selectAuthorityByUsername(String username);
+
+	String nickCheck(String nickname);
 }

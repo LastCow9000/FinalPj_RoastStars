@@ -4,7 +4,7 @@
 DROP TABLE rs_user;
 CREATE TABLE rs_user(
 	id            VARCHAR2(50)  PRIMARY KEY, -- 가입할 때 활성화회원 중복확인
-	password      VARCHAR2(50)  NOT NULL,
+	password      VARCHAR2(100)  NOT NULL,
 	name          VARCHAR2(50)  NOT NULL,
 	nickname      VARCHAR2(50)  NOT NULL, -- 가입할 때 활성화회원 중복확인
 	tel           VARCHAR2(50), -- 선택입력사항
@@ -15,9 +15,9 @@ CREATE TABLE rs_user(
 	enabled    NUMBER        DEFAULT 1 NOT NULL 
 );
 
+--ALTER TABLE rs_user MODIFY (password VARCHAR2(100))
 
 delete from rs_user
-
 
 -- 일반 고객 가입 시 SQL문
 INSERT INTO rs_user(id, password, name, nickname, tel, address)
@@ -152,17 +152,17 @@ CREATE TABLE operating_time(
 
 -- 카페 운영시간 insert
 INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(9, '08:00~22:00', '10:00~20:00','공휴일휴무');
+VALUES(1, '08:00~22:00', '10:00~20:00','공휴일휴무');
 INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(10, '09:00~24:00', '10:02~20:00','공휴일휴무');
+VALUES(2, '09:00~24:00', '10:02~20:00','공휴일휴무');
 INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(11, '08:00~22:00', '10:03~20:00','공휴일휴무');
+VALUES(3, '08:00~22:00', '10:03~20:00','공휴일휴무');
 INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(12, '08:00~22:00', '10:04~20:00','공휴일휴무');
+VALUES(4, '08:00~22:00', '10:04~20:00','공휴일휴무');
 INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(7, '08:00~22:00', '10:05~20:00','공휴일휴무');
+VALUES(5, '08:00~22:00', '10:05~20:00','공휴일휴무');
 INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(8, '08:00~22:00', '10:06~20:00','공휴일휴무');
+VALUES(6, '08:00~22:00', '10:06~20:00','공휴일휴무');
 
 select *
 from operating_time
@@ -189,17 +189,17 @@ DROP SEQUENCE review_seq;
 CREATE SEQUENCE review_seq;
 
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (9, 'java', review_seq.nextval, '맛있어요', sysdate);
+VALUES (1, 'java', review_seq.nextval, '맛있어요', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (10, 'spring', review_seq.nextval, '역시맛없네요', sysdate);
+VALUES (2, 'spring', review_seq.nextval, '역시맛없네요', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (11, 'java1', review_seq.nextval, '맛있어요1', sysdate);
+VALUES (3, 'java1', review_seq.nextval, '맛있어요1', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (12, 'java2', review_seq.nextval, '맛있어요2', sysdate);
+VALUES (4, 'java2', review_seq.nextval, '맛있어요2', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (7, 'java3', review_seq.nextval, '맛있어요3', sysdate);
+VALUES (5, 'java3', review_seq.nextval, '맛있어요3', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
-VALUES (8, 'java4', review_seq.nextval, '맛있어요4', sysdate);
+VALUES (6, 'java4', review_seq.nextval, '맛있어요4', sysdate);
 -- cafe table과 review table 조인
 SELECT *
 FROM   cafe f, review r
@@ -260,6 +260,8 @@ insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
 values (beans_pick_seq.nextval,'크리스마스분위기나는 카페3','개쩔어3',sysdate,'admin');
 
 
+select * from BEANS_PICK
+
 -- 9. menu
 DROP TABLE menu;
 CREATE TABLE menu(
@@ -271,45 +273,44 @@ CREATE TABLE menu(
 );
 
 DROP SEQUENCE menu_seq;
-CREATE SEQUENCE menu_seq;
 select*from menu;
 
 --메뉴 insert
-insert into menu values('아메리카노(ICE)',3000,9);
-insert into menu values('아메리카노(HOT)',2500,9);
-insert into menu values('카페라떼(ICE)',3500,9);
-insert into menu values('카페라떼(HOT)',3000,9);
-insert into menu values('바닐라라떼(ICE)',4000,9);
+insert into menu values('아메리카노(ICE)',3000,1);
+insert into menu values('아메리카노(HOT)',2500,1);
+insert into menu values('카페라떼(ICE)',3500,1);
+insert into menu values('카페라떼(HOT)',3000,1);
+insert into menu values('바닐라라떼(ICE)',4000,1);
 
-insert into menu values('이디야카노(ICE)',4000,10);
-insert into menu values('이디야카노(HOT)',3500,10);
-insert into menu values('이디야라떼(ICE)',4500,10);
-insert into menu values('이디야라떼(HOT)',4000,10);
-insert into menu values('이닐라라떼(ICE)',5000,10);
+insert into menu values('이디야카노(ICE)',4000,2);
+insert into menu values('이디야카노(HOT)',3500,2);
+insert into menu values('이디야라떼(ICE)',4500,2);
+insert into menu values('이디야라떼(HOT)',4000,2);
+insert into menu values('이닐라라떼(ICE)',5000,2);
 
-insert into menu values('이디야카노1(ICE)',4100,11);
-insert into menu values('이디야카노1(HOT)',3100,11);
-insert into menu values('이디야라떼1(ICE)',4100,11);
-insert into menu values('이디야라떼1(HOT)',4100,11);
-insert into menu values('이닐라라떼1(ICE)',5100,11);
+insert into menu values('이디야카노1(ICE)',4100,3);
+insert into menu values('이디야카노1(HOT)',3100,3);
+insert into menu values('이디야라떼1(ICE)',4100,3);
+insert into menu values('이디야라떼1(HOT)',4100,3);
+insert into menu values('이닐라라떼1(ICE)',5100,3);
 
-insert into menu values('이디야카노2(ICE)',4200,12);
-insert into menu values('이디야카노2(HOT)',3200,12);
-insert into menu values('이디야라떼2(ICE)',4200,12);
-insert into menu values('이디야라떼2(HOT)',4200,12);
-insert into menu values('이닐라라떼2(ICE)',5200,12);
+insert into menu values('이디야카노2(ICE)',4200,4);
+insert into menu values('이디야카노2(HOT)',3200,4);
+insert into menu values('이디야라떼2(ICE)',4200,4);
+insert into menu values('이디야라떼2(HOT)',4200,4);
+insert into menu values('이닐라라떼2(ICE)',5200,4);
 
-insert into menu values('이디야카노3(ICE)',4300,7);
-insert into menu values('이디야카노3(HOT)',3300,7);
-insert into menu values('이디야라떼3(ICE)',4300,7);
-insert into menu values('이디야라떼3(HOT)',4300,7);
-insert into menu values('이닐라라떼3(ICE)',5300,7);
+insert into menu values('이디야카노3(ICE)',4300,5);
+insert into menu values('이디야카노3(HOT)',3300,5);
+insert into menu values('이디야라떼3(ICE)',4300,5);
+insert into menu values('이디야라떼3(HOT)',4300,5);
+insert into menu values('이닐라라떼3(ICE)',5300,5);
 
-insert into menu values('이디야카노4(ICE)',4400,8);
-insert into menu values('이디야카노4(HOT)',3400,8);
-insert into menu values('이디야라떼4(ICE)',4400,8);
-insert into menu values('이디야라떼4(HOT)',4400,8);
-insert into menu values('이닐라라떼4(ICE)',5400,8);
+insert into menu values('이디야카노4(ICE)',4400,6);
+insert into menu values('이디야카노4(HOT)',3400,6);
+insert into menu values('이디야라떼4(ICE)',4400,6);
+insert into menu values('이디야라떼4(HOT)',4400,6);
+insert into menu values('이닐라라떼4(ICE)',5400,6);
 
 -- 10. order_info
 DROP TABLE order_info;
@@ -399,8 +400,6 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 --삭제 테스트
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
-
-
 
 
 

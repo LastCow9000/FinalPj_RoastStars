@@ -32,10 +32,10 @@
 		<%--로그인 X 사용자 (인증X) --%>
 		<sec:authorize access="!isAuthenticated()">
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">
+			<li><a href="register-form.do">
 				<span class="glyphicon glyphicon-user"></span>
-				회원가입
-			</a></li>
+               회원가입</a>
+            </li>
 			
 			<li>
 				<a href="login-form.do">

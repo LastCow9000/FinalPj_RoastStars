@@ -29,4 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM    rs_user r, cafe c, operating_time o
 		WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=#{value}
 	</select>
+	
+	<resultMap type="cafeVO" id="cafeListRM">
+		<result column="id" property="userVO.id"/>
+	</resultMap>
+ 	<select id="findListByLoc" resultMap="cafeListRM" parameterType="string">
+ 		select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id
+ 		from cafe
+ 		where cafe_loc=#{value}
+ 	</select>
+ 	
 </mapper>

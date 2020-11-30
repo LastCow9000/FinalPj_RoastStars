@@ -16,4 +16,16 @@ public interface UserMapper {
 	//아이디로 권한받기
 	List<AuthorityVO> selectAuthorityByUsername(String username);
 	
+	//회원가입
+	void registerUser(UserVO vo);
+
+	//권한부여
+	void registerRole(AuthorityVO authority);
+
+	//아이디 중복체크
+	int idcheck(String id);
+
+	//닉네임 중복체크
+	int nickcheck(String nickname);
+	
 }
