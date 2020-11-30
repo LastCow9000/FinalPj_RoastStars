@@ -21,11 +21,11 @@
 	
 	<%-- Main Start --%>
 	<div class="jumbotron text-center">
-		<h2>언제까지 맨날 똑같은 커피만 마실래 ?!</h2>
-		<h6>진짜 당신의 인생 카페를 찾아드립니다.</h6>
+		<h1>언제까지 맨날 똑같은 커피만 마실래 ?!</h1>
+		<h2>진짜 당신의 인생 카페를 찾아드립니다.</h2>
 		<form class="form-inline" action="findListByLoc.do">
 			<div class="input-group">
-				<input type="text" class="form-control" size="50"
+				<input type="text" class="form-control" size="100"
 					placeholder="지역을 입력해주세요" required>
 				<div class="input-group-btn">
 					<button type="submit" class="btn btn-default">검색</button>
