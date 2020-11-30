@@ -30,7 +30,7 @@
 		</ul>
 		
 		<%--로그인 X 사용자 (인증X) --%>
-		<sec:authorize access="!isAuthenticated()">
+		<sec:authorize access="!hasRole('ROLE_MEMBER')">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="register-form.do">
 				<span class="glyphicon glyphicon-user"></span>
@@ -47,15 +47,32 @@
 		</sec:authorize>
 		
 		<%-- 로그인 O 사용자 (인증O) --%>
-		<sec:authorize access="isAuthenticated()">
-			<li>
-			<a href="#" id="logoutAction">로그아웃</a>
-			<form id="logoutForm"
-				action="${pageContext.request.contextPath}/logout.do" method="post"
-				style="display: none">
-				<sec:csrfInput />
-			</form>
-			</li>
+		<sec:authorize access="hasRole('ROLE_MEMBER')">
+			<ul class="nav navbar-nav navbar-right">
+			
+			<%-- 
+			Spring Security를 이용하면 Authentication Bean 이 생성
+			로그인 한 사용자의 정보는 Authentication 객체의 principal 에 저장된다 
+			 --%>
+				<li><sec:authentication property="principal.name"/>님<li>
+				
+				<%-- spring security logout은 다음과 같은 처리가 필요하다
+				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$("#logoutAction").click(function() {
+							$("#logoutForm").submit();
+						});
+					});
+				</script>
+				<li><a href="#" id="logoutAction">로그아웃</a>
+				<form id="logoutForm"
+					action="${pageContext.request.contextPath}/logout.do" method="post"
+					style="display: none">
+					<sec:csrfInput/>
+				</form></li>
+				<li><a href="#">회원정보수정</a></li>
+			</ul>
 		</sec:authorize>
 	</div>
 </nav>

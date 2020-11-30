@@ -38,6 +38,7 @@ public class MemberController {
 	// 회원가입
 	@PostMapping("register-user.do")
 	public String register(UserVO vo) {
+		System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
 		userService.registerUser(vo);
 		return "redirect:register-resultView.do?id=" + vo.getId();
 	}

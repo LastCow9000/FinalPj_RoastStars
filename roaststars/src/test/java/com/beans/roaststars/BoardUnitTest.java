@@ -62,10 +62,11 @@ public class BoardUnitTest {
 	@Test
 	public void reviewTest() {
 		//test1. 카페넘버로 리뷰 목록 불러오기
-		List<ReviewVO> list = reviewService.findReviewListByCafeNo("9");
-		for(ReviewVO vo:list) {
-			System.out.println(vo);
-		} 
+		/*
+		 * List<ReviewVO> list = reviewService.findReviewListByCafeNo("9"); for(ReviewVO
+		 * vo:list) { System.out.println(vo); }
+		 */
+		System.out.println(userService.findUserById("tree1"));
 	}
 		//        사용법 예시             //
 		/* 

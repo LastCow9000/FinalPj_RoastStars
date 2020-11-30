@@ -9,8 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<sec:authorize access="!hasRole('ROLE_MEMBER')">
 	<br>
 	<h3>로그인</h3>
 	<form action="${pageContext.request.contextPath}/login.do" 
@@ -20,6 +18,5 @@
 		<input type="password" name="password" placeholder="PASSWORD" required="required"><br>
 		<input type="submit" value="로그인">
 	</form>
-</sec:authorize>
 </body>
 </html>

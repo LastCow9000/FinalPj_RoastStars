@@ -117,17 +117,17 @@
 <body>
 <form method="post" action="${pageContext.request.contextPath}/register-user.do" id="registerForm" onsubmit="return validateCheckboxes()">
 <input type="hidden" name="command" value="register">
-<sec:csrfInput/>
-아이디 <input type="text" name="id" id="memberId" required="required"><span id="idCheckResult"></span><br>
-패스워드 <input type="password" name="password" id="passwordC" required="required"><span id="passwordCheckResult"></span><br>
-패스워드확인 <input type="password" name="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
-
-이름 <input type="text" name="name" required="required"><br>
-닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
-전화번호 <input type="text" name="tel" required="required"><br>
-주소 <input type="text" name="address" required="required"><br>
-사업장명 <input type="text" name="businessName"><br>
-사업자등록번호<input type="text" name="businessNo"><br>
+	<sec:csrfInput/>
+	아이디 <input type="text" name="id" id="memberId" required="required"><span id="idCheckResult"></span><br>
+	패스워드 <input type="password" name="password" id="passwordC" required="required"><span id="passwordCheckResult"></span><br>
+	패스워드확인 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
+	
+	이름 <input type="text" name="name" required="required"><br>
+	닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
+	전화번호 <input type="text" name="tel" required="required"><br>
+	주소 <input type="text" name="address" required="required"><br>
+	사업장명 <input type="text" name="businessName"><br>
+	사업자등록번호<input type="text" name="businessNo"><br>
 <input  type="submit" value="회원가입">
 </form>
 

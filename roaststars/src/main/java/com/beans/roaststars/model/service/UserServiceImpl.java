@@ -56,10 +56,10 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void grantAuthorization(String id, String authority) {
 	}
+	
 	@Override
 	public List<AuthorityVO> selectAuthorityByUsername(String username) {
-		return null;
+		return userMapper.selectAuthorityByUsername(username);
 	}
-
 	
 }
