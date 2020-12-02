@@ -439,9 +439,83 @@ update cafe set cafe_pic='까치화방.jpg' where cafe_no=9
 commit
 
 -- 2. review 조회
-SELECT *
-FROM   cafe c, review r
-WHERE  c.cafe_no = r.cafe_no AND c.cafe_no=9
+SELECT   c.cafe_no, r.review_content, r.review_content, r.review_regdate, 
+		 u.id, u.password, u.name, u.nickname
+FROM     cafe c, review r, rs_user u
+WHERE    c.cafe_no = r.cafe_no AND u.id = r.id AND c.cafe_no = #{value}
+
+-- row_num 인라인 뷰 (cafe + review table JOIN)
+SELECT  row_number() over(order by review_no DESC) AS rnum, c.cafe_no, r.review_content,
+		r.review_content, r.review_regdate
+FROM    cafe c, review r
+WHERE   c.cafe_no = r.cafe_no AND r.cafe_no = 1
+
+-- review조회 (rs_user+(cafe+review)) + (row_num 인라인 뷰) (5개만 조회)
+SELECT cr.cafe_no, cr.review_content, cr.review_no, cr.review_regdate, 
+	   u.id, u.password, u.nickname, u.enabled
+FROM   ( SELECT  row_number() over(order by review_no DESC) AS rnum,
+				 c.cafe_no, r.review_content, r.review_no, r.id,
+		    	 TO_CHAR(r.review_regdate, 'YYYY-MM-DD') AS review_regdate
+ 		 FROM    cafe c, review r
+		 WHERE   c.cafe_no = r.cafe_no AND c.cafe_no = 1) cr, rs_user u
+WHERE   cr.id = u.id AND rnum BETWEEN 1 AND 5
+ORDER BY cr.review_no DESC
+
+
+-- 2-1. reivew 전체 갯수 조회
+SELECT COUNT(*)
+FROM   review r
+WHERE  cafe_no = 1
+
+-- 3. cafe_no = 1에 리뷰 더 많이 작성하기
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('abab', '1', '굉릉', '강릉최고', '010-3595-9818', '강릉');
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('cdcd', '1', '쉑초', '속초바다짱', '010-3595-9818', '속초');
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('red', '1', '귤', '애월가', '110-3595-9818', '제주');
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('blue', '1', '브랜든', '라라랜드', '210-3595-9818', 'LA');
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('green', '1', '스미스', '오클오클', '310-3595-9818', '오클랜드');
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('pink', '1', '아이슈타인', '소금', '410-3595-9818', '할슈타트');
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('grey', '1', '구텐탁', '맥주얌얌', '510-3595-9818', '뮌헨');
+
+INSERT INTO authorities VALUES('abab', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('cdcd', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('red', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('blue', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('green', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('pink', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('grey', 'ROLE_MEMBER');
+
+update property 
+set service = service + 1, taste = taste +(-2), price = price + 1, mood = mood + (1), diversity = diversity + (-2)
+where cafe_no = 1;
+update property 
+set service = service + (-2), taste = taste +(1), price = price + 0, mood = mood + (-2), diversity = diversity + 1
+where cafe_no = 1;
+update property 
+set service = service + 0, taste = taste +0, price = price + (-2), mood = mood + (0), diversity = diversity + 0
+where cafe_no = 1;
+
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'abab', review_seq.nextval, '맛있어요', sysdate);
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'cdcd', review_seq.nextval, '역시맛없네요', sysdate);
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'red', review_seq.nextval, '맛있어요1', sysdate);
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'blue', review_seq.nextval, '맛있어요2', sysdate);
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'green', review_seq.nextval, '맛있어요3', sysdate);
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'grey', review_seq.nextval, '맛있어요4', sysdate);
+INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
+VALUES (1, 'pink', review_seq.nextval, '맛있어요4', sysdate);
+
 
 -- 예울 test 끝 --
 

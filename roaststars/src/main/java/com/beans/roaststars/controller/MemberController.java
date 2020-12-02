@@ -82,20 +82,8 @@ public class MemberController {
 		@Secured("ROLE_MEMBER")
 		@PostMapping("update-useraction.do")
 		public String updateUserAction(HttpServletRequest request, UserVO userVO) {
-	     // 참고) 회원정보 수정시 권한까지 수정해야 할 경우에는 아래처럼 코딩하면 된다
-		/*	
-		    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
-			updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN")); 																		
-			Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(),
-					updatedAuthorities);
-			SecurityContextHolder.getContext().setAuthentication(newAuth);
-		*/
-			////////////////////////////////////////////////////////////////////////////
-
 			// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
 			UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 			userService.updateUser(userVO);//service에서 변경될 비밀번호를 암호화한다 
 			// 수정한 회원정보로 Spring Security 세션 회원정보를 업데이트한다
 			uvo.setPassword(userVO.getPassword());
@@ -104,19 +92,17 @@ public class MemberController {
 			uvo.setTel(userVO.getTel());
 			return "user/updateUserResult.tiles";
 		}
-		
+		//회원탈퇴폼으로 이동.
 		@Secured("ROLE_MEMBER")
 		@RequestMapping("delete-userform.do")
 		public String deleteForm() {
 			return "user/deleteUserForm.tiles";
 		} 
+		//회원탈퇴하기
 		@Secured("ROLE_MEMBER")
 		@PostMapping("delete-useraction.do")
 		public String deleteUserAction(UserVO userVO, HttpSession session) {
-			UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			userService.deleteUser(userVO);
-			uvo.setEnabled(userVO.getEnabled());
-			//session.invalidate();
 			return "user/deleteUserResult.tiles";
 		} 
 		

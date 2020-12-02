@@ -34,6 +34,7 @@
  		<put-attribute name="title"  value="{2}" />
  		<put-attribute name="main"  value="/WEB-INF/views/{1}/{2}.jsp"/>
  	</definition>
+ 	
 </tiles-definitions>
 
 

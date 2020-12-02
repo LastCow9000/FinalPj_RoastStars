@@ -10,3 +10,20 @@
 	font-size: 20px;
 }
 
+
+
+/* 카페 정보 상세보기 페이지 설정 */
+
+/* 리뷰작성 버튼 위치 조정 */
+#reviewBtn {
+	float: right;
+}
+
+#myPickStar{
+	float: right;
+}
+
+/* 페이징 바 */
+.pagingInfo{
+	text-align: center;
+}

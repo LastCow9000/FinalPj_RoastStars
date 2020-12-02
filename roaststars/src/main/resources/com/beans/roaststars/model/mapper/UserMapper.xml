@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<!-- SQL 기본 select -->
  	<sql id="selectUser">
- 		SELECT *
+ 		SELECT id,password,name,nickname,tel,address,business_name,business_pic,
+ 		business_no,enabled
  		FROM   rs_user
  	</sql>
  	
@@ -47,19 +48,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="nickcheck" resultType="int">
 		select count(*) from rs_user where nickname=#{value}
 	</select>
-	<!-- 회원탈퇴시 비밀번호 확인하기 -->
-	<select id="passcheck" resultType="int">
-		select count(*) from rs_user where password=#{value}
-	</select>
 	
+	<!-- 회원탈퇴시 비밀번호 확인하기 -->
+	<!-- <select id="passcheck" resultType="int">
+		select count(*) from rs_user where password=#{value}
+	</select> -->
+	
+	<!-- 회원정보수정 -->
 	<update id="updateUser" parameterType="userVO">
 		update rs_user set password=#{password},name=#{name},address=#{address},tel=#{tel}
 		where id=#{id}
 	</update>
-	
+	<!-- 회원탈퇴 -->
 	<update id="deleteUser" parameterType="userVO">
 		update rs_user set enabled=0
 		where id=#{id}
 	</update>
+
 </mapper>
  
