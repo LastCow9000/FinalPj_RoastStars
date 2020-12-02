@@ -55,7 +55,8 @@
 			로그인 한 사용자의 정보는 Authentication 객체의 principal 에 저장된다 
 			 --%>
 				<li><sec:authentication property="principal.name"/>님<li>
-				
+				<a href="${pageContext.request.contextPath}/update-userform.do">회원정보수정</a>
+				<a href="${pageContext.request.contextPath}/delete-userform.do">탈퇴하기</a>
 				<%-- spring security logout은 다음과 같은 처리가 필요하다
 				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
 				<script type="text/javascript">
@@ -71,7 +72,6 @@
 					style="display: none">
 					<sec:csrfInput/>
 				</form></li>
-				<li><a href="#">회원정보수정</a></li>
 			</ul>
 		</sec:authorize>
 	</div>

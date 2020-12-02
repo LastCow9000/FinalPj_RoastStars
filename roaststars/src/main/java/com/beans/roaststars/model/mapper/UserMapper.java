@@ -27,5 +27,9 @@ public interface UserMapper {
 
 	//닉네임 중복체크
 	int nickcheck(String nickname);
+
+	void updateUser(UserVO userVO);
+
+	void deleteUser(UserVO userVO);
 	
 }
