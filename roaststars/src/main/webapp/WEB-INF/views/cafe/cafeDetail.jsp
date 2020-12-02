@@ -5,11 +5,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>카페 상세보기</title>
 </head>
 
@@ -54,8 +49,7 @@
 		
 		
 			<!-- 리뷰 영역 -->
-			<div style="margin-top: 30px">
-			  <div class="col-sm-5 col-sm-offset-1" style="background-color: #cbf1f5;">
+			  <div class="col-sm-5 offset-sm-1" style="background-color: #cbf1f5; margin-top: 30px">
 				 <font size="15px"><strong>리뷰 (${reviewTotalCount})</strong></font>
 				 <span id="reviewBtn"><button>리뷰작성</button></span>
 				
@@ -118,11 +112,10 @@
 					</c:if>
 					</ul>	 		
 					
-					</div> 
+					</div><!-- 페이징 바 -->
 				 
-				</div> 
-			  </div>
-			</div><!-- 리뷰영역 -->
+				</div> <!-- 리뷰테이블 영역 -->
+			  </div><!-- 리뷰영역 -->
 			
 		</div><!-- row -->
 	</div><!-- container -->
