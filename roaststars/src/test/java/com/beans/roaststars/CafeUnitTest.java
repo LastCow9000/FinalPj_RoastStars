@@ -22,6 +22,7 @@ public class CafeUnitTest {
 	@Resource
 	ReviewService reviewService;
 
+	
 	@Test
 	public void cafeUnitTest() {
 		/*System.out.println(cafeService.findListByLoc("부천"));
@@ -36,13 +37,15 @@ public class CafeUnitTest {
 		
 		// test 3. 카페 넘버로 리뷰 총 개수 불러오기
 		System.out.println(reviewService.findReviewTotalCountByCafeNo("1"));
-		*/
+		
 		
 		// test 4. 카페 넘버로 리뷰 리스트 불러오기- 페이징 테스트
 		ReviewListVO listVO = reviewService.findReviewListByCafeNo("1");
 		for(ReviewVO vo: listVO.getReviewList()) {
 			System.out.println(vo);
-		}
+		}*/
+		
+		// test 5. 카페 정보 상세보기 페이지
 		
 	}
 }

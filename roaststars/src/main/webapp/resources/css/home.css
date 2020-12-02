@@ -14,14 +14,33 @@
 
 /* 카페 정보 상세보기 페이지 설정 */
 
-/* 리뷰작성 버튼 위치 조정 */
-#reviewBtn {
-	float: right;
+/* 카페 상세보기 영역 */
+#cafeDetailCafeTitle {
+	float: left;
+	font-size: 30px;
 }
 
 #myPickStar{
 	float: right;
+	margin-right: 15px;
 }
+
+/* 리뷰 타이틀 및 리뷰 총 개수 조정 */
+#reviewTitle{
+	float: left;
+	font-size: 25px;
+	margin-left: 10px;
+}
+
+/* 리뷰작성 버튼 위치 조정 */
+#reviewBtn {
+	float: right;
+	color : #155263;
+	text-decoration: none;
+	margin-right: 10px;
+}
+
+
 
 /* 페이징 바 */
 .pagingInfo{
