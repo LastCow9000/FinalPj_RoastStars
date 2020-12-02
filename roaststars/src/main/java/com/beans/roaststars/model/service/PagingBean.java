@@ -1,7 +1,8 @@
 package com.beans.roaststars.model.service;
 
 /**
- * 페이징 처리를 위한 비즈니스 계층의 클래스 PagingBean method 구현순서 getStartRowNumber()
+ * 페이징 처리를 위한 비즈니스 계층의 클래스 PagingBean method 구현순서
+ * getStartRowNumber()
  * getEndRowNumber() getTotalPage() getTotalPageGroup() getNowPageGroup()
  * getStartPageOfPageGroup() getEndPageOfPageGroup() isPreviousPageGroup()
  * isNextPageGroup()
@@ -17,16 +18,21 @@ public class PagingBean {
 	/**
 	 * 페이지당 게시물수
 	 */
-	private int contentNumberPerPage = 5;
+	private int contentNumberPerPage;
 	/**
 	 * 페이지 그룹당 페이지수
 	 */
-	private int pageNumberPerPageGroup = 4;
+	private int pageNumberPerPageGroup;
+
 	/**
 	 * database에 저장된 총게시물수
 	 */
 	private int totalContents;
-
+	
+	
+	/**
+	 * 생성자
+	 */
 	public PagingBean() {
 	}
 
@@ -38,10 +44,32 @@ public class PagingBean {
 		this.totalContents = totalContents;
 		this.nowPage = nowPage;
 	}
-
+	
+	
 	public int getNowPage() {
 		return nowPage;
 	}
+	
+	/** 
+	 * 페이지 당 게시물 수 & 페이지 그룹 당 페이지 수
+	 * - 인스턴스 변수 설정 후, set,get으로 입력하기
+	 */
+	public int getContentNumberPerPage() {
+		return contentNumberPerPage;
+	}
+
+	public void setContentNumberPerPage(int contentNumberPerPage) {
+		this.contentNumberPerPage = contentNumberPerPage;
+	}
+
+	public int getPageNumberPerPageGroup() {
+		return pageNumberPerPageGroup;
+	}
+
+	public void setPageNumberPerPageGroup(int pageNumberPerPageGroup) {
+		this.pageNumberPerPageGroup = pageNumberPerPageGroup;
+	}
+
 
 	/**
 	 * 현재 페이지번호에 해당하는 시작 게시물의 row number를 반환 hint : 이전페이지의 마지막 번호 + 1 ((현재페이지-1)
@@ -204,21 +232,19 @@ public class PagingBean {
 	}
 
 	public static void main(String args[]) {
-		PagingBean p = new PagingBean(47, 10);
-		// 현페이지의 시작 row number 를 조회 46
+		PagingBean p = new PagingBean(13, 2);
+		p.setContentNumberPerPage(4);
+		p.setPageNumberPerPageGroup(3);
+		// 현페이지의 시작 row number 를 조회 5
 		System.out.println("getBeginRowNumber:" + p.getStartRowNumber());
-		// 현페이지의 마지막 row number 를 조회 47
+		// 현페이지의 마지막 row number 를 조회 8
 		System.out.println("getEndRowNumber:" + p.getEndRowNumber());
-		// 전체 페이지 수 : 10
+		// 전체 페이지 수 : 4
 		System.out.println("getTotalPage:" + p.getTotalPage());
-		// 전체 페이지 그룹 수 : 3
+		// 전체 페이지 그룹 수 : 2
 		System.out.println("getTotalPageGroup:" + p.getTotalPageGroup());
 		System.out.println("////////////////////////////");
-		p = new PagingBean(31, 6);// 게시물수 31 현재 페이지 6
-		// 현페이지의 시작 row number 를 조회 26
-		System.out.println("getStartRowNumber:" + p.getStartRowNumber());
-		// 현페이지의 마지막 row number 를 조회 30
-		System.out.println("getEndRowNumber:" + p.getEndRowNumber());
+		
 		// 게시물수 31 -> 총페이지수 7 -> 총페이지그룹->2
 		// 현재 페이지 그룹 : 2
 		System.out.println("getNowPageGroup:" + p.getNowPageGroup());

@@ -115,6 +115,7 @@ CREATE TABLE cafe(
 
 delete from cafe
 
+--ALTER TABLE cafe RENAME id TO manager_id
 
 DROP SEQUENCE cafe_seq;
 CREATE SEQUENCE cafe_seq;
@@ -200,10 +201,11 @@ INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
 VALUES (5, 'java3', review_seq.nextval, '맛있어요3', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
 VALUES (6, 'java4', review_seq.nextval, '맛있어요4', sysdate);
+
 -- cafe table과 review table 조인
 SELECT *
-FROM   cafe f, review r
-WHERE  f.cafe_no = r.cafe_no
+FROM   cafe c, review r, rs_user u
+WHERE  c.cafe_no = r.cafe_no AND u.id = r.id AND c.cafe_no = 1
 
 -- 7. property
 DROP TABLE property;
@@ -401,6 +403,19 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
 
+-------------------------------
 
+--1. cafe_no=1에 전화번호 넣기
+UPDATE cafe SET cafe_name='까치화방', cafe_loc='경기도 성남시 분당구 백현동 판교역로 152 3 알파돔타워 3층',
+cafe_info='‘까치화방만의 건강한 제조 공법으로 만든 수제청과 수제청 음료, 그리고 직접구워낸 따뜻한 베이커리를 함께 제공해 드립니다. 판교 알파돔타워3, 3층 브릿지 앞 위치’',
+cafe_tel='031-622-7291' WHERE cafe_no=1
 
+SELECT *
+FROM   
+commit
 
+--
+SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+		c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+FROM    rs_user r, cafe c, operating_time o
+WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1

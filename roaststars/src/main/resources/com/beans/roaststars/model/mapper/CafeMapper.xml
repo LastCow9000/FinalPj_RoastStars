@@ -24,8 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
-	<select id="findCafeByCafeNo" resultType="cafeVO" resultMap="cafeOperRM">
-		SELECT  *
+	<select id="findCafeByCafeNo" resultType="cafeVO" resultMap="cafeOperRM" parameterType="string">
+		SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+				c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
 		FROM    rs_user r, cafe c, operating_time o
 		WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=#{value}
 	</select>
@@ -35,8 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
  	<select id="findListByLoc" resultMap="cafeListRM" parameterType="string">
  		select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id
- 		from cafe
- 		where cafe_loc=#{value}
+ 		from   cafe
+ 		where  cafe_loc=#{value}
  	</select>
  	
 </mapper>

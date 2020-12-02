@@ -4,23 +4,34 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beans.roaststars.model.mapper.ReviewMapper">
-	<!-- has a 관계를 위한 userVO resultMap -->
-	<resultMap type="reviewVO" id="writerUserRM">
+	
+	<!-- has a 관계를 위한 cafeVO resultMap -->
+	<resultMap type="reviewVO" id="UserAndCafeRM">
+		<result property="cafeVO.cafeNo" column="cafe_no"/>
 		<result property="userVO.id" column="id"/>
 		<result property="userVO.password" column="password"/>
 		<result property="userVO.name" column="name"/>
 		<result property="userVO.nickname" column="nickname"/>
 	</resultMap>
 	
-	<!-- has a 관계를 위한 cafeVO resultMap 
-	<resultMap type="reviewVO" id="cafeRM">
-		<result property="cafeVO.cafeNo" column="cafe_no"/>
-	</resultMap>-->
-
+		
 	<!-- 카페 넘버에 해당하는 리뷰 리스트 목록 조회 -->
-	<select id="findReviewListByCafeNo" resultMap="writerUserRM">
-		SELECT *
-		FROM   cafe c, review r
-		WHERE  c.cafe_no = r.cafe_no AND c.cafe_no=#{value}
+	<select id="findReviewListByCafeNo" resultMap="UserAndCafeRM">
+		SELECT cr.cafe_no, cr.review_content, cr.review_no, cr.review_regdate, 
+			   u.id, u.password, u.nickname, u.enabled
+		FROM   ( SELECT  row_number() over(order by review_no DESC) AS rnum,
+						 c.cafe_no, r.review_content, r.review_no, r.id,
+				    	 TO_CHAR(r.review_regdate, 'YYYY-MM-DD') AS review_regdate
+		 		 FROM    cafe c, review r
+				 WHERE   c.cafe_no = r.cafe_no AND c.cafe_no = #{cafeNo}) cr, rs_user u
+		WHERE   cr.id = u.id AND rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber} 
+		ORDER BY cr.review_no DESC
+	</select>
+	
+	<!-- 총 리뷰 개수 -->
+	<select id="findReviewTotalCountByCafeNo" resultType="int">
+		SELECT COUNT(*)
+		FROM   review r
+		WHERE  cafe_no = #{value}
 	</select>
 </mapper>
