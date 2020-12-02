@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cafeOperatingTimeVO.weekendTime" column="weekend_time"/>
 		<result property="cafeOperatingTimeVO.holidayTime" column="holiday_time"/>
 	</resultMap>
-	
+
 	<!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
 	<select id="findCafeByCafeNo" resultType="cafeVO" resultMap="cafeOperRM" parameterType="string">
 		SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,

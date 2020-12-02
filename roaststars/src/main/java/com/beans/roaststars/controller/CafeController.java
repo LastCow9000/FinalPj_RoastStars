@@ -12,6 +12,7 @@ import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.ReviewListVO;
+import com.beans.roaststars.model.vo.CafeVO;
 
 @Controller
 public class CafeController {
@@ -21,12 +22,15 @@ public class CafeController {
 
 	@Resource
 	ReviewService reviewService;
+	
+	@Resource
+	CafeMapper cafeMapper;
 
 	// 메인화면 검색 결과후 지역검색 리스트뽑기
 	@RequestMapping("findListByLoc.do")
 	public String findListByLoc(String loc, Model model) {
-		model.addAttribute("cafeList", cafeService.findListByLoc(loc));
-		return "cafe/CafeListByLoc.tiles";
+		model.addAttribute("cafeList",cafeService.findListByLoc(loc));
+		return "cafe/cafeListByLoc.tiles";
 	}
 
 	// 카페 상세보기 페이지로 이동
@@ -44,4 +48,17 @@ public class CafeController {
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
 
+	public ModelAndView viewCafeDetail(String cafeNo) {
+		return new ModelAndView("cafe/cafeDetail.tiles",
+				"cafeVO", cafeMapper.findCafeByCafeNo(cafeNo));
+	}//viewCafeDetail
+	
+	//카페 간략정보 ajax
+	@RequestMapping("cafe-simple.do")
+	@ResponseBody
+	public CafeVO getCafeSimple(String cafeNo) {
+		CafeVO cafeVO=cafeMapper.findCafeByCafeNo(cafeNo);
+		return cafeVO;
+	}
+	
 }

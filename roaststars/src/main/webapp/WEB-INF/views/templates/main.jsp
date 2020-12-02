@@ -16,6 +16,7 @@
 	<%-- (예울 test) 카페 상세보기 가기 링크 --%>
 	<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=1">카페 상세보기</a>
 	<%-- 예울 test 끝 --%>
+
 	<div class="masthead text-center jumbotron">
 		<div class="container">
 			<div class="row">
@@ -27,9 +28,9 @@
 					<form class="form-inline" action="findListByLoc.do">
 						<div class="form-row">
 							<div class="input-group">
-								<input type="text" class="form-control" size="100" placeholder="지역을 입력해주세요" required>
+								<input type="text" name="loc" class="form-control" size="100" placeholder="지역을 입력해주세요" required>
 								<div class="input-group-btn">
-									<button type="submit" class="btn btn-light">검색</button>
+									<button type="submit" class="btn btn-default">검색</button>
 								</div>
 							</div>
 						</div>
