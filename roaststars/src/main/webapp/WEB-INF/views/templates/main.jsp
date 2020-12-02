@@ -16,7 +16,7 @@
 </head>
 <body>
 	<%-- (예울 test) 카페 상세보기 가기 링크 --%>
-	<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=9">카페 상세보기</a>
+	<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=1">카페 상세보기</a>
 	<%-- 예울 test 끝 --%>
 	
 	<%-- Main Start --%>
@@ -25,7 +25,7 @@
 		<h2>진짜 당신의 인생 카페를 찾아드립니다.</h2>
 		<form class="form-inline" action="findListByLoc.do">
 			<div class="input-group">
-				<input type="text" class="form-control" size="100"
+				<input type="text" name="loc" class="form-control" size="100"
 					placeholder="지역을 입력해주세요" required>
 				<div class="input-group-btn">
 					<button type="submit" class="btn btn-default">검색</button>

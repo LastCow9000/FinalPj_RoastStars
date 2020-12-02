@@ -20,10 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원가입 -->
 	<insert id="registerUser" parameterType="userVO">
-	 	<!-- INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address},#{business_name},#{business_pic},#{business_no}); -->
-		INSERT INTO rs_user(id, password, name, nickname, tel, address)
-		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address})
+	  INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
+	  VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address},#{businessName},null,#{businessNo})
+	  <!-- INSERT INTO rs_user(id, password, name, nickname, tel, address)
+	  VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address}) -->
  	</insert>
  	
  	<!-- 권한 부여 -->
