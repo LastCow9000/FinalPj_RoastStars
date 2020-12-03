@@ -1,6 +1,8 @@
 package com.beans.roaststars;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -10,8 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
-import com.beans.roaststars.model.vo.ReviewListVO;
-import com.beans.roaststars.model.vo.ReviewVO;
+import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml","file:src/main/webapp/WEB-INF/spring-security.xml"})
@@ -36,7 +37,7 @@ public class CafeUnitTest {
 		
 		// test 3. 카페 넘버로 리뷰 총 개수 불러오기
 		System.out.println(reviewService.findReviewTotalCountByCafeNo("1"));
-		*/
+		
 		
 		// test 4. 카페 넘버로 리뷰 리스트 불러오기- 페이징 테스트
 		ReviewListVO listVO = reviewService.findReviewListByCafeNo("1");
@@ -44,6 +45,22 @@ public class CafeUnitTest {
 			System.out.println(vo);
 		}
 		
+		
+		// test 5. 카페리스트 특성에 따라 정렬하기
+		String[] arrOption= {"taste", null , "service"};
+		List<PropertyVO> list=cafeService.cafeListSortByProperty(arrOption, "부천");
+		for(PropertyVO vo: list)
+			System.out.println(vo);
+
+		*/
+		List<CafeOperatingTimeVO> list = cafeService.findListByLoc("부천");
+		for(CafeOperatingTimeVO vo:list) {
+			System.out.println(vo);
+		}
+		/*
+		
+		
+		System.out.println(cafeService.findCafeByCafeNo("1"));	*/	
 	}
 }
 		//        사용법 예시             //

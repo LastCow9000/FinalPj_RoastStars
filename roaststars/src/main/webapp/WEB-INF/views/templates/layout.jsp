@@ -34,5 +34,8 @@
 		</div>
 		<%-- 하단 풋터 end --%>
 	</div>
+	
+	<hr>
+	
 </body>
 </html>

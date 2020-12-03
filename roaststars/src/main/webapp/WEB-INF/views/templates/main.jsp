@@ -28,7 +28,7 @@
 					<form class="form-inline" action="findListByLoc.do">
 						<div class="form-row">
 							<div class="input-group">
-								<input type="text" name="loc" class="form-control" size="100" placeholder="지역을 입력해주세요" required>
+								<input type="text" name="loc" class="form-control" size="100" placeholder="지역을 입력해주세요" required="required">
 								<div class="input-group-btn">
 									<button type="submit" class="btn btn-default">검색</button>
 								</div>

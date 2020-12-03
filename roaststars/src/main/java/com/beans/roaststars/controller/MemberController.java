@@ -1,11 +1,17 @@
 package com.beans.roaststars.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beans.roaststars.model.service.UserService;
@@ -16,7 +22,8 @@ public class MemberController {
 
 	@Resource
 	private UserService userService;
-
+	private String uploadPath; //업로드 경로
+	
 	// 로그인 폼 페이지
 	@RequestMapping("login-form.do")
 	public String loginForm() {
@@ -37,8 +44,28 @@ public class MemberController {
 
 	// 회원가입
 	@PostMapping("register-user.do")
-	public String register(UserVO vo) {
-		System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
+	public String register(UserVO vo, MultipartHttpServletRequest request) {
+		//System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
+		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+		File uploadDir=new File(uploadPath);
+		if(uploadDir.exists()==false)
+			uploadDir.mkdirs();
+		MultipartFile file=vo.getUploadFile();
+		if(file!=null && file.isEmpty()==false) {
+			File uploadFile=new File(uploadPath + file.getOriginalFilename());
+			try {
+				file.transferTo(uploadFile);
+				System.out.println(uploadPath+file.getOriginalFilename());
+				vo.setBusinessPic(uploadPath+file.getOriginalFilename());
+				String localPath="C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
+				File localPathDir=new File(localPath);
+				if(localPathDir.exists()==false)
+					localPathDir.mkdirs();
+				FileCopyUtils.copy(file.getBytes(), new File(localPath + File.separator + file.getOriginalFilename()));
+			}catch(IllegalStateException | IOException e){
+				e.printStackTrace();
+			}
+		}
 		userService.registerUser(vo);
 		return "redirect:register-resultView.do?id=" + vo.getId();
 	}
