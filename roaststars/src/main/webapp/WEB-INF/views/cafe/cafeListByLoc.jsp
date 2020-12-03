@@ -76,6 +76,7 @@
 		//카페이름 클릭시 카페 간략정보 표현하는 ajax
  		$("#cafeList").on("click", ".cafeName", function(){
 			var cafeNo=$(this).next().val();
+			//alert(cafeNo);
 			$.ajax({
 				type:"get",
 				dataType:"json",
@@ -83,7 +84,11 @@
 				data:"cafeNo=" + cafeNo,
 				success:function(cafeTotal){
 					var tag="";
+<<<<<<< HEAD
 					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span></h2>';		
+=======
+					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '*끝에 별표</h2>';		
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 					tag +='<div class="fakeimg">';		
 					tag +='<img src="#" width="500" height="300">';			
 					tag +='</div>';			
@@ -188,11 +193,19 @@
                <div class="col-sm-6" style="margin-top: 10px">
                   <strong>${order.count}</strong> <!-- count -->
                   <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>   
+<<<<<<< HEAD
                   <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <div class="fakeimg">
                         <img src="#"
                              width="250" height="250">
                   </div>
+=======
+	                  <input type="hidden" value="${list.cafeVO.cafeNo}">
+	                  <div class="fakeimg">
+	                        <img src="#"
+	                             width="250" height="250">
+	                  </div>
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
                </div>
             </c:otherwise>
          </c:choose>

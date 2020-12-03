@@ -50,9 +50,13 @@
 			Spring Security를 이용하면 Authentication Bean 이 생성
 			로그인 한 사용자의 정보는 Authentication 객체의 principal 에 저장된다 
 			 --%>
-				<li><sec:authentication property="principal.name" />님
-				<li>&nbsp; &nbsp; <%-- spring security logout은 다음과 같은 처리가 필요하다
-				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%> <script type="text/javascript">
+				<li><sec:authentication property="principal.name"/>님<li>&nbsp; &nbsp;
+				<a href="${pageContext.request.contextPath}/update-userform.do">회원정보수정</a>&nbsp; &nbsp;
+				<a href="${pageContext.request.contextPath}/delete-userform.do">탈퇴하기</a>&nbsp; &nbsp;
+				<%-- spring security logout은 다음과 같은 처리가 필요하다
+				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
+				<script type="text/javascript">
+
 					$(document).ready(function() {
 						$("#logoutAction").click(function() {
 							$("#logoutForm").submit();
@@ -60,12 +64,12 @@
 					});
 				</script>
 				<li><a href="#" id="logoutAction">로그아웃</a>
-					<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
-						<sec:csrfInput />
-					</form>
-				</li>
-				&nbsp; &nbsp;
-				<li><a href="#">회원정보수정</a></li>
+				<form id="logoutForm"
+					action="${pageContext.request.contextPath}/logout.do" method="post"
+					style="display: none">
+					<sec:csrfInput/>
+				</form></li>
+
 			</ul>
 		</sec:authorize>
 	</div>

@@ -418,6 +418,7 @@ commit
 SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
 		c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
 FROM    rs_user r, cafe c, operating_time o
+<<<<<<< HEAD
 WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=14
 
 --
@@ -425,3 +426,23 @@ WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=14
  		from   cafe c, property p
  		where  c.cafe_no = p.cafe_no and c.cafe_loc='부천'
  		order by null desc, null desc, mood desc
+=======
+WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1
+
+-- 권한 조회
+SELECT *
+FROM   authorities a, rs_user r
+WHERE  a.username = r.id AND r.id='test11'
+
+--
+SELECT c.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
+FROM   cafe c, PROPERTY p
+WHERE  c.cafe_no = p.cafe_no
+ORDER BY p.taste DESC, null, null
+
+
+
+select *
+from   cafe
+where  cafe_loc = '부천'
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git

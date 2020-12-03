@@ -20,4 +20,10 @@ public interface UserService {
 	List<AuthorityVO> selectAuthorityByUsername(String username);
 
 	String nickCheck(String nickname);
+
+	String passCheck(String password);
+
+	void updateUser(UserVO userVO);
+
+	void deleteUser(UserVO userVO);
 }

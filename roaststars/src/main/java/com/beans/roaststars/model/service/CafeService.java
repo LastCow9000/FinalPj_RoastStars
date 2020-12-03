@@ -15,5 +15,4 @@ public interface CafeService {
 
 	// 특성으로 카페리스트 정렬
 	List<PropertyVO> cafeListSortByProperty(String[] arrOption, String loc);
-	
 }

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
-import com.beans.roaststars.model.vo.CafeVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 @Mapper
@@ -19,4 +18,5 @@ public interface CafeMapper {
 	List<CafeOperatingTimeVO> findListByLoc(String loc);
 
 	List<PropertyVO> cafeListSortByProperty(@Param("arrOption") String[] arrOption, @Param("loc") String loc);
+	
 }

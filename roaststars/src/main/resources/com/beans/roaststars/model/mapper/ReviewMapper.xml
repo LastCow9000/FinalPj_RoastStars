@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userVO.password" column="password"/>
 		<result property="userVO.name" column="name"/>
 		<result property="userVO.nickname" column="nickname"/>
+		<result property="userVO.enabled" column="enabled"/>
 	</resultMap>
 	
 		

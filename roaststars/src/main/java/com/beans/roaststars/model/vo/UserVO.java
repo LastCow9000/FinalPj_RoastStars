@@ -129,5 +129,4 @@ public class UserVO {
 				+ tel + ", address=" + address + ", businessName=" + businessName + ", uploadFile=" + uploadFile
 				+ ", businessPic=" + businessPic + ", businessNo=" + businessNo + ", enabled=" + enabled + "]";
 	}
-	
 }

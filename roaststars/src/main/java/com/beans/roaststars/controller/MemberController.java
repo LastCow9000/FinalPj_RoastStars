@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +43,7 @@ public class MemberController {
 	// 회원가입 폼으로 이동
 	@RequestMapping("register-form.do")
 	public String registerForm() {
-		return "user/registerForm.tiles";
+		return "user/registerUserForm.tiles";
 	}
 
 	// 회원가입
@@ -74,7 +78,7 @@ public class MemberController {
 	@RequestMapping("register-resultView.do")
 	public ModelAndView registerResultView(String id) {
 		UserVO vo = userService.findUserById(id);
-		return new ModelAndView("user/registerResultView.tiles", "userVO", vo);
+		return new ModelAndView("user/registerUserResult.tiles", "userVO", vo);
 	}
 
 	// 아이디 중복확인
@@ -90,5 +94,44 @@ public class MemberController {
 	public String nickcheckAjax(String nickname) {
 		return userService.nickCheck(nickname);
 	}
+	//회원탈퇴시 비밀번호 확인
+		@Secured("ROLE_MEMBER")
+		@PostMapping("pass-checkAjax.do")
+		@ResponseBody
+		public String passcheckAjax(String password) {
+			return userService.passCheck(password);
+		}
+		@Secured("ROLE_MEMBER")
+		@RequestMapping("update-userform.do")
+		public String updateForm() {
+			return "user/updateUserForm.tiles";
+		}
 
+		@Secured("ROLE_MEMBER")
+		@PostMapping("update-useraction.do")
+		public String updateUserAction(HttpServletRequest request, UserVO userVO) {
+			// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
+			UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			userService.updateUser(userVO);//service에서 변경될 비밀번호를 암호화한다 
+			// 수정한 회원정보로 Spring Security 세션 회원정보를 업데이트한다
+			uvo.setPassword(userVO.getPassword());
+			uvo.setName(userVO.getName());
+			uvo.setAddress(userVO.getAddress());
+			uvo.setTel(userVO.getTel());
+			return "user/updateUserResult.tiles";
+		}
+		//회원탈퇴폼으로 이동.
+		@Secured("ROLE_MEMBER")
+		@RequestMapping("delete-userform.do")
+		public String deleteForm() {
+			return "user/deleteUserForm.tiles";
+		} 
+		//회원탈퇴하기
+		@Secured("ROLE_MEMBER")
+		@PostMapping("delete-useraction.do")
+		public String deleteUserAction(UserVO userVO, HttpSession session) {
+			userService.deleteUser(userVO);
+			return "user/deleteUserResult.tiles";
+		} 
+		
 }
