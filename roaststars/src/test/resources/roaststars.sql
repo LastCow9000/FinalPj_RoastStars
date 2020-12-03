@@ -431,3 +431,8 @@ FROM   cafe c, PROPERTY p
 WHERE  c.cafe_no = p.cafe_no
 ORDER BY p.taste DESC, null, null
 
+
+
+select *
+from   cafe
+where  cafe_loc = '부천'

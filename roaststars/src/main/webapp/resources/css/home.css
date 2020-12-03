@@ -40,6 +40,33 @@
 	margin-right: 10px;
 }
 
+/* 리뷰작성 모달 */
+.modalBtn{
+	font-weight: bolder;
+}
+
+/* 리뷰 리스트 테이블 */
+.reviewTable{
+	/*테이블 가운데 정렬*/
+	width: 100%;
+}
+
+
+/*리뷰작성 폼 테이블 크기 조정*/
+.reviewForm{
+	/*테이블 가운데 정렬*/
+	float: center;
+	width: 100%;
+}
+
+tr.reviewTableProperty {
+	margin-bottom:1000px;
+	text-align: center;
+}
+
+.property_kind {
+	font-size: 10px;
+}
 
 
 /* 페이징 바 */

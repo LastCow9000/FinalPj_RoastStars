@@ -72,26 +72,27 @@
 		//카페이름 클릭시 카페 간략정보 표현하는 ajax
 		$(".cafeName").click(function(){
 			var cafeNo=$(this).next().val();
+			//alert(cafeNo);
 			$.ajax({
 				type:"get",
 				dataType:"json",
 				url:"${pageContext.request.contextPath}/cafe-simple.do",
 				data:"cafeNo=" + cafeNo,
-				success:function(cafeVO){
+				success:function(cafeTotal){
 					var tag="";
-					tag +='<h2>' + cafeVO.cafeName + '*끝에 별표</h2>';		
+					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '*끝에 별표</h2>';		
 					tag +='<div class="fakeimg">';		
 					tag +='<img src="#" width="500" height="300">';			
 					tag +='</div>';			
 					tag +='<table class="table cafeSimple">';		
 					tag +='<tr>';		
 					tag +='<td>위치</td>';		
-					tag +='<td>' + cafeVO.cafeLoc + '</td>';			
+					tag +='<td>' + cafeTotal.cafeVO.cafeLoc + '</td>';			
 					tag +='</tr><tr>';				
 					tag +='<td>운영시간</td>';				
 					tag +='<td>';			
-					tag +='평일 : ' + cafeVO.cafeOperatingTimeVO.weekdayTime + '<br>';			
-					tag +='주말 : ' + cafeVO.cafeOperatingTimeVO.weekendTime + ' | 공휴일 : ' + cafeVO.cafeOperatingTimeVO.holidayTime;				
+					tag +='평일 : ' + cafeTotal.weekdayTime + '<br>';			
+					tag +='주말 : ' + cafeTotal.weekendTime + ' | 공휴일 : ' + cafeTotal.holidayTime;				
 					tag +='</td></tr>';				
 					tag +='<tr>';				
 					tag +='<td colspan="2" align="center"><button id="cafeDetail">카페 상세정보 보기</button></td>';				
@@ -172,8 +173,8 @@
             <c:when test="${order.count % 2 == 1}">
                <div class="col-sm-6" style="margin-top: 10px">
                   <strong>${order.count}</strong> <!-- count -->
-                  <a href="#" class="cafeName">${list.cafeName}</a>
-                  <input type="hidden" value="${list.cafeNo}">
+                  <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>
+                  <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <div class="fakeimg">
                         <img src="#"
                              width="250" height="250">
@@ -183,12 +184,12 @@
             <c:otherwise>
                <div class="col-sm-6" style="margin-top: 10px">
                   <strong>${order.count}</strong> <!-- count -->
-                  <a href="#" class="cafeName">${list.cafeName}</a>   
-                  <input type="hidden" value="${list.cafeNo}">
-                  <div class="fakeimg">
-                        <img src="#"
-                             width="250" height="250">
-                  </div>
+                  <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>   
+	                  <input type="hidden" value="${list.cafeVO.cafeNo}">
+	                  <div class="fakeimg">
+	                        <img src="#"
+	                             width="250" height="250">
+	                  </div>
                </div>
             </c:otherwise>
          </c:choose>

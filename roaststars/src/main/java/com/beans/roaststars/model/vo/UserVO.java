@@ -10,7 +10,8 @@ public class UserVO {
 	private String tel;
 	private String address;
 	private String businessName;
-	private MultipartFile businessPic;
+	private MultipartFile uploadFile;
+	private String businessPic;
 	private String businessNo;
 	private int enabled;
 	
@@ -19,7 +20,7 @@ public class UserVO {
 	}
 
 	public UserVO(String id, String password, String name, String nickname, String tel, String address,
-			String businessName, MultipartFile businessPic, String businessNo, int enabled) {
+			String businessName, MultipartFile uploadFile, String businessPic, String businessNo, int enabled) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -28,6 +29,7 @@ public class UserVO {
 		this.tel = tel;
 		this.address = address;
 		this.businessName = businessName;
+		this.uploadFile = uploadFile;
 		this.businessPic = businessPic;
 		this.businessNo = businessNo;
 		this.enabled = enabled;
@@ -89,11 +91,19 @@ public class UserVO {
 		this.businessName = businessName;
 	}
 
-	public MultipartFile getBusinessPic() {
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
+	public String getBusinessPic() {
 		return businessPic;
 	}
 
-	public void setBusinessPic(MultipartFile businessPic) {
+	public void setBusinessPic(String businessPic) {
 		this.businessPic = businessPic;
 	}
 
@@ -116,7 +126,7 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", password=" + password + ", name=" + name + ", nickname=" + nickname + ", tel="
-				+ tel + ", address=" + address + ", businessName=" + businessName + ", businessPic=" + businessPic
-				+ ", businessNo=" + businessNo + ", enabled=" + enabled + "]";
+				+ tel + ", address=" + address + ", businessName=" + businessName + ", uploadFile=" + uploadFile
+				+ ", businessPic=" + businessPic + ", businessNo=" + businessNo + ", enabled=" + enabled + "]";
 	}
 }
