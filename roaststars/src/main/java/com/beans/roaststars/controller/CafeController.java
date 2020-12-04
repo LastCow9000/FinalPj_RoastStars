@@ -20,6 +20,7 @@ import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
 import com.beans.roaststars.model.vo.ReviewListVO;
+import com.beans.roaststars.model.vo.PropertyVO;
 import com.beans.roaststars.model.vo.UserVO;
 
 @Controller
@@ -55,10 +56,7 @@ public class CafeController {
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
 
-	public ModelAndView viewCafeDetail(String cafeNo) {
-		return new ModelAndView("cafe/cafeDetail.tiles", "cafeVO", cafeMapper.findCafeByCafeNo(cafeNo));
-	}// viewCafeDetail
-
+	
 	// 카페 간략정보 ajax
 	@RequestMapping("cafe-simple.do")
 	@ResponseBody
