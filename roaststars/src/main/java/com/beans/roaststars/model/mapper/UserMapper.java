@@ -28,4 +28,10 @@ public interface UserMapper {
 	//닉네임 중복체크
 	int nickcheck(String nickname);
 	
+	//회원정보수정하기
+	void updateUser(UserVO userVO);
+	
+	//회원탈퇴하기
+	void deleteUser(UserVO userVO);
+	
 }

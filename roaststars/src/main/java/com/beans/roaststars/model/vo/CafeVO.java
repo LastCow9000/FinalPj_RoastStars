@@ -6,14 +6,27 @@ public class CafeVO {
    private String cafeNo;
    private String cafeName;
    private String cafeLoc;
-   private MultipartFile cafePic;
+   private MultipartFile uploadFile;
+   private String cafePic;
    private String cafeInfo;
-   private CafeOperatingTimeVO cafeOperatingTimeVO;
    private String cafeTel;
    private UserVO userVO;
    
    public CafeVO() {
       super();
+   }
+
+   public CafeVO(String cafeNo, String cafeName, String cafeLoc, MultipartFile uploadFile, String cafePic,
+         String cafeInfo, String cafeTel, UserVO userVO) {
+      super();
+      this.cafeNo = cafeNo;
+      this.cafeName = cafeName;
+      this.cafeLoc = cafeLoc;
+      this.uploadFile = uploadFile;
+      this.cafePic = cafePic;
+      this.cafeInfo = cafeInfo;
+      this.cafeTel = cafeTel;
+      this.userVO = userVO;
    }
 
    public String getCafeNo() {
@@ -40,11 +53,19 @@ public class CafeVO {
       this.cafeLoc = cafeLoc;
    }
 
-   public MultipartFile getCafePic() {
+   public MultipartFile getUploadFile() {
+      return uploadFile;
+   }
+
+   public void setUploadFile(MultipartFile uploadFile) {
+      this.uploadFile = uploadFile;
+   }
+
+   public String getCafePic() {
       return cafePic;
    }
 
-   public void setCafePic(MultipartFile cafePic) {
+   public void setCafePic(String cafePic) {
       this.cafePic = cafePic;
    }
 
@@ -54,14 +75,6 @@ public class CafeVO {
 
    public void setCafeInfo(String cafeInfo) {
       this.cafeInfo = cafeInfo;
-   }
-
-   public CafeOperatingTimeVO getCafeOperatingTimeVO() {
-      return cafeOperatingTimeVO;
-   }
-
-   public void setCafeOperatingTimeVO(CafeOperatingTimeVO cafeOperatingTimeVO) {
-      this.cafeOperatingTimeVO = cafeOperatingTimeVO;
    }
 
    public String getCafeTel() {
@@ -82,22 +95,9 @@ public class CafeVO {
 
    @Override
    public String toString() {
-      return "CafeVO [cafeNo=" + cafeNo + ", cafeName=" + cafeName + ", cafeLoc=" + cafeLoc + ", cafePic=" + cafePic
-            + ", cafeInfo=" + cafeInfo + ", cafeOperatingTimeVO=" + cafeOperatingTimeVO + ", cafeTel=" + cafeTel
-            + ", userVO=" + userVO + "]";
-   }
-
-   public CafeVO(String cafeNo, String cafeName, String cafeLoc, MultipartFile cafePic, String cafeInfo,
-         CafeOperatingTimeVO cafeOperatingTimeVO, String cafeTel, UserVO userVO) {
-      super();
-      this.cafeNo = cafeNo;
-      this.cafeName = cafeName;
-      this.cafeLoc = cafeLoc;
-      this.cafePic = cafePic;
-      this.cafeInfo = cafeInfo;
-      this.cafeOperatingTimeVO = cafeOperatingTimeVO;
-      this.cafeTel = cafeTel;
-      this.userVO = userVO;
+      return "CafeVO [cafeNo=" + cafeNo + ", cafeName=" + cafeName + ", cafeLoc=" + cafeLoc + ", uploadFile="
+            + uploadFile + ", cafePic=" + cafePic + ", cafeInfo=" + cafeInfo + ", cafeTel=" + cafeTel + ", userVO="
+            + userVO + "]";
    }
    
    

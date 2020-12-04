@@ -21,7 +21,7 @@ public interface ReviewService {
 	ReviewVO findReviewByReviewNo(String reviewNo);
 	
 	// 리뷰 작성
-	void registerReview(ReviewVO reviewVO);
+	public void registerReviewAndUpdateProperty(ReviewVO reviewVO, PropertyVO propertyVO, String cafeNo, String id);
 	// 카페 특성 update
 	void updateProperty(PropertyVO propertyVO);
 	

@@ -111,17 +111,15 @@
          }
       });
    });//ready
-   
 </script>
 </head>
 <body>
-<form method="post" action="${pageContext.request.contextPath}/register-user.do" id="registerForm" onsubmit="return validateCheckboxes()">
+<form method="post" action="${pageContext.request.contextPath}/register-user.do" id="registerForm">
 <input type="hidden" name="command" value="register">
 	<sec:csrfInput/>
 	아이디 <input type="text" name="id" id="memberId" required="required"><span id="idCheckResult"></span><br>
 	패스워드 <input type="password" name="password" id="passwordC" required="required"><span id="passwordCheckResult"></span><br>
 	패스워드확인 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
-	
 	이름 <input type="text" name="name" required="required"><br>
 	닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
 	전화번호 <input type="text" name="tel" required="required"><br>
@@ -130,52 +128,5 @@
 	사업자등록번호<input type="text" name="businessNo"><br>
 <input  type="submit" value="회원가입">
 </form>
-
-<!-- <div class="container">
-   <div class="row">
-       <div class="col-sm-6">
-       
-<form action="register.do" method="post" id="registerForm" onsubmit="return validateCheckboxes()">
-<input type="hidden" name="command" value="register">
-
-<table class="table">
-   
-      <tr align="center">
-         <td>아이디</td>
-         <td><input type="text" name="id" id="memberId" required="required"></td>
-         <td><span id="idCheckResult"></span></td>
-      </tr>   
-      <tr align="center">
-         <td>패스워드</td>
-         <td><input type="password" name="password" id="passwordC" required="required"></td>
-         <td><span id="passwordResult"></span></td>
-      </tr>
-      
-      <tr align="center">
-         <td>패스워드 확인</td>
-         <td><input type="password" name="password" id="passwordChecked" required="required"></td>
-         <td><span id="passwordCheckResult"></span></td>
-      </tr>
-
-      <tr align="center">
-         <td>닉네임</td>
-         <td><input type="text" name="nickname" id="memberNick" required="required"></td>
-         <td><span id="nickCheckResult"></span></td>
-      </tr>
-   
-      <tr align="center">
-         
-      </tr>
-         
-      <tr>
-         <td colspan="3" align="center"><input type="submit" class="btn-warning" value="회원가입"></td>
-      </tr>
-   </table>
-   
-</form>
-
-      </div>
-   </div>
-</div> -->
 </body>
 </html>
