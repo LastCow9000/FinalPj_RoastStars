@@ -160,42 +160,111 @@
                 <!-- 리뷰 작성 관련 script -->
                 <script type="text/javascript">
                    $(document).ready(function() {
+                     
+                      // 한줄평 길이 제한
+                      /* 한줄평 수정 시 길이 체크 공간 */
                       
+                      var checkContent="";
                       // property 점수 부여
                       var dictProperty={'taste':0, 'price':0, 'service':0, 'mood':0, 'diversity':0};
                       
-                      // 색 변화
-                        var i=0;
-                        var turn=new Array('#d3d4d8','#ffb400');
-                        
-                     $(".like").on("click", "#likeBtn", function() {
-                           var result = turn[i];
-                           $("#likeIcon").css("color", result);
-                        i++;
-                        if (i == turn.length){i=0;}
-                     });
-                        
-                  
+                     // 1. 댓글 내용 부분에 입력을 시작하면 댓글 길이 나옴   
+                     $("#registerReviewForm").on("keyup","#reviewContent",function(){
+                        checkContent="";
+                        var reviewContentVal  =  $("#reviewContent").val().trim();
+                        //한줄평 내용 길이 50자 넘어가면 빨갛게
+                        if(reviewContentVal.length > 50){
+                           $("#reviewContentLen").html(reviewContentVal.length).css("color","red");
+                           return;
+                        //한줄평 내용 길이 평소에는 grey로
+                        } else {
+                           $("#reviewContentLen").html(reviewContentVal.length).css("color","grey");
+                           checkContent = reviewContentVal; //이 경우에만 입력된 내용을 checkContent에 할당해줌
+                        }
+                     });//keyup
+                      
+                      //리뷰 폼 submit (registerReviewForm)
+                      $("#registerReviewForm").submit(function() {
+                         
+                         // dictProperty를 key로 반복문 돌리기
+                         for(key in dictProperty) {
+                            // key에 해당하는 name을 가진 라디오 버튼이 체크될 경우 selectEvalName에 할당
+                            selectedEvalName = $("#registerReviewForm :radio[name=" + key + "]:checked()").val();
+                            // 해당 key에 대한 value값으로 'good', 'soso', 'bad' 중 하나 들어옴
+                            dictProperty[key] = selectedEvalName;
+                            alert(key + " " + selectedEvalName);
+                        }
+                         
+                         //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
+                         if (checkContent == ""){
+                            alert("한줄평은 50자 이하로 작성해주세요.");
+                            return false;
+                         }
+                      });//registerReviewForm
+                      
                    });//ready
                 </script>
                  
-                 
                  <!-- Modal body -->
-                <form>
+                <form action="register-review.do" method="POST" id="registerReviewForm">
                  <div class="modal-body">
+                    <sec:csrfInput/><%-- csrf 토큰 --%>
+                    <!-- cafeNo 보내기 -->
+                    <input type="hidden" name="cafeNo" value="${cafeNo}"> 
+                    <!-- 현재 로그인 중인 회원의 id 보내기 -->
+                    <input type="hidden" name="id" value="${loginUser.id}">
                     
                     <!-- 리뷰 특성 선택 table -->
                       <table class="reviewForm">
                          <tr class="reviewTableProperty property_kind">
                             <td></td>
-                            <td>좋아요!</td>
-                            <td>보통이에요</td>
-                            <td>별로예요</td>
+                            <td>좋아요! <i class="far fa-grin-hearts propertyIcon"></i></td>
+                            <td>보통이에요 <i class="far fa-grin propertyIcon"></i></td>
+                            <td>별로예요 <i class="far fa-angry propertyIcon"></i></td>
                          </tr>
                          
                          <tr></tr>
                          
-                         <%-- <c:forEach items="맛, 가격, 서비스, 분위기, 다양한 메뉴" var="property" varStatus="order">
+                         <tr class="reviewTableProperty property_kind">
+                            <td>맛</td>
+                            <td><input type="radio" name="taste" value="good"></td>
+                            <td><input type="radio" name="taste" value="soso" checked></td>
+                            <td><input type="radio" name="taste" value="bad"></td>
+                         </tr>
+                         
+                         <tr class="reviewTableProperty property_kind">
+                            <td>가격</td>
+                            <td><input type="radio" name="price" value="good"></td>
+                            <td><input type="radio" name="price" value="soso" checked></td>
+                            <td><input type="radio" name="price" value="bad"></td>
+                         </tr>
+                         
+                        <tr class="reviewTableProperty property_kind">
+                            <td>서비스</td>
+                            <td><input type="radio" name="service" value="good"></td>
+                            <td><input type="radio" name="service" value="soso" checked></td>
+                            <td><input type="radio" name="service" value="bad"></td>
+                         </tr>
+                         
+                        <tr class="reviewTableProperty property_kind">
+                            <td>분위기</td>
+                            <td><input type="radio" name="mood" value="good"></td>
+                            <td><input type="radio" name="mood" value="soso" checked></td>
+                            <td><input type="radio" name="mood" value="bad"></td>
+                         </tr>
+                         
+                        <tr class="reviewTableProperty property_kind">
+                            <td>다양한 메뉴</td>
+                            <td><input type="radio" name="diversity" value="good"></td>
+                            <td><input type="radio" name="diversity" value="soso" checked></td>
+                            <td><input type="radio" name="diversity" value="bad"></td>
+                         </tr>
+                         
+                         <%-- [20.12.04_예울]
+                            이모티콘으로 선택하기 실패 -- 나중에 시간나면 하겠습니다
+                         
+                         
+                         <c:forEach items="맛, 가격, 서비스, 분위기, 다양한 메뉴" var="property" varStatus="order">
                          <tr class="reviewTableProperty">
                             <td><strong>${property}</strong></td>
                             <td class="like">
@@ -222,15 +291,18 @@
                       <!-- 한줄평 작성 -->
                       <hr>
                       <div style="margin-left: 20px; margin-right: 20px; ">
-                         한줄평<br>
-                         <input type="text" name="reviewContent" required="required" 
-                            placeholder="한줄평을 작성해주세요" style="width:400px; height:30px; margin-top: 10px;">
+                         한줄평 (<span id="reviewContentLen"></span>)<br>
+                         <!--  <input type="text" name="reviewContent" required="required" id="reviewContent"
+                            placeholder="한줄평을 작성해주세요" style="width:500px; height:30px; margin-top: 10px;">-->
+                            <textarea name="reviewContent" id="reviewContent" class="form-control property_kind"  
+                              cols="2" style="overflow:auto; margin-top: 10px; font-weight: bolder" 
+                              wrap="hard" required="required">한줄평을 작성해주세요</textarea>
                       </div>
                  </div><!-- modal-body -->
                  
                  <!-- Modal footer -->
                  <div class="modal-footer">
-                   <button type="button" class="btn btn-info btn-sm" data-dismiss="modal"><strong>리뷰 등록</strong></button>
+                   <button type="submit" class="btn btn-info btn-sm"><strong>리뷰 등록</strong></button>
                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><strong>취소</strong></button>
                  </div><!-- modal-footer -->
                  

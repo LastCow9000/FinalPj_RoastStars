@@ -3,16 +3,16 @@
 -- 1. rs_user 
 DROP TABLE rs_user;
 CREATE TABLE rs_user(
-	id            VARCHAR2(50)  PRIMARY KEY, -- 가입할 때 활성화회원 중복확인
-	password      VARCHAR2(100)  NOT NULL,
-	name          VARCHAR2(50)  NOT NULL,
-	nickname      VARCHAR2(50)  NOT NULL, -- 가입할 때 활성화회원 중복확인
-	tel           VARCHAR2(50), -- 선택입력사항
-	address       VARCHAR2(200) NOT NULL,
-	business_name VARCHAR2(50),  -- 선택입력사항
-	business_pic  VARCHAR2(500) DEFAULT 'NO IMAGE', -- 선택입력사항
-	business_no   VARCHAR2(100), -- 선택입력사항 
-	enabled    NUMBER        DEFAULT 1 NOT NULL 
+   id            VARCHAR2(50)  PRIMARY KEY, -- 가입할 때 활성화회원 중복확인
+   password      VARCHAR2(100)  NOT NULL,
+   name          VARCHAR2(50)  NOT NULL,
+   nickname      VARCHAR2(50)  NOT NULL, -- 가입할 때 활성화회원 중복확인
+   tel           VARCHAR2(50), -- 선택입력사항
+   address       VARCHAR2(200) NOT NULL,
+   business_name VARCHAR2(50),  -- 선택입력사항
+   business_pic  VARCHAR2(500) DEFAULT 'NO IMAGE', -- 선택입력사항
+   business_no   VARCHAR2(100), -- 선택입력사항 
+   enabled    NUMBER        DEFAULT 1 NOT NULL 
 );
 
 --ALTER TABLE rs_user MODIFY (password VARCHAR2(100))
@@ -63,10 +63,10 @@ VALUES('admin', 'admin', '관리자', '관리자', '010-9000-0805', '수원 장�
 -- 2. authorities 
 drop table authorities;
 create table authorities(
-	username  varchar2(50) not null,
-	authority varchar2(50) not null,
-	constraint fk_authorities foreign key(username) references rs_user(id) on delete cascade,
-	constraint pk_authorities primary key(username, authority)
+   username  varchar2(50) not null,
+   authority varchar2(50) not null,
+   constraint fk_authorities foreign key(username) references rs_user(id) on delete cascade,
+   constraint pk_authorities primary key(username, authority)
 )
 
 -- 관리자 권한 부여 (admin)
@@ -103,14 +103,14 @@ commit;
 -- 3. cafe 
 DROP TABLE cafe;
 CREATE TABLE cafe(
-	cafe_no    NUMBER        PRIMARY KEY,
-	cafe_name  VARCHAR2(50)  NOT NULL,
-	cafe_loc   VARCHAR2(200)  NOT NULL,
-	cafe_pic   VARCHAR2(500) DEFAULT 'NO IMAGE',
-	cafe_info  CLOB          NOT NULL,
-	cafe_tel   VARCHAR2(50)  NOT NULL,
-	id         VARCHAR2(50)  NOT NULL,
-	constraint fk_cafe foreign key(id) references rs_user(id) on delete cascade
+   cafe_no    NUMBER        PRIMARY KEY,
+   cafe_name  VARCHAR2(50)  NOT NULL,
+   cafe_loc   VARCHAR2(200)  NOT NULL,
+   cafe_pic   VARCHAR2(500) DEFAULT 'NO IMAGE',
+   cafe_info  CLOB          NOT NULL,
+   cafe_tel   VARCHAR2(50)  NOT NULL,
+   id         VARCHAR2(50)  NOT NULL,
+   constraint fk_cafe foreign key(id) references rs_user(id) on delete cascade
 );
 
 delete from cafe
@@ -144,11 +144,11 @@ FROM   cafe
 -- 4. operating_time
 DROP TABLE operating_time;
 CREATE TABLE operating_time(
-	cafe_no      NUMBER        PRIMARY KEY,
-	weekday_time VARCHAR2(50),
-	weekend_time VARCHAR2(50),
-	holiday_time VARCHAR2(50),
-	constraint fk_operating_time foreign key(cafe_no) references cafe(cafe_no) on delete cascade
+   cafe_no      NUMBER        PRIMARY KEY,
+   weekday_time VARCHAR2(50),
+   weekend_time VARCHAR2(50),
+   holiday_time VARCHAR2(50),
+   constraint fk_operating_time foreign key(cafe_no) references cafe(cafe_no) on delete cascade
 )
 
 -- 카페 운영시간 insert
@@ -176,14 +176,14 @@ WHERE  o.cafe_no = c.cafe_no
 -- 6. review
 DROP TABLE review;
 CREATE TABLE review(
-	cafe_no        NUMBER        NOT NULL,
-	id             VARCHAR2(50)  NOT NULL,
-	review_no      NUMBER        NOT NULL,
-	review_content CLOB          NOT NULL,
-	review_regdate DATE          NOT NULL,
-	constraint fk_review_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade,
-	constraint fk_review_id foreign key(id) references rs_user(id) on delete cascade,
-	constraint pk_review primary key(cafe_no, id)
+   cafe_no        NUMBER        NOT NULL,
+   id             VARCHAR2(50)  NOT NULL,
+   review_no      NUMBER        NOT NULL,
+   review_content CLOB          NOT NULL,
+   review_regdate DATE          NOT NULL,
+   constraint fk_review_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade,
+   constraint fk_review_id foreign key(id) references rs_user(id) on delete cascade,
+   constraint pk_review primary key(cafe_no, id)
 )
 
 DROP SEQUENCE review_seq;
@@ -210,13 +210,13 @@ WHERE  c.cafe_no = r.cafe_no AND u.id = r.id AND c.cafe_no = 1
 -- 7. property
 DROP TABLE property;
 CREATE TABLE property(
-	cafe_no   NUMBER  PRIMARY KEY,
-	service   NUMBER  NOT NULL,
-	taste     NUMBER  NOT NULL,
-	price     NUMBER  NOT NULL,
-	mood      NUMBER  NOT NULL,
-	diversity NUMBER  NOT NULL,
-	constraint fk_property foreign key(cafe_no) references cafe(cafe_no) on delete cascade
+   cafe_no   NUMBER  PRIMARY KEY,
+   service   NUMBER  NOT NULL,
+   taste     NUMBER  NOT NULL,
+   price     NUMBER  NOT NULL,
+   mood      NUMBER  NOT NULL,
+   diversity NUMBER  NOT NULL,
+   constraint fk_property foreign key(cafe_no) references cafe(cafe_no) on delete cascade
 )
 
 INSERT INTO property VALUES (1, 1, 0, -2, 1, 0);
@@ -402,47 +402,3 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 --삭제 테스트
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
-
--------------------------------
-
---1. cafe_no=1에 전화번호 넣기
-UPDATE cafe SET cafe_name='까치화방', cafe_loc='경기도 성남시 분당구 백현동 판교역로 152 3 알파돔타워 3층',
-cafe_info='‘까치화방만의 건강한 제조 공법으로 만든 수제청과 수제청 음료, 그리고 직접구워낸 따뜻한 베이커리를 함께 제공해 드립니다. 판교 알파돔타워3, 3층 브릿지 앞 위치’',
-cafe_tel='031-622-7291' WHERE cafe_no=1
-
-SELECT *
-FROM   
-commit
-
---
-SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
-		c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
-FROM    rs_user r, cafe c, operating_time o
-<<<<<<< HEAD
-WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=14
-
---
- 		select c.cafe_no, c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel, c.id
- 		from   cafe c, property p
- 		where  c.cafe_no = p.cafe_no and c.cafe_loc='부천'
- 		order by null desc, null desc, mood desc
-=======
-WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1
-
--- 권한 조회
-SELECT *
-FROM   authorities a, rs_user r
-WHERE  a.username = r.id AND r.id='test11'
-
---
-SELECT c.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
-FROM   cafe c, PROPERTY p
-WHERE  c.cafe_no = p.cafe_no
-ORDER BY p.taste DESC, null, null
-
-
-
-select *
-from   cafe
-where  cafe_loc = '부천'
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git

@@ -5,7 +5,7 @@ public class CafeOperatingTimeVO {
 	private String weekendTime;
 	private String holidayTime;
 	private CafeVO cafeVO;
-	
+
 	public CafeOperatingTimeVO() {
 		super();
 	}
@@ -17,6 +17,7 @@ public class CafeOperatingTimeVO {
 		this.holidayTime = holidayTime;
 		this.cafeVO = cafeVO;
 	}
+
 
 	public String getWeekdayTime() {
 		return weekdayTime;

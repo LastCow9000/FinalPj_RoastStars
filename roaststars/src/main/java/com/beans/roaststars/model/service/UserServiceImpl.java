@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
 		String encodedPwd = passwordEncoder.encode(vo.getPassword());
 		vo.setPassword(encodedPwd);
 		userMapper.registerUser(vo);
-		AuthorityVO authority = new AuthorityVO(vo.getId(), "ROLE_MEMBER");
+		AuthorityVO authority = new AuthorityVO(vo.getId(), "ROLE_MEMBER", vo);
 		userMapper.registerRole(authority);
 	}
 	
