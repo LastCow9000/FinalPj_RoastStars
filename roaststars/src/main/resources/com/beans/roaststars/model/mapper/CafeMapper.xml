@@ -96,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
      <!-- 카페 번호로 카페 특성 점수까지 반환받기 -->
- 	<select id="findCafeAndPropertyByCafeNo" resultMap="propertyAndCafeRM">
+ 	<select id="findCafeAndPropertyByCafeNo" resultMap="propertyCafeRM">
  		SELECT p.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
 		FROM   cafe c, property p
 		WHERE  c.cafe_no = p.cafe_no AND p.cafe_no=#{value}

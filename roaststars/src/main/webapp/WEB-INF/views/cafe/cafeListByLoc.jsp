@@ -217,7 +217,6 @@
    </div><!-- 카페 간략정보 영역 -->
       	
   </div><!-- 아래쪽 영역 row -->
-  <button type="button" id="detailBtn">카페 상세정보 보기</button>
 </div><!-- container -->
 </body>   
 </html>
