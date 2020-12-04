@@ -21,10 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원가입 -->
 	<insert id="registerUser" parameterType="userVO">
-	 	<!-- INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address},#{business_name},#{business_pic},#{business_no}); -->
-		INSERT INTO rs_user(id, password, name, nickname, tel, address)
-		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address})
+	 	INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
+		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address},
+		#{businessName, jdbcType=VARCHAR},#{businessPic, jdbcType=VARCHAR},#{businessNo, jdbcType=VARCHAR})
  	</insert>
  	
  	<!-- 권한 부여 -->
@@ -49,16 +48,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from rs_user where nickname=#{value}
 	</select>
 	
-	<!-- 회원탈퇴시 비밀번호 확인하기 -->
-	<!-- <select id="passcheck" resultType="int">
-		select count(*) from rs_user where password=#{value}
-	</select> -->
-	
 	<!-- 회원정보수정 -->
 	<update id="updateUser" parameterType="userVO">
 		update rs_user set password=#{password},name=#{name},address=#{address},tel=#{tel}
 		where id=#{id}
 	</update>
+	
 	<!-- 회원탈퇴 -->
 	<update id="deleteUser" parameterType="userVO">
 		update rs_user set enabled=0

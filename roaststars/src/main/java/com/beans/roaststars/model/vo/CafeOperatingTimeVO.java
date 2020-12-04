@@ -5,7 +5,7 @@ public class CafeOperatingTimeVO {
 	private String weekendTime;
 	private String holidayTime;
 	private CafeVO cafeVO;
-	
+
 	public CafeOperatingTimeVO() {
 		super();
 	}
@@ -17,6 +17,7 @@ public class CafeOperatingTimeVO {
 		this.holidayTime = holidayTime;
 		this.cafeVO = cafeVO;
 	}
+
 
 	public String getWeekdayTime() {
 		return weekdayTime;
@@ -41,19 +42,15 @@ public class CafeOperatingTimeVO {
 	public void setHolidayTime(String holidayTime) {
 		this.holidayTime = holidayTime;
 	}
-
 	public CafeVO getCafeVO() {
 		return cafeVO;
 	}
-
 	public void setCafeVO(CafeVO cafeVO) {
 		this.cafeVO = cafeVO;
 	}
-
 	@Override
 	public String toString() {
 		return "CafeOperatingTimeVO [weekdayTime=" + weekdayTime + ", weekendTime=" + weekendTime + ", holidayTime="
 				+ holidayTime + ", cafeVO=" + cafeVO + "]";
 	}
-	
 }

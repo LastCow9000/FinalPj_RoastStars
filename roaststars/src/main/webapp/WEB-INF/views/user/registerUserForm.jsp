@@ -110,12 +110,27 @@
             $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
          }
       });
+      
+   	  //3. 회원구분 라디오 버튼 
+      $(".classification").change(function(){ //라디오 버튼 변화 시
+    	  var tags='';
+    	  if( $(this).val() == "ROLE_MANAGER"){	//사장 체크 시 
+    		  alert("관리자가 확인 후 사장 권한이 부여됩니다.");
+    		  tags+='사업장명 <input type="text" name="businessName"><br>';
+    		  tags+='사업자등록번호<input type="text" name="businessNo"><br>';
+    		  tags+='사업자등록증<input type="file" name="uploadFile"><br>';
+    		  $(".classification:input[value='ROLE_MEMBER']").prop("checked", false);//일반회원 체크라디오버튼 풀림
+    	  }else{
+    		  tags='';
+    		  $(".classification:input[value='ROLE_MANAGER']").prop("checked", false);//일반 체크시 사장체크 풀림
+    	  }
+    	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
+      });
    });//ready
 </script>
 </head>
 <body>
-<form method="post" action="${pageContext.request.contextPath}/register-user.do" id="registerForm">
-<input type="hidden" name="command" value="register">
+<form method="post" action="${pageContext.request.contextPath}/register-user.do" id="registerForm" enctype="multipart/form-data">
 	<sec:csrfInput/>
 	아이디 <input type="text" name="id" id="memberId" required="required"><span id="idCheckResult"></span><br>
 	패스워드 <input type="password" name="password" id="passwordC" required="required"><span id="passwordCheckResult"></span><br>
@@ -124,9 +139,20 @@
 	닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
 	전화번호 <input type="text" name="tel" required="required"><br>
 	주소 <input type="text" name="address" required="required"><br>
-	사업장명 <input type="text" name="businessName"><br>
-	사업자등록번호<input type="text" name="businessNo"><br>
-<input  type="submit" value="회원가입">
+	회원구분
+	<div class="form-check-inline">
+		<label class="form-check-label" for="radioMember">
+      			<input type="radio" class="classification" id="radioMember" value="ROLE_MEMBER" checked>일반
+    		</label>
+ 		</div>
+    	<div class="form-check-inline">	 
+   		<label class="form-check-label" for="radioManager">
+        	<input type="radio" class="classification" id="radioManager" value="ROLE_MANAGER">사장
+    	</label>
+    </div>
+ 	<br>
+ 	<div id="managerInfo"></div>	
+	<input  type="submit" value="회원가입" class="btn btn-primary">
 </form>
 </body>
 </html>

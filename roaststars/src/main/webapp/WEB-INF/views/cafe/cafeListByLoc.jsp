@@ -9,69 +9,75 @@
 <title>지역검색 결과</title>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//선호요소 선택시 카페리스트 필터링
-		
-		/*			버튼으로 구현하다 만 것
-		$("#likeButton").on("click",".likePoint",function(){
-			//alert($(this).val());
-			var buttonVal = $(this).val();
-			if(buttonVal=='taste')
-				buttonVal='맛';
-			else if(buttonVal=='price')
-				buttonVal='가격';
-			else if(buttonVal=='service')
-				buttonVal='서비스';
-			else if(buttonVal=='mood')
-				buttonVal='무드';
-			else if(buttonVal=='diversity')
-				buttonVal='다양한 메뉴';
-			$("#1st").html('<input type="button" class="movedLikePoint" id=buttonVal value='+buttonVal+'>');
-			
-			//if($("#1st").)
-			$(this).remove();
-			$(".movedLikePoint").click(function(){
-				$("#likeButton").append('<input type="button" class="likePoint" id=buttonVal value='+buttonVal+'>');
-				$(this).remove();
-			});// .movedLikePoint click
-		});// .likePoint click*/
-			
+
 		//셀렉트 옵션으로.
-		var number = 2;
-		var pri_num = 1;
-		$("#selectFilter").on("change",".cafeFilter",function(){
-			//alert($(this).val());
-			var dictProperty={'taste':'맛', 'price':'가격', 'service':'서비스', 
+		var number = 2; // 기존에 처음 셀렉트폼(우선순위1)은 존재하므로 2부터 시작
+		var pri_num = 1; // 처음 셀렉트폼(우선순위1, '#cafeFilter1')부터 옵션값을 받아와야 되므로
+		var arrIndex = 0;
+		var dictProperty={'taste':'맛', 'price':'가격', 'service':'서비스', //dictionary 사전자료형
 								'mood':'분위기', 'diversity':'다양한 메뉴'};
-			//var dicLen= Object.keys(dictProperty).length;
+		
+		$("#selectFilter").on("change",".cafeFilter",function(){ //셀렉트폼의 옵션이 변경될 때  
+			var arrOption = ['null', 'null', 'null']; //ajax처리를 위한 배열 선언
+			var option = $('#cafeFilter' + pri_num +' option:selected').val();//셀렉트폼의 선택된 옵션 값(dictionary의 key값)
+			arrOption[arrIndex]=option; //선택된 옵션 배열에 추가
 			
-			var option='';			
-			var chosenPropertyVal = $('#cafeFilter' + pri_num +' option:selected').val();
-			alert(chosenPropertyVal);
-			
+			$.ajax({//선택된 옵션으로 카페리스트 정렬
+				type:"get",
+				data:"loc=${param.loc}&arrOption="+arrOption,
+				dataType:"json",
+				url:"${pageContext.request.contextPath}/cafe-list-sort-by-property.do",
+				success:function(cafeList){
+					var tags='';
+					for(var i=0;i<cafeList.length;i++){
+						if(i%2==0){
+							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
+							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
+							tags+="<div class='fakeimg'><img src='#' width='250' height='250'></div>";
+							tags+="</div>";
+						}else{
+							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
+							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
+							tags+="<div class='fakeimg'><img src='#' width='250' height='250'></div>";
+							tags+="</div>";
+						}
+						$("#cafeList").html();
+						$("#cafeList").html(tags);
+					}
+				
+				}//success
+			});//ajax
+
 			var tags='';
 			if (number <= 3 && pri_num <= 3){
+				delete dictProperty[option];	//셀렉트폼에서 선택된 값 사전에서 삭제
 				tags+='&nbsp&nbsp&nbsp&nbsp';
 				tags+='<select class="cafeFilter" id="cafeFilter' + number + '" required="required">';
 				tags+='<option value="">--' + number + '순위--</option>';
-				for(key in dictProperty) {
+				for(key in dictProperty) {	//동적으로 생성된 셀렉트폼의 옵션값을 dictionary에서 받아옴 
 					tags+='<option value="' + key + '">' + dictProperty[key] + '</option>';
 				}	
 				tags+=' </select>';
-				$("#selectFilter").append(tags);
-				option = chosenPropertyVal;
-				delete dictProperty[option];
-				alert(Object.keys(dictProperty));
-				//$('#cafeFilter' + (number) + ' option[value=' + option + ']').remove();
-				number++;
-				pri_num++;
+				$("#selectFilter").append(tags); //옵션값 동적으로 추가
+				
+				//alert(Object.keys(dictProperty)); //사전에 들어있는 키값 확인
+				number++; // 다음 셀렉트폼을 선택하기 위하여 값 증가
+				pri_num++; // 다음 옵션값을 선택하기 위하여 값 증가
+				arrIndex++;
 			}
-
+			if(number == 4 || pri_num == 4){
+				tags+='';
+			}
 			
 		});//#selectFilter
-				
+
 		//카페이름 클릭시 카페 간략정보 표현하는 ajax
-		$(".cafeName").click(function(){
+ 		$("#cafeList").on("click", ".cafeName", function(){
 			var cafeNo=$(this).next().val();
+			// 버튼 눌렀을시 작동하는 함수
+			
 			//alert(cafeNo);
 			$.ajax({
 				type:"get",
@@ -80,7 +86,7 @@
 				data:"cafeNo=" + cafeNo,
 				success:function(cafeTotal){
 					var tag="";
-					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '*끝에 별표</h2>';		
+					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span></h2>';		
 					tag +='<div class="fakeimg">';		
 					tag +='<img src="#" width="500" height="300">';			
 					tag +='</div>';			
@@ -95,15 +101,21 @@
 					tag +='주말 : ' + cafeTotal.weekendTime + ' | 공휴일 : ' + cafeTotal.holidayTime;				
 					tag +='</td></tr>';				
 					tag +='<tr>';				
-					tag +='<td colspan="2" align="center"><button id="cafeDetail">카페 상세정보 보기</button></td>';				
+					tag +='<td colspan="2" align="center"><button type="button" onclick="detailBtn()">카페 상세정보 보기</button></td>';
 					tag +='</tr>';				
 					tag +='</table>';			
+					tag +='<input type="hidden" id="detailCafeNo" value="'+cafeNo+'">';			
 					$("#cafeSimple").html(tag);
 				}
 			}); //ajax
-		});//click
-		
+		});//on 
 	});//ready
+	
+	//상세보기로 이동
+	function detailBtn(){
+		var detailCafeNo = document.getElementById("detailCafeNo").value;
+		location.href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo="+detailCafeNo;
+	}
 </script>
 </head>
 <body>
@@ -161,13 +173,13 @@
    </div><!-- row 1 -->
  
  
-   
+  
    <div class="row">
    <div class="col-sm-7"><!-- 카페 리스트 부분 -->
    
       <h3>검색 결과</h3>
       
-      <div class="row">
+      <div class="row cafeList" id="cafeList">
       <c:forEach items="${cafeList}" var="list" varStatus="order">
          <c:choose>
             <c:when test="${order.count % 2 == 1}">
@@ -185,11 +197,11 @@
                <div class="col-sm-6" style="margin-top: 10px">
                   <strong>${order.count}</strong> <!-- count -->
                   <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>   
-	                  <input type="hidden" value="${list.cafeVO.cafeNo}">
-	                  <div class="fakeimg">
-	                        <img src="#"
-	                             width="250" height="250">
-	                  </div>
+                  <input type="hidden" value="${list.cafeVO.cafeNo}">
+                  <div class="fakeimg">
+                        <img src="#"
+                             width="250" height="250">
+                  </div>
                </div>
             </c:otherwise>
          </c:choose>
@@ -197,7 +209,7 @@
       
       </div>
    </div><!-- 카페 리스트 부분 -->
-   
+
    <!-- 카페 간략정보 영역 -->
    <div class="col-sm-4">
 	   <!-- 카페 간략정보 표시 -->
@@ -205,7 +217,6 @@
    </div><!-- 카페 간략정보 영역 -->
       	
   </div><!-- 아래쪽 영역 row -->
-  
 </div><!-- container -->
 </body>   
 </html>
