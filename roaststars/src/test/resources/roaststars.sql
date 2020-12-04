@@ -436,3 +436,16 @@ ORDER BY p.taste DESC, null, null
 select *
 from   cafe
 where  cafe_loc = '부천'
+
+-- 리뷰 insert용 회원정보 등록
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('reviewtest16', '123', '꺄구', '꺄구', '510-3595-9818', '경기도 부천시 5조마루로372번길 60-1 (2층)');
+
+commit
+
+select *
+from   rs_user
+where  id='reviewtest16'
+--
+
+ 		

@@ -35,4 +35,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM   review r
 		WHERE  cafe_no = #{value}
 	</select>
+	
+	<!-- 리뷰 번호로 리뷰 조회하기 -->
+	<select id="findReviewByReviewNo" resultMap="UserAndCafeRM">
+		SELECT  c.cafe_no, c.cafe_name, u.id, u.password, u.nickname, u.enabled,
+				r.review_no, r.review_content, r.review_regdate
+		FROM    cafe c, review r, rs_user u
+		WHERE   c.cafe_no = r.cafe_no AND u.id = r.id AND review_no=#{value} 
+	</select>
+	
+	
+	<!-- 리뷰 등록하기 1 (리뷰 테이블에 콘텐츠 insert) -->
+	<insert id="registerReview" parameterType="ReviewVO">
+		<selectKey keyProperty="reviewNo" resultType="string" order="BEFORE">
+			SELECT review_seq.nextval
+			FROM   dual
+		</selectKey>
+		INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate) 
+		VALUES(#{cafeVO.cafeNo}, #{userVO.id}, #{reviewNo}, #{reviewContent}, sysdate)
+	</insert>
+	
+	<!-- 리뷰 등록하기 2 (특성 테이블에 평가값 update) -->
+	<update id="updateProperty" parameterType="PropertyVO">
+		UPDATE property 
+		SET    service = service + #{service}, taste = taste + #{taste} , price = price + #{price}, 
+			   mood = mood + #{mood}, diversity = diversity + #{diversity}
+		WHERE  cafe_no = #{cafeOperatingTimeVO.cafeVO.cafeNo}
+	</update>
+	
+	
 </mapper>

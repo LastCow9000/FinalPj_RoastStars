@@ -5,16 +5,26 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.mapper.ReviewMapper;
+import com.beans.roaststars.model.mapper.UserMapper;
+import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 import com.beans.roaststars.model.vo.ReviewListVO;
 import com.beans.roaststars.model.vo.ReviewVO;
+import com.beans.roaststars.model.vo.UserVO;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	
 	@Resource
 	private ReviewMapper reviewMapper;
+	
+	@Resource
+	private CafeMapper cafeMapper;
+	
+	@Resource
+	private UserMapper userMapper;
 	
 	// 카페넘버에 해당하는 리뷰 리스트 목록 불러오기
 
@@ -59,14 +69,31 @@ public class ReviewServiceImpl implements ReviewService {
 	// 리뷰 번호로 리뷰 정보 조회
 	@Override
 	public ReviewVO findReviewByReviewNo(String reviewNo) {
-		return null;
+		return reviewMapper.findReviewByReviewNo(reviewNo);
 	}
 	
 	// 리뷰 작성 및 카페 특성 update 는 둘 다 이루어져야함
 	// --> 트랜잭션 처리
 	@Transactional 
 	@Override
-	public void registerReview(ReviewVO reviewVO) {
+	public void registerReviewAndUpdateProperty(ReviewVO reviewVO, PropertyVO propertyVO, String cafeNo, String id) {
+		// 리뷰 쓸 대상 cafeOperVO 가져오기
+		CafeOperatingTimeVO cafeOperVO = cafeMapper.findCafeByCafeNo(cafeNo);
+		// 리뷰 쓰는 대상 userVO 가져오기
+		UserVO userVO = userMapper.findUserById(id);
+		
+		//reviewVO에 cafeOperVO의 cafeVO, userVO 할당
+		reviewVO.setCafeVO(cafeOperVO.getCafeVO());
+		reviewVO.setUserVO(userVO);
+		
+		//reviewVO로 registerReview 동작하여 리뷰 등록
+		reviewMapper.registerReview(reviewVO);
+		
+		// 특성 업데이트를 위해 PropertyVO에 cafeOper 넣기
+		propertyVO.setCafeOperatingTimeVO(cafeOperVO);
+		
+		// 해당 카페+특성 테이블 조인하여, 특성값 update
+		reviewMapper.updateProperty(propertyVO);
 	}
 	
 	@Override

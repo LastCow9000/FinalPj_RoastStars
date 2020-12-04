@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
-import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.PropertyVO;
 
 @Service
 public class CafeServiceImpl implements CafeService {
@@ -27,5 +27,13 @@ public class CafeServiceImpl implements CafeService {
 	public List<CafeOperatingTimeVO> findListByLoc(String loc) {
 		return cafeMapper.findListByLoc(loc);
 	}
+
+	// 카페 번호로 카페 정보 조회(+특성까지)
+	@Override
+	public PropertyVO findCafeAndPropertyByCafeNo(String cafeNo) {
+		return cafeMapper.findCafeAndPropertyByCafeNo(cafeNo);
+	}
+	
+	
 
 }

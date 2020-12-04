@@ -34,6 +34,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cafeVO.userVO.enabled" column="enabled"/>
 	</resultMap>
 	
+	<!-- 카페 특성 값 resultMap -->
+	<resultMap type="PropertyVO" id="propertyAndCafeRM">
+		<result column="cafe_no" property="cafeOperatingTimeVO.cafeVO.cafeNo"/>
+		<result column="cafe_name" property="cafeOperatingTimeVO.cafeVO.cafeName"/>
+		<result column="cafe_loc" property="cafeOperatingTimeVO.cafeVO.cafeLoc"/>
+		<result column="cafe_info" property="cafeOperatingTimeVO.cafeVO.cafeInfo"/>
+		<result column="cafe_tel" property="cafeOperatingTimeVO.cafeVO.cafeTel"/>
+		<result column="id" property="cafeOperatingTimeVO.cafeVO.userVO.id"/>
+	</resultMap>
 
 	<!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
 	<select id="findCafeByCafeNo" resultMap="CafeRM" parameterType="string">
@@ -50,6 +59,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id
  		from   cafe
  		where  cafe_loc=#{value}
+ 	</select>
+ 	
+ 	<!-- 카페 번호로 카페 특성 점수까지 반환받기 -->
+ 	<select id="findCafeAndPropertyByCafeNo" resultMap="propertyAndCafeRM">
+ 		SELECT p.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
+		FROM   cafe c, property p
+		WHERE  c.cafe_no = p.cafe_no AND p.cafe_no=#{value}
  	</select>
  	
 </mapper>
