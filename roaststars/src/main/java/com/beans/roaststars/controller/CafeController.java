@@ -86,7 +86,7 @@ public class CafeController {
 		//로그인한 유저정보 불러오기
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		cafeVO.setUserVO(uvo);
-		cafeOperVO.setCafeVO(cafeVO);ㄴ
+		cafeOperVO.setCafeVO(cafeVO);
 		//카페정보 등록
 		 cafeService.registerCafe(cafeVO,cafeOperVO);
 		 //cafeNo 보내주기
