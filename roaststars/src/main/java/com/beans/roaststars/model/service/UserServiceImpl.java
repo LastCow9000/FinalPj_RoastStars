@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService{
 		String encodedPwd = passwordEncoder.encode(vo.getPassword());
 		vo.setPassword(encodedPwd);
 		userMapper.registerUser(vo);
-		AuthorityVO authority = new AuthorityVO(vo.getId(), "ROLE_MEMBER");
+		AuthorityVO authority = new AuthorityVO(vo.getId(), "ROLE_MEMBER", vo);
 		userMapper.registerRole(authority);
 	}
 	
@@ -60,6 +61,24 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<AuthorityVO> selectAuthorityByUsername(String username) {
 		return userMapper.selectAuthorityByUsername(username);
+	}
+
+	@Override
+	public String passCheck(String password) {
+		UserVO userVO = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return passwordEncoder.matches(password, userVO.getPassword()) ? "ok" : "fail";
+	}
+
+	@Override
+	public void updateUser(UserVO userVO) {
+		String encodePassword = passwordEncoder.encode(userVO.getPassword());
+		userVO.setPassword(encodePassword);
+		userMapper.updateUser(userVO);
+	}
+
+	@Override
+	public void deleteUser(UserVO userVO) {
+		userMapper.deleteUser(userVO);
 	}
 	
 }

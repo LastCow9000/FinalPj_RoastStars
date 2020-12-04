@@ -419,3 +419,245 @@ SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
 		c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
 FROM    rs_user r, cafe c, operating_time o
 WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1
+
+SELECT cafe_no,cafe_name,cafe_loc,cafe_pic,cafe_info,cafe_tel,id
+ 		FROM   cafe where cafe_no=46
+
+-- 권한 조회
+SELECT *
+FROM   authorities a, rs_user r
+WHERE  a.username = r.id AND r.id='test11'
+
+--
+SELECT c.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
+FROM   cafe c, PROPERTY p
+WHERE  c.cafe_no = p.cafe_no
+ORDER BY p.taste DESC, null, null
+
+
+
+select *
+from   cafe
+where  cafe_loc = '부천'
+
+-- 리뷰 insert용 회원정보 등록
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('reviewtest16', '123', '꺄구', '꺄구', '510-3595-9818', '경기도 부천시 5조마루로372번길 60-1 (2층)');
+
+commit
+
+select *
+from   rs_user
+where  id='reviewtest16'
+--
+-----------------
+-- 성호 테스트
+-------------------------------
+
+--1. cafe_no=1에 전화번호 넣기
+UPDATE cafe SET cafe_name='까치화방', cafe_loc='경기도 성남시 분당구 백현동 판교역로 152 3 알파돔타워 3층',
+cafe_info='‘까치화방만의 건강한 제조 공법으로 만든 수제청과 수제청 음료, 그리고 직접구워낸 따뜻한 베이커리를 함께 제공해 드립니다. 판교 알파돔타워3, 3층 브릿지 앞 위치’',
+cafe_tel='031-622-7291' WHERE cafe_no=1
+
+SELECT *
+FROM   
+commit
+
+--
+SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+		c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+FROM    rs_user r, cafe c, operating_time o
+WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1
+
+
+select id,business_name,business_no,business_pic,authority
+from rs_user rs, authorities au
+where rs.id = au.username
+and not business_name is null
+          and not business_no is null
+                  and not business_pic is null
+                          and authority='ROLE_MEMBER';
+                          
+
+-- 사장 권한 member로 임시 강등
+update authorities set authority='ROLE_MEMBER' where username='sajang';
+update authorities set authority='ROLE_MEMBER' where username='sajang1';
+update authorities set authority='ROLE_MEMBER' where username='sajang2';
+update authorities set authority='ROLE_MEMBER' where username='sajang3';
+update authorities set authority='ROLE_MEMBER' where username='sajang4';
+
+		select rs.id,business_name,business_no,business_pic,authority, enabled
+		from   rs_user rs, authorities au
+		where  rs.id = au.username
+			   and not business_name is null
+			   and not business_no is null
+			   and not business_pic is null
+			   and authority='ROLE_MEMBER' 
+			   and authority<>'ROLE_MANAGER'
+			   
+		SELECT	username, authority
+		FROM	authorities
+		WHERE	username='java'
+		
+		
+		
+				select rs.id,rs.name, business_name,business_no,business_pic, au.authority, enabled
+		from   rs_user rs, authorities au
+		where  rs.id = au.username
+			   and not business_name is null
+			   and not business_no is null
+			   and not business_pic is null
+			   and authority='ROLE_MEMBER'
+insert into authorities(username, authority) values('sajang','ROLE_MANAGER');
+insert into authorities(username, authority) values('sajang','ROLE_MEMBER');
+
+select  count(*)
+from    AUTHORITIES
+where   username='sajang'
+
+----미등록 사장추가--
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test', '1', '스퉐붝스', '커피왕', '010-2475-2081', '용인','스타벅스','000');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test1', '1', '스퉐붝스1', '커피왕1', '110-2475-2081', '용인1','스타벅스1','001');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test2', '1', '스퉐붝스2', '커피왕2', '210-2475-2081', '용인2','스타벅스2','002');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test3', '1', '스퉐붝스3', '커피왕3', '310-2475-2081', '용인3','스타벅스3','003');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test5', '1', '스퉐붝스', '커피왕', '010-2475-2081', '용인','스타벅스','000');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test6', '1', '스퉐붝스1', '커피왕1', '110-2475-2081', '용인1','스타벅스1','001');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test7', '1', '스퉐붝스2', '커피왕2', '210-2475-2081', '용인2','스타벅스2','002');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('test8', '1', '스퉐붝스3', '커피왕3', '310-2475-2081', '용인3','스타벅스3','003');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest9', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest10', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest11', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest12', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest13', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest14', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest15', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest16', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest17', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest18', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest19', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest20', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+
+VALUES('stest21', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest22', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest23', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest24', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest25', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest26', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest27', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest28', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest29', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest30', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_no)
+VALUES('stest31', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4','스타벅스4','004');
+
+
+
+
+
+INSERT INTO authorities VALUES('test1', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test2', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test3', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test4', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test5', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test6', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test7', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('test8', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest9', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest10', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest11', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest12', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest13', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest14', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest15', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest16', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest17', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest18', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest19', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest20', 'ROLE_MEMBER');
+
+INSERT INTO authorities VALUES('stest21', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest22', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest23', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest24', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest25', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest26', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest27', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest28', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest29', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest30', 'ROLE_MEMBER');
+INSERT INTO authorities VALUES('stest31', 'ROLE_MEMBER');
+	
+SELECT rs.id, au.authority
+FROM(SELECT row_number() over(order by username DESC) AS rnum, rs.id, au.authority
+	FROM    rs_user rs, authorities au
+	WHERE   rs.id = au.username AND rs.id = 'java')
+WHERE rnum BETWEEN 1 AND 1
+ORDER BY rs.id DESC
+
+SELECT row_number() over(order by username DESC) AS rnum, rs.id, au.authority
+	FROM    rs_user rs, authorities au
+	WHERE   rs.id = au.username AND rs.id = #{cafeNo}
+WHERE rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber} 
+ORDER BY rs.id DESC
+
+		SELECT cr.cafe_no, cr.review_content, cr.review_no, cr.review_regdate, 
+			   u.id, u.password, u.nickname, u.enabled
+		FROM   ( SELECT  row_number() over(order by review_no DESC) AS rnum,
+						 c.cafe_no, r.review_content, r.review_no, r.id,
+				    	 TO_CHAR(r.review_regdate, 'YYYY-MM-DD') AS review_regdate
+		 		 FROM    cafe c, review r
+				 WHERE   c.cafe_no = r.cafe_no AND c.cafe_no = #{cafeNo}) cr, rs_user u
+		WHERE   cr.id = u.id AND rnum BETWEEN #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber} 
+		ORDER BY cr.review_no DESC
+		
+		
+		
+		
+		
+		
+SELECT au.authority, au.username, rs.id
+FROM(SELECT row_number() over (order by authority desc) as rnum, username, authority
+    from authorities) au, rs_user rs
+where rs.id=au.username and rnum between 1 and 30
+
+
+		select distinct(authority) 
+		from authorities
+		
+		
+		
+		SELECT
+		COUNT(*)
+		from authorities
+		where authority = 'ROLE_MEMBER'

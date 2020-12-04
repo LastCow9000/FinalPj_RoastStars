@@ -16,7 +16,10 @@
 	<%-- (예울 test) 카페 상세보기 가기 링크 --%>
 	<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=1">카페 상세보기</a>
 	<%-- 예울 test 끝 --%>
-
+	
+	<%-- 성호 : 관리자 페이지 링크 : 시작 --%>
+	 	<a href="${pageContext.request.contextPath}/admin-detail-form.do">관리자 페이지</a> 
+	<%-- 성호 : 관리자 페이지 링크 : 종료 --%>
 	<div class="masthead text-center jumbotron">
 		<div class="container">
 			<div class="row">
