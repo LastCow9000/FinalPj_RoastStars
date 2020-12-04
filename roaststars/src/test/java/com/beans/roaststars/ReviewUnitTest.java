@@ -76,7 +76,7 @@ public class ReviewUnitTest {
 		
 		cafeOperVO.setCafeVO(cafeOperVO.getCafeVO());//cafeOp에 cafeVO 할당
 		
-		UserVO userVO = userService.findUserById("reviewtest16");
+		UserVO userVO = userService.findUserById("reviewtest18");
 		
 		reviewVO.setCafeVO(cafeOperVO.getCafeVO()); //cafeVO 할당
 		reviewVO.setUserVO(userVO); //userVO 할당
@@ -86,17 +86,17 @@ public class ReviewUnitTest {
 		// 2. 카페 특성 update
 		//준비사항 1)cafeVO 
 		PropertyVO propertyVO = new PropertyVO();
-		propertyVO.setCafeOperatingTimeVO(cafeOperVO);//cafeOperVO 할당 - 그 안에 cafeVO 값 있음
+		propertyVO.setCafeVO(cafeOperVO.getCafeVO());//cafeOperVO 할당 - 그 안에 cafeVO 값 있음
 		propertyVO.setDiversity(propertyVO.good);
 		propertyVO.setMood(propertyVO.soso);
 		propertyVO.setPrice(propertyVO.bad);
 		propertyVO.setService(propertyVO.good);
 		propertyVO.setTaste(propertyVO.soso);
 		
-		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, "1", "reviewtest16");
+		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, "1", "reviewtest18");
 		
 		System.out.println(reviewMapper.findReviewByReviewNo(reviewVO.getReviewNo()));
-		System.out.println(cafeService.findCafeAndPropertyByCafeNo(propertyVO.getCafeOperatingTimeVO().getCafeVO().getCafeNo()));
+		System.out.println(cafeService.findCafeAndPropertyByCafeNo(propertyVO.getCafeVO().getCafeNo()));
 		
 	
 	}	

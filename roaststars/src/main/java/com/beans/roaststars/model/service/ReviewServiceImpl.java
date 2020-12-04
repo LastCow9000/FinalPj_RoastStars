@@ -89,8 +89,8 @@ public class ReviewServiceImpl implements ReviewService {
 		//reviewVO로 registerReview 동작하여 리뷰 등록
 		reviewMapper.registerReview(reviewVO);
 		
-		// 특성 업데이트를 위해 PropertyVO에 cafeOper 넣기
-		propertyVO.setCafeOperatingTimeVO(cafeOperVO);
+		// 특성 업데이트를 위해 PropertyVO에 cafeVO 넣기
+		propertyVO.setCafeVO(cafeOperVO.getCafeVO());
 		
 		// 해당 카페+특성 테이블 조인하여, 특성값 update
 		reviewMapper.updateProperty(propertyVO);
@@ -103,13 +103,11 @@ public class ReviewServiceImpl implements ReviewService {
 	// 리뷰 수정
 	@Override
 	public void updateReview(ReviewVO reviewVO) {
-		// TODO Auto-generated method stub
 	}
 	
 	// 리뷰 삭제
 	@Override
 	public void deleteReview(String reviewNo) {
-		// TODO Auto-generated method stub
 	}
 
 

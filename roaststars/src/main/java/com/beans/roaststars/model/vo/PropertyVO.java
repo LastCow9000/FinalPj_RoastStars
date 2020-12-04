@@ -12,21 +12,21 @@ public class PropertyVO {
 	private int price;
 	private int mood;
 	private int diversity;
-	private CafeOperatingTimeVO cafeOperatingTimeVO;
+	private CafeVO cafeVO;
+	
 	
 	public PropertyVO() {
 		super();
 	}
 
-	public PropertyVO(int service, int taste, int price, int mood, int diversity,
-			CafeOperatingTimeVO cafeOperatingTimeVO) {
+	public PropertyVO(int service, int taste, int price, int mood, int diversity, CafeVO cafeVO) {
 		super();
 		this.service = service;
 		this.taste = taste;
 		this.price = price;
 		this.mood = mood;
 		this.diversity = diversity;
-		this.cafeOperatingTimeVO = cafeOperatingTimeVO;
+		this.cafeVO = cafeVO;
 	}
 
 	public int getService() {
@@ -69,12 +69,12 @@ public class PropertyVO {
 		this.diversity = diversity;
 	}
 
-	public CafeOperatingTimeVO getCafeOperatingTimeVO() {
-		return cafeOperatingTimeVO;
+	public CafeVO getCafeVO() {
+		return cafeVO;
 	}
 
-	public void setCafeOperatingTimeVO(CafeOperatingTimeVO cafeOperatingTimeVO) {
-		this.cafeOperatingTimeVO = cafeOperatingTimeVO;
+	public void setCafeVO(CafeVO cafeVO) {
+		this.cafeVO = cafeVO;
 	}
 
 	public static int getGood() {
@@ -92,7 +92,7 @@ public class PropertyVO {
 	@Override
 	public String toString() {
 		return "PropertyVO [service=" + service + ", taste=" + taste + ", price=" + price + ", mood=" + mood
-				+ ", diversity=" + diversity + ", cafeOperatingTimeVO=" + cafeOperatingTimeVO + "]";
+				+ ", diversity=" + diversity + ", cafeVO=" + cafeVO + "]";
 	}
-
+	
 }

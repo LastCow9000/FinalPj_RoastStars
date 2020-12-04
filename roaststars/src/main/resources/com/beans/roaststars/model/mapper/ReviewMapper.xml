@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE property 
 		SET    service = service + #{service}, taste = taste + #{taste} , price = price + #{price}, 
 			   mood = mood + #{mood}, diversity = diversity + #{diversity}
-		WHERE  cafe_no = #{cafeOperatingTimeVO.cafeVO.cafeNo}
+		WHERE  cafe_no = #{cafeVO.cafeNo}
 	</update>
 	
 	
