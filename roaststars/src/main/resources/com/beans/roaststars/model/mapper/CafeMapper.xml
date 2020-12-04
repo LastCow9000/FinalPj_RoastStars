@@ -5,21 +5,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beans.roaststars.model.mapper.CafeMapper">
 	
-
-	<!-- has a 관계를 위한 cafeOperatingTime resultMap 
-		 : CafeOperatingTimeVO has a CafeVO
-		   CafeVO has a UserVO
-	-->	
-	<resultMap type="cafeOperatingTimeVO" id="CafeRM" >
-		<result property="cafeVO.userVO.id" column="id"/>
-		<result property="cafeVO.cafeNo" column="cafe_no"/>
-		<result property="cafeVO.cafeName" column="cafe_name"/>
-		<result property="cafeVO.cafeLoc" column="cafe_loc"/>
-		<result property="cafeVO.cafePic" column="cafe_pic"/>
-		<result property="cafeVO.cafeInfo" column="cafe_info"/>
-		<result property="cafeVO.cafeTel" column="cafe_tel"/>
-	</resultMap>
-	
+	<!-- SQL 기본 select -->
+ 	<sql id="selectCafe">
+ 		SELECT cafe_no,cafe_name,cafe_loc,cafe_pic,cafe_info,cafe_tel,id
+ 		FROM   cafe
+ 	</sql>
+   
+   <!-- has a 관계를 위한 cafeOperatingTime resultMap 
+       : CafeOperatingTimeVO has a CafeVO
+         CafeVO has a UserVO
+   -->   
+   <resultMap type="cafeOperatingTimeVO" id="CafeRM" >
+      <result property="cafeVO.userVO.id" column="id"/>
+      <result property="cafeVO.cafeNo" column="cafe_no"/>
+      <result property="cafeVO.cafeName" column="cafe_name"/>
+      <result property="cafeVO.cafeLoc" column="cafe_loc"/>
+      <result property="cafeVO.cafePic" column="cafe_pic"/>
+      <result property="cafeVO.cafeInfo" column="cafe_info"/>
+      <result property="cafeVO.cafeTel" column="cafe_tel"/>
+   </resultMap>
+   
 	<!-- 카페 사장님의 구체적인 정보를 알고싶을 때는
 		 아래의 resultMap을 사용하세요! -->
 	<resultMap type="cafeOperatingTimeVO" id="CafeAndManagerRM" extends="CafeRM">
@@ -33,39 +38,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="cafeVO.userVO.businessNo" column="business_no"/>
 		<result property="cafeVO.userVO.enabled" column="enabled"/>
 	</resultMap>
-	
-	<!-- 카페 특성 값 resultMap -->
-	<resultMap type="PropertyVO" id=" ">
-		<result column="cafe_no" property="cafeVO.cafeNo"/>
-		<result column="cafe_name" property="cafeVO.cafeName"/>
-		<result column="cafe_loc" property="cafeVO.cafeLoc"/>
-		<result column="cafe_info" property="cafeVO.cafeInfo"/>
-		<result column="cafe_tel" property="cafeVO.cafeTel"/>
-		<result column="id" property="cafeVO.userVO.id"/>
-	</resultMap>
+   
+   	<!-- 카페 특성 값 resultMap -->
+	<resultMap type="propertyVO" id="propertyCafeRM">
+ 		<result column="cafe_no" property="cafeVO.cafeNo"/>
+ 		<result column="cafe_name" property="cafeVO.cafeName"/>
+ 		<result column="cafe_loc" property="cafeVO.cafeLoc"/>
+ 		<result column="cafe_info" property="cafeVO.cafeInfo"/>
+ 		<result column="cafe_tel" property="cafeVO.cafeTel"/>
+ 		<result column="id" property="cafeVO.userVO.id"/>
+ 	</resultMap>
 
-	<!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
-	<select id="findCafeByCafeNo" resultMap="CafeRM" parameterType="string">
-		SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
-				c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel,
-				r.password, r.name, r.nickname, r.tel, r.address, r.business_name,
-				r.business_pic, r.business_no, r.enabled
-		FROM    rs_user r, cafe c, operating_time o
-		WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=#{value}
-	</select>
-	
-	<!-- 지역 기준으로 카페 리스트 반환 -->
- 	<select id="findListByLoc" resultMap="CafeRM" parameterType="string">
- 		select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id
- 		from   cafe
- 		where  cafe_loc=#{value}
- 	</select>
+   <!-- cafeNo로 카페정보 조인하지않고 찾기 -->
+   <select id="findcafeByNoNotJoin" resultType="cafeVO">
+       <include refid="selectCafe"/>
+       where cafe_no=#{value}
+   </select>
+   
+   <!-- cafe_no로 cafeVO 정보 반환받기(+userVO까지) -->
+   <select id="findCafeByCafeNo" resultMap="CafeRM" parameterType="string">
+      SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel,
+              r.password, r.name, r.nickname, r.tel, r.address, r.business_name,
+              r.business_pic, r.business_no, r.enabled
+      FROM    rs_user r, cafe c, operating_time o
+      WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=#{value}
+   </select>
+   
+   <!-- 지역 기준으로 카페 리스트 반환 -->
+    <select id="findListByLoc" resultMap="CafeRM" parameterType="string">
+       select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id
+       from   cafe
+       where  cafe_loc=#{value}
+    </select>
  	
- 	<!-- 카페 번호로 카페 특성 점수까지 반환받기 -->
- 	<select id="findCafeAndPropertyByCafeNo" resultMap="propertyAndCafeRM">
+ 	<!-- 특성값으로 카페리스트 정렬 -->
+ 	<select id="cafeListSortByProperty" resultMap="propertyCafeRM">
+ 		select c.cafe_no, c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel, c.id, p.taste, p.service, p.mood, p.diversity, p.price
+ 		from   cafe c, property p
+ 		where  c.cafe_no = p.cafe_no and c.cafe_loc=#{loc}
+ 		order by ${arrOption[0]} desc, ${arrOption[1]} desc, ${arrOption[2]} desc
+ 	</select>
+
+    <!-- 카페 등록하기 -->
+    <insert id="registerCafe" parameterType="cafeVO">
+    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
+    select cafe_seq.nextval from dual
+    </selectKey>
+    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
+    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
+    </insert>
+    
+    <!-- 카페운영시간 등록하기 -->
+    <insert id="registerCafeOperatingTime" parameterType="cafeOperatingTimeVO">
+    insert into operating_time(cafe_no,weekday_time,weekend_time,holiday_time)
+    values(#{cafeVO.cafeNo},#{weekdayTime},#{weekendTime},#{holidayTime})
+    </insert>
+    
+     <!-- 카페 번호로 카페 특성 점수까지 반환받기 -->
+ 	<select id="findCafeAndPropertyByCafeNo" resultMap="propertyCafeRM">
  		SELECT p.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
 		FROM   cafe c, property p
 		WHERE  c.cafe_no = p.cafe_no AND p.cafe_no=#{value}
  	</select>
- 	
+
 </mapper>
