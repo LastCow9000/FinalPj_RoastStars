@@ -6,7 +6,8 @@ public class BeansPickVO {
 	private String beansNo;
 	private String beansTitle;
 	private String beansContent;
-	private MultipartFile beansPic;
+	private MultipartFile uploadFile;
+	private String beansPic;
 	private String beans_regdate;
 	private UserVO userVO;
 	
@@ -14,12 +15,13 @@ public class BeansPickVO {
 		super();
 	}
 
-	public BeansPickVO(String beansNo, String beansTitle, String beansContent, MultipartFile beansPic,
-			String beans_regdate, UserVO userVO) {
+	public BeansPickVO(String beansNo, String beansTitle, String beansContent, MultipartFile uploadFile,
+			String beansPic, String beans_regdate, UserVO userVO) {
 		super();
 		this.beansNo = beansNo;
 		this.beansTitle = beansTitle;
 		this.beansContent = beansContent;
+		this.uploadFile = uploadFile;
 		this.beansPic = beansPic;
 		this.beans_regdate = beans_regdate;
 		this.userVO = userVO;
@@ -49,11 +51,19 @@ public class BeansPickVO {
 		this.beansContent = beansContent;
 	}
 
-	public MultipartFile getBeansPic() {
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
+	public String getBeansPic() {
 		return beansPic;
 	}
 
-	public void setBeansPic(MultipartFile beansPic) {
+	public void setBeansPic(String beansPic) {
 		this.beansPic = beansPic;
 	}
 
@@ -76,7 +86,8 @@ public class BeansPickVO {
 	@Override
 	public String toString() {
 		return "BeansPickVO [beansNo=" + beansNo + ", beansTitle=" + beansTitle + ", beansContent=" + beansContent
-				+ ", beansPic=" + beansPic + ", beans_regdate=" + beans_regdate + ", userVO=" + userVO + "]";
+				+ ", uploadFile=" + uploadFile + ", beansPic=" + beansPic + ", beans_regdate=" + beans_regdate
+				+ ", userVO=" + userVO + "]";
 	}
-
+	
 }

@@ -1,6 +1,8 @@
 package com.beans.roaststars;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -11,8 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
+
 import com.beans.roaststars.model.vo.CafeVO;
 import com.beans.roaststars.model.vo.ReviewListVO;
+
 import com.beans.roaststars.model.vo.ReviewVO;
 import com.beans.roaststars.model.vo.UserVO;
 
@@ -25,6 +29,7 @@ public class CafeUnitTest {
 	@Resource
 	ReviewService reviewService;
 
+	
 	@Test
 	public void cafeUnitTest() {
 		/*System.out.println(cafeService.findListByLoc("부천"));
@@ -33,10 +38,10 @@ public class CafeUnitTest {
 		//System.out.println(cafeService.findCafeByCafeNo("1"));
 		/*
 		// test 2. 카페 넘버로 리뷰 리스트 불러오기
-		for(ReviewVO vo:reviewService.findReviewListByCafeNo("1")) {
+		for(ReviewListVO vo:reviewService.findReviewListByCafeNo("1")) {
 			System.out.println(vo);
-		}
-		
+		}*/
+		/*
 		// test 3. 카페 넘버로 리뷰 총 개수 불러오기
 		System.out.println(reviewService.findReviewTotalCountByCafeNo("1"));
 		
@@ -82,7 +87,11 @@ public class CafeUnitTest {
 		 * 
 		 */
 	}
-}
+		// test 5. 카페 정보 상세보기 페이지
+		
+	}	
+
+
 		//        사용법 예시             //
 		/*
 		@Resource

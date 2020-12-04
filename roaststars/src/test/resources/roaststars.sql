@@ -422,3 +422,32 @@ WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1
 
 SELECT cafe_no,cafe_name,cafe_loc,cafe_pic,cafe_info,cafe_tel,id
  		FROM   cafe where cafe_no=46
+
+-- 권한 조회
+SELECT *
+FROM   authorities a, rs_user r
+WHERE  a.username = r.id AND r.id='test11'
+
+--
+SELECT c.cafe_no, p.service, p.taste, p.price, p.mood, p.diversity
+FROM   cafe c, PROPERTY p
+WHERE  c.cafe_no = p.cafe_no
+ORDER BY p.taste DESC, null, null
+
+
+
+select *
+from   cafe
+where  cafe_loc = '부천'
+
+-- 리뷰 insert용 회원정보 등록
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('reviewtest16', '123', '꺄구', '꺄구', '510-3595-9818', '경기도 부천시 5조마루로372번길 60-1 (2층)');
+
+commit
+
+select *
+from   rs_user
+where  id='reviewtest16'
+--
+

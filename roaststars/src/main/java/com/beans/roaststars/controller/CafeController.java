@@ -1,6 +1,7 @@
 package com.beans.roaststars.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 
 import org.springframework.security.access.annotation.Secured;
@@ -35,6 +36,7 @@ public class CafeController {
 	@Resource
 	CafeMapper cafeMapper;
 
+
 	// 메인화면 검색 결과후 지역검색 리스트뽑기
 	@RequestMapping("findListByLoc.do")
 	public String findListByLoc(String loc, Model model) {
@@ -44,7 +46,7 @@ public class CafeController {
 
 	// 카페 상세보기 페이지로 이동
 	@RequestMapping("cafe-detail.do")
-	public String viewCafeDetail(String cafeNo, String pageNo, Model model) {
+	public String viewCafeDetail(String cafeNo, String pageNo, Model model, HttpSession session) {
 		// CafeVO 넘기기
 		model.addAttribute("cafeTotal", cafeService.findCafeByCafeNo(cafeNo));
 		// 총 리뷰 개수 넘기기
@@ -52,17 +54,23 @@ public class CafeController {
 		// 리뷰 리스트 넘기기
 		ReviewListVO lvo = reviewService.findReviewListByCafeNo(cafeNo, pageNo);
 		model.addAttribute("lvo", lvo);
-
+		
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
 
+
+	public ModelAndView viewCafeDetail(String cafeNo) {
+		return new ModelAndView("cafe/cafeDetail.tiles",
+				"cafeTotal", cafeMapper.findCafeByCafeNo(cafeNo));
+	}//viewCafeDetail
 	
 	// 카페 간략정보 ajax
 	@RequestMapping("cafe-simple.do")
 	@ResponseBody
 	public CafeOperatingTimeVO getCafeSimple(String cafeNo) {
-		CafeOperatingTimeVO cafeVO = cafeMapper.findCafeByCafeNo(cafeNo);
-		return cafeVO;
+
+		CafeOperatingTimeVO cafeTotal=cafeMapper.findCafeByCafeNo(cafeNo);
+		return cafeTotal;
 	}
 
 	// 카페등록폼으로 이동

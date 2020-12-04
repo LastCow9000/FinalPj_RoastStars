@@ -67,8 +67,6 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		   이용자가 로그인 폼에서 입력한 비밀번호와 DB로부터 가져온 암호화된 비밀번호를 비교한다
 		  ( 비밀번호 암호화를 이용할 경우 )
 		 */
-		System.out.println(password.length());
-		System.out.println(member.getPassword());
 		
 		if (passwordEncoder.matches(password, member.getPassword()) == false)
 			throw new BadCredentialsException("비밀번호가 일치하지 않습니다");
