@@ -93,13 +93,13 @@ public class MemberController {
 			return "user/updateUserResult.tiles";
 		}
 		//회원탈퇴폼으로 이동.
-		@Secured("ROLE_MEMBER")
+		@Secured({"ROLE_ADMIN","ROLE_MANAGER"})		
 		@RequestMapping("delete-userform.do")
 		public String deleteForm() {
 			return "user/deleteUserForm.tiles";
 		} 
 		//회원탈퇴하기
-		@Secured("ROLE_MEMBER")
+		@Secured({"ROLE_ADMIN","ROLE_MANAGER"})		
 		@PostMapping("delete-useraction.do")
 		public String deleteUserAction(UserVO userVO, HttpSession session) {
 			userService.deleteUser(userVO);

@@ -419,3 +419,6 @@ SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
 		c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
 FROM    rs_user r, cafe c, operating_time o
 WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=1
+
+SELECT cafe_no,cafe_name,cafe_loc,cafe_pic,cafe_info,cafe_tel,id
+ 		FROM   cafe where cafe_no=46
