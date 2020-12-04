@@ -13,10 +13,6 @@
 <title>Main</title>
 </head>
 <body>
-	<%-- (예울 test) 카페 상세보기 가기 링크 --%>
-	<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=1">카페 상세보기</a>
-	<%-- 예울 test 끝 --%>
-
 	<div class="masthead text-center jumbotron">
 		<div class="container">
 			<div class="row">

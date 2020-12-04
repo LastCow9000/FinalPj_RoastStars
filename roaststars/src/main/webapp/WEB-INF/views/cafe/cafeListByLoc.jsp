@@ -32,13 +32,13 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'>"+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<div class='fakeimg'><img src='#' width='250' height='250'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'>"+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<div class='fakeimg'><img src='#' width='250' height='250'></div>";
 							tags+="</div>";
@@ -72,10 +72,12 @@
 			}
 			
 		});//#selectFilter
-				 
+
 		//카페이름 클릭시 카페 간략정보 표현하는 ajax
  		$("#cafeList").on("click", ".cafeName", function(){
 			var cafeNo=$(this).next().val();
+			// 버튼 눌렀을시 작동하는 함수
+			
 			//alert(cafeNo);
 			$.ajax({
 				type:"get",
@@ -84,11 +86,7 @@
 				data:"cafeNo=" + cafeNo,
 				success:function(cafeTotal){
 					var tag="";
-<<<<<<< HEAD
 					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span></h2>';		
-=======
-					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '*끝에 별표</h2>';		
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 					tag +='<div class="fakeimg">';		
 					tag +='<img src="#" width="500" height="300">';			
 					tag +='</div>';			
@@ -103,15 +101,21 @@
 					tag +='주말 : ' + cafeTotal.weekendTime + ' | 공휴일 : ' + cafeTotal.holidayTime;				
 					tag +='</td></tr>';				
 					tag +='<tr>';				
-					tag +='<td colspan="2" align="center"><button id="cafeDetail">카페 상세정보 보기</button></td>';				
+					tag +='<td colspan="2" align="center"><button type="button" onclick="detailBtn()">카페 상세정보 보기</button></td>';
 					tag +='</tr>';				
 					tag +='</table>';			
+					tag +='<input type="hidden" id="detailCafeNo" value="'+cafeNo+'">';			
 					$("#cafeSimple").html(tag);
 				}
 			}); //ajax
 		});//on 
-		
 	});//ready
+	
+	//상세보기로 이동
+	function detailBtn(){
+		var detailCafeNo = document.getElementById("detailCafeNo").value;
+		location.href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo="+detailCafeNo;
+	}
 </script>
 </head>
 <body>
@@ -193,19 +197,11 @@
                <div class="col-sm-6" style="margin-top: 10px">
                   <strong>${order.count}</strong> <!-- count -->
                   <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>   
-<<<<<<< HEAD
                   <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <div class="fakeimg">
                         <img src="#"
                              width="250" height="250">
                   </div>
-=======
-	                  <input type="hidden" value="${list.cafeVO.cafeNo}">
-	                  <div class="fakeimg">
-	                        <img src="#"
-	                             width="250" height="250">
-	                  </div>
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
                </div>
             </c:otherwise>
          </c:choose>
@@ -221,7 +217,7 @@
    </div><!-- 카페 간략정보 영역 -->
       	
   </div><!-- 아래쪽 영역 row -->
-  
+  <button type="button" id="detailBtn">카페 상세정보 보기</button>
 </div><!-- container -->
 </body>   
 </html>

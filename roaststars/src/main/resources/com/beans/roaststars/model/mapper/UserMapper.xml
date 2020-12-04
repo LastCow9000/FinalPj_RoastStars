@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원가입 -->
 	<insert id="registerUser" parameterType="userVO">
 	 	INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address},#{business_name},#{business_pic},#{business_no})
+		VALUES(#{id},#{password},#{name},#{nickname},#{tel},#{address},#{businessName},#{businessPic, jdbcType=VARCHAR},#{businessNo})
  	</insert>
  	
  	<!-- 권한 부여 -->
