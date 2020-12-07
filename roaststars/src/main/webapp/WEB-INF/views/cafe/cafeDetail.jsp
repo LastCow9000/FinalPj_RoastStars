@@ -188,11 +188,20 @@
                          
                          // dictProperty를 key로 반복문 돌리기
                          for(key in dictProperty) {
+                        	 var resultPoint = 0;
+                        	 
                             // key에 해당하는 name을 가진 라디오 버튼이 체크될 경우 selectEvalName에 할당
                             selectedEvalName = $("#registerReviewForm :radio[name=" + key + "]:checked()").val();
+                            if (selectedEvalName == 'good'){
+                            	resultPoint = 1;
+                            } else if (selectedEvalName == 'soso') {
+                            	resultPoint = 0;
+                            } else {
+                            	resultPoint = -2;
+                            }
                             // 해당 key에 대한 value값으로 'good', 'soso', 'bad' 중 하나 들어옴
-                            dictProperty[key] = selectedEvalName;
-                            alert(key + " " + selectedEvalName);
+                            dictProperty[key] = resultPoint;
+                            alert(key + " " + dictProperty[key]);
                         }
                          
                          //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
