@@ -51,7 +51,7 @@ public class MemberController {
 	public String register(UserVO vo, MultipartHttpServletRequest request) {
 		// System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
 		//이미지 파일 업로드용
-		//System.out.println(vo.getUploadFile());
+		System.out.println(vo.getUploadFile());
 		if (vo.getUploadFile() != null) {
 			uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
 			File uploadDir = new File(uploadPath);
@@ -62,7 +62,7 @@ public class MemberController {
 				File uploadFile = new File(uploadPath + file.getOriginalFilename());
 				try {
 					file.transferTo(uploadFile);
-					//System.out.println(uploadPath + file.getOriginalFilename());
+					System.out.println(uploadPath + file.getOriginalFilename());
 					vo.setBusinessPic(file.getOriginalFilename());
 					String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
 					File localPathDir = new File(localPath);
@@ -76,6 +76,7 @@ public class MemberController {
 			}
 		}
 		userService.registerUser(vo);
+		
 		return "redirect:register-resultView.do?id=" + vo.getId();
 	}
 
