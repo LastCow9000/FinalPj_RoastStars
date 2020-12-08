@@ -129,12 +129,14 @@ public class MemberController {
 		uvo.setTel(userVO.getTel());
 		return "user/updateUserResult.tiles";
 	}
+	
 	//회원탈퇴폼으로 이동.
 	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})		
 	@RequestMapping("delete-userform.do")
 	public String deleteForm() {
 		return "user/deleteUserForm.tiles";
 	} 
+	
 	//회원탈퇴하기
 	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})		
 	@PostMapping("delete-useraction.do")

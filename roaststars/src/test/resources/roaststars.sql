@@ -178,13 +178,16 @@ DROP TABLE review;
 CREATE TABLE review(
    cafe_no        NUMBER        NOT NULL,
    id             VARCHAR2(50)  NOT NULL,
-   review_no      NUMBER        NOT NULL,
+   review_no      NUMBER        NOT NULL UNIQUE,
    review_content CLOB          NOT NULL,
    review_regdate DATE          NOT NULL,
    constraint fk_review_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade,
    constraint fk_review_id foreign key(id) references rs_user(id) on delete cascade,
    constraint pk_review primary key(cafe_no, id)
 )
+
+-- review_no에 unique 조건 추가
+ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);
 
 DROP SEQUENCE review_seq;
 CREATE SEQUENCE review_seq;
@@ -402,3 +405,29 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 --삭제 테스트
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
+
+
+-- [20.12.07] 추가해야할 SQL
+
+-- 12. evaluated_property 테이블 생성
+DROP TABLE evaluated_property;
+CREATE TABLE evaluated_property(
+	review_no   number   PRIMARY KEY,
+	service     number   DEFAULT 0 NOT NULL,
+	taste       number   DEFAULT 0 NOT NULL,
+	price       number   DEFAULT 0 NOT NULL,
+	mood        number   DEFAULT 0 NOT NULL,
+	diversity   number   DEFAULT 0 NOT NULL,
+   constraint fk_evaluated_property foreign key(review_no) references review(review_no) on delete cascade
+)
+
+-- review_no에 unique 조건 추가
+ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);
+
+
+
+
+
+
+
+

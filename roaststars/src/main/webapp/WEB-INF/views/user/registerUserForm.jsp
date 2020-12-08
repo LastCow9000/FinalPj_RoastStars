@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 주소 API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
    $(document).ready(function() {
@@ -126,7 +128,24 @@
     	  }
     	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
       });
+   	  
+   	  
+   	  // 주소 팝업
+   	  $("#goToAddrAPIBtn").click(function() {
+	      new daum.Postcode({
+	          oncomplete: function(data) {
+	              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	              // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	              $("#address").val(data.address);
+	          }//oncomplete
+	      
+	      }).open();
+		
+	});//goToAddrAPIBtn
+	
    });//ready
+   
+
 </script>
 </head>
 <body>
@@ -138,7 +157,8 @@
 	이름 <input type="text" name="name" required="required"><br>
 	닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
 	전화번호 <input type="text" name="tel" required="required"><br>
-	주소 <input type="text" name="address" required="required"><br>
+	주소 <input type="text" name="address" id="address" value="" required="required" size=80>&nbsp;<button class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
+	상세주소 <input type="text" name="address"><br>
 	회원구분
 	<div class="form-check-inline">
 		<label class="form-check-label" for="radioMember">

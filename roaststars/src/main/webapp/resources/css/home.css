@@ -26,18 +26,46 @@
 }
 
 /* 리뷰 타이틀 및 리뷰 총 개수 조정 */
+
+/* 리뷰 전체 영역(리뷰 + 페이징 바)*/
+.reviewArea{
+	position: relative;
+}
+
 #reviewTitle{
 	float: left;
 	font-size: 25px;
 	margin-left: 10px;
 }
 
+/* 리뷰 테이블 */
+#reviewTableInfo {
+	font-size: 18px;
+	color : #6c5b7b;
+}
+
 /* 리뷰작성 버튼 위치 조정 */
-#reviewBtn {
+#reviewRegisterBtn {
 	float: right;
 	color : #155263;
 	text-decoration: none;
 	margin-right: 10px;
+}
+
+#reviewRegisterBtn:hover{
+	cursor: pointer;
+}
+
+/* 리뷰 삭제 버튼 크기 조정 */
+.deleteReviewBtn{
+	line-height: 1px;
+	border-radius: .2rem;
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
+	background-color: #e23e57;
+	color:white;
+	outline: 0;
+	border: 0;
 }
 
 /* 리뷰작성 모달 */
@@ -71,5 +99,11 @@ tr.reviewTableProperty {
 
 /* 페이징 바 */
 .pagingInfo{
-	text-align: center;
+	background-color: white;
+	width: 100%;
+	position: absolute;
+	margin: auto;
+	/*align-items: center; 세로에서 가운데에 요소를 배치*/
+	/*justify-content: cetner; 가로에서 가운데에 요소를 배치*/
+	font-size: 20px;
 }
