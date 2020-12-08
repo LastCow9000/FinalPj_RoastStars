@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		SELECT cafe_no,cafe_name,cafe_loc,cafe_pic,cafe_info,cafe_tel,id
  		FROM   cafe
  	</sql>
-   
+
    <!-- has a 관계를 위한 cafeOperatingTime resultMap 
        : CafeOperatingTimeVO has a CafeVO
          CafeVO has a UserVO

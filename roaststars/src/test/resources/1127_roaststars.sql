@@ -426,6 +426,7 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
 
+
 ------------------------------------
 -- 예울 test --
 
@@ -516,9 +517,60 @@ VALUES (1, 'grey', review_seq.nextval, '맛있어요4', sysdate);
 INSERT INTO review(cafe_no, id, review_no, review_content, review_regdate)
 VALUES (1, 'pink', review_seq.nextval, '맛있어요4', sysdate);
 
+--리뷰에 따른 프로퍼티 반영 여부 확인
+select *
+from   cafe c, property p
+where  c.cafe_no = p.cafe_no AND c.cafe_no =1
 
+
+-- 리뷰 중복 작성 여부 확인
+SELECT COUNT(*)
+FROM   cafe c, review r, rs_user u
+WHERE  c.cafe_no = r.cafe_no AND u.id= r.id AND r.cafe_no='3' AND r.id='pink'
+
+-- 리뷰 넘버로 리뷰 삭제
+DELETE FROM review WHERE review_no='1'
+
+INSERT INTO rs_user(id, password, name, nickname, tel, address)
+VALUES('reviewtest20', '1', '정예울', '파프리카20', '010-3595-9818', '경기도 부천시 조마루로372번길 60-1 (2층)');
+INSERT INTO authorities VALUES('reviewtest20', 'ROLE_MEMBER');
+
+commit
+
+INSERT INTO evaluated_property(review_no, service, taste, price, mood, diversity)
+VALUES (2,3, 1,2, 1,0);
+
+select 	c.cafe_no,service,taste,price,mood,diversity
+from   review r, cafe c, evaluated_property p
+where  r.cafe_no = c.cafe_no AND p.review_no = r.review_no AND p.review_no='56'
+
+select *
+from evaluated_property p
+
+select *
+from   cafe c, property p
+where  c.cafe_no = '2' AND c.cafe_no = p.cafe_no
+
+select *
+from   rs_user r, authorities a
+where  r.id = a.username AND id='reviewtest19'
+
+select *
+from   evaluated_property
+where  review_no='2'
+
+   		DELETE FROM review WHERE review_no='2'
+
+select *
+from   rs_user
+where  id='java88'
+
+select *
+from   cafe
+where  cafe_no=28
+   	 
 -- 예울 test 끝 --
 
-
+update cafe set cafe_pic='iu.jpg' where cafe_no=1
 
 
