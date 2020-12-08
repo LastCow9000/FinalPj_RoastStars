@@ -17,7 +17,7 @@ public class AdminListVO {
 		this.userList = userList;
 		this.pagingBean = pagingBean;
 		// 페이지 그룹 당 페이지 수
-		pagingBean.setPageNumberPerPageGroup(5);
+		pagingBean.setPageNumberPerPageGroup(4);
 		//페이지 당 게시물 수
 		pagingBean.setContentNumberPerPage(5);
 	}

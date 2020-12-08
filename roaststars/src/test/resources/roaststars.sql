@@ -402,3 +402,50 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 --삭제 테스트
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
+
+-- 테스트용 데이터
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id)
+VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id)
+VALUES (cafe_seq.nextval, '수하담', '성남시 분당구 판교로 190-8', '맛있습니다!!!!!!', '333', 'sajang1');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id)
+VALUES (cafe_seq.nextval, '오픈커피 ', '성남시 분당구 판교역로14번길 15', '맛있습니다!!!!!!', '333', 'sajang2');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id)
+VALUES (cafe_seq.nextval, '정지영커피로스터즈', '수원시 팔달구 정조로905번길 13', '맛있습니다!!!!!!', '333', 'sajang3');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id)
+VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교호수공원로 80', '맛있습니다!!!!!!', '333', 'sajang4');
+
+
+--
+
+select  rs.id, rs.name, rs.business_name, rs.business_no, rs.business_pic,
+		rs.enabled
+from 	(select count(authority), username
+		 from   AUTHORITIES
+		 group by username
+		 having count(authority) < 2) au, rs_user rs
+where	rs.id = au.username
+		and not business_name is null
+		and not business_no is null
+		and not business_pic is null
+
+		
+		select
+		distinct(authority)
+		from authorities
+		where authority <> 'ROLE_ADMIN';
+		
+		
+select 	id, name, business_name, business_no, business_pic, enabled, rnum
+from	(select  rs.id, rs.name, rs.business_name, rs.business_no, rs.business_pic,
+		rs.enabled, row_number() over(order by rs.id desc) as rnum
+		from 	(select count(authority), username
+				from   AUTHORITIES
+				group by username
+				having count(authority) < 2) au, rs_user rs 
+		where	rs.id = au.username
+		and not business_name is null
+		and not business_no is null
+		and not business_pic is null
+		and business_pic <> 'NO IMAGE') ra
+where	rnum between 1 and 3

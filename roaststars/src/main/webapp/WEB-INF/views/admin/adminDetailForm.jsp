@@ -1,12 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>AdminDetail</title>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		//권한 추가
+		$(".grantAuthority").on("click", "#addAuthorityBtn", function(){
+			var id=$(this).parent().parent().children("td:nth-child(1)").text();
+			var authority=$(this).parent().parent().children("td:nth-child(7)").children().val();
+			$.ajax({
+				type:"post",
+				data:"id=" + id + "&authority=" + authority,
+				url:"${pageContext.request.contextPath}/grant-authority.do",
+				beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
+				success:function(result){
+					if(result=="true"){
+						alert("권한 부여 성공!");
+					}else{
+						alert("권한 부여 실패!");
+					}
+					location.reload();
+				}
+				
+			});//end ajax
+		});//end on(권한추가)
+		
+		//이미지 클릭시 확대보기
+		$(document).on("click","img",function(e){
+			var path = $(this).attr('src')
+			var img = $(this).next().val();
+			showImage("resources/upload/"+img);
+		});//end click
+		$(".bigPictureWrapper").on("click", function(e){
+		    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+		    setTimeout(function(){
+		      $('.bigPictureWrapper').hide();
+		    }, 1000);
+		  });//end bigWrapperClick
+		function showImage(fileCallPath){
+		    $(".bigPictureWrapper").css("display","flex").show();
+		    $(".bigPicture")
+		    .html("<img src='"+fileCallPath+"' >")
+		    .animate({width:'100%', height: '100%'}, 1000);
+		  }//end function
+		  
+	});//end ready
+</script>
 </head>
 <body>
+	<div class="bigPictureWrapper">
+		<div class="bigPicture"></div>
+	</div>
 	<!-- 성호 : 네비 : 시작 -->
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" href="#">등급관리</a></li>
@@ -16,39 +68,45 @@
 	</ul>
 	<%-- 성호 : 네비 : 종료 --%>
 	<%-- 성호 : 등급테이블 : 시작 --%>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">이름</th>
-				<th scope="col">사업명</th>
-				<th scope="col">사업자등록번호</th>
-				<th scope="col">사업자등록증</th>
-				<th scope="col">현재등급</th>
-				<th scope="col">등급</th>
-				<th scope="col">확인</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="userVO" items="${requestScope.list}">
+	<form class="grantAuthority">
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td>${userVO.id}</td>
-					<td>${userVO.name}</td>
-					<td>${userVO.businessName}</td>
-					<td>${userVO.businessNo}</td>
-					<td>${userVO.businessPic}</td>
-					<td>${authorities.authority}</td>
-					<td><select id="getUserPositionList">
-							<option value="">등급</option>
-							<c:forEach items="${uplist}" var="addr">
-								<option value="${addr}">${addr}</option>
-							</c:forEach>
-					</select></td>
-					<td><input type="submit" value="권한추가" id="addAuthority"></td>
+					<th scope="col">ID</th>
+					<th scope="col">이름</th>
+					<th scope="col">사업명</th>
+					<th scope="col">사업자등록번호</th>
+					<th scope="col">사업자등록증</th>
+					<th scope="col">등급</th>
+					<th scope="col">권한 부여</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+					<c:forEach var="AuthorityVO" items="${requestScope.userList}">
+						<tr>
+							<td>${AuthorityVO.userVO.id}</td>
+							<td>${AuthorityVO.userVO.name}</td>
+							<td>${AuthorityVO.userVO.businessName}</td>
+							<td>${AuthorityVO.userVO.businessNo}</td>	
+							<td class="img"><a href="#" id="businessImg"><img src="resources/upload/${AuthorityVO.userVO.businessPic}" width="150" height="150"/>
+							<input type="hidden" id="businessImg" value="${AuthorityVO.userVO.businessPic}"></a>
+							</td>
+							<td>${AuthorityVO.authority}</td>
+							<td><select name="authority" id="getUserPositionList">
+									<option value="">등급</option>
+									<c:forEach items="${uplist}" var="addr">
+										<option value="${addr}">${addr}</option>
+									</c:forEach>
+								</select>
+							<input type="hidden" id="id" value="${AuthorityVO.userVO.id}">
+							</td>
+							<td><button type="button" id="addAuthorityBtn">권한 추가</button></td>
+						</tr>
+					</c:forEach>
+			</tbody>
+		</table>
+	<hr>
+	</form>
 	<%-- 성호 : 등급테이블 : 종료 --%>
 	<%-- 성호 : 페이징 : 시작 --%>
 	<div class="pagingInfo">

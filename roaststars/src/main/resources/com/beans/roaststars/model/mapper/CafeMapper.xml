@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="findListByLoc" resultMap="CafeRM" parameterType="string">
        select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id
        from   cafe
-       where  cafe_loc=#{value}
+       where  cafe_loc like '%' || #{value} || '%'
     </select>
  	
  	<!-- 특성값으로 카페리스트 정렬 -->
