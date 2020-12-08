@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.beans.roaststars.model.mapper.BeansPickMapper">
+	<!-- 빈즈픽 게시물 받아오기 -->
+	<select id="getAllBeansPickList" resultType="beansPickVO">
+		select beans_no, beans_title, beans_pic
+from BEANS_PICK order by beans_no desc
+	</select>
+</mapper>
