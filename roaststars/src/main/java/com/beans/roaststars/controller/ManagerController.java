@@ -57,7 +57,7 @@ public class ManagerController {
 		model.addAttribute("list", list);
 		return "cafe/updateCafeList.tiles";
 	}
-
+	//카페정보 수정전 자신의 카페목록 불러오기.
 	@Secured("ROLE_MANAGER")
 	@RequestMapping("update-cafeform.do")
 	public ModelAndView updateCafeForm(String cafeNo, Model model) {

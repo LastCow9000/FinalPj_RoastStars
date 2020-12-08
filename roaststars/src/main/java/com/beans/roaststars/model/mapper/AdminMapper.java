@@ -12,7 +12,7 @@ import com.beans.roaststars.model.vo.UserVO;
 @Mapper
 public interface AdminMapper {
 	// 가입한 아이디 중, 사장 권한 부여를 받기 위해 대기 중인 user의 리스트 반환
-	List<UserVO> getAllWaitingForUpgradeUserList();
+	List<AuthorityVO> getAllWaitingForUpgradeUserList();
 
 	// 권한 종류 불러오기
 	List<String> getUserAuthorityList();
@@ -22,8 +22,9 @@ public interface AdminMapper {
 
 	// 페이징
 	List<AuthorityVO> findMemberByAuthority(@Param("pagingBean") PagingBean pagingBean);
-
-
+	
+	// 권한 부여하기
+	int grantAuthority(@Param("id") String id, @Param("authority") String authority);
 
 	
 }

@@ -14,7 +14,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="userVO.nickname" column="nickname"/>
       <result property="userVO.enabled" column="enabled"/>
    </resultMap>
-   
       
    <!-- 카페 넘버에 해당하는 리뷰 리스트 목록 조회 -->
    <select id="findReviewListByCafeNo" resultMap="UserAndCafeRM">
