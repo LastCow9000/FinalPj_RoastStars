@@ -399,6 +399,22 @@ select sum(p.menu_price*p.menu_count) as 총액 from(
 select * from rs_user rs, menu m,order_info oi,order_detail od
 where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and oi.order_no=1) p
 
+
+
 --삭제 테스트
 delete from rs_user where id='java';
-delete from cafe where cafe_no=2;
+delete from cafe where cafe_no=1;
+
+ SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel,
+              r.password, r.name, r.nickname, r.tel, r.address, r.business_name,
+              r.business_pic, r.business_no, r.enabled
+      FROM    rs_user r, cafe c, operating_time o
+      WHERE   r.id = c.id AND c.cafe_no = o.cafe_no AND c.cafe_no=95
+  
+-- review_no에 unique 조건 추가
+ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);
+
+-- 12. evaluated_property 테이블 생성
+-- review_no에 unique 조건 추가
+ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);

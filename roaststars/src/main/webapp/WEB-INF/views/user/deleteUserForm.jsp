@@ -45,7 +45,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<sec:authorize access="hasRole('ROLE_MEMBER')">
+<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
  <form method="post" action="${pageContext.request.contextPath}/delete-useraction.do" id="deleteUserForm">
 <input type="hidden" name="command" value="delete">
 

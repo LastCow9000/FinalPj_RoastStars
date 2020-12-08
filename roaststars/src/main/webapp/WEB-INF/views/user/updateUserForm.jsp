@@ -34,7 +34,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
- <sec:authorize access="hasRole('ROLE_MEMBER')">
+ <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
  <form method="post" action="${pageContext.request.contextPath}/update-useraction.do">
  <%-- 
   		csrf 토큰 : csrf 공격을 막기 위한 1회성 인증키인 

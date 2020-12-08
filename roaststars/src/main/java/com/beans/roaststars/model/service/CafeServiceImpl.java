@@ -55,5 +55,23 @@ public class CafeServiceImpl implements CafeService {
 	public PropertyVO findCafeAndPropertyByCafeNo(String cafeNo) {
 		return cafeMapper.findCafeAndPropertyByCafeNo(cafeNo);
 	}
+	//자신의 카페리스트 불러오기
+	@Override
+	public List<CafeVO> getCafeList(String id) {
+		return cafeMapper.getCafeList(id);
+	}
+	@Transactional
+	@Override
+	public void updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO) {
+		cafeMapper.updateCafe(cafeVO);
+		cafeMapper.updateCafeOperatingTime(cafeOperVO);
+	}
+
+	@Override
+	public String deleteCafe(String cafeNo) {
+		int count = cafeMapper.deleteCafe(cafeNo);
+		System.out.println(count);
+		return (count == 1) ? "ok" : "fail";
+	}
 
 }

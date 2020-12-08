@@ -101,7 +101,7 @@ public class MemberController {
 	}
 
 	// 회원탈퇴시 비밀번호 확인
-	@Secured("ROLE_MEMBER")
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@PostMapping("pass-checkAjax.do")
 	@ResponseBody
 	public String passcheckAjax(String password) {
@@ -109,14 +109,14 @@ public class MemberController {
 	}
 	
 	//회원수정폼
-	@Secured("ROLE_MEMBER")
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@RequestMapping("update-userform.do")
 	public String updateForm() {
 		return "user/updateUserForm.tiles";
 	}
 
 	//회원수정
-	@Secured("ROLE_MEMBER")
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@PostMapping("update-useraction.do")
 	public String updateUserAction(HttpServletRequest request, UserVO userVO) {
 		// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
