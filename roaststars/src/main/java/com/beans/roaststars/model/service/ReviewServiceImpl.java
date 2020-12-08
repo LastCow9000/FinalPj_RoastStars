@@ -72,6 +72,12 @@ public class ReviewServiceImpl implements ReviewService {
       return reviewMapper.findReviewByReviewNo(reviewNo);
    }
    
+   //리뷰 등록 전, 해당 아이디로 해당 카페에 리뷰 등록 여부 확인
+   @Override
+   public int checkDuplicatedReview(String cafeNo, String id) {
+	   return reviewMapper.checkDuplicatedReview(cafeNo, id);
+   }
+   
    // 리뷰 작성 및 카페 특성 update 는 둘 다 이루어져야함
    // --> 트랜잭션 처리
    @Transactional 
@@ -88,26 +94,28 @@ public class ReviewServiceImpl implements ReviewService {
       
       //reviewVO로 registerReview 동작하여 리뷰 등록
       reviewMapper.registerReview(reviewVO);
-      
       // 특성 업데이트를 위해 PropertyVO에 cafeVO 넣기
       propertyVO.setCafeVO(cafeOperVO.getCafeVO());
       
       // 해당 카페+특성 테이블 조인하여, 특성값 update
       reviewMapper.updateProperty(propertyVO);
-   }
-   
-   @Override
-   public void updateProperty(PropertyVO propertyVO) {
-   }
-   
-   // 리뷰 수정
-   @Override
-   public void updateReview(ReviewVO reviewVO) {
+      
+      // 리뷰 평가 내용 evaluated_property 테이블에 등록
+      reviewMapper.insertEvalProperty(reviewVO.getReviewNo(), propertyVO);
    }
    
    // 리뷰 삭제
+   @Transactional
    @Override
-   public void deleteReview(String reviewNo) {
+   public void deleteReviewAndRollbackProperty(String reviewNo) {
+	   //리뷰 넘버로 카페 특성 불러오기
+	   PropertyVO propertyVO = reviewMapper.findPropertyByReviewNo(reviewNo);
+	   
+	   //해당 카페 특성 롤백하기
+	   reviewMapper.rollbackProperty(propertyVO);
+	   
+	   //리뷰 테이블에서 해당 리뷰 지우기
+	   reviewMapper.deleteReview(reviewNo);
    }
 
 

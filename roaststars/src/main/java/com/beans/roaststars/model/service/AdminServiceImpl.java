@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.beans.roaststars.model.mapper.AdminMapper;
 import com.beans.roaststars.model.vo.AdminListVO;
-import com.beans.roaststars.model.vo.UserVO;
+import com.beans.roaststars.model.vo.AuthorityVO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -17,7 +17,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	//등업 대기 중인 회원 리스트 불러오기
 	@Override
-	public List<UserVO> getAllWaitingForUpgradeUserList() {
+	public List<AuthorityVO> getAllWaitingForUpgradeUserList() {
 		return adminMapper.getAllWaitingForUpgradeUserList();
 	}
 
@@ -50,8 +50,10 @@ public class AdminServiceImpl implements AdminService{
 		AdminListVO listVO=new AdminListVO(adminMapper.findMemberByAuthority(pagingBean), pagingBean);
 		return listVO;
 	}
-	
-	
 
+	@Override
+	public int grantAuthority(String id, String authority) {
+		return adminMapper.grantAuthority(id, authority);
+	}
 
 }

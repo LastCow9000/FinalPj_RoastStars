@@ -55,7 +55,7 @@
 				<a href="${pageContext.request.contextPath}/delete-userform.do">탈퇴하기</a>&nbsp; &nbsp;
 				<sec:authorize access="hasRole('ROLE_MANAGER')">
 				<a href="${pageContext.request.contextPath}/register-cafeform.do">카페등록하기</a>&nbsp; &nbsp;
-				<a href="${pageContext.request.contextPath}/update-cafeform.do">카페수정하기</a>&nbsp; &nbsp;
+				<a href="${pageContext.request.contextPath}/update-cafelist.do">카페수정하기</a>&nbsp; &nbsp;
 				
 				</sec:authorize>
 				<%-- spring security logout은 다음과 같은 처리가 필요하다

@@ -36,28 +36,28 @@ public class ReviewUnitTest {
 	
 	@Test
 	public void reviewUnitTest() {
-		
 		/*
+		
 		// 1. 리뷰 등록
 		//준비사항1) cafeVO / 준비사항2) userVO
 		ReviewVO reviewVO = new ReviewVO();
-		CafeOperatingTimeVO cafeOperVO = cafeService.findCafeByCafeNo("1"); //cafeNo로 CafeOp가져오기
+		CafeOperatingTimeVO cafeOperVO = cafeService.findCafeByCafeNo("2"); //cafeNo로 CafeOp가져오기
 		//System.out.println(cafeOperVO.getCafeVO());
 		
 		cafeOperVO.setCafeVO(cafeOperVO.getCafeVO());//cafeOp에 cafeVO 할당
 		
-		UserVO userVO = userService.findUserById("reviewtest15");
+		UserVO userVO = userService.findUserById("reviewtest18");
 		
 		reviewVO.setCafeVO(cafeOperVO.getCafeVO()); //cafeVO 할당
 		reviewVO.setUserVO(userVO); //userVO 할당
-		reviewVO.setReviewContent("얌얌짱맛임");
+		reviewVO.setReviewContent("얌얌짱맛임- 리뷰테스트2");
 		
 		reviewMapper.registerReview(reviewVO); //리뷰 등록
 
 		// 2. 카페 특성 update
 		//준비사항 1)cafeVO 
 		PropertyVO propertyVO = new PropertyVO();
-		propertyVO.setCafeOperatingTimeVO(cafeOperVO);//cafeOperVO 할당 - 그 안에 cafeVO 값 있음
+		propertyVO.setCafeVO(cafeOperVO.getCafeVO());//cafeOperVO 할당 - 그 안에 cafeVO 값 있음
 		propertyVO.setDiversity(1);
 		propertyVO.setMood(0);
 		propertyVO.setPrice(-2);
@@ -65,17 +65,19 @@ public class ReviewUnitTest {
 		propertyVO.setTaste(1);
 		
 		reviewMapper.updateProperty(propertyVO); //카페특성 update
-		/*
+		reviewMapper.insertEvalProperty(reviewVO.getReviewNo(), propertyVO); //리뷰 평가 insert
+		
+		
 		System.out.println(reviewMapper.findReviewByReviewNo(reviewVO.getReviewNo()));
 		System.out.println(cafeService.findCafeAndPropertyByCafeNo(propertyVO.getCafeOperatingTimeVO().getCafeVO().getCafeNo()));
 		
-		*/
+		
 		ReviewVO reviewVO = new ReviewVO();
 		CafeOperatingTimeVO cafeOperVO = cafeService.findCafeByCafeNo("1"); //cafeNo로 CafeOp가져오기
 		
 		cafeOperVO.setCafeVO(cafeOperVO.getCafeVO());//cafeOp에 cafeVO 할당
 		
-		UserVO userVO = userService.findUserById("reviewtest16");
+		UserVO userVO = userService.findUserById("reviewtest20");
 		
 		reviewVO.setCafeVO(cafeOperVO.getCafeVO()); //cafeVO 할당
 		reviewVO.setUserVO(userVO); //userVO 할당
@@ -86,17 +88,28 @@ public class ReviewUnitTest {
 		//준비사항 1)cafeVO 
 		PropertyVO propertyVO = new PropertyVO();
 		propertyVO.setCafeVO(cafeOperVO.getCafeVO());//cafeOperVO 할당 - 그 안에 cafeVO 값 있음
-		propertyVO.setDiversity(propertyVO.good);
-		propertyVO.setMood(propertyVO.soso);
-		propertyVO.setPrice(propertyVO.bad);
-		propertyVO.setService(propertyVO.good);
-		propertyVO.setTaste(propertyVO.soso);
+		propertyVO.setDiversity(-2);
+		propertyVO.setMood(-2);
+		propertyVO.setPrice(-2);
+		propertyVO.setService(-2);
+		propertyVO.setTaste(-2);
 		
-		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, "1", "reviewtest16");
+		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, "1", "reviewtest20");
 		
 		System.out.println(reviewMapper.findReviewByReviewNo(reviewVO.getReviewNo()));
 		System.out.println(cafeService.findCafeAndPropertyByCafeNo(propertyVO.getCafeVO().getCafeNo()));
+		*/
 		
+		//리뷰 삭제
+		//리뷰넘버로 카페 특성 불러오기
+		/*PropertyVO propertyVO = reviewMapper.findPropertyByReviewNo("56");
+
+		//해당 카페특성 롤백하기
+		reviewMapper.rollbackProperty(propertyVO);
+		reviewMapper.deleteReview("56");*/
+	
+		// 리뷰 등록 전, 리뷰 작성 여부 확인
+		System.out.println(reviewService.checkDuplicatedReview("6", "sdfg"));
 	
 	}	
 }

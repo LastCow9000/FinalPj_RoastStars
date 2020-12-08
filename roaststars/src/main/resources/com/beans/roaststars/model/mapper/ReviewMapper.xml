@@ -15,7 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="userVO.enabled" column="enabled"/>
    </resultMap>
    
-      
+   <resultMap type="propertyVO" id="propertyRM">
+   	 <result property="cafeVO.cafeNo" column="cafe_no"/>
+   </resultMap>
+   
    <!-- 카페 넘버에 해당하는 리뷰 리스트 목록 조회 -->
    <select id="findReviewListByCafeNo" resultMap="UserAndCafeRM">
       SELECT cr.cafe_no, cr.review_content, cr.review_no, cr.review_regdate, 
@@ -44,7 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE   c.cafe_no = r.cafe_no AND u.id = r.id AND review_no=#{value} 
    </select>
    
+   <!-- 리뷰 등록 전, 해당 아이디로 해당 카페에 리뷰 등록 여부 확인 -->
+   <select id="checkDuplicatedReview" resultType="int" parameterType="string">
+		SELECT COUNT(*)
+		FROM   cafe c, review r, rs_user u
+		WHERE  c.cafe_no = r.cafe_no AND u.id= r.id AND r.cafe_no=#{0} AND u.id=#{1}
+   </select>
    
+
    <!-- 리뷰 등록하기 1 (리뷰 테이블에 콘텐츠 insert) -->
    <insert id="registerReview" parameterType="ReviewVO">
       <selectKey keyProperty="reviewNo" resultType="string" order="BEFORE">
@@ -63,5 +73,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE  cafe_no = #{cafeVO.cafeNo}
    </update>
    
+   <!-- 리뷰 등록하기 3 (evaluated_property 테이블에 리뷰 번호에 따른 평가 정보 insert) -->
+   <insert id="insertEvalProperty">
+      INSERT INTO evaluated_property(review_no, service, taste, price, mood, diversity)
+      VALUES(#{reviewNo}, #{propertyVO.service}, #{propertyVO.taste}, 
+      			#{propertyVO.price}, #{propertyVO.mood}, #{propertyVO.diversity})
+   </insert>
+   
+   <!-- 리뷰 삭제하기 0 (리뷰 번호로 평가 정보 조회) -->
+   <select id="findPropertyByReviewNo" resultMap="propertyRM">
+   	select c.cafe_no,service,taste,price,mood,diversity
+	from   review r, cafe c, evaluated_property p
+	where  r.cafe_no = c.cafe_no AND p.review_no = r.review_no AND p.review_no=#{value}
+   </select>
+   
+   <!-- 리뷰 삭제하기 1 (특성 테이블에 평가값 update(rollback))-->
+   <update id="rollbackProperty" parameterType="propertyVO">
+      UPDATE property 
+      SET    service = service - #{service}, taste = taste - #{taste} , price = price - #{price}, 
+            mood = mood - #{mood}, diversity = diversity - #{diversity}
+      WHERE  cafe_no = #{cafeVO.cafeNo}
+   </update>
+   
+   <!-- 리뷰 삭제하기 2 (리뷰 테이블에서 삭제) -->
+   <delete id="deleteReview">
+   		DELETE FROM review WHERE review_no=#{value}
+   </delete>
    
 </mapper>

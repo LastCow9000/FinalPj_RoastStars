@@ -427,7 +427,6 @@ CREATE TABLE evaluated_property(
 -- review_no에 unique 조건 추가
 ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);
 
-
 -- [20.12.08] 추가해야할 SQL	
 
 -- 테스트용 데이터
