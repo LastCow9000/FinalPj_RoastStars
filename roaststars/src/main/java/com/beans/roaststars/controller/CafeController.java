@@ -80,29 +80,5 @@ public class CafeController {
 		return cafeList;
 	}
 
-	// 카페등록폼으로 이동
-	@Secured("ROLE_MANAGER")
-	@RequestMapping("register-cafeform.do")
-	public String registerCafeForm() {
-		return "cafe/registerCafeForm.tiles";
-	}
 	
-	//카페등록하기
-	@Transactional
-	@Secured("ROLE_MANAGER")
-	@PostMapping("register-cafe.do") 
-	public ModelAndView registerCafe(CafeVO cafeVO,CafeOperatingTimeVO cafeOperVO) {
-		//로그인한 유저정보 불러오기
-		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		cafeVO.setUserVO(uvo);
-		cafeOperVO.setCafeVO(cafeVO);
-		//카페정보 등록
-		 cafeService.registerCafe(cafeVO,cafeOperVO);
-		 //cafeNo 보내주기
-		  cafeVO = cafeService.findcafeByNoNotJoin(cafeVO.getCafeNo());
-		  cafeOperVO.setCafeVO(cafeVO);
-		  cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
-		  return new ModelAndView("cafe/registerCafeResult.tiles","cafeOperVO",cafeOperVO);
-		}
-
 }

@@ -1,5 +1,7 @@
 package com.beans.roaststars;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -9,7 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beans.roaststars.model.mapper.AdminMapper;
 import com.beans.roaststars.model.service.AdminService;
-import com.beans.roaststars.model.service.PagingBean;
+import com.beans.roaststars.model.vo.AuthorityVO;
+import com.beans.roaststars.model.vo.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-model.xml",
@@ -25,27 +28,29 @@ public class AdminUnitTest {
 	@Test
 	public void adminUnitTest() {
 		//test.1 가입한 아이디 중 사장 권한 부여 대기중인 회원
-//		List<UserVO> listVO = adminMapper.getAllWaitingForUpgradeUserList();
-//		for(UserVO vo:listVO) {
-//			System.out.println(vo);
-//		}
+		//List<AuthorityVO> listVO = adminMapper.getAllWaitingForUpgradeUserList();
+		//for(AuthorityVO vo:listVO) {
+		//	System.out.println(vo);
+		//}
 		
 		//test.2 권한 종류 불러오기
-//		System.out.println(adminMapper.getUserAuthorityList());
+		//System.out.println(adminMapper.getUserAuthorityList());
 		
 		//test.3 권한 부여 대기중인 회원 총 인원 수
-//		System.out.println(adminMapper.getTotalCountByWaitingMember());
+		//System.out.println(adminMapper.getTotalCountByWaitingMember());
 		
-		//test.4 페이징 테스트
-		PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 2);
-		pb.setContentNumberPerPage(5);
-		pb.setPageNumberPerPageGroup(5);
-		System.out.println(adminMapper.findMemberByAuthority(pb));
+		//test.4 페이징 테스트  미완
+		//PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 2);
+		//pb.setContentNumberPerPage(5);
+		//pb.setPageNumberPerPageGroup(5);
+		//System.out.println(adminMapper.findMemberByAuthority(pb));
 		
-		
-
-	
-		
+		//test.5 권한 부여하기
+		//int a = adminService.grantAuthority("asdf11", "ROLE_MANAGER");
+		//List<AuthorityVO> listVO = adminMapper.getAllWaitingForUpgradeUserList();
+		//for(AuthorityVO vo:listVO) {
+		//System.out.println(vo);
+		}
 	}
 
 	/*
@@ -67,4 +72,3 @@ public class AdminUnitTest {
 	 * ivo.setPrice(1000); System.out.println("동록전: "+ ivo);
 	 * itemDAO.registerItem(ivo); System.out.println("등록완료: "+ivo); }
 	 */
-}

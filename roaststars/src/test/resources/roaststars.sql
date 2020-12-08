@@ -78,6 +78,7 @@ INSERT INTO authorities VALUES('sajang1', 'ROLE_MANAGER');
 INSERT INTO authorities VALUES('sajang2', 'ROLE_MANAGER');
 INSERT INTO authorities VALUES('sajang3', 'ROLE_MANAGER');
 INSERT INTO authorities VALUES('sajang4', 'ROLE_MANAGER');
+INSERT INTO authorities VALUES('te', 'ROLE_MANAGER');
 
 
 -- 고객 권한 부여 (member)
@@ -402,6 +403,8 @@ select sum(p.menu_price*p.menu_count) as 총액 from(
 select * from rs_user rs, menu m,order_info oi,order_detail od
 where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and oi.order_no=1) p
 
+
+
 --삭제 테스트
 delete from rs_user where id='java';
 delete from cafe where cafe_no=2;
@@ -425,9 +428,19 @@ CREATE TABLE evaluated_property(
 ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);
 
 
+-- [20.12.08] 추가해야할 SQL	
 
-
-
-
-
+-- 테스트용 데이터
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
+VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
+VALUES (cafe_seq.nextval, '수하담', '성남시 분당구 판교로 190-8', '맛있습니다!!!!!!', '333', 'sajang1', 'iu.jpg');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
+VALUES (cafe_seq.nextval, '오픈커피 ', '성남시 분당구 판교역로14번길 15', '맛있습니다!!!!!!', '333', 'sajang2', 'iu.jpg');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
+VALUES (cafe_seq.nextval, '정지영커피로스터즈', '수원시 팔달구 정조로905번길 13', '맛있습니다!!!!!!', '333', 'sajang3', 'iu.jpg');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
+VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교호수공원로 80', '맛있습니다!!!!!!', '333', 'sajang4', 'iu.jpg');
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
+VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
 

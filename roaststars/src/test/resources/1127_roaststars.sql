@@ -564,6 +564,10 @@ where  review_no='2'
 select *
 from   rs_user
 where  id='java88'
+
+select *
+from   cafe
+where  cafe_no=28
    	 
 -- 예울 test 끝 --
 

@@ -51,7 +51,7 @@ public class MemberController {
 	public String register(UserVO vo, MultipartHttpServletRequest request) {
 		// System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
 		//이미지 파일 업로드용
-		System.out.println(vo.getUploadFile());
+		//System.out.println(vo.getUploadFile());
 		if (vo.getUploadFile() != null) {
 			uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
 			File uploadDir = new File(uploadPath);
@@ -62,8 +62,8 @@ public class MemberController {
 				File uploadFile = new File(uploadPath + file.getOriginalFilename());
 				try {
 					file.transferTo(uploadFile);
-					System.out.println(uploadPath + file.getOriginalFilename());
-					vo.setBusinessPic(uploadPath + file.getOriginalFilename());
+					//System.out.println(uploadPath + file.getOriginalFilename());
+					vo.setBusinessPic(file.getOriginalFilename());
 					String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
 					File localPathDir = new File(localPath);
 					if (localPathDir.exists() == false)
@@ -101,7 +101,7 @@ public class MemberController {
 	}
 
 	// 회원탈퇴시 비밀번호 확인
-	@Secured("ROLE_MEMBER")
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@PostMapping("pass-checkAjax.do")
 	@ResponseBody
 	public String passcheckAjax(String password) {
@@ -109,14 +109,14 @@ public class MemberController {
 	}
 	
 	//회원수정폼
-	@Secured("ROLE_MEMBER")
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@RequestMapping("update-userform.do")
 	public String updateForm() {
 		return "user/updateUserForm.tiles";
 	}
 
 	//회원수정
-	@Secured("ROLE_MEMBER")
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@PostMapping("update-useraction.do")
 	public String updateUserAction(HttpServletRequest request, UserVO userVO) {
 		// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다

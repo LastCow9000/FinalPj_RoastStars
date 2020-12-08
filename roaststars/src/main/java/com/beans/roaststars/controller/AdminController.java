@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.beans.roaststars.model.service.AdminService;
 import com.beans.roaststars.model.vo.AdminListVO;
@@ -20,7 +21,7 @@ public class AdminController {
 	@RequestMapping("admin-detail-form.do")
 	public String adminDetailForm(String authority, String pageNo, Model model) {
 		//등급대기 중인 회원 리스트
-		model.addAttribute("list", adminService.getAllWaitingForUpgradeUserList());
+		model.addAttribute("userList", adminService.getAllWaitingForUpgradeUserList());
 		//권한 종류
 		model.addAttribute("uplist", adminService.getUserAuthorityList());
 		//등급대기 총인원
@@ -36,6 +37,22 @@ public class AdminController {
 	@RequestMapping("beanspick-detail-form.do")
 	public String beanspickDetailForm() {
 		return "admin/beanspickDetailForm.tiles";
+	}
+	
+	//영섭 : 권한부여
+	@RequestMapping("grant-authority.do")
+	@ResponseBody
+	public String grantAuthority(String id, String authority) {
+		String result=null;
+		try {
+			int resultCount=adminService.grantAuthority(id, authority);
+			if(resultCount >= 1)
+				result="true";
+		}catch(Exception e) {
+			e.printStackTrace();
+			result="false";
+		}
+		return result;
 	}
 
 }

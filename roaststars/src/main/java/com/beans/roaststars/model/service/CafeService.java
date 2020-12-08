@@ -25,4 +25,10 @@ public interface CafeService {
 	
 	// 카페 번호로 카페 정보 조회(+특성까지)
 	PropertyVO findCafeAndPropertyByCafeNo(String cafeNo);
+
+	List<CafeVO> getCafeList(String id);
+
+	void updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO);
+
+	String deleteCafe(String cafeNo);
 }
