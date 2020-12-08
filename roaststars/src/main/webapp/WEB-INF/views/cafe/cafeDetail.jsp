@@ -19,6 +19,7 @@
 <%-- 리뷰에서 쓸 cafeName도 변수에 담는다. --%>
 <c:set var="cafeName" value="${cafeTotal.cafeVO.cafeName}"/>
 <%-- 리뷰 중복 작성 여부 체크를 위해 로그인한 유저 아이디로 변수에 담는다 --%>
+<sec:authentication var="loginUser" property="principal"/>
 <c:set var="loginId" value="${loginUser.id}"/>
 
    <div class="container" style="margin-top: 10px">
@@ -74,7 +75,6 @@
               
               <%--로그인한 사용자만 보여지도록 secure 처리 --%>
               <sec:authorize access="hasRole('ROLE_MEMBER')">
-            <sec:authentication var="loginUser" property="principal"/>
               <%-- 카페의 사장아이디와 로그인한 사용자의 아이디가 같은 경우도 안보이기--%> 
             <c:if test="${cafeTotal.cafeVO.userVO.id != loginUser.id}">
               <span id="reviewRegisterBtn">
@@ -191,8 +191,8 @@
                   		   
                   		   //현재 로그인한 아이디
                   		   var loginId = '${loginId}';
-                  		   //alert(loginId)
-                  		   
+                  		   //alert(loginId);
+
     	              	    $.ajax({
     	          			   type:"GET",
     	          			   url:"${pageContext.request.contextPath}/check-review-ajax.do",
@@ -211,14 +211,16 @@
                       
                       var checkContent="";
                      
-                     // 1. 댓글 내용 부분에 입력을 시작하면 댓글 길이 나옴   
+                     // 1. 리뷰 내용 부분에 입력을 시작하면 댓글 길이 나옴   
                      $("#registerReviewForm").on("keyup","#reviewContent",function(){
                     	 
                         checkContent="";
+                        overLengthContent = "";
                         var reviewContentVal  =  $("#reviewContent").val().trim();
                         //한줄평 내용 길이 50자 넘어가면 빨갛게
                         if(reviewContentVal.length > 50){
                            $("#reviewContentLen").html(reviewContentVal.length).css("color","red");
+                           overLengthContent = reviewContentVal;
                            return;
                         //한줄평 내용 길이 평소에는 grey로
                         } else {
@@ -227,12 +229,26 @@
                         }
                      });//keyup
                       
+                 	// 2. 리뷰 부분 클릭하면 기존 리뷰 길이 나옴	
+                 	$("#reviewContent").mouseenter(function() {
+                 		var reviewContentVal = $(this).val().trim();
+                 		//한줄평 길이 20자 넘어가면 빨갛게
+                        if(reviewContentVal.length > 50){
+                            $("#reviewContentLen").html(reviewContentVal.length).css("color","red");
+                 		//한줄평 길이 평소에는 grey로
+                 		} else {
+                            $("#reviewContentLen").html(reviewContentVal.length).css("color","grey");
+                 		}
+                 	});//click
+                 	
                       //리뷰 폼 submit (registerReviewForm)
                       $("#registerReviewForm").submit(function() {
                       
                          //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
                          if (checkContent == ""){
                             alert("한줄평은 50자 이하로 작성해주세요.");
+                            $("#reviewContent").val(overLengthContent.substring(0, 50));// 51자부터 글자 all 삭제
+                            $("#reviewContent").focus();
                             return false;
                          }
                       });//registerReviewForm

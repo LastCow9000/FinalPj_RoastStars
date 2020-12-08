@@ -102,14 +102,14 @@ public class ReviewUnitTest {
 		
 		//리뷰 삭제
 		//리뷰넘버로 카페 특성 불러오기
-		PropertyVO propertyVO = reviewMapper.findPropertyByReviewNo("56");
+		/*PropertyVO propertyVO = reviewMapper.findPropertyByReviewNo("56");
 
 		//해당 카페특성 롤백하기
 		reviewMapper.rollbackProperty(propertyVO);
-		reviewMapper.deleteReview("56");
+		reviewMapper.deleteReview("56");*/
 	
 		// 리뷰 등록 전, 리뷰 작성 여부 확인
-		//System.out.println(reviewService.checkDuplicatedReview("1", "java"));
+		System.out.println(reviewService.checkDuplicatedReview("6", "sdfg"));
 	
 	}	
 }
