@@ -559,7 +559,7 @@ select *
 from   evaluated_property
 where  review_no='2'
 
-   		DELETE FROM review WHERE review_no='2'
+   		DELETE FROM review WHERE review_no='2'	
 
 select *
 from   rs_user
