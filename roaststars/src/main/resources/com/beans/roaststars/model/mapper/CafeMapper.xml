@@ -108,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="updateCafe" parameterType="cafeVO">
-	update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel}
+	update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
 	where cafe_no = #{cafeNo}
 	</update>
 	

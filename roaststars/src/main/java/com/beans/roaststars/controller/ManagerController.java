@@ -1,5 +1,7 @@
 package com.beans.roaststars.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,9 +11,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beans.roaststars.model.service.CafeService;
@@ -22,6 +27,7 @@ import com.beans.roaststars.model.vo.UserVO;
 public class ManagerController {
 	@Resource
 	private CafeService cafeService;
+	private String uploadPath; // 업로드 경로
 
 	// 카페등록폼으로 이동
 	@Secured("ROLE_MANAGER")
@@ -34,11 +40,39 @@ public class ManagerController {
 	@Transactional
 	@Secured("ROLE_MANAGER")
 	@PostMapping("register-cafe.do")
-	public ModelAndView registerCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO) {
+	public ModelAndView registerCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) {
 		// 로그인한 유저정보 불러오기
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		cafeVO.setUserVO(uvo);
 		cafeOperVO.setCafeVO(cafeVO);
+		// System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
+				//이미지 파일 업로드용
+				//System.out.println(cafeVO.getUploadFile());
+				
+				if (cafeVO.getUploadFile() != null) {
+					uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+					File uploadDir = new File(uploadPath);
+					if (uploadDir.exists() == false)
+						uploadDir.mkdirs();
+					MultipartFile file = cafeVO.getUploadFile();
+					if (file != null && file.isEmpty() == false) {
+						File uploadFile = new File(uploadPath + file.getOriginalFilename());
+						try {
+							file.transferTo(uploadFile);
+							// System.out.println(uploadPath + file.getOriginalFilename());
+							cafeVO.setCafePic((file.getOriginalFilename()));
+							String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
+							File localPathDir = new File(localPath);
+							if (localPathDir.exists() == false)
+								localPathDir.mkdirs();
+							FileCopyUtils.copy(file.getBytes(),
+									new File(localPath + File.separator + file.getOriginalFilename()));
+						} catch (IllegalStateException | IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				 
 		// 카페정보 등록
 		cafeService.registerCafe(cafeVO, cafeOperVO);
 		// cafeNo 보내주기
@@ -71,10 +105,33 @@ public class ManagerController {
 	@Transactional
 	@Secured("ROLE_MANAGER")
 	@PostMapping("update-cafe.do")
-	public ModelAndView updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO) { // 로그인한 유저정보 불러오기
+	public ModelAndView updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		cafeVO.setUserVO(uvo);
 		cafeOperVO.setCafeVO(cafeVO);
+		if (cafeVO.getUploadFile() != null) {
+			uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+			File uploadDir = new File(uploadPath);
+			if (uploadDir.exists() == false)
+				uploadDir.mkdirs();
+			MultipartFile file = cafeVO.getUploadFile();
+			if (file != null && file.isEmpty() == false) {
+				File uploadFile = new File(uploadPath + file.getOriginalFilename());
+				try {
+					file.transferTo(uploadFile);
+					// System.out.println(uploadPath + file.getOriginalFilename());
+					cafeVO.setCafePic((file.getOriginalFilename()));
+					String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
+					File localPathDir = new File(localPath);
+					if (localPathDir.exists() == false)
+						localPathDir.mkdirs();
+					FileCopyUtils.copy(file.getBytes(),
+							new File(localPath + File.separator + file.getOriginalFilename()));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		cafeService.updateCafe(cafeVO, cafeOperVO);
 		cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
 		return new ModelAndView("cafe/updateCafeResult.tiles", "cafeOperVO", cafeOperVO);
