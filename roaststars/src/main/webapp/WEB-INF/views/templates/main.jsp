@@ -13,9 +13,11 @@
 <title>Main</title>
 </head>
 <body>
-	
 	<%-- 성호 : 관리자 페이지 링크 : 시작 --%>
 	 	<a href="${pageContext.request.contextPath}/admin-detail-form.do">관리자 페이지</a> 
+	<%-- 성호 : 관리자 페이지 링크 : 종료 --%>
+		<%-- 성호 : 관리자 페이지 링크 : 시작 --%>
+	 	<a href="${pageContext.request.contextPath}/beansPick-form.do">BeansPick</a> 
 	<%-- 성호 : 관리자 페이지 링크 : 종료 --%>
 	<div class="masthead text-center jumbotron">
 		<div class="container">
