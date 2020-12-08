@@ -41,8 +41,8 @@
                <tr>
                   <td>운영시간</td>
                   <td>
-                  평일 : ${cafeTotal.weekdayTime} <br>
-                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
+			                  평일 : ${cafeTotal.weekdayTime} <br>
+			                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
                   </td>
                </tr>
                
@@ -92,7 +92,6 @@
                    </tr>
                 </c:forEach>
               </table> <%-- 리뷰 테이블 영역 --%>
-              
               
               <div class="pagingInfo">
                <%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>

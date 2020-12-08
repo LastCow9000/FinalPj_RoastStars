@@ -17,11 +17,10 @@ public class AdminController {
 	private AdminService adminService;
 
 	// 성호 : 페이지이동(adminDetailForm.jsp)
-
 	@RequestMapping("admin-detail-form.do")
-	public String adminDetailForm(String authority, String pageNo, Model model) {
+	public String adminDetailForm(String pageNo, Model model) {
 		//등급대기 중인 회원 리스트
-		model.addAttribute("userList", adminService.getAllWaitingForUpgradeUserList());
+		model.addAttribute("userList", adminService. findMemberByAuthority());
 		//권한 종류
 		model.addAttribute("uplist", adminService.getUserAuthorityList());
 		//등급대기 총인원

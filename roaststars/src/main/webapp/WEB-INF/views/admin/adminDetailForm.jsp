@@ -56,9 +56,7 @@
 </script>
 </head>
 <body>
-	<div class="bigPictureWrapper">
-		<div class="bigPicture"></div>
-	</div>
+	
 	<!-- 성호 : 네비 : 시작 -->
 	<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" href="#">등급관리</a></li>
@@ -90,6 +88,9 @@
 							<td>${AuthorityVO.userVO.businessNo}</td>	
 							<td class="img"><a href="#" id="businessImg"><img src="resources/upload/${AuthorityVO.userVO.businessPic}" width="150" height="150"/>
 							<input type="hidden" id="businessImg" value="${AuthorityVO.userVO.businessPic}"></a>
+							<div class="bigPictureWrapper">
+								<div class="bigPicture"></div>
+							</div>
 							</td>
 							<td>${AuthorityVO.authority}</td>
 							<td><select name="authority" id="getUserPositionList">
@@ -107,46 +108,48 @@
 		</table>
 	<hr>
 	</form>
-	<%-- 성호 : 등급테이블 : 종료 --%>
-	<%-- 성호 : 페이징 : 시작 --%>
+	
 	<div class="pagingInfo">
-	<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
-	<c:set var="pb" value="${requestScope.lvo.pagingBean}"></c:set>
-	<!-- 
-			step2 1) 이전 페이지 그룹이 있으면 화살표 보여준다
-				   		페이징빈의 previousPageGroup 이용 
-				   2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
-				   	    hint)   startPageOfPageGroup-1 하면 됨 		 
-	 -->  
-	<!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
-				   2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
-				      현 페이지이면 링크를 처리하지 않는다.  
-				      PagingBean의 nowPage
-				      jstl choose 를 이용  
-				      예) <a href="DispatcherServlet?command=list&pageNo=...">				   
-	 -->	
-	<ul class="pagination">
-	<c:if test="${pb.previousPageGroup}">	
-	<li><a href="${pageContext.request.contextPath}/admin-detail-form.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
-	</c:if>
-	<c:forEach var="i" begin="${pb.startPageOfPageGroup}" 
-	end="${pb.endPageOfPageGroup}">
-	<c:choose>
-	<c:when test="${pb.nowPage!=i}">
-	<li><a href="${pageContext.request.contextPath}/admin-detail-form.do.do?pageNo=${i}">${i}</a></li> 
-	</c:when>
-	<c:otherwise>
-	<li class="active"><a href="#" >${i}</a></li>
-	</c:otherwise>
-	</c:choose>
-	&nbsp;
-	</c:forEach>
-	<c:if test="${pb.nextPageGroup}">	
-	<li><a href="${pageContext.request.contextPath}/admin-detail-form.do.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
-	</c:if>
-	</ul>	 		
-	</div> 	
-	<%-- 성호 : 페이징 : 끝 --%>
+               <%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
+               <c:set var="pb" value="${requestScope.lvo.pagingBean}"/>
+               <!-- 
+                     step2 1) 이전 페이지 그룹이 있으면 화살표 보여준다
+                          	    페이징빈의 previousPageGroup 이용 
+                           2)  이미지에 이전 그룹의 마지막 페이지번호를 링크한다. 
+                           hint)   startPageOfPageGroup-1 하면 됨        
+                -->  
+               <!-- step1. 1)현 페이지 그룹의 startPage부터 endPage까지 forEach 를 이용해 출력한다
+                           2) 현 페이지가 아니면 링크를 걸어서 서버에 요청할 수 있도록 한다.
+                              현 페이지이면 링크를 처리하지 않는다.  
+                              PagingBean의 nowPage
+                              jstl choose 를 이용  
+                              예) <a href="DispatcherServlet?command=list&pageNo=...">               
+                -->    
+               <ul class="pagination pagination-sm">
+               <c:if test="${pb.previousPageGroup}">   
+                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+               </c:if>
+               
+               <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
+                  <c:choose>
+                     <c:when test="${pb.nowPage!=i}">
+                     <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${i}">${i}</a></li> 
+                     </c:when>
+                     
+                     <c:otherwise>
+                     <li class="active"><a href="#">${i}</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  &nbsp; 
+               </c:forEach>
+               
+               <c:if test="${pb.nextPageGroup}">   
+                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+               </c:if>
+               </ul>          
+               
+               </div><!-- 페이징 바 -->
+	
 </body>
 </html>
 
