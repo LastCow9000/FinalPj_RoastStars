@@ -41,12 +41,12 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<form method="post" action="${pageContext.request.contextPath}/register-cafe.do" id="registerCafeForm">
+<form method="post" action="${pageContext.request.contextPath}/register-cafe.do" id="registerCafeForm" enctype="multipart/form-data">
 <input type="hidden" name="command" value="register">
 	<sec:csrfInput/>
 	카페명: <input type="text" name="cafeName" id="registCafeName" required="required"><span id="nameCheckResult"></span><br>
 	위치: <input type="text" name="cafeLoc" required="required"><br>
-	<!-- 사진: <input type="text" name="" required="required"><br> -->
+	카페사진 <input type="file" name="uploadFile">
 	전화번호 <input type="text" name="cafeTel" required="required"><br>
 	정보:<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="cafeInfo" required="required"></textarea>
 	운영시간<br> 

@@ -54,27 +54,42 @@ public class CafeUnitTest {
 		}*/
 		
 		// Test 카페등록하기
-		  UserVO uvo= new UserVO(); 
-		  uvo.setId("java11"); 
-		  CafeVO vo = new CafeVO();
-		  vo.setUserVO(uvo); 
-		  vo.setCafeName("sdfasdfsasdf"); vo.setCafeLoc("dvd124qwd");
-		  vo.setCafeInfo("asdasdaqw124dda"); vo.setCafeTel("012410-6565-95664864");
-		  vo.setCafeNo("asdafag");
-		 // cafeService.registerCafe(vo);
-		 
-		  System.out.println(vo.getCafeNo());
-		 
-		  System.out.println(cafeService.findcafeByNoNotJoin(vo.getCafeNo()));
-		  vo = cafeService.findcafeByNoNotJoin(vo.getCafeNo());
-		  System.out.println(vo);
-		  CafeOperatingTimeVO ovo = new CafeOperatingTimeVO();
-		  ovo.setWeekendTime("1241");ovo.setHolidayTime("2142");ovo.setWeekdayTime("1261");
-		   ovo.setCafeVO(vo);
-		   
-		  // cafeService.registerCafeOperatingTime(ovo);
-		  System.out.println(cafeService.findCafeByCafeNo(vo.getCafeNo()));
-
+		/*
+		 * UserVO uvo= new UserVO(); uvo.setId("java11"); CafeVO vo = new CafeVO();
+		 * vo.setUserVO(uvo); vo.setCafeName("sdfasdfsasdf");
+		 * vo.setCafeLoc("dvd124qwd"); vo.setCafeInfo("asdasdaqw124dda");
+		 * vo.setCafeTel("012410-6565-95664864"); vo.setCafeNo("asdafag"); //
+		 * cafeService.registerCafe(vo);
+		 * 
+		 * System.out.println(vo.getCafeNo());
+		 * 
+		 * System.out.println(cafeService.findcafeByNoNotJoin(vo.getCafeNo())); vo =
+		 * cafeService.findcafeByNoNotJoin(vo.getCafeNo()); System.out.println(vo);
+		 * CafeOperatingTimeVO ovo = new CafeOperatingTimeVO();
+		 * ovo.setWeekendTime("1241");ovo.setHolidayTime("2142");ovo.setWeekdayTime(
+		 * "1261"); ovo.setCafeVO(vo);
+		 * 
+		 * // cafeService.registerCafeOperatingTime(ovo);
+		 * System.out.println(cafeService.findCafeByCafeNo(vo.getCafeNo()));
+		 */
+		UserVO uvo = new UserVO();
+		uvo.setId("java11");
+		List<CafeVO> list = cafeService.getCafeList(uvo.getId());
+		for(int i = 0; i<list.size(); i++)
+			System.out.println(list.get(i));
+		CafeVO cafeVO = new CafeVO();
+		cafeVO.setUserVO(uvo);
+		cafeVO =  cafeService.findcafeByNoNotJoin("48");
+		CafeOperatingTimeVO cafeOperVO = new CafeOperatingTimeVO();
+		cafeOperVO.setCafeVO(cafeVO);
+		cafeOperVO.setWeekendTime("1241");cafeOperVO.setHolidayTime("2142");cafeOperVO.setWeekdayTime("1261");
+		System.out.println(cafeOperVO);
+		
+		System.out.println(cafeService.findCafeByCafeNo(cafeOperVO.getCafeVO().getCafeNo()));
+		cafeOperVO.setWeekendTime("1");cafeOperVO.setHolidayTime("2");cafeOperVO.setWeekdayTime("3");
+		cafeVO.setCafeName("스타벅스");
+		cafeService.updateCafe(cafeVO, cafeOperVO);
+		System.out.println(cafeService.findCafeByCafeNo(cafeOperVO.getCafeVO().getCafeNo()));
 		/*
 		 * CafeVO vo = new CafeVO(); vo.set CafeOperatingTimeVO ovo = new
 		 * CafeOperatingTimeVO();

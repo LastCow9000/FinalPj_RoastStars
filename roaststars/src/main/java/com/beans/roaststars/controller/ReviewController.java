@@ -6,6 +6,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,19 +20,43 @@ public class ReviewController {
 	@Resource
 	private ReviewService reviewService;
 
+	// 리뷰 등록 폼으로 이동하기(모달 열기)
 	@Secured("ROLE_MEMBER")
 	@RequestMapping("register-review-form.do")
-	public ModelAndView registerReviewForm(String cafeNo) {
-		return new ModelAndView("review/registerReviewForm",
-				"cafeNo", cafeNo);
+	public String registerReviewForm() {
+		return "review/registerReviewForm";
 	}
 	
+	// 리뷰 등록 전, 리뷰 중복 체크
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("check-review-ajax.do")
+	@ResponseBody
+	public int checkReviewAjax(String id, String cafeNo) {
+		return reviewService.checkDuplicatedReview(cafeNo, id);
+	}
+	
+	// 리뷰 등록 시 1)리뷰 등록, 2)해당 카페에 평점 추가
 	@Secured("ROLE_MEMBER")
 	@PostMapping("register-review.do")
 	public String registerReviewAndupdateProperty(ReviewVO reviewVO, PropertyVO propertyVO,
-			String cafeNo, String id, RedirectAttributes ra) {
+			String cafeNo, String id) {
 		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, cafeNo, id);
-		ra.addAttribute("cafeNo", cafeNo);
-		return "redirect:review/registerReviewResult";
+		return "redirect:register-review-result.do?cafeNo="+cafeNo;
+	}
+	
+	// 리뷰 작성 결과 alert으로 이동
+	@Secured("ROLE_MEMBER")
+	@RequestMapping("register-review-result.do")
+	public ModelAndView registerReviewResult(String cafeNo) {
+		return new ModelAndView("review/registerReviewResult.tiles",
+				"cafeNo", cafeNo);
+	}
+	
+	// 리뷰 삭제
+	@Secured("ROLE_MEMBER")
+	@PostMapping("delete-review.do")
+	public String deleteReview(String reviewNo, String cafeNo) {
+		reviewService.deleteReviewAndRollbackProperty(reviewNo);
+		return "redirect:cafe-detail.do?cafeNo="+cafeNo;
 	}
 }
