@@ -18,9 +18,10 @@
 <c:set var="cafeNo" value="${cafeTotal.cafeVO.cafeNo}"/>
 <%-- 리뷰에서 쓸 cafeName도 변수에 담는다. --%>
 <c:set var="cafeName" value="${cafeTotal.cafeVO.cafeName}"/>
+<%-- 관리자 아이디 변수에 담기 --%>
+<sec:authorize access="hasRole('ROLE_ADMIN')" var="adminId"/>
 <%-- 리뷰 중복 작성 여부 체크를 위해 로그인한 유저 아이디로 변수에 담는다 --%>
-<sec:authentication var="loginUser" property="principal"/>
-<c:set var="loginId" value="${loginUser.id}"/>
+<c:set var="loginId" value="${loginUser}"/>
 
    <div class="container" style="margin-top: 10px">
       <div class="row">
@@ -28,8 +29,10 @@
          <div class="col-sm-6" style="background-color: #ffe2e2">
             <div style="margin-top: 10px">
             
-            &nbsp;<p id="cafeDetailCafeTitle" class="font-weight-bolder">${cafeTotal.cafeVO.cafeName}</p>
-            
+            &nbsp;<p id="cafeDetailCafeTitle" class="font-weight-bolder">${cafeTotal.cafeVO.cafeName}</p> 
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            	<button class="btn btn-danger"><strong>이 카페 데이터 지우기</strong></button>
+            </sec:authorize>
             <%--<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-spin fa-2x" style="color:#ffc93c"></i></a></span>--%>
             <span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>
             <span id="myPickStar"><a href="#" id="myPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>
@@ -75,8 +78,9 @@
               
               <%--로그인한 사용자만 보여지도록 secure 처리 --%>
               <sec:authorize access="hasRole('ROLE_MEMBER')">
+              <sec:authentication var="loginUser" property="principal.id"/>
               <%-- 카페의 사장아이디와 로그인한 사용자의 아이디가 같은 경우도 안보이기--%> 
-             <c:if test="${cafeTotal.cafeVO.userVO.id != loginUser.id}">
+              <c:if test="${cafeTotal.cafeVO.userVO.id != loginUser}">
               <span id="reviewRegisterBtn">
               	<a data-toggle="modal" data-target="#registerReviewForm" id="reviewBtn">
                  <i class="fas fa-pencil-alt fa-1x" style="color:#155263"></i>
@@ -94,7 +98,8 @@
                 <c:forEach items="${lvo.reviewList}" var="review">
                    <tr>
                    	<c:choose>
-                   	  <c:when test="${review.userVO.id == loginUser.id}">
+                   	
+                   	  <c:when test="${adminId == true || review.userVO.id == loginUser}">
                    	  	<td align="left" id="reviewTableInfo">
                    	  		${review.userVO.nickname}
                      		
@@ -109,6 +114,7 @@
 							 </form>
                      	</td>
                    	  </c:when>
+                   	 
                    	  <c:otherwise>
                    	    <td align="left" id="reviewTableInfo">${review.userVO.nickname}</td>
                    	  </c:otherwise>
@@ -169,6 +175,10 @@
          <!-- 리뷰 작성 팝업(모달) -->
          <!-- The Modal -->
            <div class="modal" id="registerReviewForm">
+           	 <sec:authorize access="hasRole('ROLE_MEMBER')">
+              <sec:authentication var="loginUser" property="principal.id"/>
+          	 </sec:authorize>
+            
              <div class="modal-dialog">
                <div class="modal-content">
                
@@ -189,7 +199,7 @@
                   		   //alert(cafeNo);
                   		   
                   		   //현재 로그인한 아이디
-                  		   var loginId = '${loginId}';
+                  		   var loginId = '${loginUser}';
                   		   //alert(loginId);
 
     	              	    $.ajax({
@@ -268,7 +278,7 @@
                     <!-- cafeNo 보내기 -->
                     <input type="hidden" name="cafeNo" value="${cafeNo}"> 
                     <!-- 현재 로그인 중인 회원의 id 보내기 -->
-                    <input type="hidden" name="id" value="${loginUser.id}">
+                    <input type="hidden" name="id" value="${loginUser}">
                     
                     <!-- 리뷰 특성 선택 table -->
                       <table class="reviewForm">
@@ -352,7 +362,7 @@
                             placeholder="한줄평을 작성해주세요" style="width:500px; height:30px; margin-top: 10px;">-->
                             <textarea name="reviewContent" id="reviewContent" class="form-control property_kind" maxlength="50" 
                               cols="2" style="overflow:auto; margin-top: 10px;  font-weight: bolder" 
-                              wrap="hard" placeholder="한줄평을 작성해주세요" required="required"></textarea>
+                              wrap="hard" required="required">한줄평을 작성해주세요</textarea>
                       </div>
                  </div><!-- modal-body -->
                  
