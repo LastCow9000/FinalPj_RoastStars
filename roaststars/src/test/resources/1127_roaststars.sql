@@ -520,16 +520,8 @@ VALUES (1, 'pink', review_seq.nextval, '맛있어요4', sysdate);
 --리뷰에 따른 프로퍼티 반영 여부 확인
 select *
 from   cafe c, property p
-where  c.cafe_no = p.cafe_no AND c.cafe_no =31
+where  c.cafe_no = p.cafe_no AND c.cafe_no =1
 
-select *
-from property
-where cafe_no=31
-
-
-select *
-from   evaluated_property e, review r
-where  r.review_no = e.review_no AND r.review_no=82
 
 -- 리뷰 중복 작성 여부 확인
 SELECT COUNT(*)
@@ -567,7 +559,7 @@ select *
 from   evaluated_property
 where  review_no='2'
 
-   		DELETE FROM review WHERE review_no='2'	
+   		DELETE FROM review WHERE review_no='2'
 
 select *
 from   rs_user
@@ -577,6 +569,20 @@ select *
 from   cafe
 where  cafe_no=28
    	 
+
+select *
+from   property p, cafe c
+where  p.cafe_no = c.cafe_no AND c.cafe_no=3
+
+delete from cafe
+where cafe_no=5
+
+delete from cafe
+where cafe_no=3
+
+delete from cafe
+where cafe_no=2
+
 -- 예울 test 끝 --
 
 update cafe set cafe_pic='iu.jpg' where cafe_no=1

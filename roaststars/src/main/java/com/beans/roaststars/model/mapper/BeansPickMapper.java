@@ -10,5 +10,7 @@ import com.beans.roaststars.model.vo.BeansPickVO;
 public interface BeansPickMapper {
 
 	List<BeansPickVO> getAllBeansPickList();
+	
+	List<BeansPickVO> getOneBeansPick(String beansNo);
 
 }
