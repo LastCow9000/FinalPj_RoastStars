@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.beans.roaststars.model.service.PagingBean;
 import com.beans.roaststars.model.vo.AuthorityVO;
-import com.beans.roaststars.model.vo.UserVO;
 
 @Mapper
 public interface AdminMapper {

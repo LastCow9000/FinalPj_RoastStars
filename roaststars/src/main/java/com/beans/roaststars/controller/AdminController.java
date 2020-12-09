@@ -16,20 +16,16 @@ public class AdminController {
 	@Resource
 	private AdminService adminService;
 
-	// 성호 : 페이지이동(adminDetailForm.jsp)
-	@RequestMapping("admin-detail-form.do")
+	@RequestMapping("admin-detail.do")
 	public String adminDetailForm(String pageNo, Model model) {
-		//등급대기 중인 회원 리스트
-		model.addAttribute("userList", adminService. findMemberByAuthority());
 		//권한 종류
-		model.addAttribute("uplist", adminService.getUserAuthorityList());
+		model.addAttribute("authorList", adminService.getUserAuthorityList());
 		//등급대기 총인원
-		model.addAttribute("waitingMemberTotalCount", adminService.getTotalCountByWaitingMember());
+		model.addAttribute("watingTotalCount", adminService.getTotalCountByWaitingMember());
 		//회원 정보 넘기기
-		AdminListVO lvo=adminService.findMemberByAuthority(pageNo);
+		AdminListVO lvo=adminService.getAllWatingForAuthor(pageNo);
 		model.addAttribute("lvo",lvo);
 		return "admin/adminDetailForm.tiles";
-
 	}
 
 	// 성호 : 페이지이동(beanspickDetailForm.jsp)

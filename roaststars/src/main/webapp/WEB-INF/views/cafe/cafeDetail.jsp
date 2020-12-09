@@ -76,11 +76,11 @@
               <%--로그인한 사용자만 보여지도록 secure 처리 --%>
               <sec:authorize access="hasRole('ROLE_MEMBER')">
               <%-- 카페의 사장아이디와 로그인한 사용자의 아이디가 같은 경우도 안보이기--%> 
-            <c:if test="${cafeTotal.cafeVO.userVO.id != loginUser.id}">
+             <c:if test="${cafeTotal.cafeVO.userVO.id != loginUser.id}">
               <span id="reviewRegisterBtn">
               	<a data-toggle="modal" data-target="#registerReviewForm" id="reviewBtn">
                  <i class="fas fa-pencil-alt fa-1x" style="color:#155263"></i>
-                 리뷰 작성하기 
+           		      리뷰 작성하기 
              	</a>
               </span>
              </c:if>

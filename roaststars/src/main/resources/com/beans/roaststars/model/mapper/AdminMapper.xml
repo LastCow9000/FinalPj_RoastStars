@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 페이징용  -->
-	<select id="getAllWatingForAuthor" resultMap="adminUserRM" parameterType="pagingBean">
+	<select id="getAllWatingForAuthor" resultMap="adminUserRM">
 		<![CDATA[
 		select 	id, name, business_name, business_no, business_pic, enabled, rnum
 		from	(select  rs.id, rs.name, rs.business_name, rs.business_no, rs.business_pic,
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and not business_no is null
 				and not business_pic is null
 				and business_pic <> 'NO IMAGE') ra
-		where	rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+		where	rnum between #{startRowNumber} and #{endRowNumber}
 		]]>
 	</select>
 
