@@ -351,9 +351,9 @@
                          한줄평 (<span id="reviewContentLen"></span>)<br>
                          <!--  <input type="text" name="reviewContent" required="required" id="reviewContent"
                             placeholder="한줄평을 작성해주세요" style="width:500px; height:30px; margin-top: 10px;">-->
-                            <textarea name="reviewContent" id="reviewContent" class="form-control property_kind" maxlength="50" 
+                            <textarea name="reviewContent" id="reviewContent" placeholder="한줄평을 작성해주세요" class="form-control property_kind" maxlength="50" 
                               cols="2" style="overflow:auto; margin-top: 10px;  font-weight: bolder" 
-                              wrap="hard" required="required">한줄평을 작성해주세요</textarea>
+                              wrap="hard" required="required"></textarea>
                       </div>
                  </div><!-- modal-body -->
                  

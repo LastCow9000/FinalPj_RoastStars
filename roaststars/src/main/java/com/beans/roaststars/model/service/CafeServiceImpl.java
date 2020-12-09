@@ -41,6 +41,8 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public void registerCafe(CafeVO cafeVO,CafeOperatingTimeVO cafeOperVO) {
 		cafeMapper.registerCafe(cafeVO);
+		String cafeNo = cafeVO.getCafeNo();
+		cafeMapper.registerCafeProperty(cafeNo);
 		cafeMapper.registerCafeOperatingTime(cafeOperVO);
 	}
 

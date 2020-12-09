@@ -215,7 +215,7 @@ WHERE  c.cafe_no = r.cafe_no AND u.id = r.id AND c.cafe_no = 1
 DROP TABLE property;
 CREATE TABLE property(
    cafe_no   NUMBER  PRIMARY KEY,
-   service   NUMBER  NOT NULL,
+   service   NUMBER   NOT NULL,
    taste     NUMBER  NOT NULL,
    price     NUMBER  NOT NULL,
    mood      NUMBER  NOT NULL,
@@ -442,4 +442,5 @@ INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic
 VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교호수공원로 80', '맛있습니다!!!!!!', '333', 'sajang4', 'iu.jpg');
 INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
 VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
+
 

@@ -82,11 +82,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 카페 등록하기 -->
     <insert id="registerCafe" parameterType="cafeVO">
-    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
-    select cafe_seq.nextval from dual
-    </selectKey>
-    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
-    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
+	    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
+	    select cafe_seq.nextval from dual
+	    </selectKey>
+	    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
+	    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
+    </insert>
+    
+    <!-- 카페 등록 시, property 테이블에 카페 넘버로 row 삽입 -->
+    <insert id="registerCafeProperty">
+    	INSERT INTO property(cafe_no, service, taste, price, mood, diversity) 
+    	VALUES(#{value}, 0,0,0,0,0)
     </insert>
     
     <!-- 카페운영시간 등록하기 -->
@@ -101,10 +107,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM   cafe c, property p
 		WHERE  c.cafe_no = p.cafe_no AND p.cafe_no=#{value}
  	</select>
- 	<!-- 아이디로 카페목록 불러오시 -->
+ 	<!-- 아이디로 카페목록 불러오기 -->
 	<select id="getCafeList" resultType="cafeVO">
-	<include refid="selectCafe"/>
-	where id=#{value}
+		<include refid="selectCafe"/>
+		where id=#{value}
 	</select>
 	
 	<update id="updateCafe" parameterType="cafeVO">
