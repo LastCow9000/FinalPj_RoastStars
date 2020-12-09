@@ -175,6 +175,10 @@
          <!-- 리뷰 작성 팝업(모달) -->
          <!-- The Modal -->
            <div class="modal" id="registerReviewForm">
+           	 <sec:authorize access="hasRole('ROLE_MEMBER')">
+              <sec:authentication var="loginUser" property="principal.id"/>
+          	 </sec:authorize>
+            
              <div class="modal-dialog">
                <div class="modal-content">
                
@@ -195,7 +199,7 @@
                   		   //alert(cafeNo);
                   		   
                   		   //현재 로그인한 아이디
-                  		   var loginId = '${loginId}';
+                  		   var loginId = '${loginUser}';
                   		   //alert(loginId);
 
     	              	    $.ajax({
