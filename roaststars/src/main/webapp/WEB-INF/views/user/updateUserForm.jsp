@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	/* 중복 확인 공간 */   
@@ -42,6 +43,18 @@ $(document).ready(function() {
 	          }//oncomplete 
 	      }).open();
 	});//goToAddrAPIBtn
+    
+    // 주소 팝업
+ 	  $("#goToAddrAPIBtn").click(function() {
+	      new daum.Postcode({
+	          oncomplete: function(data) {
+	              $("#address").val(data.address);
+	          }//oncomplete
+	      
+	      }).open();
+		
+	});//goToAddrAPIBtn
+	
 	
 });//ready
 </script>
@@ -62,6 +75,8 @@ $(document).ready(function() {
 		<br>패스워드확인 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
 		<br>이름 : <input type="text" name="name" value="<sec:authentication property="principal.name"/>" required="required">	
 		<br>주소 : <input type="text" name="address" id="address" value="<sec:authentication property="principal.address"/>" required="required" size=80><button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button>	
+	
+		<br>상세주소 <input type="text" name="address">
 		<br>전화번호 <input type="text" name="tel"  value="<sec:authentication property="principal.tel"/>" required="required"><br>
 		<br><input type="submit" value="회원정보수정">
 		</form>

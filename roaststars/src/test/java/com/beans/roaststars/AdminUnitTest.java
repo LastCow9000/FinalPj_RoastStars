@@ -1,7 +1,5 @@
 package com.beans.roaststars;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -11,8 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beans.roaststars.model.mapper.AdminMapper;
 import com.beans.roaststars.model.service.AdminService;
-import com.beans.roaststars.model.vo.AuthorityVO;
-import com.beans.roaststars.model.vo.UserVO;
+import com.beans.roaststars.model.service.PagingBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-model.xml",
@@ -39,19 +36,19 @@ public class AdminUnitTest {
 		//test.3 권한 부여 대기중인 회원 총 인원 수
 		//System.out.println(adminMapper.getTotalCountByWaitingMember());
 		
-		//test.4 페이징 테스트  미완
-		//PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 2);
-		//pb.setContentNumberPerPage(5);
-		//pb.setPageNumberPerPageGroup(5);
-		//System.out.println(adminMapper.findMemberByAuthority(pb));
-		
-		//test.5 권한 부여하기
+		//test.4 권한 부여하기
 		//int a = adminService.grantAuthority("asdf11", "ROLE_MANAGER");
 		//List<AuthorityVO> listVO = adminMapper.getAllWaitingForUpgradeUserList();
 		//for(AuthorityVO vo:listVO) {
 		//System.out.println(vo);
-		}
+		
+		//test.5 페이징 테스트  미완
+		PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 1);
+		pb.setContentNumberPerPage(5);
+		pb.setPageNumberPerPageGroup(5);
+		System.out.println(adminMapper.getAllWatingForAuthor(pb));
 	}
+}
 
 	/*
 	 * @Test public void adminTest() { //test1. admin 페이지에서 사장 등록 대기 중인 사용자 리스트 불러오기

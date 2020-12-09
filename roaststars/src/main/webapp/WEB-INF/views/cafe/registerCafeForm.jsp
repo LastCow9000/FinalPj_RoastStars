@@ -81,6 +81,7 @@ $(document).ready(function() {
 	      }).open();
 		
 	});//goToAddrAPIBtn
+
 });//ready
 function inputTimeColon(time) {
     // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
@@ -127,7 +128,7 @@ function inputTimeColon(time) {
             return false;
         }
         if(hours + minute>hours2 + minute2){
-        	alert("오픈시간이 마감시간보다 늦습니다. 다시한번 확인해주세요");
+           alert("오픈시간이 마감시간보다 늦습니다. 다시한번 확인해주세요");
             return false;
 
         }
@@ -141,7 +142,7 @@ function inputTimeColon(time) {
 <input type="hidden" name="command" value="register">
    <sec:csrfInput/>
    카페명: <input type="text" name="cafeName" id="registCafeName" required="required"><span id="nameCheckResult"></span><br>
-   주소: <input type="text" name="cafeLoc" id="address" required="required" size=60>&nbsp;<button class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
+   주소: <input type="text" name="cafeLoc" id="address" readonly="readonly" required="required" size=60>&nbsp;<button class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
    카페사진 <input type="file" name="uploadFile">
    전화번호 <input type="text" name="cafeTel" required="required"><br>
    정보:<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="cafeInfo" required="required"></textarea>
@@ -150,14 +151,14 @@ function inputTimeColon(time) {
 주말<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/><br>
 공휴일
 <div class="form-check-inline">
-		<label class="form-check-label" for="radioMember">
-      			<input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
-    		</label>
- 		</div>
-    	<div class="form-check-inline">	 
-   		<label class="form-check-label" for="radioManager">
-        	<input type="radio" class="classification" id="radioOpen" value="open">운영함
-    	</label>
+      <label class="form-check-label" for="radioMember">
+               <input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+          </label>
+       </div>
+       <div class="form-check-inline">    
+         <label class="form-check-label" for="radioManager">
+           <input type="radio" class="classification" id="radioOpen" value="open">운영함
+       </label>
     </div>
     
 <div id="managerInfo"></div>

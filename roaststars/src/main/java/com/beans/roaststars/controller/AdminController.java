@@ -2,6 +2,7 @@ package com.beans.roaststars.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,31 +16,29 @@ public class AdminController {
 
 	@Resource
 	private AdminService adminService;
-
-	// 성호 : 페이지이동(adminDetailForm.jsp)
-
-	@RequestMapping("admin-detail-form.do")
-	public String adminDetailForm(String authority, String pageNo, Model model) {
-		//등급대기 중인 회원 리스트
-		model.addAttribute("userList", adminService.getAllWaitingForUpgradeUserList());
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("admin-detail.do")
+	public String adminDetailForm(String pageNo, Model model) {
 		//권한 종류
-		model.addAttribute("uplist", adminService.getUserAuthorityList());
+		model.addAttribute("authorList", adminService.getUserAuthorityList());
 		//등급대기 총인원
-		model.addAttribute("waitingMemberTotalCount", adminService.getTotalCountByWaitingMember());
+		model.addAttribute("watingTotalCount", adminService.getTotalCountByWaitingMember());
 		//회원 정보 넘기기
-		AdminListVO lvo=adminService.findMemberByAuthority(pageNo);
+		AdminListVO lvo=adminService.getAllWatingForAuthor(pageNo);
 		model.addAttribute("lvo",lvo);
 		return "admin/adminDetailForm.tiles";
-
 	}
 
 	// 성호 : 페이지이동(beanspickDetailForm.jsp)
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("beanspick-detail-form.do")
 	public String beanspickDetailForm() {
 		return "admin/beanspickDetailForm.tiles";
 	}
 	
 	//영섭 : 권한부여
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("grant-authority.do")
 	@ResponseBody
 	public String grantAuthority(String id, String authority) {

@@ -29,7 +29,6 @@ public class PagingBean {
 	 */
 	private int totalContents;
 	
-	
 	/**
 	 * 생성자
 	 */

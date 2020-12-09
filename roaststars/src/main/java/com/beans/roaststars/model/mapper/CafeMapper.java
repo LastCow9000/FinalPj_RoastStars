@@ -20,7 +20,9 @@ public interface CafeMapper {
 	List<PropertyVO> cafeListSortByProperty(@Param("arrOption") String[] arrOption, @Param("loc") String loc);
 	
 	void registerCafe(CafeVO cafeVO);
-
+	// 카페 등록 시, 특성 테이블에 해당 카페 넘버 row 추가하기
+	void registerCafeProperty(String CafeNo);
+	
 	CafeVO findcafeByNoNotJoin(String cafeNo);
 
 	void registerCafeOperatingTime(CafeOperatingTimeVO cafeOperVO);

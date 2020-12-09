@@ -59,7 +59,7 @@ public class ManagerController {
 						try {
 							file.transferTo(uploadFile);
 							// System.out.println(uploadPath + file.getOriginalFilename());
-							cafeVO.setCafePic((file.getOriginalFilename()));
+							cafeVO.setCafePic(file.getOriginalFilename());
 							String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
 							File localPathDir = new File(localPath);
 							if (localPathDir.exists() == false)
