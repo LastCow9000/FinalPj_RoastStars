@@ -69,6 +69,7 @@ create table authorities(
    constraint pk_authorities primary key(username, authority)
 )
 
+
 -- 관리자 권한 부여 (admin)
 INSERT INTO authorities VALUES('admin', 'ROLE_ADMIN');
 
@@ -415,19 +416,19 @@ delete from cafe where cafe_no=2;
 -- 12. evaluated_property 테이블 생성
 DROP TABLE evaluated_property;
 CREATE TABLE evaluated_property(
-	review_no   number   PRIMARY KEY,
-	service     number   DEFAULT 0 NOT NULL,
-	taste       number   DEFAULT 0 NOT NULL,
-	price       number   DEFAULT 0 NOT NULL,
-	mood        number   DEFAULT 0 NOT NULL,
-	diversity   number   DEFAULT 0 NOT NULL,
+   review_no   number   PRIMARY KEY,
+   service     number   DEFAULT 0 NOT NULL,
+   taste       number   DEFAULT 0 NOT NULL,
+   price       number   DEFAULT 0 NOT NULL,
+   mood        number   DEFAULT 0 NOT NULL,
+   diversity   number   DEFAULT 0 NOT NULL,
    constraint fk_evaluated_property foreign key(review_no) references review(review_no) on delete cascade
 )
 
 -- review_no에 unique 조건 추가
 ALTER TABLE review ADD CONSTRAINT review_no_uniq UNIQUE (review_no);
 
--- [20.12.08] 추가해야할 SQL	
+-- [20.12.08] 추가해야할 SQL   
 
 -- 테스트용 데이터
 INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
@@ -442,4 +443,5 @@ INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic
 VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교호수공원로 80', '맛있습니다!!!!!!', '333', 'sajang4', 'iu.jpg');
 INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
 VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
+
 
