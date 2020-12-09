@@ -59,6 +59,8 @@ FROM   rs_user
 INSERT INTO rs_user(id, password, name, nickname, tel, address)
 VALUES('admin', 'admin', '관리자', '관리자', '010-9000-0805', '수원 장안구')
 
+delete BEANS_PICK from RS_USER where id='admin';
+
 -- 2. authorities 
 drop table authorities;
 create table authorities(
