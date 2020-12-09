@@ -10,7 +10,7 @@ CREATE TABLE rs_user(
    tel           VARCHAR2(50), -- 선택입력사항
    address       VARCHAR2(200) NOT NULL,
    business_name VARCHAR2(50),  -- 선택입력사항
-   business_pic  VARCHAR2(500) DEFAULT 'NO IMAGE', -- 선택입력사항
+   business_pic  VARCHAR2(500), -- 선택입력사항
    business_no   VARCHAR2(100), -- 선택입력사항 
    enabled    NUMBER        DEFAULT 1 NOT NULL 
 );
@@ -59,7 +59,6 @@ FROM   rs_user
 INSERT INTO rs_user(id, password, name, nickname, tel, address)
 VALUES('admin', 'admin', '관리자', '관리자', '010-9000-0805', '수원 장안구')
 
-
 -- 2. authorities 
 drop table authorities;
 create table authorities(
@@ -107,7 +106,7 @@ CREATE TABLE cafe(
    cafe_no    NUMBER        PRIMARY KEY,
    cafe_name  VARCHAR2(50)  NOT NULL,
    cafe_loc   VARCHAR2(200)  NOT NULL,
-   cafe_pic   VARCHAR2(500) DEFAULT 'NO IMAGE',
+   cafe_pic   VARCHAR2(500) DEFAULT 'NO_IMAGE.jpg',
    cafe_info  CLOB          NOT NULL,
    cafe_tel   VARCHAR2(50)  NOT NULL,
    id         VARCHAR2(50)  NOT NULL,
@@ -247,7 +246,7 @@ CREATE TABLE beans_pick(
    beans_no          NUMBER        PRIMARY KEY,
    beans_title       VARCHAR2(50)  NOT NULL,
    beans_content     clob          NOT NULL,
-   beans_pic         VARCHAR2(500) DEFAULT 'NO IMAGE' NOT NULL,
+   beans_pic         VARCHAR2(500) DEFAULT 'NO_IMAGE.jpg' NOT NULL,
    beans_regdate     date          not null,
    id                VARCHAR2(50)  NOT NULL,
    constraint fk_beans_pick foreign key(id) references rs_user(id) on delete cascade
@@ -392,8 +391,8 @@ select *from order_detail
 
 
 
-select * from rs_user rs, cafe c, menu m
-where rs.id=c.id and c.cafe_no = m.cafe_no and rs.id='sajang';
+select * from rs_user rs, cafe c, operating_time ot
+where rs.id=c.id and c.cafe_no = ot.cafe_no and rs.id='testtest';
 
 --id가 'java'인 고객이 주문상세목록
 select * from rs_user rs, menu m,order_info oi,order_detail od
@@ -442,6 +441,13 @@ INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic
 VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교호수공원로 80', '맛있습니다!!!!!!', '333', 'sajang4', 'iu.jpg');
 INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
 VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
+
+
+-- [20.12.09] 추가해야할 SQL
+ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
+ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
+
+
 
 -- 테스트용 데이터
 insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)

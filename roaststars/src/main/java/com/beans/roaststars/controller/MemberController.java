@@ -59,6 +59,9 @@ public class MemberController {
 				uploadDir.mkdirs();
 			MultipartFile file = vo.getUploadFile();
 			if (file != null && file.isEmpty() == false) {
+				if(file.getSize() > 2097152) {
+					
+				}
 				File uploadFile = new File(uploadPath + file.getOriginalFilename());
 				try {
 					file.transferTo(uploadFile);
