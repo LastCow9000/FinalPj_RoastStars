@@ -106,7 +106,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	<hr>
 	</form>
 	
 	<div class="pagingInfo">
@@ -125,7 +124,7 @@
                    jstl choose 를 이용  
                    예) <a href="DispatcherServlet?command=list&pageNo=...">               
      -->    
-    <ul class="pagination pagination-sm">
+    <ul class="pagination">
     <c:if test="${pb.previousPageGroup}">   
        <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
     </c:if>
@@ -149,7 +148,7 @@
     </ul>          
     
     </div><!-- 페이징 바 -->
-	
+		<hr>
 </body>
 </html>
 

@@ -446,3 +446,7 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git

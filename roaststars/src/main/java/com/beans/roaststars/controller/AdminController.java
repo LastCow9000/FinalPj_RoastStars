@@ -2,6 +2,7 @@ package com.beans.roaststars.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,8 @@ public class AdminController {
 
 	@Resource
 	private AdminService adminService;
-
+	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("admin-detail.do")
 	public String adminDetailForm(String pageNo, Model model) {
 		//권한 종류
@@ -29,12 +31,14 @@ public class AdminController {
 	}
 
 	// 성호 : 페이지이동(beanspickDetailForm.jsp)
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("beanspick-detail-form.do")
 	public String beanspickDetailForm() {
 		return "admin/beanspickDetailForm.tiles";
 	}
 	
 	//영섭 : 권한부여
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("grant-authority.do")
 	@ResponseBody
 	public String grantAuthority(String id, String authority) {
