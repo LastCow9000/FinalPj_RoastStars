@@ -392,8 +392,8 @@ select *from order_detail
 
 
 
-select * from rs_user rs, cafe c, menu m
-where rs.id=c.id and c.cafe_no = m.cafe_no and rs.id='sajang';
+select * from rs_user rs, cafe c, operating_time ot
+where rs.id=c.id and c.cafe_no = ot.cafe_no and rs.id='testtest';
 
 --id가 'java'인 고객이 주문상세목록
 select * from rs_user rs, menu m,order_info oi,order_detail od
@@ -442,4 +442,5 @@ INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic
 VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교호수공원로 80', '맛있습니다!!!!!!', '333', 'sajang4', 'iu.jpg');
 INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
 VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
-
+ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
+ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
