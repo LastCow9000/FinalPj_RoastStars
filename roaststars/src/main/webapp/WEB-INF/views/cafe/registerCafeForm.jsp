@@ -142,7 +142,7 @@ function inputTimeColon(time) {
 <input type="hidden" name="command" value="register">
    <sec:csrfInput/>
    카페명: <input type="text" name="cafeName" id="registCafeName" required="required"><span id="nameCheckResult"></span><br>
-   주소: <input type="text" name="cafeLoc" id="address" readonly="readonly" required="required" size=60>&nbsp;<button class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
+   주소: <input type="text" name="cafeLoc" id="address" readonly="readonly" required="required" size=60>&nbsp;<button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
    카페사진 <input type="file" name="uploadFile">
    전화번호 <input type="text" name="cafeTel" required="required"><br>
    정보:<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="cafeInfo" required="required"></textarea>

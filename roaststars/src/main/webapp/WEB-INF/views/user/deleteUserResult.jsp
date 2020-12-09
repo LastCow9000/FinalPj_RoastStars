@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-$(document).ready(function() {
-		alert("탈퇴되었습니다.");
-		$("#logoutForm").submit();
-});
+	$(document).ready(function() {
+			alert("탈퇴되었습니다.");
+			$("#logoutForm").submit();
+	});
 </script>
 </head>
 <body>

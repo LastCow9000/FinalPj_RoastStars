@@ -155,7 +155,7 @@
 	이름 <input type="text" name="name" required="required"><br>
 	닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
 	전화번호 <input type="text" name="tel" required="required"><br>
-	주소 <input type="text" name="address" id="address" value="" readonly="readonly" required="required" size=80>&nbsp;<button class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
+	주소 <input type="text" name="address" id="address" value="" readonly="readonly" required="required" size=80>&nbsp;<button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
 	상세주소 <input type="text" name="address"><br>
 	회원구분
 	<div class="form-check-inline">
