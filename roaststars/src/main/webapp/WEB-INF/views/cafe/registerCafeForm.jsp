@@ -51,36 +51,37 @@ $(document).ready(function() {
    });//noOperating
    
    $("#registerCafeForm").submit(function() {
-         if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
-            return true;
-         }else
-            return false;
+   		if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
+   			return true;
+   		}else
+   			return false;
    });
    
    $(".classification").change(function(){ //라디오 버튼 변화 시
-      var tags='';
-      if( $(this).val() == "open"){   //사장 체크 시 
-         alert("공휴일에도 일을 한다구?!");
-         tags+='<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
-         $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
-      }else{
-         tags='';
-         $(".classification:input[value='open']").prop("checked", false);//일반 체크시 사장체크 풀림
-      }
-      $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
+ 	  var tags='';
+ 	  if( $(this).val() == "open"){	//사장 체크 시 
+ 		  alert("공휴일에도 일을 한다구?!");
+ 		  tags+='<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
+ 		  $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
+ 	  }else{
+ 		  tags='';
+ 		  $(".classification:input[value='open']").prop("checked", false);//일반 체크시 사장체크 풀림
+ 	  }
+ 	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
    });
 // 주소 팝업
-     $("#goToAddrAPIBtn").click(function() {
-         new daum.Postcode({
-             oncomplete: function(data) {
-                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                 // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-                 $("#address").val(data.address);
-             }//oncomplete
-         
-         }).open();
-      
-   });//goToAddrAPIBtn
+	  $("#goToAddrAPIBtn").click(function() {
+	      new daum.Postcode({
+	          oncomplete: function(data) {
+	              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	              // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	              $("#address").val(data.address);
+	          }//oncomplete
+	      
+	      }).open();
+		
+	});//goToAddrAPIBtn
+
 });//ready
 function inputTimeColon(time) {
     // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
@@ -141,7 +142,7 @@ function inputTimeColon(time) {
 <input type="hidden" name="command" value="register">
    <sec:csrfInput/>
    카페명: <input type="text" name="cafeName" id="registCafeName" required="required"><span id="nameCheckResult"></span><br>
-   주소: <input type="text" name="cafeLoc" id="address" readonly="readonly" required="required" size=60>&nbsp;<button class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
+   주소: <input type="text" name="cafeLoc" id="address" readonly="readonly" required="required" size=60>&nbsp;<button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
    카페사진 <input type="file" name="uploadFile">
    전화번호 <input type="text" name="cafeTel" required="required"><br>
    정보:<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="cafeInfo" required="required"></textarea>

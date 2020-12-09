@@ -4,12 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +14,8 @@ import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
-import com.beans.roaststars.model.vo.CafeVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 import com.beans.roaststars.model.vo.ReviewListVO;
-import com.beans.roaststars.model.vo.UserVO;
 
 @Controller
 public class CafeController {

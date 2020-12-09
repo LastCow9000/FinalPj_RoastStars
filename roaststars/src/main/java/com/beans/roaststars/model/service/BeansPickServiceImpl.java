@@ -14,9 +14,15 @@ public class BeansPickServiceImpl implements BeansPickService{
 	@Resource
 	private BeansPickMapper beansPickMapper;
 	
-	//빈즈픽 불러오기
+	//빈즈픽 리스트 불러오기
 	@Override
 	public List<BeansPickVO> getAllBeansPickList(){
 		return beansPickMapper.getAllBeansPickList();
 	}
+	//빈즈픽 불러오기
+	@Override
+	public List<BeansPickVO> getOneBeansPick(String beansNo){
+		return beansPickMapper.getOneBeansPick(beansNo);
+	}
+	
 }
