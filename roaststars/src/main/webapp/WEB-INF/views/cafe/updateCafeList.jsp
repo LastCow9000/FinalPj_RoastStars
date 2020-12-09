@@ -49,19 +49,17 @@ $(document).ready(function() {
 	<td>${list.cafeName }</td><td>${list.cafeLoc }</td><td>${list.cafeTel }</td>
 	<td>
 		<form method="get" action="${pageContext.request.contextPath}/update-cafeform.do">
-		<sec:csrfInput/>
-		<input type="hidden" name="command" value="updateCafe">
-		<input type="hidden" name="cafeNo" value="${list.cafeNo}">
-		<input type="submit" value="수정하기">
+			<input type="hidden" name="command" value="updateCafe">
+			<input type="hidden" name="cafeNo" value="${list.cafeNo}">
+			<input type="submit" value="수정하기">
 		 </form>
 	</td>
 	<td>
-	<form method="get" action="${pageContext.request.contextPath}/delete-cafe.do" id="delete">
-		<input type="hidden" name="command" value="deleteCafe">
-		<input type="hidden" name="cafeNo" value="${list.cafeNo}">
-		<input type="button" id="del-btn" value="삭제하기">	
-		 
-		<sec:csrfInput/>
+		<form method="POST" action="${pageContext.request.contextPath}/delete-cafe.do" id="delete">
+			<sec:csrfInput/>
+			<input type="hidden" name="command" value="deleteCafe">
+			<input type="hidden" name="cafeNo" value="${list.cafeNo}">
+			<input type="button" id="del-btn" value="삭제하기">	
 		 </form> 
 	</td>
 	</tr>

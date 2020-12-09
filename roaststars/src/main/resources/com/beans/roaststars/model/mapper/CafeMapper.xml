@@ -95,6 +95,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	VALUES(#{value}, 0,0,0,0,0)
     </insert>
     
+    <!-- 카페 등록 시, 특성 테이블에 해당 카페 넘버 row 추가하기 -->
+    <insert id="registerCafeProperty" parameterType="string">
+    	INSERT INTO property(cafe_no, service, taste, price, mood, diversity) 
+    	VALUES(#{value}, 0,0,0,0,0)
+    </insert>
+    
     <!-- 카페운영시간 등록하기 -->
     <insert id="registerCafeOperatingTime" parameterType="cafeOperatingTimeVO">
     insert into operating_time(cafe_no,weekday_time,weekend_time,holiday_time)

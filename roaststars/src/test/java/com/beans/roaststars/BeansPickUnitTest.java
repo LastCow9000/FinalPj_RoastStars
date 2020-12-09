@@ -27,10 +27,17 @@ public class BeansPickUnitTest {
 	@Test
 	public void BeanPickUnitTest() {
 		//test.1 빈즈빅 리스트
-		List<BeansPickVO> listVO = beansPickMapper.getAllBeansPickList();
-		for(BeansPickVO vo:listVO) {
-			System.out.println(vo);
-		}
+//		List<BeansPickVO> listVO = beansPickMapper.getAllBeansPickList();
+//		for(BeansPickVO vo:listVO) {
+//			System.out.println(vo);
+//		}
+		
+		//test.2 빈즈빅 게시물 하나
+		System.out.println(beansPickMapper.getOneBeansPick("2"));
+		
+		
+		
+		
 		
 		//test.2 권한 종류 불러오기
 //		System.out.println(adminMapper.getUserAuthorityList());

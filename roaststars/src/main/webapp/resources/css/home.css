@@ -127,6 +127,16 @@ tr.reviewTableProperty {
 	justify-content: left;
 	align-items: center;
 }
+/* 빈즈픽 레이아웃*/
+
+
+.card{
+	padding: 10px;
+	margin: 5px;
+	justify-content: center;
+}
+
+
 /*
 .bigPicture img {
 	width:600px;

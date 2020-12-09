@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
@@ -60,7 +59,7 @@ public class ManagerController {
 						try {
 							file.transferTo(uploadFile);
 							// System.out.println(uploadPath + file.getOriginalFilename());
-							cafeVO.setCafePic((file.getOriginalFilename()));
+							cafeVO.setCafePic(file.getOriginalFilename());
 							String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
 							File localPathDir = new File(localPath);
 							if (localPathDir.exists() == false)
