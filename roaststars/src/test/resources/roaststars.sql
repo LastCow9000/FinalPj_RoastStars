@@ -55,10 +55,6 @@ VALUES('sajang4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4'
 SELECT *
 FROM   rs_user
 
--- 관리자 INSERT
-INSERT INTO rs_user(id, password, name, nickname, tel, address)
-VALUES('admin', 'admin', '관리자', '관리자', '010-9000-0805', '수원 장안구')
-
 -- 2. authorities 
 drop table authorities;
 create table authorities(
@@ -172,8 +168,6 @@ SELECT *
 FROM   operating_time o, cafe c
 WHERE  o.cafe_no = c.cafe_no
 
-delete from operating_time
-
 
 -- 6. review
 DROP TABLE review;
@@ -212,8 +206,6 @@ SELECT *
 FROM   cafe c, review r, rs_user u
 WHERE  c.cafe_no = r.cafe_no AND u.id = r.id AND c.cafe_no = 1
 
-delete from review
-
 -- 7. property
 DROP TABLE property;
 CREATE TABLE property(
@@ -232,7 +224,6 @@ INSERT INTO property VALUES (3, 0, 1, -2, 1, -2);
 INSERT INTO property VALUES (4, 1, 0, -2, 1, -2);
 INSERT INTO property VALUES (5, 1, 1, 0, 1, -2);
 INSERT INTO property VALUES (6, 1, 1, -2, 0, -2);
-
 
 --cafe table과 property table 조인
 SELECT *
@@ -452,4 +443,49 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
+
+-- 테스트용 데이터
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페1','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페2','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페3','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페4','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페5','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페6','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페7','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페8','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페9','하아 ',sysdate,'admin');
+
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페1','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페2','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페3','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페4','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페5','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페6','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페7','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페8','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페9','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페10','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페11','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'일이삼사오육칠팔구십일이삼사오육','여긴 아니야 ',sysdate,'admin');
 
