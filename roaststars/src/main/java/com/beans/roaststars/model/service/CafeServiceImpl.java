@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 @Service
@@ -75,6 +76,16 @@ public class CafeServiceImpl implements CafeService {
 		int count = cafeMapper.deleteCafe(cafeNo);
 		System.out.println(count);
 		return (count == 1) ? "ok" : "fail";
+	}
+
+	@Override
+	public void updateMenu(MenuVO menuVO) {
+		cafeMapper.updateMenu(menuVO);
+	}
+
+	@Override
+	public List<MenuVO> findMenuByCafeNo(String cafeNo) {
+		return cafeMapper.findMenuByCafeNo(cafeNo);
 	}
 
 }

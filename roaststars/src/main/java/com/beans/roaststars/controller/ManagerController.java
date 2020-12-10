@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.UserVO;
 @Controller
 public class ManagerController {
@@ -142,4 +143,31 @@ public class ManagerController {
 	public String deleteCafe(String cafeNo) {
 		return cafeService.deleteCafe(cafeNo);
 	}
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuForm.do")
+	public ModelAndView updateMenuForm(String cafeNo) {
+		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("updateMenu-Ajax.do")
+	@ResponseBody
+	public List<MenuVO> updateMenu(MenuVO menuVO,String cafeNo) {
+		CafeVO cafeVO = new CafeVO();
+		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
+		//System.out.println(cafeVO);
+		menuVO.setCafeVO(cafeVO);
+		//System.out.println(menuVO);
+
+		cafeService.updateMenu(menuVO);
+		//System.out.println(menuVO);
+
+
+		List<MenuVO> list = cafeService.findMenuByCafeNo(cafeNo);
+		/*
+		 * for(int i=0; i<list.size();i++) System.out.println(list.get(i));
+		 */
+		return list;
+	}
+	
 }

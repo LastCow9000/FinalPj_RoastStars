@@ -512,3 +512,10 @@ where beans_no=#{beans_no}
 update BEANS_PICK 
 set beans_title=수우정, content=수우우정
 where beans_no=1;
+
+   SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel,
+              r.password, r.name, r.nickname, r.tel, r.address, r.business_name,
+              r.business_pic, r.business_no, r.enabled,m.menu_name
+      FROM    rs_user r, cafe c, operating_time o, menu m
+      WHERE   r.id = c.id AND c.cafe_no = o.cafe_no and m.cafe_no = c.cafe_no AND c.cafe_no='125';
