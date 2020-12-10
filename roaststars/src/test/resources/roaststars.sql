@@ -172,6 +172,8 @@ SELECT *
 FROM   operating_time o, cafe c
 WHERE  o.cafe_no = c.cafe_no
 
+delete from operating_time
+
 
 -- 6. review
 DROP TABLE review;
@@ -210,6 +212,8 @@ SELECT *
 FROM   cafe c, review r, rs_user u
 WHERE  c.cafe_no = r.cafe_no AND u.id = r.id AND c.cafe_no = 1
 
+delete from review
+
 -- 7. property
 DROP TABLE property;
 CREATE TABLE property(
@@ -228,6 +232,7 @@ INSERT INTO property VALUES (3, 0, 1, -2, 1, -2);
 INSERT INTO property VALUES (4, 1, 0, -2, 1, -2);
 INSERT INTO property VALUES (5, 1, 1, 0, 1, -2);
 INSERT INTO property VALUES (6, 1, 1, -2, 0, -2);
+
 
 --cafe table과 property table 조인
 SELECT *
