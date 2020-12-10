@@ -163,7 +163,7 @@
 	      
 	      }).open();
 		
-	});//goToAddrAPIBtn
+	});// end goToAddrAPIBtn
 	
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {
@@ -242,7 +242,7 @@
     <div class="form-group">
        <label for="address"> 주소 : <button type="button" class="btn btn-warning btn-sm" id="goToAddrAPIBtn">주소 검색하기</button></label>
         <input type="text" name="address" id="address" value="" readonly="readonly" class="form-control"  
-        size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
+       	 size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
 	      상세주소: <input type="text" name="address" size="50" style="margin-top: 10px; height: 20px;">
