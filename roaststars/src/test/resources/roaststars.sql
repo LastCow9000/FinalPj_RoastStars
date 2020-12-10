@@ -443,6 +443,21 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
+------ 신경쓰지말것---------------------
+CREATE TABLE my_pick(
+	id varchar2(100),
+	cafe_name varchar2(100),
+	cafe_loc varchar2(100),
+	cafe_pic varchar2(300),
+	regdate DATE,
+)
+
+
+select cafe_no, cafe
+from
+where
+-------------------------------------
+
 
 -- 테스트용 데이터
 insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
@@ -489,3 +504,5 @@ values (beans_pick_seq.nextval,'내 삶같은 카페11','여긴 아니야 ',sysd
 insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
 values (beans_pick_seq.nextval,'일이삼사오육칠팔구십일이삼사오육','여긴 아니야 ',sysdate,'admin');
 
+ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
+ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
