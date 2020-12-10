@@ -407,7 +407,7 @@ where rs.id=oi.id and oi.order_no = od.order_no and m.menu_name=od.menu_name and
 
 
 --삭제 테스트
-delete from rs_user where id='java';
+delete from rs_user where id='admin';
 delete from cafe where cafe_no=2;
 
 
