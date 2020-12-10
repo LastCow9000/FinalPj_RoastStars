@@ -27,7 +27,7 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="#">Beans Pick</a></li>
 			<sec:authorize access="hasRole('ROLE_MEMBER')">
-			<li class="nav-item"><a class="nav-link" href="#">My Pick</a></li>
+			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/my-pick-list.do">My Pick</a></li>
 			</sec:authorize>
 		</ul>
 

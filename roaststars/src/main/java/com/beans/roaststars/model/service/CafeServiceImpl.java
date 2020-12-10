@@ -42,7 +42,7 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public void registerCafe(CafeVO cafeVO,CafeOperatingTimeVO cafeOperVO) {
 		if(cafeVO.getCafePic()==null)
-	         cafeVO.setCafePic("no_image.jpg");
+			cafeVO.setCafePic("no_image.jpg");
 		cafeMapper.registerCafe(cafeVO);
 		cafeMapper.registerCafeProperty(cafeVO.getCafeNo());
 		cafeMapper.registerCafeOperatingTime(cafeOperVO);
