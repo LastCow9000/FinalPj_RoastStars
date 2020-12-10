@@ -55,11 +55,18 @@ $(document).ready(function() {
 		 </form>
 	</td>
 	<td>
-		<form method="POST" action="${pageContext.request.contextPath}/delete-cafe.do" id="delete">
+		<form method="POST" action="${pageContext.request.contextPath}/delete-cafe.do">
 			<sec:csrfInput/>
 			<input type="hidden" name="command" value="deleteCafe">
 			<input type="hidden" name="cafeNo" value="${list.cafeNo}">
 			<input type="button" id="del-btn" value="삭제하기">	
+		 </form> 
+	</td>
+	<td>
+		<form method="get" action="${pageContext.request.contextPath}/update-menuForm.do">	
+			<input type="hidden" name="command" value="updateMenu">
+			<input type="hidden" name="cafeNo" value="${list.cafeNo}">
+			<input type="submit" value="메뉴추가">	
 		 </form> 
 	</td>
 	</tr>
