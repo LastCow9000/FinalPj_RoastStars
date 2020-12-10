@@ -569,6 +569,20 @@ select *
 from   cafe
 where  cafe_no=28
    	 
+
+select *
+from   property p, cafe c
+where  p.cafe_no = c.cafe_no AND c.cafe_no=3
+
+delete from cafe
+where cafe_no=5
+
+delete from cafe
+where cafe_no=3
+
+delete from cafe
+where cafe_no=2
+
 -- 예울 test 끝 --
 
 update cafe set cafe_pic='iu.jpg' where cafe_no=1

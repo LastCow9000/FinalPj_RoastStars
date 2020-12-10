@@ -47,21 +47,16 @@ $(document).ready(function() {
 <body>
 <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
  <form method="post" action="${pageContext.request.contextPath}/delete-useraction.do" id="deleteUserForm">
-<input type="hidden" name="command" value="delete">
-
- <%-- 
-  		csrf 토큰 : csrf 공격을 막기 위한 1회성 인증키인 
-  		              csrf토큰을 함께 전달해야 전송이 가능하다
- 
-  --%>
- <sec:csrfInput/>
-		아이디 : 
-		<input type="text" name="id" value="<sec:authentication property="principal.id"/>" readonly>
-
-		<br>패스워드 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
-		
-		<br><input type="submit" value="탈퇴하기">
-		</form>
+	<input type="hidden" name="command" value="delete">
+	 <%-- 
+	 		csrf 토큰 : csrf 공격을 막기 위한 1회성 인증키인 
+	 		              csrf토큰을 함께 전달해야 전송이 가능하다
+	 --%>
+	<sec:csrfInput/>
+	아이디 : <input type="text" name="id" value="<sec:authentication property="principal.id"/>" readonly>
+	<br>패스워드 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
+	<br><input type="submit" value="탈퇴하기">
+ </form>
 </sec:authorize>
 </body>
 </html>

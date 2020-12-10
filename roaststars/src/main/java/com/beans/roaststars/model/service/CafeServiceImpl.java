@@ -43,6 +43,7 @@ public class CafeServiceImpl implements CafeService {
 		if(cafeVO.getCafePic()==null)
 			cafeVO.setCafePic("no_image.jpg");
 		cafeMapper.registerCafe(cafeVO);
+		cafeMapper.registerCafeProperty(cafeVO.getCafeNo());
 		cafeMapper.registerCafeOperatingTime(cafeOperVO);
 	}
 

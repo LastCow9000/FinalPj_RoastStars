@@ -387,8 +387,8 @@ select *from order_detail
 
 
 
-select * from rs_user rs, cafe c, menu m
-where rs.id=c.id and c.cafe_no = m.cafe_no and rs.id='sajang';
+select * from rs_user rs, cafe c, operating_time ot
+where rs.id=c.id and c.cafe_no = ot.cafe_no and rs.id='testtest';
 
 --id가 'java'인 고객이 주문상세목록
 select * from rs_user rs, menu m,order_info oi,order_detail od
@@ -438,6 +438,7 @@ VALUES (cafe_seq.nextval, '책발전소 광교점', '수원시 영통구 광교�
 INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, id, cafe_pic)
 VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중로267번길 3-5', '맛있습니다!!!!!!', '333', 'sajang', 'iu.jpg');
 
+
 -- [20.12.09] 추가해야할 SQL
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
@@ -451,9 +452,73 @@ CREATE TABLE my_pick(
 	regdate DATE,
 )
 
-
-
 select cafe_no, cafe
 from
 where
 -------------------------------------
+
+
+-- 테스트용 데이터
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페1','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페2','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페3','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페4','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페5','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페6','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페7','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페8','하아 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'새해분위기나는 카페9','하아 ',sysdate,'admin');
+
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페1','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페2','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페3','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페4','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페5','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페6','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페7','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페8','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페9','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페10','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'내 삶같은 카페11','여긴 아니야 ',sysdate,'admin');
+insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
+values (beans_pick_seq.nextval,'일이삼사오육칠팔구십일이삼사오육','여긴 아니야 ',sysdate,'admin');
+
+ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
+ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
+
+---테스트
+--등록
+insert into BEANS_PICK(beans_no,beans_title,beans_content,beans_regdate)
+values (beans_pick_seq.nextval, #{beans_title},#{beans_content},sysdate);
+--삭제
+delete from BEANS_PICK where beans_no=2;
+delete from BEANS_PICK where beans_no=#{beans_no}
+--수정
+update BEANS_PICK 
+set beans_title=#{beans_title}, content=#{content}
+where beans_no=#{beans_no}
+
+update BEANS_PICK 
+set beans_title=수우정, content=수우우정
+where beans_no=1;
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git

@@ -7,51 +7,79 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 주소 API -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	/* 중복 확인 공간 */   
     // 비밀번호 길이 체크
-    $("#passwordC").keyup(function() {
-       var passValue=$(this).val();
-       //$("#passwordResult").html($(this).val());
-       if(passValue.length<4||passValue.length>12){
-          $("#passwordResult").html("비밀번호는 4~12자 이내로 작성해주세요").css("color","violet");
-          return;
-       } else {
-          $("#passwordResult").html("적합한 비밀번호입니다.").css("color","blue");
-       }
-    });
+    var checkPass="";
+    
     $("#passwordChecked").keyup(function() {
-       var passValue =$("#passwordC").val();
-       var passChecked = $(this).val();
+    	checkPass="";
+       var passValue =$("#passwordC").val().trim();
+       var passChecked = $(this).val().trim();
        if(passChecked===passValue){
           $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","blue");
+          checkPass = passValue;
        }else{
           $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
        }
     });
+    //비밀번호가 다르면 정보수정 안됨
+    $("#updateUserForm").submit(function() {
+        if(checkPass==""){
+           alert("비밀번호를 확인해주세요!");
+           return false;
+        }
+     });//submit
+     
+ 	 // 주소 팝업	
+ 	  $("#goToAddrAPIBtn").click(function() {
+	      new daum.Postcode({
+	          oncomplete: function(data) {
+	              $("#address").val(data.address);
+	          }//oncomplete 
+	      }).open();
+	});//goToAddrAPIBtn
+    
+    // 주소 팝업
+ 	  $("#goToAddrAPIBtn").click(function() {
+	      new daum.Postcode({
+	          oncomplete: function(data) {
+	              $("#address").val(data.address);
+	          }//oncomplete
+	      
+	      }).open();
+		
+	});//goToAddrAPIBtn
+	
+	
 });//ready
 </script>
 </head>
 <body>
  <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
  <form method="post" action="${pageContext.request.contextPath}/update-useraction.do">
- <%-- 
-  		csrf 토큰 : csrf 공격을 막기 위한 1회성 인증키인 
-  		              csrf토큰을 함께 전달해야 전송이 가능하다
- 
-  --%>
- <sec:csrfInput/>
-		<input type="hidden" name="command" value="update">
-		아이디 : 
-		<input type="text" name="id" value="<sec:authentication property="principal.id"/>" readonly>
-		<br>패스워드 : <input type="password" name="password" id="passwordC" required="required">	
-		<br>패스워드확인 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
-		<br>이름 : <input type="text" name="name" value="<sec:authentication property="principal.name"/>" required="required">	
-		<br>주소 : <input type="text" name="address" value="<sec:authentication property="principal.address"/>" required="required">	
-		<br>전화번호 <input type="text" name="tel"  value="<sec:authentication property="principal.tel"/>" required="required"><br>
-		<br><input type="submit" value="회원정보수정">
-		</form>
+	<%-- 
+	 		csrf 토큰 : csrf 공격을 막기 위한 1회성 인증키인 
+	 		              csrf토큰을 함께 전달해야 전송이 가능하다
+	
+	 --%>
+	<sec:csrfInput/>
+	<input type="hidden" name="command" value="update">
+	아이디 : 
+	<input type="text" name="id" value="<sec:authentication property="principal.id"/>" readonly>
+	<br>패스워드 : <input type="password" name="password" id="passwordC" required="required">	
+	<br>패스워드확인 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
+	<br>이름 : <input type="text" name="name" value="<sec:authentication property="principal.name"/>" required="required">	
+	<br>주소 : <input type="text" id="address" readonly="readonly" name="address" size=80 value="<sec:authentication property="principal.address"/>" required="required">	
+	&nbsp;<button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button>
+	<br>상세주소 <input type="text" name="address">
+	<br>전화번호 <input type="text" name="tel"  value="<sec:authentication property="principal.tel"/>" required="required"><br>
+	<br><input type="submit" value="회원정보수정">
+</form>
 </sec:authorize>
 </body>
 </html>

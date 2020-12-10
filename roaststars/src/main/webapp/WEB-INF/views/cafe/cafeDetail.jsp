@@ -327,8 +327,7 @@
                          </tr>
                          
                          <%-- [20.12.04_예울]
-                            이모티콘으로 선택하기 실패 -- 나중에 시간나면 하겠습니다
-                         
+                            	이모티콘으로 선택하기 실패 -- 나중에 시간나면 하겠습니다
                          
                          <c:forEach items="맛, 가격, 서비스, 분위기, 다양한 메뉴" var="property" varStatus="order">
                          <tr class="reviewTableProperty">
@@ -357,12 +356,12 @@
                       <!-- 한줄평 작성 -->
                       <hr>
                       <div style="margin-left: 20px; margin-right: 20px; ">
-                         한줄평 (<span id="reviewContentLen"></span>)<br>
+                         	한줄평 (<span id="reviewContentLen"></span>)<br>
                          <!--  <input type="text" name="reviewContent" required="required" id="reviewContent"
                             placeholder="한줄평을 작성해주세요" style="width:500px; height:30px; margin-top: 10px;">-->
                             <textarea name="reviewContent" id="reviewContent" class="form-control property_kind" maxlength="50" 
                               cols="2" style="overflow:auto; margin-top: 10px;  font-weight: bolder" 
-                              wrap="hard" required="required">한줄평을 작성해주세요</textarea>
+                              wrap="hard" required="required" placeholder="한줄평을 작성해주세요"></textarea>
                       </div>
                  </div><!-- modal-body -->
                  
