@@ -125,4 +125,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteCafe" parameterType="string">
 	delete from cafe where cafe_no=#{value}
 	</delete>
+	
+	<insert id="updateMenu" parameterType="menuVO">
+	insert into menu(menu_name,menu_price,cafe_no) 
+	values(#{menuName},#{menuPrice},#{cafeVO.cafeNo})
+	</insert>
+	
+	<resultMap type="menuVO" id="MenuRM" >
+      <result property="cafeVO.userVO.id" column="id"/>
+      <result property="cafeVO.cafeNo" column="cafe_no"/>
+      <result property="cafeVO.cafeName" column="cafe_name"/>
+      <result property="cafeVO.cafeLoc" column="cafe_loc"/>
+      <result property="cafeVO.cafePic" column="cafe_pic"/>
+      <result property="cafeVO.cafeInfo" column="cafe_info"/>
+      <result property="cafeVO.cafeTel" column="cafe_tel"/>
+   </resultMap>
+	 <select id="findMenuByCafeNo" resultMap="MenuRM" parameterType="string">
+     SELECT  m.menu_name,m.menu_price, c.cafe_no,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+      FROM     cafe c, menu m
+      WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
+   </select>
 </mapper>
