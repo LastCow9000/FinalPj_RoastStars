@@ -55,12 +55,15 @@ VALUES('sajang4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4'
 SELECT *
 FROM   rs_user
 
+<<<<<<< HEAD
 -- 관리자 INSERT
 INSERT INTO rs_user(id, password, name, nickname, tel, address)
 VALUES('admin', 'admin', '관리자', '관리자', '010-9000-0805', '수원 장안구')
 
 delete BEANS_PICK from RS_USER where id='admin';
 
+=======
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 -- 2. authorities 
 drop table authorities;
 create table authorities(
@@ -449,6 +452,19 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
+------ 신경쓰지말것---------------------
+CREATE TABLE my_pick(
+	id varchar2(100),
+	cafe_name varchar2(100),
+	cafe_loc varchar2(100),
+	cafe_pic varchar2(300),
+	regdate DATE,
+)
+
+select cafe_no, cafe
+from
+where
+-------------------------------------
 
 
 -- 테스트용 데이터
@@ -514,3 +530,4 @@ where beans_no=#{beans_no}
 update BEANS_PICK 
 set beans_title=수우정, content=수우우정
 where beans_no=1;
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
