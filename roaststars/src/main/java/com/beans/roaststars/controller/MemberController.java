@@ -148,5 +148,12 @@ public class MemberController {
 		userService.deleteUser(userVO);
 		return "user/deleteUserResult.tiles";
 	} 
+	
+	//My Pick
+	@RequestMapping("my-pick-list.do")
+	public ModelAndView myPickList() {
+		
+		return new ModelAndView();
+	}
 
 }

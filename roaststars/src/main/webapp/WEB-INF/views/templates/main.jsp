@@ -13,26 +13,21 @@
 <title>Main</title>
 </head>
 <body>
-	 	<a href="${pageContext.request.contextPath}/beansPick-form.do">BeansPick</a> 
-	<div class="masthead text-center jumbotron">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-9 mx-auto">
-					<h1>언제까지 맨날 똑같은 커피만 마실래 ?!</h1>
-					<h2>진짜 당신의 인생 카페를 찾아드립니다.</h2>
-				</div>
-				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-					<form class="form-inline" action="findListByLoc.do">
-						<div class="form-row">
-							<div class="input-group">
-								<input type="text" name="loc" class="form-control" size="100" placeholder="지역을 입력해주세요" required="required">
-								<div class="input-group-btn">
-									<button type="submit" class="btn btn-default">검색</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
+	<a href="${pageContext.request.contextPath}/beansPick-form.do">BeansPick</a> <!-- 나중에 헤더로 이동 -->
+	<div class="bannerbox">
+		<video src="resources/upload/main_banner.mp4" width="1200px" height="700px" autoplay loop muted></video>
+		<div class="banner-form">
+			<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+				<div class="banner-text">
+	    			<h1>언제까지 맨날 똑같은 커피만 마실래 ?!</h1>
+	    			<h2>진짜 당신의 인생 카페를 찾아드립니다.</h2>
+	  			</div>
+				<form class="form-inline" action="findListByLoc.do">
+					<div class="input-group">
+						<input type="text" name="loc" class="form-control" size="100" placeholder="지역을 입력해주세요" required="required">
+						<button type="submit" class="btn btn-dark">검색</button>
+					</div> 
+				</form>
 			</div>
 		</div>
 	</div>
