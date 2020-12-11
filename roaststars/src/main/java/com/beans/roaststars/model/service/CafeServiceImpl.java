@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 @Service
@@ -66,6 +67,8 @@ public class CafeServiceImpl implements CafeService {
 	@Transactional
 	@Override
 	public void updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO) {
+		if(cafeVO.getCafePic()==null)
+			cafeVO.setCafePic("no_image.jpg");
 		cafeMapper.updateCafe(cafeVO);
 		cafeMapper.updateCafeOperatingTime(cafeOperVO);
 	}
@@ -73,8 +76,36 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public String deleteCafe(String cafeNo) {
 		int count = cafeMapper.deleteCafe(cafeNo);
-		System.out.println(count);
 		return (count == 1) ? "ok" : "fail";
+	}
+
+	@Override
+	public String updateMenu(MenuVO menuVO) {
+		int count = cafeMapper.updateMenu(menuVO);
+		return (count == 1) ? "ok" : "fail";
+	}
+
+	@Override
+	public List<MenuVO> findMenuByCafeNo(String cafeNo) {
+		return cafeMapper.findMenuByCafeNo(cafeNo);
+	}
+
+	@Override
+	public List<MenuVO> updateMenuList(String cafeNo) {
+		
+		return cafeMapper.updateMenuList(cafeNo);
+	}
+
+	@Override
+	public String menuNameCheck(String cafeNo, String menuName) {
+		int count = cafeMapper.menuNameCheck(cafeNo,menuName);
+		return (count==0)? "ok":"fail";
+	}
+
+	@Override
+	public String deleteMenu(String cafeNo, String menuName) {
+		int count = cafeMapper.deleteMenu(cafeNo,menuName);
+		return (count == 1) ? "ok":"fail";
 	}
 
 }

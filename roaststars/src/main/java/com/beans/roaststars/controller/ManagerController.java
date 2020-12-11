@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.UserVO;
 @Controller
 public class ManagerController {
@@ -141,5 +142,48 @@ public class ManagerController {
 	@ResponseBody
 	public String deleteCafe(String cafeNo) {
 		return cafeService.deleteCafe(cafeNo);
+	}
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuForm.do")
+	public ModelAndView updateMenuForm(String cafeNo) {
+		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("updateMenu-Ajax.do")
+	@ResponseBody
+	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
+		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		CafeVO cafeVO = new CafeVO();
+		
+		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
+		cafeVO.setUserVO(uvo);
+		menuVO.setCafeVO(cafeVO);
+		cafeService.updateMenu(menuVO);
+		return menuVO;
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuList.do")
+	@ResponseBody
+	public ModelAndView updateMenuList(String cafeNo, Model model) {
+		List<MenuVO> list = cafeService.updateMenuList(cafeNo);
+		model.addAttribute("cafeNo", cafeNo);
+		return new ModelAndView("cafe/updateMenuList.tiles", "menuList", list);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("menuName-checkAjax.do")
+	@ResponseBody
+	public String menuNamecheckAjax(String cafeNo, String menuName) {
+		return cafeService.menuNameCheck(cafeNo,menuName);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("deleteMenu-Ajax.do")
+	@ResponseBody
+	public String deleteMenu(String cafeNo, String menuName) {
+		System.out.println(cafeNo);
+		return cafeService.deleteMenu(cafeNo,menuName);
 	}
 }

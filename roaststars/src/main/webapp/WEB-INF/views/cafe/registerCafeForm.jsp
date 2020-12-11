@@ -73,8 +73,6 @@ $(document).ready(function() {
 	  $("#goToAddrAPIBtn").click(function() {
 	      new daum.Postcode({
 	          oncomplete: function(data) {
-	              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-	              // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 	              $("#address").val(data.address);
 	          }//oncomplete
 	      
@@ -138,31 +136,84 @@ function inputTimeColon(time) {
 </script>
 </head>
 <body>
-<form method="post" action="${pageContext.request.contextPath}/register-cafe.do" id="registerCafeForm" enctype="multipart/form-data">
-<input type="hidden" name="command" value="register">
-   <sec:csrfInput/>
-   카페명: <input type="text" name="cafeName" id="registCafeName" required="required"><span id="nameCheckResult"></span><br>
-   주소: <input type="text" name="cafeLoc" id="address" readonly="readonly" required="required" size=60>&nbsp;<button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
-   카페사진 <input type="file" name="uploadFile">
-   전화번호 <input type="text" name="cafeTel" required="required"><br>
-   정보:<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="cafeInfo" required="required"></textarea>
-   운영시간<br> 
-  평일<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" /><br>
-주말<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/><br>
-공휴일
-<div class="form-check-inline">
-      <label class="form-check-label" for="radioMember">
-               <input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
-          </label>
-       </div>
-       <div class="form-check-inline">    
-         <label class="form-check-label" for="radioManager">
-           <input type="radio" class="classification" id="radioOpen" value="open">운영함
-       </label>
-    </div>
-    
-<div id="managerInfo"></div>
-<input  type="submit" value="등록하기">
+<div class="container" style="width: 800px; float: center;">
+  <h2>카페 등록하기</h2>
+<form method="post" action="${pageContext.request.contextPath}/register-cafe.do" 
+		id="registerCafeForm" enctype="multipart/form-data">
+	<input type="hidden" name="command" value="register">
+	<sec:csrfInput/>
+	<table class="table table-sm">
+		<thead></thead>
+		<tbody>
+			<tr>
+				<td>카페명</td>
+				<td colspan=2><input type="text" name="cafeName" size=50 id="registCafeName" placeholder="카페명을 입력해주세요" required>&nbsp;<span id="nameCheckResult"></span>/10</td>
+			</tr>
+			<tr>
+				<td>주소</td>
+				<td colspan=2><input type="text" name="cafeLoc" id="address" readonly="readonly" required size=50 placeholder="주소 검색으로 주소를 입력해주세요">&nbsp;<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td colspan=2><input type="text" name="cafeTel" required placeholder="전화번호를 숫자로만 입력해주세요" size=50 ></td>
+			</tr>
+			<tr>
+				<td>카페사진</td>
+				<td colspan=2>
+					<div class="input-group mb-3">
+				   	<input type="file" class="form-control" name="uploadFile" id="inputGroupFile02">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"
+						 name="cafeInfo" required></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="4">운영시간</td>
+			</tr>
+			<tr>
+				<td>평일</td>
+				<td colspan="2">
+					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" />
+				</td>
+			</tr>
+			<tr>
+				<td>주말</td>
+				<td colspan="2">
+					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>
+				</td>
+			</tr>
+			<tr>
+				<td>공휴일</td>
+				<td colspan="2">
+					<div id="managerInfo"></div>
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="radioMember">
+		              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+				      </label>
+				    </div>
+				    <div class="form-check-inline">    
+		         		<label class="form-check-label" for="radioManager">
+				       	  <input type="radio" name="holidayTime" class="classification" id="radioOpen"  value="open" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
+				    	</label>
+				    </div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="3" align="center">
+					<input type="submit" class="btn btn-success" value="등록하기">
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+	
+	
 </form>
+</div><!-- container -->
 </body>
 </html>

@@ -83,11 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 카페 등록하기 -->
     <insert id="registerCafe" parameterType="cafeVO">
-    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
-    select cafe_seq.nextval from dual
-    </selectKey>
-    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
-    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
+	    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
+	    select cafe_seq.nextval from dual
+	    </selectKey>
+	    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
+	    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
     </insert>
     
     <!-- 카페 등록 시, 특성 테이블에 해당 카페 넘버 row 추가하기 -->
@@ -127,4 +127,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from cafe where cafe_no=#{value}
 	</delete>
 	
+	<insert id="updateMenu" parameterType="menuVO">
+	insert into menu(menu_name,menu_price,cafe_no) 
+	values(#{menuName},#{menuPrice},#{cafeVO.cafeNo})
+	</insert>
+	
+	<resultMap type="menuVO" id="MenuRM" >
+      <result property="cafeVO.userVO.id" column="id"/>
+      <result property="cafeVO.cafeNo" column="cafe_no"/>
+      <result property="cafeVO.cafeName" column="cafe_name"/>
+      <result property="cafeVO.cafeLoc" column="cafe_loc"/>
+      <result property="cafeVO.cafePic" column="cafe_pic"/>
+      <result property="cafeVO.cafeInfo" column="cafe_info"/>
+      <result property="cafeVO.cafeTel" column="cafe_tel"/>
+   </resultMap>
+	 <select id="findMenuByCafeNo" resultMap="MenuRM" parameterType="string">
+     SELECT  m.menu_name,m.menu_price, c.cafe_no,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+      FROM     cafe c, menu m
+      WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
+   </select>
+   
+   <select id="updateMenuList" resultType="menuVO">
+   SELECT  m.menu_name,m.menu_price, c.cafe_no,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+      FROM     cafe c, menu m
+      WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
+   </select>
+   
+   <select id="menuNameCheck" resultType="int">
+   select count(*)
+   from cafe c, menu m 
+   where m.cafe_no = c.cafe_no and c.cafe_no=#{cafeNo} and m.menu_name=#{menuName}
+   </select>
+   
+   <delete id="deleteMenu">
+   delete from menu where cafe_no=#{cafeNo} and menu_name=#{menuName}
+   </delete>
+
 </mapper>

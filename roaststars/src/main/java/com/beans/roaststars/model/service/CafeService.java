@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 public interface CafeService {
+	List<MenuVO> findMenuByCafeNo(String cafeNo);
 	
 	//no로 카페 찾기
 	CafeVO findcafeByNoNotJoin(String cafeNo);
@@ -31,4 +33,12 @@ public interface CafeService {
 	void updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO);
 
 	String deleteCafe(String cafeNo);
+
+	String updateMenu(MenuVO menuVO);
+
+	List<MenuVO> updateMenuList(String cafeNo);
+
+	String menuNameCheck(String cafeNo, String menuName);
+
+	String deleteMenu(String cafeNo, String menuName);
 }

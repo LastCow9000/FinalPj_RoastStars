@@ -7,11 +7,13 @@ import org.apache.ibatis.annotations.Param;
 
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 @Mapper
 public interface CafeMapper {
-	
+	List<MenuVO> findMenuByCafeNo(String cafeNo);
+
 	// 카페 번호로 카페 정보 조회
 	CafeOperatingTimeVO findCafeByCafeNo(String CafeNo);
 	
@@ -37,4 +39,12 @@ public interface CafeMapper {
 	void updateCafeOperatingTime(CafeOperatingTimeVO cafeOperVO);
 
 	int deleteCafe(String cafeNo);
+
+	int updateMenu(MenuVO menuVO);
+
+	List<MenuVO> updateMenuList(String cafeNo);
+
+	int menuNameCheck(@Param("cafeNo")String cafeNo,@Param("menuName")String menuName);
+
+	int deleteMenu(@Param("cafeNo")String cafeNo, @Param("menuName")String menuName);
 }
