@@ -152,22 +152,38 @@ public class ManagerController {
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
-	public List<MenuVO> updateMenu(MenuVO menuVO,String cafeNo) {
+	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
+		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CafeVO cafeVO = new CafeVO();
+		
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
-		//System.out.println(cafeVO);
+		cafeVO.setUserVO(uvo);
 		menuVO.setCafeVO(cafeVO);
-		//System.out.println(menuVO);
-
 		cafeService.updateMenu(menuVO);
-		//System.out.println(menuVO);
-
-
-		List<MenuVO> list = cafeService.findMenuByCafeNo(cafeNo);
-		/*
-		 * for(int i=0; i<list.size();i++) System.out.println(list.get(i));
-		 */
-		return list;
+		return menuVO;
 	}
 	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuList.do")
+	@ResponseBody
+	public ModelAndView updateMenuList(String cafeNo, Model model) {
+		List<MenuVO> list = cafeService.updateMenuList(cafeNo);
+		model.addAttribute("cafeNo", cafeNo);
+		return new ModelAndView("cafe/updateMenuList.tiles", "menuList", list);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("menuName-checkAjax.do")
+	@ResponseBody
+	public String menuNamecheckAjax(String cafeNo, String menuName) {
+		return cafeService.menuNameCheck(cafeNo,menuName);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("deleteMenu-Ajax.do")
+	@ResponseBody
+	public String deleteMenu(String cafeNo, String menuName) {
+		System.out.println(cafeNo);
+		return cafeService.deleteMenu(cafeNo,menuName);
+	}
 }

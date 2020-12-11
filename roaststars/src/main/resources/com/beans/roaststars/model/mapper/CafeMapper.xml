@@ -146,4 +146,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       FROM     cafe c, menu m
       WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
    </select>
+   
+   <select id="updateMenuList" resultType="menuVO">
+   SELECT  m.menu_name,m.menu_price, c.cafe_no,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+      FROM     cafe c, menu m
+      WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
+   </select>
+   
+   <select id="menuNameCheck" resultType="int">
+   select count(*)
+   from cafe c, menu m 
+   where m.cafe_no = c.cafe_no and c.cafe_no=#{cafeNo} and m.menu_name=#{menuName}
+   </select>
+   
+   <delete id="deleteMenu">
+   delete from menu where cafe_no=#{cafeNo} and menu_name=#{menuName}
+   </delete>
 </mapper>
