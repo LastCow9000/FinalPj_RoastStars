@@ -10,10 +10,8 @@ import com.beans.roaststars.model.vo.AuthorityVO;
 
 @Mapper
 public interface AdminMapper {
-	// 원래거
-	List<AuthorityVO> getAllWaitingForUpgradeUserList();
 
-	// 페이징 용 : 승인 대기 중인 가입자 전체 목록 반환
+	// 등급업 대기인원 리스트(페이징 적용)
 	List<AuthorityVO> getAllWatingForAuthor(PagingBean pagingBean);
 	
 	// 권한 종류 불러오기

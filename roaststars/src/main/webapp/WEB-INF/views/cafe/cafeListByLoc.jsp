@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER','ROLE_ADMIN')" var="hasRole">  <%-- var를 이용하여 js에서 등급확인을 할 수 있다 --%>
+	<sec:authentication property='principal.id' var='loginId'/>
+</sec:authorize>
 <title>지역검색 결과</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e0eb306fda064dda6bc06fd37a1eb729&libraries=services"></script>
 <script type="text/javascript">
@@ -33,14 +36,14 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='250' height='250'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='250' height='250'></div>";
@@ -83,15 +86,19 @@
 			var cafeNo=$(this).next().val();
 			var cafeLoc=$(this).next().next().val();
 			//alert(cafeLoc); //alert(cafeNo);
-			$.ajax({	//1. 카페 간략정보 표현
+			$.ajax({	// 1.카페 간략정보 표현
 				type:"get",
-				dataType:"json",
+				dataType:"json",  
 				url:"${pageContext.request.contextPath}/cafe-simple.do",
 				data:"cafeNo=" + cafeNo,
 				success:function(cafeTotal){
 					var tag="";
-					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span></h2>';		
-					tag +='<div class="img">';		
+					tag +='<h2>' + cafeTotal.cafeVO.cafeName;
+					<%--문젱ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ --%>
+					if(${hasRole} == true)	//로그인 했을 시
+						tag +='<span class="myPickStar"><a href="#" id="myPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
+						
+					tag +='</h2><div class="img">';		
 					tag +="<img src='resources/upload/"+cafeTotal.cafeVO.cafePic+"' width='500' height='300'></div>";			
 					tag +='</div>';			
 					tag +='<table class="table cafeSimple">';		
@@ -112,7 +119,26 @@
 					$("#cafeSimple").html(tag);
 				}
 			}); //ajax
-			
+			<%--문젱ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ --%>
+		//마이픽 추가
+		$(document).on("click", "#myPickIcon",function(){
+			var cafeNo=$("#detailCafeNo").val();
+			$.ajax({
+				type:"post",
+				data:"id=${loginId}&cafeNo="+cafeNo,
+				url:"${pageContext.request.contextPath}/my-pick-add.do",
+				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+                	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
+				success:function(result){
+					if(result=="ok"){
+						alert("마이픽 추가 완료!");
+						$(".myPickStar").html('<a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a>');
+					}
+				}//end function
+			});//end ajax
+		});//end star click
+		
 			/*
 			*	카카오맵 API
 			*/
@@ -187,8 +213,8 @@
 		var detailCafeNo = document.getElementById("detailCafeNo").value;
 		location.href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo="+detailCafeNo;
 	}
-	
 </script>
+	
 </head>
 <body>
 <div class="container">

@@ -1,5 +1,6 @@
 package com.beans.roaststars.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -58,12 +59,15 @@ public class CafeController {
 				"cafeTotal", cafeService.findCafeByCafeNo(cafeNo));
 	}//viewCafeDetail
 	
+	/*문젱ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ */
 	// 카페 간략정보 ajax
 	@RequestMapping("cafe-simple.do")
 	@ResponseBody
-	public CafeOperatingTimeVO getCafeSimple(String cafeNo) {
+	public Object getCafeSimple(String cafeNo) {
+		ArrayList<Object> list=new ArrayList<Object>();
 		CafeOperatingTimeVO cafeTotal=cafeService.findCafeByCafeNo(cafeNo);
-		return cafeTotal;
+		list.add(cafeTotal);
+		return list;
 	}
 	
 	//카페 리스트 정렬 ajax

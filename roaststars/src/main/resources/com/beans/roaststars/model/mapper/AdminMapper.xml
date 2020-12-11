@@ -18,23 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userVO.enabled" column="enabled" />
 	</resultMap>
 	
-	<!-- 원래거 (페이지 적용 전)
-	     : 가입한 아이디 중, 사장 권한 부여를 받기 위해 대기 중인 user의 리스트 반환 -->
-	<select id="getAllWaitingForUpgradeUserList" resultMap="adminUserRM">
-		<![CDATA[
-		select  rs.id, rs.name, rs.business_name, rs.business_no, rs.business_pic,
-		rs.enabled
-		from 	(select count(authority), username
-		from   AUTHORITIES
-		group by username
-		having count(authority) < 2) au, rs_user rs
-		where	rs.id = au.username
-		and not business_name is null
-		and not business_no is null
-		and not business_pic is null]]>
-	</select>
-
-	<!-- 페이징용  -->
+	<!-- 등급업 대기인원 리스트(페이징 적용)  -->
 	<select id="getAllWatingForAuthor" resultMap="adminUserRM">
 		<![CDATA[
 		select 	id, name, business_name, business_no, business_pic, enabled, rnum

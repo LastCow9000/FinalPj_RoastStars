@@ -583,8 +583,34 @@ where cafe_no=3
 delete from cafe
 where cafe_no=2
 
+select *
+from   rs_user r, authorities a
+where  id='sajang100' AND r.id = a.username
+
+select *
+from   authorities
+
 -- 예울 test 끝 --
 
 update cafe set cafe_pic='iu.jpg' where cafe_no=1
 
 
+ 		select c.cafe_no, c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel, c.id, p.taste, p.service, p.mood, p.diversity, p.price
+ 		from   cafe c, property p
+ 		where  c.cafe_no = p.cafe_no and c.cafe_loc='부천'
+ 		order by taste desc, null desc, mood desc
+
+ 		select *
+ 		from   
+
+-- 마이픽 리스트 불러오기 테스트 --
+select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_tel, pick_no, id, rnum
+from (select c.cafe_no, c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_tel, mp.pick_no, mp.id, row_number() over(order by mp.pick_no desc) AS rnum
+	  from cafe c, my_pick mp
+	  where c.cafe_no = mp.cafe_no and  mp.id='java11') mpc
+where rnum between 1 and 5
+
+select *
+from  my_pick
+#{startRowNumber} and #{endRowNumber}
+---------end test----------
