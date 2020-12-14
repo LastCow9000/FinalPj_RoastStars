@@ -32,20 +32,15 @@ $(document).ready(function() {
                   }//ajax1 success
                });//ajax1
       } 
-            
-         
    });// end document click
-   
-     // 카페 수정 시 한번 묻기
-     $("#updateCafeInfoForm").submit(function() {
-         return confirm("카페 정보를 수정하시겠습니까?");
-   });//end updateCafeInfoForm
-
 
 });// end ready
 </script>
 </head>
 <body>
+<c:choose>
+<%-- 등록된 카페가 있는 경우 : 카페 리스트를 보여준다 --%>
+<c:when test="${list.size() > 0}">
 <table class="table table-hover">
 <thead>
    <tr>
@@ -62,13 +57,11 @@ $(document).ready(function() {
          <td>${list.cafeLoc}</td>
          <td>${list.cafeTel}</td>
          <td>
-            <%-- 수정버튼 --%>
-               <button type="submit" class="btn btn-info btn-sm" form="updateCafeInfoForm">수정하기</button>
-            
-            <%-- 수정 폼 --%>
+            <%-- 수정 버튼 & 폼 --%>
             <form method="POST" action="${pageContext.request.contextPath}/update-cafe-form.do" id="updateCafeInfoForm">
                <sec:csrfInput/>
                <input type="hidden" name="cafeNo" value="${list.cafeNo}">
+               <input type="submit" class="btn btn-info btn-sm" value="수정하기">
              </form>
          </td>
          <td>
@@ -83,6 +76,18 @@ $(document).ready(function() {
    </c:forEach>
 </tbody>   
 </table>
+</c:when>
+
+<%-- 등록된 카페가 없는 경우 : 카페 등록 버튼을 보여준다 --%>
+<c:otherwise>
+	<div class="container" style="width:100%; text-align: center;">
+		<h2>등록된 카페가 없습니다.</h2><br>
+		<button type="submit" form="registerCafeInfoForm" class="btn btn-warning"><font style="color:white">카페 등록하기</font></button>
+		<form action="${pageContext.request.contextPath}/register-cafeform.do" id="registerCafeInfoForm"></form>
+	</div>
+</c:otherwise>
+
+</c:choose>
 
 </body>
 </html>
