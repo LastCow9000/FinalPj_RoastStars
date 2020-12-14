@@ -35,13 +35,12 @@ public class AdminServiceImpl implements AdminService{
        else
           pagingBean = new PagingBean(memberTotalCount, Integer.parseInt(pageNo));
        
-       //Admin List에 해당하는 페이징 빈 초기 설정
-       // setContentNumberPerPage : 한 페이지 당 나오는 리뷰 수
-       // setPageNumberPerPageGroup : 페이지 그룹 당 속하는 페이지 수
-       pagingBean.setContentNumberPerPage(5);
-       pagingBean.setPageNumberPerPageGroup(4);
-       
-       AdminListVO listVO 
+       // 페이지 그룹 당 페이지 수
+	   pagingBean.setPageNumberPerPageGroup(4);
+	   //페이지 당 게시물 수
+	   pagingBean.setContentNumberPerPage(5);
+
+	   AdminListVO listVO 
           = new AdminListVO(adminMapper.getAllWatingForAuthor(pagingBean), pagingBean);
 
        return listVO;
