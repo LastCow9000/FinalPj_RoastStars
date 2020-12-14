@@ -443,11 +443,14 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
--- [20.12.10] 추가해야할 SQL
+-- [20.12.14] 추가해야할 SQL
+DROP TABLE my_pick
+DROP SEQUENCE my_pick_seq;
+
 CREATE TABLE my_pick(
 	pick_no number primary key,
 	id varchar2(100),
-	cafe_no number unique,
+	cafe_no number,
 	constraint fk_id foreign key(id) references rs_user(id) on delete cascade,
 	constraint fk_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade
 );
@@ -456,75 +459,3 @@ CREATE SEQUENCE my_pick_seq;
 insert into my_pick
 values(my_pick_seq.nextval, 'java11', '4');
 
-
--- 테스트용 데이터
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페1','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페2','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페3','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페4','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페5','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페6','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페7','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페8','하아 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'새해분위기나는 카페9','하아 ',sysdate,'admin');
-
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페1','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페2','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페3','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페4','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페5','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페6','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페7','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페8','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페9','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페10','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'내 삶같은 카페11','여긴 아니야 ',sysdate,'admin');
-insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
-values (beans_pick_seq.nextval,'일이삼사오육칠팔구십일이삼사오육','여긴 아니야 ',sysdate,'admin');
-
-ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
-ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
-
-
----테스트
---등록
-insert into BEANS_PICK(beans_no,beans_title,beans_content,beans_regdate)
-values (beans_pick_seq.nextval, #{beans_title},#{beans_content},sysdate);
---삭제
-delete from BEANS_PICK where beans_no=2;
-delete from BEANS_PICK where beans_no=#{beans_no}
---수정
-update BEANS_PICK 
-set beans_title=#{beans_title}, content=#{content}
-where beans_no=#{beans_no}
-
-update BEANS_PICK 
-set beans_title=수우정, content=수우우정
-where beans_no=1;
-
-   SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
-              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel,
-              r.password, r.name, r.nickname, r.tel, r.address, r.business_name,
-              r.business_pic, r.business_no, r.enabled,m.menu_name
-      FROM    rs_user r, cafe c, operating_time o, menu m
-      WHERE   r.id = c.id AND c.cafe_no = o.cafe_no and m.cafe_no = c.cafe_no AND c.cafe_no='125';
