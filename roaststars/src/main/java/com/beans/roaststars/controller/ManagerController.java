@@ -145,18 +145,22 @@ public class ManagerController {
 		return new ModelAndView("cafe/updateCafeResult.tiles", "cafeOperVO", cafeOperVO);
 	}
 	
+	// 카페 삭제하기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
-	@PostMapping("deleteCafe-Ajax.do")
-	@ResponseBody
-	public String deleteCafe(String cafeNo) {
-		return cafeService.deleteCafe(cafeNo);
-	}
+    @PostMapping("deleteCafe-Ajax.do")
+    @ResponseBody
+    public String deleteCafe(String cafeNo) {
+       return cafeService.deleteCafe(cafeNo);
+    }
+
+	// 카페 메뉴 수정 폼
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@RequestMapping("update-menuForm.do")
 	public ModelAndView updateMenuForm(String cafeNo) {
 		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
 	}
 	
+	// 메뉴 ajax로 수정하기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
