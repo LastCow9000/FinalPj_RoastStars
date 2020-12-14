@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beans.roaststars.model.mapper.MyPickMapper">
+
+ 	<!-- has a 관계 표현 -->
+ 	<resultMap type="myPickVO" id="myPickRM">
+		<result property="cafeVO.cafeNo" column="cafe_no"/>
+		<result property="cafeVO.cafeName" column="cafe_name"/>
+		<result property="cafeVO.cafeLoc" column="cafe_loc"/>
+		<result property="cafeVO.cafePic" column="cafe_pic"/>
+		<result property="cafeVO.cafeTel" column="cafe_tel"/>
+	</resultMap>
+	
+	<!-- MyPick 리스트 불러오기 -->
+	<select id="getMyPickList" resultMap="myPickRM">
+		select cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_tel, pick_no, id, rnum
+		from (select c.cafe_no, c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_tel, mp.pick_no, mp.id, row_number() over(order by mp.pick_no desc) AS rnum
+	  		  from cafe c, my_pick mp
+	  		  where c.cafe_no = mp.cafe_no and mp.id=#{id}) mpc
+		where rnum between #{pagingBean.startRowNumber} AND #{pagingBean.endRowNumber} 
+	</select>
+	
+	<!-- 사용자별 MyPick 리스트 총 갯수  -->
+	<select id="getTotalCountMyPick" resultType="int">
+		select count(*)
+		from my_pick
+		where id=#{id}
+	</select>
+	
+	<!-- MyPick 등록 -->
+	<insert id="addMyPick">
+		insert into my_pick
+		values(my_pick_seq.nextval, #{id}, #{cafeNo})
+	</insert>
+	
+	<!-- MyPick 삭제(pk) -->
+	<delete id="deleteMyPick">
+		delete from my_pick
+		where pick_no=#{value}
+	</delete>
+	
+	<!-- MyPick 삭제(id, cafeNo) -->
+	<delete id="deleteMyPickByIdAndCafeNo">
+		delete from my_pick
+		where cafe_no=#{cafeNo} and id=#{id}
+	</delete>
+	
+	<!-- MyPick 리스트 불러오기(by Id) -->
+	<select id="findMyPickListById" resultMap="myPickRM">
+		select pick_no, id, cafe_no
+		from my_pick
+		where id=#{id}
+	</select>
+	
+</mapper>
+ 

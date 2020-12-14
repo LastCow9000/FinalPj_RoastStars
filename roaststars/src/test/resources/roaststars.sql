@@ -443,19 +443,18 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
------- 신경쓰지말것---------------------
+-- [20.12.10] 추가해야할 SQL
 CREATE TABLE my_pick(
+	pick_no number primary key,
 	id varchar2(100),
-	cafe_name varchar2(100),
-	cafe_loc varchar2(100),
-	cafe_pic varchar2(300),
-	regdate DATE,
-)
+	cafe_no number unique,
+	constraint fk_id foreign key(id) references rs_user(id) on delete cascade,
+	constraint fk_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade
+);
+CREATE SEQUENCE my_pick_seq;
 
-select cafe_no, cafe
-from
-where
--------------------------------------
+insert into my_pick
+values(my_pick_seq.nextval, 'java11', '4');
 
 
 -- 테스트용 데이터
@@ -506,6 +505,7 @@ values (beans_pick_seq.nextval,'일이삼사오육칠팔구십일이삼사오육
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
+
 ---테스트
 --등록
 insert into BEANS_PICK(beans_no,beans_title,beans_content,beans_regdate)
@@ -521,3 +521,11 @@ where beans_no=#{beans_no}
 update BEANS_PICK 
 set beans_title=수우정, content=수우우정
 where beans_no=1;
+
+   SELECT  r.id, c.cafe_no, o.weekday_time, o.weekend_time, o.holiday_time,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel,
+              r.password, r.name, r.nickname, r.tel, r.address, r.business_name,
+              r.business_pic, r.business_no, r.enabled,m.menu_name
+      FROM    rs_user r, cafe c, operating_time o, menu m
+      WHERE   r.id = c.id AND c.cafe_no = o.cafe_no and m.cafe_no = c.cafe_no AND c.cafe_no='125';
+

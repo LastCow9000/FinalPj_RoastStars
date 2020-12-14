@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.UserVO;
 @Controller
 public class ManagerController {
@@ -93,60 +94,90 @@ public class ManagerController {
       return "cafe/updateCafeList.tiles";
    }
 
-   // 카페정보수정폼으로 이동하기 전에 자신의 카페 리스트 불러오기
-   @Secured("ROLE_MANAGER")
-   @RequestMapping("view-cafelist-for-menu.do")
-   public String ViewCafeListForMenu(Model model) {
-      UserVO userVO = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      List<CafeVO> list = cafeService.getCafeList(userVO.getId());
-      model.addAttribute("list", list);
-      return "cafe/updateCafeListForMenu.tiles";
-   }
-   
-   //카페정보 수정전 자신의 카페목록 불러오기.
-   @Secured("ROLE_MANAGER")
-   @RequestMapping("update-cafeform.do")
-   public ModelAndView updateCafeForm(String cafeNo, Model model) {
-      model.addAttribute(cafeNo);
-      CafeVO cafeVO = new CafeVO();
-      cafeVO = cafeService.findcafeByNoNotJoin(cafeNo);
-      return new ModelAndView("cafe/updateCafeForm.tiles", "cafeVO", cafeVO);
-   }
-
-   // 카페정보수정하기
-   @Transactional
-   @Secured("ROLE_MANAGER")
-   @PostMapping("update-cafe.do")
-   public ModelAndView updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
-      UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-      cafeVO.setUserVO(uvo);
-      cafeOperVO.setCafeVO(cafeVO);
-      if (cafeVO.getUploadFile() != null) {
-         uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
-         File uploadDir = new File(uploadPath);
-         if (uploadDir.exists() == false)
-            uploadDir.mkdirs();
-         MultipartFile file = cafeVO.getUploadFile();
-         if (file != null && file.isEmpty() == false) {
-            File uploadFile = new File(uploadPath + file.getOriginalFilename());
-            try {
-               file.transferTo(uploadFile);
-               // System.out.println(uploadPath + file.getOriginalFilename());
-               cafeVO.setCafePic((file.getOriginalFilename()));
-               String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
-               File localPathDir = new File(localPath);
-               if (localPathDir.exists() == false)
-                  localPathDir.mkdirs();
-               FileCopyUtils.copy(file.getBytes(),
-                     new File(localPath + File.separator + file.getOriginalFilename()));
-            } catch (IllegalStateException | IOException e) {
-               e.printStackTrace();
-            }
-         }
-      }
-      cafeService.updateCafe(cafeVO, cafeOperVO);
-      cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
-      return new ModelAndView("cafe/updateCafeResult.tiles", "cafeOperVO", cafeOperVO);
-   }
-
+	// 카페정보수정하기
+	@Transactional
+	@Secured("ROLE_MANAGER")
+	@PostMapping("update-cafe.do")
+	public ModelAndView updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
+		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		cafeVO.setUserVO(uvo);
+		cafeOperVO.setCafeVO(cafeVO);
+		if (cafeVO.getUploadFile() != null) {
+			uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+			File uploadDir = new File(uploadPath);
+			if (uploadDir.exists() == false)
+				uploadDir.mkdirs();
+			MultipartFile file = cafeVO.getUploadFile();
+			if (file != null && file.isEmpty() == false) {
+				File uploadFile = new File(uploadPath + file.getOriginalFilename());
+				try {
+					file.transferTo(uploadFile);
+					// System.out.println(uploadPath + file.getOriginalFilename());
+					cafeVO.setCafePic((file.getOriginalFilename()));
+					String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
+					File localPathDir = new File(localPath);
+					if (localPathDir.exists() == false)
+						localPathDir.mkdirs();
+					FileCopyUtils.copy(file.getBytes(),
+							new File(localPath + File.separator + file.getOriginalFilename()));
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		cafeService.updateCafe(cafeVO, cafeOperVO);
+		cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
+		return new ModelAndView("cafe/updateCafeResult.tiles", "cafeOperVO", cafeOperVO);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("deleteCafe-Ajax.do")
+	@ResponseBody
+	public String deleteCafe(String cafeNo) {
+		return cafeService.deleteCafe(cafeNo);
+	}
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuForm.do")
+	public ModelAndView updateMenuForm(String cafeNo) {
+		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("updateMenu-Ajax.do")
+	@ResponseBody
+	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
+		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		CafeVO cafeVO = new CafeVO();
+		
+		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
+		cafeVO.setUserVO(uvo);
+		menuVO.setCafeVO(cafeVO);
+		cafeService.updateMenu(menuVO);
+		return menuVO;
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuList.do")
+	@ResponseBody
+	public ModelAndView updateMenuList(String cafeNo, Model model) {
+		List<MenuVO> list = cafeService.updateMenuList(cafeNo);
+		model.addAttribute("cafeNo", cafeNo);
+		return new ModelAndView("cafe/updateMenuList.tiles", "menuList", list);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("menuName-checkAjax.do")
+	@ResponseBody
+	public String menuNamecheckAjax(String cafeNo, String menuName) {
+		return cafeService.menuNameCheck(cafeNo,menuName);
+	}
+	
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@PostMapping("deleteMenu-Ajax.do")
+	@ResponseBody
+	public String deleteMenu(String cafeNo, String menuName) {
+		System.out.println(cafeNo);
+		return cafeService.deleteMenu(cafeNo,menuName);
+	}
 }
+

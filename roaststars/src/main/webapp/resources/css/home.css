@@ -10,8 +10,6 @@
 	font-size: 20px;
 }
 
-
-
 /* 카페 정보 상세보기 페이지 설정 */
 
 /* 카페 상세보기 영역 */
@@ -20,7 +18,7 @@
 	font-size: 30px;
 }
 
-#myPickStar{
+.myPickStar{
 	float: right;
 	margin-right: 15px;
 }
@@ -127,15 +125,13 @@ tr.reviewTableProperty {
 	justify-content: left;
 	align-items: center;
 }
+
 /* 빈즈픽 레이아웃*/
-
-
 .card{
 	padding: 10px;
 	margin: 5px;
 	justify-content: center;
 }
-
 
 /*
 .bigPicture img {
@@ -158,4 +154,14 @@ tr.reviewTableProperty {
 }
 .banner-text h2 { 
 	margin-top: -24px; text-align: center; font-size: 32px; color: #ffffff; 
+}
+
+/* 마이픽 카드 */
+.myPickrow {
+  display: flex; /* 요소가 늘어나면 차곡차곡 가로로 채워지는데 한 줄로 쭉 늘여 세운다. */
+  flex-wrap: wrap; /* 컨테이너 너비를 넘어가면 다음 줄로 요소를 배치 */
+  justify-content: flex-start;
+}
+.card {
+    max-height: 600px;
 }
