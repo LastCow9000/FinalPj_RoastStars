@@ -19,6 +19,12 @@ public interface MyPickMapper {
 	// 마이픽 추가
 	int addMyPick(@Param("id") String id, @Param("cafeNo") String cafeNo);
 	
-	//마이픽 삭제
+	//마이픽 삭제(pk)
 	int deleteMyPick(String pickNo);
+	
+	//마이픽 삭제(id, cafeNo)
+	int deleteMyPickByIdAndCafeNo(@Param("id") String id, @Param("cafeNo") String cafeNo);	
+	
+	// 아이디로 마이픽 리스트 불러오기(No Paging)
+	List<MyPickVO> findMyPickListById(String id);
 }

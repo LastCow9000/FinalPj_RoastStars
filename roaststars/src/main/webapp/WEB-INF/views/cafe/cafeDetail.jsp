@@ -20,8 +20,6 @@
 <c:set var="cafeName" value="${cafeTotal.cafeVO.cafeName}"/>
 <%-- 관리자 아이디 변수에 담기 --%>
 <sec:authorize access="hasRole('ROLE_ADMIN')" var="adminId"/>
-<%-- 리뷰 중복 작성 여부 체크를 위해 로그인한 유저 아이디로 변수에 담는다 --%>
-<c:set var="loginId" value="${loginUser}"/>
 
    <div class="container" style="margin-top: 10px">
       <div class="row">
@@ -33,10 +31,14 @@
             <sec:authorize access="hasRole('ROLE_ADMIN')">
             	<button class="btn btn-danger"><strong>이 카페 데이터 지우기</strong></button>
             </sec:authorize>
-            <%--<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-spin fa-2x" style="color:#ffc93c"></i></a></span>--%>
-            <span class="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>
-            <span class="myPickStar"><a href="#" id="myPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>
-            
+            <sec:authorize access="hasRole('ROLE_MEMBER')">
+            <c:if test="${flag==true}">
+            	<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>
+            </c:if>
+            <c:if test="${flag==false}">
+            	<span class="myPickStar"><a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>
+            </c:if>
+            </sec:authorize>
             <br>
             
             <div>
@@ -141,16 +143,16 @@
                               jstl choose 를 이용  
                               예) <a href="DispatcherServlet?command=list&pageNo=...">               
                 -->    
-               <ul class="pagination pagination-sm">
+               <ul class="pagination pagination-sm justify-content-center">
                <c:if test="${pb.previousPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 	               &nbsp;
                </c:if>
                
                <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
                   <c:choose>
                      <c:when test="${pb.nowPage!=i}">
-                     <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${i}">${i}</a></li> 
+                     <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}">${i}</a></li> 
                      </c:when>
                      
                      <c:otherwise>
@@ -161,7 +163,7 @@
                </c:forEach>
                
                <c:if test="${pb.nextPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
                </c:if>
                </ul>          
                
@@ -209,7 +211,7 @@
     	          			   success: function(result) {
     								if(result === 1){
     									alert("이미 리뷰를 등록하였습니다.");
-    									location.href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo="+cafeNo;
+    									location.href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo="+cafeNo;
     								}
     							}//success
     	          		   });//ajax
@@ -266,6 +268,43 @@
                       $("#deleteReviewForm").submit(function() {
                     	  return confirm("리뷰를 삭제하시겠습니까?");
 					});//deleteReviewBtn
+					
+					//마이픽 추가
+					$(document).on("click", "#halfMyPickIcon",function(){
+						$.ajax({
+							type:"post",
+							data:"id=${loginUser}&cafeNo=${cafeNo}",
+							url:"${pageContext.request.contextPath}/my-pick-add.do",
+							beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+			                	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			                },
+							success:function(addResult){
+								if(addResult=="ok"){
+									$(".myPickStar").html('<a href="#" id="fullMyPickIcon"><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a>');
+								}else{
+									return;
+								}
+							}//end function
+						});//end ajax
+					});//end star click
+					
+					//마이픽 삭제
+					$(document).on("click", "#fullMyPickIcon",function(){
+						var cafeNo=$("#detailCafeNo").val();
+						$.ajax({
+							type:"post",
+							data:"id=${loginUser}&cafeNo=${cafeNo}",
+							url:"${pageContext.request.contextPath}/my-pick-delete-by-id-cafeNo.do",
+							beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+				               	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				               },
+							success:function(delResult){
+								if(delResult == 'ok'){
+									$(".myPickStar").html('<a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a>');
+								}
+							}//end function
+						});//end ajax
+					});//end star click
 					
                    });//ready
                    

@@ -9,7 +9,7 @@
 <title>MyPickList</title>
 <script type="text/javascript">
 	$(document).ready(function(){
-		<%--문젱ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ --%>
+		
 		//마이픽 삭제
 		$(".myPickStar").on("click", "#myPickIcon",function(){
 			var pickNo=$(this).parent().next().val();
@@ -22,7 +22,8 @@
                 	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
                 },
 				success:function(result){
-						alert(1212);
+					if(result == 'ok')
+						location.reload();
 				}//end function
 			});//end ajax
 		});//end star click
@@ -56,8 +57,3 @@
 	
 </body>
 </html>
-
-<%--
-	<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>
-	<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>
---%>

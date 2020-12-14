@@ -35,6 +35,11 @@ public class AdminServiceImpl implements AdminService{
        else
           pagingBean = new PagingBean(memberTotalCount, Integer.parseInt(pageNo));
        
+       // 페이지 그룹 당 페이지 수
+	   pagingBean.setPageNumberPerPageGroup(4);
+	   //페이지 당 게시물 수
+	   pagingBean.setContentNumberPerPage(5);
+       
        AdminListVO listVO 
           = new AdminListVO(adminMapper.getAllWatingForAuthor(pagingBean), pagingBean);
        

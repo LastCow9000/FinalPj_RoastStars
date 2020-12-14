@@ -1,9 +1,6 @@
 package com.beans.roaststars.model.vo;
 
-import java.io.Serializable;
-
-public class AuthorityVO implements Serializable{
-	private static final long serialVersionUID = 7074773449013571163L;
+public class AuthorityVO{
 	private String username;
 	private String authority;
 	//성호:UserVO 추가:시작
@@ -37,15 +34,9 @@ public class AuthorityVO implements Serializable{
 	public void setUserVO(UserVO userVO) {
 		this.userVO = userVO;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	@Override
 	public String toString() {
 		return "AuthorityVO [username=" + username + ", authority=" + authority + ", userVO=" + userVO + "]";
 	}
-
-	
-	
 	
 }

@@ -1,11 +1,14 @@
 package com.beans.roaststars.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.beans.roaststars.model.mapper.MyPickMapper;
 import com.beans.roaststars.model.vo.MyPickListVO;
+import com.beans.roaststars.model.vo.MyPickVO;
 
 @Service
 public class MyPickServiceImpl implements MyPickService {
@@ -49,10 +52,22 @@ public class MyPickServiceImpl implements MyPickService {
 		return myPickMapper.addMyPick(id, cafeNo);
 	}
 
-	// 마이픽 삭제
+	// 마이픽 삭제(pk)
 	@Override
 	public int deleteMyPick(String pickNo) {
 		return myPickMapper.deleteMyPick(pickNo);
+	}
+	
+	//마이픽 삭제(id, cafeNo)
+	@Override
+	public int deleteMyPickByIdAndCafeNo(String id, String cafeNo) {
+		return myPickMapper.deleteMyPickByIdAndCafeNo(id, cafeNo);
+	}
+
+	// id로 마이픽 리스트 불러오기(No paging)
+	@Override
+	public List<MyPickVO> findMyPickListById(String id) {
+		return myPickMapper.findMyPickListById(id);
 	}
 
 }
