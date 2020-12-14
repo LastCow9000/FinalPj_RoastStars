@@ -124,7 +124,7 @@
                    jstl choose 를 이용  
                    예) <a href="DispatcherServlet?command=list&pageNo=...">               
      -->    
-    <ul class="pagination">
+    <ul class="pagination pagination-sm justify-content-center">
     <c:if test="${pb.previousPageGroup}">   
        <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
     </c:if>
