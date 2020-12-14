@@ -8,21 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.beans.roaststars.model.mapper.AdminMapper;
 import com.beans.roaststars.model.vo.AdminListVO;
-import com.beans.roaststars.model.vo.AuthorityVO;
-import com.beans.roaststars.model.vo.ReviewListVO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
 	@Resource
 	private AdminMapper adminMapper;
-	
-	//페이징전 등업 대기 중인 회원 리스트 불러오기
-	@Override
-	public List<AuthorityVO> getAllWaitingForUpgradeUserList() {
-		return adminMapper.getAllWaitingForUpgradeUserList();
-	}
 
-	// 페이징 용 : 승인 대기 중인 가입자 전체 목록 반환
+	// 등급업 대기인원 리스트(페이징 적용)
     // findReviewListByCafeNo(String cafeNo)
     // : 페이지 번호가 없을 때는 default 1 page
     @Override
@@ -43,11 +35,10 @@ public class AdminServiceImpl implements AdminService{
        else
           pagingBean = new PagingBean(memberTotalCount, Integer.parseInt(pageNo));
        
-       //adminList에 해당하는 페이징 빈 초기 설정
-       // setContentNumberPerPage : 한 페이지 당 나오는  컨텐츠 수
-       // setPageNumberPerPageGroup : 페이지 그룹 당 속하는 페이지 수
-       pagingBean.setContentNumberPerPage(4);
-       pagingBean.setPageNumberPerPageGroup(3);
+       // 페이지 그룹 당 페이지 수
+	   pagingBean.setPageNumberPerPageGroup(4);
+	   //페이지 당 게시물 수
+	   pagingBean.setContentNumberPerPage(5);
        
        AdminListVO listVO 
           = new AdminListVO(adminMapper.getAllWatingForAuthor(pagingBean), pagingBean);

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER','ROLE_ADMIN')" var="hasRole">  <%-- var를 이용하여 js에서 등급확인을 할 수 있다 --%>
+	<sec:authentication property='principal.id' var='loginId'/>
+</sec:authorize>
 <title>지역검색 결과</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e0eb306fda064dda6bc06fd37a1eb729&libraries=services"></script>
 <script type="text/javascript">
@@ -33,14 +36,14 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='250' height='250'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + i + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='250' height='250'></div>";
@@ -83,26 +86,33 @@
 			var cafeNo=$(this).next().val();
 			var cafeLoc=$(this).next().next().val();
 			//alert(cafeLoc); //alert(cafeNo);
-			$.ajax({	//1. 카페 간략정보 표현
+			$.ajax({	// 1.카페 간략정보 표현
 				type:"get",
-				dataType:"json",
+				dataType:"json",  
 				url:"${pageContext.request.contextPath}/cafe-simple.do",
-				data:"cafeNo=" + cafeNo,
-				success:function(cafeTotal){
+				data:"cafeNo=" + cafeNo + "&id=${loginId}",
+				success:function(list){
 					var tag="";
-					tag +='<h2>' + cafeTotal.cafeVO.cafeName + '<span id="myPickStar"><a href="#" id="myPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span></h2>';		
-					tag +='<div class="img">';		
-					tag +="<img src='resources/upload/"+cafeTotal.cafeVO.cafePic+"' width='500' height='300'></div>";			
+					tag +='<h2>' + list[0].cafeVO.cafeName;
+					if(${hasRole} == true){	//로그인 했을 시
+						if(list[1] == true){
+							tag +='<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
+						}else{
+							tag +='<span class="myPickStar"><a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
+						}
+					}	
+					tag +='</h2><div class="img">';		
+					tag +="<img src='resources/upload/"+list[0].cafeVO.cafePic+"' width='500' height='300'></div>";			
 					tag +='</div>';			
 					tag +='<table class="table cafeSimple">';		
 					tag +='<tr>';		
 					tag +='<td>위치</td>';		
-					tag +='<td>' + cafeTotal.cafeVO.cafeLoc + '</td>';			
+					tag +='<td>' + list[0].cafeVO.cafeLoc + '</td>';			
 					tag +='</tr><tr>';				
 					tag +='<td>운영시간</td>';				
 					tag +='<td>';			
-					tag +='평일 : ' + cafeTotal.weekdayTime + '<br>';			
-					tag +='주말 : ' + cafeTotal.weekendTime + ' | 공휴일 : ' + cafeTotal.holidayTime;				
+					tag +='평일 : ' + list[0].weekdayTime + '<br>';			
+					tag +='주말 : ' + list[0].weekendTime + ' | 공휴일 : ' + list[0].holidayTime;				
 					tag +='</td></tr>';				
 					tag +='<tr>';				
 					tag +='<td colspan="2" align="center"><button type="button" onclick="detailBtn()">카페 상세정보 보기</button></td>';
@@ -112,7 +122,7 @@
 					$("#cafeSimple").html(tag);
 				}
 			}); //ajax
-			
+		
 			/*
 			*	카카오맵 API
 			*/
@@ -128,67 +138,96 @@
 				};
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption);
-
+	
 			// 장소 검색 객체를 생성합니다
 			var ps = new kakao.maps.services.Places();
-
+	
 			// 키워드로 장소를 검색합니다
 			ps.keywordSearch(cafeLoc + ' ' + cafeName, placesSearchCB);
-
+	
 			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 			function placesSearchCB(data, status, pagination) {
 				if (status === kakao.maps.services.Status.OK) {
-
+	
 					// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 					// LatLngBounds 객체에 좌표를 추가합니다
 					var bounds = new kakao.maps.LatLngBounds();
-
+	
 					for (var i = 0; i < data.length; i++) {
 						displayMarker(data[i]);
 						bounds.extend(new kakao.maps.LatLng(data[i].y,
 								data[i].x));
 					}
-
+	
 					// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 					map.setBounds(bounds);
 				}
 			}// 키워드 검색 완료시 호출되는 롤백함수
-
+	
 			// 지도에 마커를 표시하는 함수입니다
 			function displayMarker(place) {
-
+	
 				// 마커를 생성하고 지도에 표시합니다
 				var marker = new kakao.maps.Marker({
 					map : map,
 					position : new kakao.maps.LatLng(place.y, place.x)
 				});
-
+	
 				// 마커에 클릭이벤트를 등록합니다
-				kakao.maps.event
-						.addListener(
-								marker,
-								'click',
-								function() {
-									// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-									infowindow
-											.setContent('<div style="padding:5px;font-size:12px;">'
-													+ place.place_name
-													+ '</div>');
-									infowindow.open(map, marker);
-								});
+				kakao.maps.event.addListener(marker, 'click', function() {// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+					infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+					infowindow.open(map, marker);
+				});
 			}//마커표시 함수
-			
 		});//on 
+		
+		//마이픽 추가
+		$(document).on("click", "#halfMyPickIcon",function(){
+			var cafeNo=$("#detailCafeNo").val();
+			$.ajax({
+				type:"post",
+				data:"id=${loginId}&cafeNo="+cafeNo,
+				url:"${pageContext.request.contextPath}/my-pick-add.do",
+				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+                	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
+				success:function(addResult){
+					if(addResult=="ok"){
+						$(".myPickStar").html('<a href="#" id="fullMyPickIcon"><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a>');
+					}else{
+						return;
+					}
+				}//end function
+			});//end ajax
+		});//end star click
+		
+		//마이픽 삭제
+		$(document).on("click", "#fullMyPickIcon",function(){
+			var cafeNo=$("#detailCafeNo").val();
+			$.ajax({
+				type:"post",
+				data:"id=${loginId}&cafeNo="+cafeNo,
+				url:"${pageContext.request.contextPath}/my-pick-delete-by-id-cafeNo.do",
+				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+	               	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	               },
+				success:function(delResult){
+					if(delResult == 'ok'){
+						$(".myPickStar").html('<a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a>');
+					}
+				}//end function
+			});//end ajax
+		});//end star click
 		
 	});//ready
 	
 	//카페 상세보기로 이동하는 함수
 	function detailBtn(){
 		var detailCafeNo = document.getElementById("detailCafeNo").value;
-		location.href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo="+detailCafeNo;
+		location.href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginId}&cafeNo="+detailCafeNo;
 	}
-	
 </script>
+	
 </head>
 <body>
 <div class="container">

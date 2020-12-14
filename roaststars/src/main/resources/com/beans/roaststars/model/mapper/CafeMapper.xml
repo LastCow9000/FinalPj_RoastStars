@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="cafe_no" property="cafeVO.cafeNo"/>
  		<result column="cafe_name" property="cafeVO.cafeName"/>
  		<result column="cafe_loc" property="cafeVO.cafeLoc"/>
+ 		<result column="cafe_pic" property="cafeVO.cafePic"/>
  		<result column="cafe_info" property="cafeVO.cafeInfo"/>
  		<result column="cafe_tel" property="cafeVO.cafeTel"/>
  		<result column="id" property="cafeVO.userVO.id"/>
@@ -114,16 +115,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="updateCafe" parameterType="cafeVO">
-	update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
-	where cafe_no = #{cafeNo}
+		update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
+		where cafe_no = #{cafeNo}
 	</update>
 	
 	<update id="updateCafeOperatingTime" parameterType="cafeOperatingTimeVO">
-	update operating_time set weekday_time=#{weekdayTime}, weekend_time=#{weekendTime},holiday_time=#{holidayTime}
-	where cafe_no=#{cafeVO.cafeNo}
-	</update>
-	<delete id="deleteCafe" parameterType="string">
-	delete from cafe where cafe_no=#{value}
+		update operating_time set weekday_time=#{weekdayTime}, weekend_time=#{weekendTime},holiday_time=#{holidayTime}
+		where cafe_no=#{cafeVO.cafeNo}
+		</update>
+		<delete id="deleteCafe" parameterType="string">
+		delete from cafe where cafe_no=#{value}
 	</delete>
 	
 	<insert id="updateMenu" parameterType="menuVO">
@@ -163,4 +164,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <delete id="deleteMenu">
    delete from menu where cafe_no=#{cafeNo} and menu_name=#{menuName}
    </delete>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.beans.roaststars.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beans.roaststars.model.service.MyPickService;
 import com.beans.roaststars.model.service.UserService;
 import com.beans.roaststars.model.vo.UserVO;
 
@@ -26,6 +29,9 @@ public class MemberController {
 
 	@Resource
 	private UserService userService;
+	@Resource
+	private MyPickService myPickService;
+	
 	private String uploadPath; // 업로드 경로
 
 	// 로그인 폼 페이지
@@ -59,9 +65,6 @@ public class MemberController {
 				uploadDir.mkdirs();
 			MultipartFile file = vo.getUploadFile();
 			if (file != null && file.isEmpty() == false) {
-				if(file.getSize() > 2097152) {
-					
-				}
 				File uploadFile = new File(uploadPath + file.getOriginalFilename());
 				try {
 					file.transferTo(uploadFile);
@@ -71,7 +74,7 @@ public class MemberController {
 					File localPathDir = new File(localPath);
 					if (localPathDir.exists() == false)
 						localPathDir.mkdirs();
-					FileCopyUtils.copy(file.getBytes(),
+					FileCopyUtils.copy(uploadFile,
 							new File(localPath + File.separator + file.getOriginalFilename()));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
@@ -149,11 +152,44 @@ public class MemberController {
 		return "user/deleteUserResult.tiles";
 	} 
 	
-	//My Pick
+	//마이픽 리스트(페이징)
+	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})	
 	@RequestMapping("my-pick-list.do")
-	public ModelAndView myPickList() {
-		
-		return new ModelAndView();
+	public String myPickList(String id, String pageNo, Model model) {
+		model.addAttribute("lvo", myPickService.getMyPickList(id, pageNo)); //페이징 적용 리스트
+		model.addAttribute("totalCount", myPickService.getTotalCountMyPick(id)); //총 갯수
+		return "user/myPick.tiles";
 	}
-
+	
+	//마이픽 추가
+	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})	
+	@RequestMapping("my-pick-add.do")
+	@ResponseBody
+	public String MyPickAdd(String id, String cafeNo) {
+		int count=-1;
+		try {
+			count=myPickService.addMyPick(id, cafeNo); //마이픽 추가
+		}catch (Exception e) { //중복으로 인한 sql 오류시 처리
+			count=0;
+		}
+		return (count>=1) ? "ok":"fail";
+	}
+	
+	//마이픽 삭제(primary key로)
+	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})	
+	@RequestMapping("my-pick-delete.do")
+	@ResponseBody
+	public String MyPickDelete(String pickNo) {
+		int count=myPickService.deleteMyPick(pickNo);
+		return (count>=1) ? "ok":"fail";
+	}
+	
+	//마이픽 삭제(id와 cafeNo로)
+	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})	
+	@RequestMapping("my-pick-delete-by-id-cafeNo.do")
+	@ResponseBody
+	public String MyPickDeleteByIdAndCafeNo(String id, String cafeNo) {
+		int count=myPickService.deleteMyPickByIdAndCafeNo(id, cafeNo);
+		return (count>=1) ? "ok":"fail";
+	}
 }

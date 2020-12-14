@@ -42,7 +42,7 @@ public class AdminUnitTest {
 		//for(AuthorityVO vo:listVO) {
 		//System.out.println(vo);
 		
-		//test.5 페이징 테스트  미완
+		//test.5 페이징 테스트
 		PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 1);
 		pb.setContentNumberPerPage(5);
 		pb.setPageNumberPerPageGroup(5);
