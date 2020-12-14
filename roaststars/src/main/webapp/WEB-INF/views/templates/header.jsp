@@ -8,13 +8,20 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/87f055c024.js" crossorigin="anonymous"></script>
 <title>Header</title>
+<script type="text/javascript">
+	// 드롭다운에서 한 가지 영역 클릭하여 이동 시, 
+	// 다시 드롭다운이 활성화되지 않는 오류를 해결하기 위해 jQuery 추가
+	$(document).ready(function() {
+	    $(".dropdown-toggle").dropdown();
+	});
+</script>
 </head>
 <%-- Header Start --%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -58,10 +65,21 @@
 					<a href="${pageContext.request.contextPath}/update-userform.do">회원정보수정</a>&nbsp; &nbsp;
 					<a href="${pageContext.request.contextPath}/delete-userform.do">탈퇴하기</a>&nbsp; &nbsp;
 				</sec:authorize>
+				
 				<sec:authorize access="hasRole('ROLE_MANAGER')">
-					<a href="${pageContext.request.contextPath}/register-cafeform.do">카페등록하기</a>&nbsp; &nbsp;
-					<a href="${pageContext.request.contextPath}/update-cafelist.do">카페수정하기</a>&nbsp; &nbsp;
+				<!-- Dropdown -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						내 카페 관리하기
+					</a>
+					<div class="dropdown-menu">
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/register-cafeform.do">카페 등록</a>&nbsp; &nbsp;
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/update-cafelist.do">카페 수정 | 삭제</a>&nbsp; &nbsp;
+					<a class="dropdown-item" href="${pageContext.request.contextPath}/view-cafelist-for-menu.do">메뉴 관리</a>&nbsp; &nbsp;
+					</div>
+				</li> &nbsp;
 				</sec:authorize>
+				
 				<%-- spring security logout은 다음과 같은 처리가 필요하다
 				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
 				<script type="text/javascript">

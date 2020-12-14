@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService{
        
        AdminListVO listVO 
           = new AdminListVO(adminMapper.getAllWatingForAuthor(pagingBean), pagingBean);
-       
+
        return listVO;
     }
    
