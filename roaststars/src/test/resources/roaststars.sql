@@ -55,15 +55,6 @@ VALUES('sajang4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4'
 SELECT *
 FROM   rs_user
 
-<<<<<<< HEAD
--- 관리자 INSERT
-INSERT INTO rs_user(id, password, name, nickname, tel, address)
-VALUES('admin', 'admin', '관리자', '관리자', '010-9000-0805', '수원 장안구')
-
-delete BEANS_PICK from RS_USER where id='admin';
-
-=======
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 -- 2. authorities 
 drop table authorities;
 create table authorities(
@@ -530,4 +521,3 @@ where beans_no=#{beans_no}
 update BEANS_PICK 
 set beans_title=수우정, content=수우우정
 where beans_no=1;
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git

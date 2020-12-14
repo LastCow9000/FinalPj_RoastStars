@@ -141,7 +141,9 @@
                               jstl choose 를 이용  
                               예) <a href="DispatcherServlet?command=list&pageNo=...">               
                 -->    
-               <ul class="pagination pagination-sm">
+                <%-- 성호 : 페이징 가운데 정렬 : 시작 --%>
+               <ul class="pagination pagination-sm justify-content-center">
+               <%-- 성호 : 페이징 가운데 정렬 : 끝 --%>
                <c:if test="${pb.previousPageGroup}">   
                   <li><a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 	               &nbsp;
@@ -166,7 +168,7 @@
                </ul>          
                
                </div><!-- 페이징 바 -->
-             
+         
             </div> <!-- 리뷰테이블 영역 -->
             </div><!-- 리뷰 마진 -->
            </div><!-- 리뷰영역 -->

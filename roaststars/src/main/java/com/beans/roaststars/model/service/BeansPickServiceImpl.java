@@ -24,5 +24,25 @@ public class BeansPickServiceImpl implements BeansPickService{
 	public List<BeansPickVO> getOneBeansPick(String beansNo){
 		return beansPickMapper.getOneBeansPick(beansNo);
 	}
+	//빈즈픽 등록하기
+	@Override
+	public void registerBeansPick(BeansPickVO beansPickVO) {
+		beansPickMapper.registerBeansPick(beansPickVO);
+	}
+	//빈즈픽 수정하기
+	@Override
+	public void updateFormBeansPick(BeansPickVO beansPickVO) {
+		beansPickMapper.updateFormBeansPick(beansPickVO);
+	}
+	//빈즈픽 삭제하기
+	@Override
+	public void deleteFormBeansPick(String beansNo) {
+		beansPickMapper.deleteFormBeansPick(beansNo);
+	}
+	//빈즈픽 총 수량
+	@Override
+	public int getTotalCountBeansPick() {
+		return beansPickMapper.getTotalCountBeansPick();
+	}
 	
 }

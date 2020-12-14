@@ -13,4 +13,12 @@ public interface BeansPickMapper {
 	
 	List<BeansPickVO> getOneBeansPick(String beansNo);
 
+	void registerBeansPick(BeansPickVO beansPickVO);
+	
+	void deleteFormBeansPick(String	beansNo);
+
+	void updateFormBeansPick(BeansPickVO beansPickVO);
+	
+	int getTotalCountBeansPick();
+	
 }

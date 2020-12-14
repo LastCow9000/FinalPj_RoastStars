@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.beans.roaststars.model.vo.AdminListVO;
 import com.beans.roaststars.model.vo.AuthorityVO;
-import com.beans.roaststars.model.vo.ReviewListVO;
 
 
 public interface AdminService {

@@ -107,7 +107,9 @@
 			</tbody>
 		</table>
 	</form>
-	
+	<%-- 성호 : 화면비율 : 시작 --%>
+	<div class="col-sm-12">
+	<%-- 성호 : 화면비율 : 종료 --%>
 	<div class="pagingInfo">
     <%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
     <c:set var="pb" value="${lvo.pagingBean}"/>
@@ -124,7 +126,9 @@
                    jstl choose 를 이용  
                    예) <a href="DispatcherServlet?command=list&pageNo=...">               
      -->    
-    <ul class="pagination">
+     <%-- 성호 : 페이징 가운데 정렬 : 시작 --%>
+    <ul class="pagination justify-content-center">
+    <%-- 성호 : 페이징 가운데 정렬 : 종료 --%>
     <c:if test="${pb.previousPageGroup}">   
        <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
     </c:if>
@@ -145,8 +149,8 @@
     <c:if test="${pb.nextPageGroup}">   
        <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
     </c:if>
-    </ul>          
-    
+    </ul>         
+ </div>
     </div><!-- 페이징 바 -->
 		<hr>
 </body>

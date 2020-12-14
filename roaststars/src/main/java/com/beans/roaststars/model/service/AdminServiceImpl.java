@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.beans.roaststars.model.mapper.AdminMapper;
 import com.beans.roaststars.model.vo.AdminListVO;
 import com.beans.roaststars.model.vo.AuthorityVO;
-import com.beans.roaststars.model.vo.ReviewListVO;
 
 @Service
 public class AdminServiceImpl implements AdminService{

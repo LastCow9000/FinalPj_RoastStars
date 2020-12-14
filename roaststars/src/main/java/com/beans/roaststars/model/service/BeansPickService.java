@@ -10,4 +10,12 @@ public interface BeansPickService {
 	
 	List<BeansPickVO> getOneBeansPick(String beansNo);
 
+	void registerBeansPick(BeansPickVO beansPickVO);
+
+	void deleteFormBeansPick(String beansNo);
+
+	void updateFormBeansPick(BeansPickVO beansPickVO);
+
+	int getTotalCountBeansPick();
+
 }

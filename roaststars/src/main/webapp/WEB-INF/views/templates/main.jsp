@@ -13,7 +13,7 @@
 <title>Main</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/beansPick-form.do">BeansPick</a> <!-- 나중에 헤더로 이동 -->
+	<a href="${pageContext.request.contextPath}/form-beansPick.do">BeansPick</a> <!-- 나중에 헤더로 이동 -->
 	<div class="bannerbox">
 		<video src="resources/upload/main_banner.mp4" width="1200px" height="700px" autoplay loop muted></video>
 		<div class="banner-form">
