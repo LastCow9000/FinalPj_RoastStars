@@ -2,6 +2,7 @@ package com.beans.roaststars.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -173,7 +174,8 @@ public class MemberController {
 		}
 		return (count>=1) ? "ok":"fail";
 	}
-	//마이픽 삭제
+	
+	//마이픽 삭제(primary key로)
 	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})	
 	@RequestMapping("my-pick-delete.do")
 	@ResponseBody

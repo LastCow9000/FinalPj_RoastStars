@@ -39,8 +39,8 @@ public class AdminServiceImpl implements AdminService{
 	   pagingBean.setPageNumberPerPageGroup(4);
 	   //페이지 당 게시물 수
 	   pagingBean.setContentNumberPerPage(5);
-
-	   AdminListVO listVO 
+       
+       AdminListVO listVO 
           = new AdminListVO(adminMapper.getAllWatingForAuthor(pagingBean), pagingBean);
 
        return listVO;

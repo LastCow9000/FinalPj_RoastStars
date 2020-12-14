@@ -36,10 +36,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(my_pick_seq.nextval, #{id}, #{cafeNo})
 	</insert>
 	
-	<!-- MyPick 삭제 -->
+	<!-- MyPick 삭제(pk) -->
 	<delete id="deleteMyPick">
 		delete from my_pick
 		where pick_no=#{value}
 	</delete>
+	
+	<!-- MyPick 삭제(id, cafeNo) -->
+	<delete id="deleteMyPickByIdAndCafeNo">
+		delete from my_pick
+		where cafe_no=#{cafeNo} and id=#{id}
+	</delete>
+	
+	<!-- MyPick 리스트 불러오기(by Id) -->
+	<select id="findMyPickListById" resultMap="myPickRM">
+		select pick_no, id, cafe_no
+		from my_pick
+		where id=#{id}
+	</select>
+	
 </mapper>
  
