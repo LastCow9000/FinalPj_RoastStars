@@ -152,22 +152,28 @@ public class ManagerController {
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
-	public List<MenuVO> updateMenu(MenuVO menuVO,String cafeNo) {
+	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
 		CafeVO cafeVO = new CafeVO();
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
-		//System.out.println(cafeVO);
 		menuVO.setCafeVO(cafeVO);
-		//System.out.println(menuVO);
-
+		
 		cafeService.updateMenu(menuVO);
-		//System.out.println(menuVO);
-
-
+		return menuVO;
+	}
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuList.do")
+	public ModelAndView updateMenuList(String cafeNo, Model model) {
 		List<MenuVO> list = cafeService.findMenuByCafeNo(cafeNo);
-		/*
-		 * for(int i=0; i<list.size();i++) System.out.println(list.get(i));
-		 */
-		return list;
+		model.addAttribute("cafeNo",cafeNo);
+		return new ModelAndView("cafe/updateMenuList.tiles","menuList",list);
 	}
 	
+	// 메뉴명 중복확인
+	@RequestMapping("menuName-checkAjax.do")
+	@ResponseBody
+	public String idcheckAjax(String cafeNo,String menuName) {
+		System.out.println(cafeNo);
+		System.out.println(menuName);
+		return cafeService.menuNameCheck(cafeNo, menuName);
+	}
 }

@@ -528,3 +528,6 @@ where beans_no=1;
               r.business_pic, r.business_no, r.enabled,m.menu_name
       FROM    rs_user r, cafe c, operating_time o, menu m
       WHERE   r.id = c.id AND c.cafe_no = o.cafe_no and m.cafe_no = c.cafe_no AND c.cafe_no='125';
+
+      select count(*) from cafe c, menu m
+   where m.cafe_no = c.cafe_no and c.cafe_no ='2' and m.menu_name='카페라떼(HOT)';

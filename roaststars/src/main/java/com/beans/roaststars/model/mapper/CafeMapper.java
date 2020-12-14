@@ -41,4 +41,6 @@ public interface CafeMapper {
 	int deleteCafe(String cafeNo);
 
 	void updateMenu(MenuVO menuVO);
+
+	int menuNameCheck(@Param("cafeNo")String cafeNo,@Param("menuName")String menuName);
 }

@@ -74,7 +74,6 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public String deleteCafe(String cafeNo) {
 		int count = cafeMapper.deleteCafe(cafeNo);
-		System.out.println(count);
 		return (count == 1) ? "ok" : "fail";
 	}
 
@@ -86,6 +85,14 @@ public class CafeServiceImpl implements CafeService {
 	@Override
 	public List<MenuVO> findMenuByCafeNo(String cafeNo) {
 		return cafeMapper.findMenuByCafeNo(cafeNo);
+	}
+
+	@Override
+	public String menuNameCheck(String cafeNo, String menuName) {
+		int count = cafeMapper.menuNameCheck(cafeNo,menuName);
+		System.out.println(count);
+		return (count == 0) ? "ok" : "fail";
+		
 	}
 
 }

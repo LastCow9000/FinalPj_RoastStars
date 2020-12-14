@@ -146,4 +146,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       FROM     cafe c, menu m
       WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
    </select>
+   
+   <select id="menuNameCheck" parameterType="map" resultType="int">
+   select count(*) from cafe c, menu m
+   where m.cafe_no = c.cafe_no and c.cafe_no =#{cafeNo} and m.menu_name=#{menuName}
+   </select>
 </mapper>
