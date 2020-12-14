@@ -101,7 +101,7 @@
 							</select>
 						<input type="hidden" id="id" value="${lvo.userVO.id}">
 						</td>
-						<td><button type="button" id="addAuthorityBtn">권한 추가</button></td>
+						<td><button type="button" id="addAuthorityBtn">권한 부여</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

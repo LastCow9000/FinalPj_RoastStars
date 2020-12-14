@@ -265,7 +265,7 @@
                       // 리뷰 삭제 시 한번 묻기
                       $("#deleteReviewForm").submit(function() {
                     	  return confirm("리뷰를 삭제하시겠습니까?");
-					});//deleteReviewBtn
+					});//deleteReviewForm
 					
                    });//ready
                    

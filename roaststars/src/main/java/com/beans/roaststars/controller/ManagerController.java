@@ -50,7 +50,7 @@ public class ManagerController {
 				//System.out.println(cafeVO.getUploadFile());
 				
 				if (cafeVO.getUploadFile() != null) {
-					uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+					uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/"); //server(tomcat) 경로
 					File uploadDir = new File(uploadPath);
 					if (uploadDir.exists() == false)
 						uploadDir.mkdirs();
@@ -59,14 +59,15 @@ public class ManagerController {
 						File uploadFile = new File(uploadPath + file.getOriginalFilename());
 						try {
 							file.transferTo(uploadFile);
-							// System.out.println(uploadPath + file.getOriginalFilename());
+							System.out.println(uploadPath + file.getOriginalFilename());
 							cafeVO.setCafePic(file.getOriginalFilename());
 							String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
 							File localPathDir = new File(localPath);
+							
 							if (localPathDir.exists() == false)
 								localPathDir.mkdirs();
-							FileCopyUtils.copy(file.getBytes(),
-									new File(localPath + File.separator + file.getOriginalFilename()));
+							// server에 업로드된 이미지->workspace(local)에 카피
+							FileCopyUtils.copy(uploadFile, new File(localPath+File.separator+file.getOriginalFilename())); 
 						} catch (IllegalStateException | IOException e) {
 							e.printStackTrace();
 						}
@@ -104,7 +105,7 @@ public class ManagerController {
 	
 	//카페정보 수정전 자신의 카페목록 불러오기.
 	@Secured("ROLE_MANAGER")
-	@RequestMapping("update-cafeform.do")
+	@PostMapping("update-cafe-form.do")
 	public ModelAndView updateCafeForm(String cafeNo, Model model) {
 		model.addAttribute(cafeNo);
 		CafeVO cafeVO = new CafeVO();
@@ -174,6 +175,7 @@ public class ManagerController {
 		return menuVO;
 	}
 	
+	// 메뉴 리스트 불러오기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@RequestMapping("update-menuList.do")
 	@ResponseBody
@@ -183,6 +185,7 @@ public class ManagerController {
 		return new ModelAndView("cafe/updateMenuList.tiles", "menuList", list);
 	}
 	
+	// 메뉴 이름 중복 체크
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@RequestMapping("menuName-checkAjax.do")
 	@ResponseBody
@@ -190,11 +193,11 @@ public class ManagerController {
 		return cafeService.menuNameCheck(cafeNo,menuName);
 	}
 	
+	// 메뉴 삭제
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@PostMapping("deleteMenu-Ajax.do")
 	@ResponseBody
 	public String deleteMenu(String cafeNo, String menuName) {
-		System.out.println(cafeNo);
 		return cafeService.deleteMenu(cafeNo,menuName);
 	}
 }

@@ -73,7 +73,7 @@ public class MemberController {
 					File localPathDir = new File(localPath);
 					if (localPathDir.exists() == false)
 						localPathDir.mkdirs();
-					FileCopyUtils.copy(file.getBytes(),
+					FileCopyUtils.copy(uploadFile,
 							new File(localPath + File.separator + file.getOriginalFilename()));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
