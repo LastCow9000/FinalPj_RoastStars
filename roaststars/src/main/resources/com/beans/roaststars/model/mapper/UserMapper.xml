@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원정보수정 -->
 	<update id="updateUser" parameterType="userVO">
-		update rs_user set password=#{password},name=#{name},address=#{address},tel=#{tel}
+		update rs_user set password=#{password},name=#{name},address=#{address},tel=#{tel}, nickname=#{nickname}
 		where id=#{id}
 	</update>
 	
@@ -59,6 +59,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update rs_user set enabled=0
 		where id=#{id}
 	</update>
-
+	
 </mapper>
  

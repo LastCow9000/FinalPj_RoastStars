@@ -8,8 +8,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beans.roaststars.model.mapper.AdminMapper;
+import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.service.AdminService;
 import com.beans.roaststars.model.service.PagingBean;
+import com.beans.roaststars.model.vo.AdminListVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-model.xml",
@@ -21,14 +23,17 @@ public class AdminUnitTest {
 
 	@Resource
 	private AdminService adminService;
+	
+	@Resource
+	private CafeMapper cafeMapper;
 
 	@Test
 	public void adminUnitTest() {
 		//test.1 가입한 아이디 중 사장 권한 부여 대기중인 회원
-		//List<AuthorityVO> listVO = adminMapper.getAllWaitingForUpgradeUserList();
-		//for(AuthorityVO vo:listVO) {
-		//	System.out.println(vo);
-		//}
+	//	List<AuthorityVO> listVO = adminMapper.getAllWaitingForUpgradeUserList();
+	//	for(AuthorityVO vo:listVO) {
+	//		System.out.println(vo);
+	//  }
 		
 		//test.2 권한 종류 불러오기
 		//System.out.println(adminMapper.getUserAuthorityList());
@@ -42,11 +47,13 @@ public class AdminUnitTest {
 		//for(AuthorityVO vo:listVO) {
 		//System.out.println(vo);
 		
-		//test.5 페이징 테스트  미완
-		PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 1);
-		pb.setContentNumberPerPage(5);
-		pb.setPageNumberPerPageGroup(5);
-		System.out.println(adminMapper.getAllWatingForAuthor(pb));
+		//test.5 페이징 테스트
+		//PagingBean pb=new PagingBean(adminMapper.getTotalCountByWaitingMember(), 1);
+
+		AdminListVO adminListVO = adminService.getAllWatingForAuthor();
+		System.out.println(adminListVO);
+		
+		
 	}
 }
 

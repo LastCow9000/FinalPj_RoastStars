@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
@@ -21,6 +22,10 @@ import com.beans.roaststars.model.vo.UserVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml","file:src/main/webapp/WEB-INF/spring-security.xml"})
 public class CafeUnitTest {
+	
+	@Resource
+	CafeMapper cafeMapper;
+	
 	@Resource
 	CafeService cafeService;
 	
@@ -72,7 +77,7 @@ public class CafeUnitTest {
 		 * // cafeService.registerCafeOperatingTime(ovo);
 		 * System.out.println(cafeService.findCafeByCafeNo(vo.getCafeNo()));
 		 */
-		UserVO uvo = new UserVO();
+		/*UserVO uvo = new UserVO();
 		uvo.setId("java11");
 		List<CafeVO> list = cafeService.getCafeList(uvo.getId());
 		for(int i = 0; i<list.size(); i++)
@@ -90,23 +95,28 @@ public class CafeUnitTest {
 		cafeVO.setCafeName("스타벅스");
 		cafeService.updateCafe(cafeVO, cafeOperVO);
 		System.out.println(cafeService.findCafeByCafeNo(cafeOperVO.getCafeVO().getCafeNo()));
+		*/
 		/*
 		 * CafeVO vo = new CafeVO(); vo.set CafeOperatingTimeVO ovo = new
 		 * CafeOperatingTimeVO();
 		 */
 		  
 		// test 5. 카페리스트 특성에 따라 정렬하기
-		  /*
-		String[] arrOption= {"taste", null , "service"};
-		List<PropertyVO> list=cafeService.cafeListSortByProperty(arrOption, "부천");
+		  
+		String[] arrOption= {"taste", "null" , "service"};
+		List<PropertyVO> list= cafeMapper.cafeListSortByProperty(arrOption, "부천");
+		for (PropertyVO vo:list) {
+			System.out.println(vo);
+		}
+		/*List<PropertyVO> list=cafeService.cafeListSortByProperty(arrOption, "부천");
 		for(PropertyVO vo: list)
 			System.out.println(vo);
 		List<CafeOperatingTimeVO> list = cafeService.findListByLoc("부천");
 		for(CafeOperatingTimeVO vo:list) {
 			System.out.println(vo);
 		}
-		System.out.println(cafeService.findCafeByCafeNo("1"));	
-		   */	
+		System.out.println(cafeService.findCafeByCafeNo("1"));	*/
+		  
 	}
 
 }

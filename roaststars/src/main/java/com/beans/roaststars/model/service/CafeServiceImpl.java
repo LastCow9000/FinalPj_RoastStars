@@ -67,6 +67,8 @@ public class CafeServiceImpl implements CafeService {
 	@Transactional
 	@Override
 	public void updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO) {
+		if(cafeVO.getCafePic()==null)
+			cafeVO.setCafePic("no_image.jpg");
 		cafeMapper.updateCafe(cafeVO);
 		cafeMapper.updateCafeOperatingTime(cafeOperVO);
 	}
@@ -78,8 +80,9 @@ public class CafeServiceImpl implements CafeService {
 	}
 
 	@Override
-	public void updateMenu(MenuVO menuVO) {
-		cafeMapper.updateMenu(menuVO);
+	public String updateMenu(MenuVO menuVO) {
+		int count = cafeMapper.updateMenu(menuVO);
+		return (count == 1) ? "ok" : "fail";
 	}
 
 	@Override
@@ -88,11 +91,21 @@ public class CafeServiceImpl implements CafeService {
 	}
 
 	@Override
+	public List<MenuVO> updateMenuList(String cafeNo) {
+		
+		return cafeMapper.updateMenuList(cafeNo);
+	}
+
+	@Override
 	public String menuNameCheck(String cafeNo, String menuName) {
 		int count = cafeMapper.menuNameCheck(cafeNo,menuName);
-		System.out.println(count);
-		return (count == 0) ? "ok" : "fail";
-		
+		return (count==0)? "ok":"fail";
+	}
+
+	@Override
+	public String deleteMenu(String cafeNo, String menuName) {
+		int count = cafeMapper.deleteMenu(cafeNo,menuName);
+		return (count == 1) ? "ok":"fail";
 	}
 
 }

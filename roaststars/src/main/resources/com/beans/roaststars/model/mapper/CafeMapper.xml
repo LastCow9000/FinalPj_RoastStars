@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result column="cafe_no" property="cafeVO.cafeNo"/>
  		<result column="cafe_name" property="cafeVO.cafeName"/>
  		<result column="cafe_loc" property="cafeVO.cafeLoc"/>
+ 		<result column="cafe_pic" property="cafeVO.cafePic"/>
  		<result column="cafe_info" property="cafeVO.cafeInfo"/>
  		<result column="cafe_tel" property="cafeVO.cafeTel"/>
  		<result column="id" property="cafeVO.userVO.id"/>
@@ -82,11 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!-- 카페 등록하기 -->
     <insert id="registerCafe" parameterType="cafeVO">
-    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
-    select cafe_seq.nextval from dual
-    </selectKey>
-    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
-    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
+	    <selectKey keyProperty="cafeNo" resultType="string" order="BEFORE">
+	    select cafe_seq.nextval from dual
+	    </selectKey>
+	    insert into cafe(cafe_no, cafe_name, cafe_loc, cafe_pic, cafe_info, cafe_tel, id)
+	    values(#{cafeNo},#{cafeName},#{cafeLoc},#{cafePic,jdbcType=VARCHAR},#{cafeInfo},#{cafeTel},#{userVO.id})
     </insert>
     
     <!-- 카페 등록 시, 특성 테이블에 해당 카페 넘버 row 추가하기 -->
@@ -107,23 +108,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM   cafe c, property p
 		WHERE  c.cafe_no = p.cafe_no AND p.cafe_no=#{value}
  	</select>
- 	<!-- 아이디로 카페목록 불러오시 -->
+ 	<!-- 아이디로 카페목록 불러오기 -->
 	<select id="getCafeList" resultType="cafeVO">
-	<include refid="selectCafe"/>
-	where id=#{value}
+		<include refid="selectCafe"/>
+		where id=#{value}
 	</select>
 	
 	<update id="updateCafe" parameterType="cafeVO">
-	update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
-	where cafe_no = #{cafeNo}
+		update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
+		where cafe_no = #{cafeNo}
 	</update>
 	
 	<update id="updateCafeOperatingTime" parameterType="cafeOperatingTimeVO">
-	update operating_time set weekday_time=#{weekdayTime}, weekend_time=#{weekendTime},holiday_time=#{holidayTime}
-	where cafe_no=#{cafeVO.cafeNo}
+		update operating_time set weekday_time=#{weekdayTime}, weekend_time=#{weekendTime},holiday_time=#{holidayTime}
+		where cafe_no=#{cafeVO.cafeNo}
 	</update>
 	<delete id="deleteCafe" parameterType="string">
-	delete from cafe where cafe_no=#{value}
+		delete from cafe where cafe_no=#{value}
 	</delete>
 	
 	<insert id="updateMenu" parameterType="menuVO">
@@ -147,8 +148,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
    </select>
    
-   <select id="menuNameCheck" parameterType="map" resultType="int">
-   select count(*) from cafe c, menu m
-   where m.cafe_no = c.cafe_no and c.cafe_no =#{cafeNo} and m.menu_name=#{menuName}
+   <select id="updateMenuList" resultType="menuVO">
+   SELECT  m.menu_name,m.menu_price, c.cafe_no,
+              c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
+      FROM     cafe c, menu m
+      WHERE   m.cafe_no = c.cafe_no AND c.cafe_no=#{value}
    </select>
+   
+   <select id="menuNameCheck" resultType="int">
+   select count(*)
+   from cafe c, menu m 
+   where m.cafe_no = c.cafe_no and c.cafe_no=#{cafeNo} and m.menu_name=#{menuName}
+   </select>
+   
+   <delete id="deleteMenu">
+   delete from menu where cafe_no=#{cafeNo} and menu_name=#{menuName}
+   </delete>
+
 </mapper>

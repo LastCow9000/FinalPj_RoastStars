@@ -443,20 +443,22 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
------- 신경쓰지말것---------------------
+-- [20.12.14] 추가해야할 SQL
+DROP TABLE my_pick
+DROP SEQUENCE my_pick_seq;
+
 CREATE TABLE my_pick(
+	pick_no number primary key,
 	id varchar2(100),
-	cafe_name varchar2(100),
-	cafe_loc varchar2(100),
-	cafe_pic varchar2(300),
-	regdate DATE,
-)
+	cafe_no number,
+	constraint fk_id foreign key(id) references rs_user(id) on delete cascade,
+	constraint fk_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade
+);
+CREATE SEQUENCE my_pick_seq;
 
-select cafe_no, cafe
-from
-where
--------------------------------------
+insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
 
+<<<<<<< HEAD
 
 -- 테스트용 데이터
 insert into beans_pick(beans_no,beans_title,beans_content,beans_regdate,id)
@@ -531,3 +533,8 @@ where beans_no=1;
 
       select count(*) from cafe c, menu m
    where m.cafe_no = c.cafe_no and c.cafe_no ='2' and m.menu_name='카페라떼(HOT)';
+
+select *
+from   rs_user
+where  nickname='123123'
+

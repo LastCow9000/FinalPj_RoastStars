@@ -10,6 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/87f055c024.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/home.css">
+
 <meta charset="UTF-8">
 <!-- title이 null인 경우는 무시된다 -->
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
@@ -18,7 +19,7 @@
 	<div class="container">
 		<%-- 상단 헤더 start --%>
 		<div id="header">
-			<tiles:insertAttribute name="header" />
+			<tiles:insertAttribute name="header"/>
 		</div>
 		<!-- 상단 헤더 end -->
 		<hr>

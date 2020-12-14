@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 부트스트랩4 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -15,6 +21,8 @@
    $(document).ready(function() {
       var checkId="";
       var checkNick="";
+      var checkPassword = "";
+      
       /* 길이 체크 공간 */
       
       // 1. 아이디 길이 체크
@@ -23,7 +31,7 @@
          var idValue= $(this).val().trim();
          // 아이디 길이 체크
          if(idValue.length<4||idValue.length>10){
-            $("#idCheckResult").html("아이디는 4~10자 이내로 작성해주세요").css("color","violet");
+            $("#idCheckResult").html("아이디는 4~10자 이내로 작성해주세요").css("color","red");
             return;
          }
          // 아이디 중복 체크
@@ -38,7 +46,7 @@
                // 아이디가 사용가능하면 = 중복이 아니면
                if (result == "ok"){
                   $("#idCheckResult").html("사용가능한 아이디입니다.").css(
-                        "color", "blue");
+                        "color", "green");
                   checkId = idValue; 
                } else { // 아이디가 사용불가하면 = 중복이면
                   $("#idCheckResult").html("중복된 아이디입니다.").css(
@@ -46,7 +54,7 @@
                }
             }//success
          });//ajax
-      });//keyup
+      });// end memberId keyup
       
       // 2. 닉네임 길이 체크
         $("#memberNick").keyup(function() {
@@ -54,7 +62,7 @@
          var nickValue= $(this).val().trim();
          // 닉네임 길이 체크
          if(nickValue.length<2||nickValue.length>7){
-            $("#nickCheckResult").html("닉네임은 2~7자 이내로 작성해주세요").css("color","violet");
+            $("#nickCheckResult").html("닉네임은 2~7자 이내로 작성해주세요").css("color","red");
             return;
          }
          
@@ -67,7 +75,7 @@
                // 닉네임이 사용가능하면 = 중복이 아니면
                if (result == "ok"){
                   $("#nickCheckResult").html("사용가능한 닉네임입니다.").css(
-                        "color", "blue");
+                        "color", "green");
                   checkNick = nickValue; 
                   //alert($(this).text());
                } else { // 닉네임 사용불가하면 = 중복이면
@@ -76,58 +84,74 @@
                }
             }
          });
-      });//keyup    
-   /* 중복 확인 공간 */   
-      // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
-      $("#registerForm").submit(function() {
-         if(checkId==""){
-            alert("아이디를 확인해주세요!");
-            return false;
-         }
-      });   
-      // 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
-        $("#registerForm").submit(function() {
-         if(checkNick==""){
-            alert("닉네임을 확인해주세요!");
-            return false;
-         }
-      }); 
+      });// end memberNick keyup    
+     
+    
       // 비밀번호 길이 체크
       $("#passwordC").keyup(function() {
-         var passValue=$(this).val();
+         var passValue=$(this).val();  //기존 기입 비밀번호
          //$("#passwordResult").html($(this).val());
          if(passValue.length<4||passValue.length>12){
-            $("#passwordResult").html("비밀번호는 4~12자 이내로 작성해주세요").css("color","violet");
+            $("#passwordResult").html("비밀번호는 4~12자 이내로 작성해주세요").css("color","red");
+            checkPassword="";
             return;
          } else {
-            $("#passwordResult").html("적합한 비밀번호입니다.").css("color","blue");
+            $("#passwordResult").html("적합한 비밀번호입니다.").css("color","green");
+            checkPassword=passValue;
          }
-      });
+        
+         //비밀번호 일치 여부 체크 (기존 기입 비밀번호 변경 시)
+       	 checkPassword="";
+         $("#passwordCheckResult").html("");
+         var passChecked = $("#passwordChecked").val(); // 비밀번호 확인 기입 비밀번호
+         if(passChecked === passValue){
+            $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","green");
+            checkPassword = passChecked;
+         } else if (checkPassword == "" || passChecked !=passValue){
+            $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
+            checkPassword="";
+         }
+         
+      });// end passwordC
+      
+      //비밀번호 일치 여부 체크 (비밀번호 확인 기입 비밀번호)
       $("#passwordChecked").keyup(function() {
-         var passValue =$("#passwordC").val();
-         var passChecked = $(this).val();
+    	 checkPassword="";
+         var passValue =$("#passwordC").val(); //기존 기입 비밀번호
+         var passChecked = $(this).val(); // 비밀번호 확인 기입 비밀번호
          if(passChecked===passValue){
-            $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","blue");
+            $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","green");
+            checkPassword = passChecked;
          }else{
             $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
+            checkPassword="";
+            //$(".pass valid-feedback").attr('class', ".pass invalid-feedback");
+            
          }
-      });
+      });// end passwordChecked
       
+
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
     	  var tags='';
     	  if( $(this).val() == "ROLE_MANAGER"){	//사장 체크 시 
     		  alert("관리자가 확인 후 사장 권한이 부여됩니다.");
-    		  tags+='사업장명 <input type="text" name="businessName"><br>';
-    		  tags+='사업자등록번호<input type="text" name="businessNo"><br>';
-    		  tags+='사업자등록증<input type="file" name="uploadFile"><br>';
+    	  	  tags+="<table>"
+    	  	  tags+="<tr>"
+    		  tags+='<td>사업장명</td> <td><input type="text" name="businessName" size=40></td>';
+       	  	  tags+="</tr><tr>"
+    		  tags+='<td>사업자등록번호</td><td><input type="text" name="businessNo" size=40></td>';
+          	  tags+="</tr><tr>"
+    		  tags+='<td>사업자등록증</td><td><input type="file" name="uploadFile"></td>';
+    		  tags+="</tr></table>"
+    		  tags+='<hr style="width: 480px; float:left;"><br>';
     		  $(".classification:input[value='ROLE_MEMBER']").prop("checked", false);//일반회원 체크라디오버튼 풀림
     	  }else{
     		  tags='';
     		  $(".classification:input[value='ROLE_MANAGER']").prop("checked", false);//일반 체크시 사장체크 풀림
     	  }
     	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
-      });
+      });// end classification
    	  
    	  
    	  // 주소 팝업
@@ -139,38 +163,114 @@
 	      
 	      }).open();
 		
-	});//goToAddrAPIBtn
+	});// end goToAddrAPIBtn
 	
+    /* 중복 확인 공간 */   
+    $("#registerForm").submit(function() {
+  	  // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
+       if(checkId==""){
+          alert("아이디를 확인해주세요!");
+          return false;
+       }
+  	  
+       // 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
+       if(checkNick==""){
+           alert("닉네임을 확인해주세요!");
+           return false;
+        }
+       
+       // 비밀번호 일치 여부 체크해서 사용가능 상태일때만 가입되도록 한다.
+       if(checkPassword==""){
+           alert("비밀번호를 확인해주세요!");
+           return false;
+        }
+    }); // end registerForm submit
+    
    });//ready
    
 
 </script>
 </head>
 <body>
-<form method="post" action="${pageContext.request.contextPath}/register-user.do" id="registerForm" enctype="multipart/form-data">
-	<sec:csrfInput/>
-	아이디 <input type="text" name="id" id="memberId" required="required"><span id="idCheckResult"></span><br>
-	패스워드 <input type="password" name="password" id="passwordC" required="required"><span id="passwordCheckResult"></span><br>
-	패스워드확인 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
-	이름 <input type="text" name="name" required="required"><br>
-	닉네임 <input type="text" name="nickname" id="memberNick" required="required"><span id="nickCheckResult"></span><br>
-	전화번호 <input type="text" name="tel" required="required"><br>
-	주소 <input type="text" name="address" id="address" value="" readonly="readonly" required="required" size=80>&nbsp;<button type="button" class="btn" id="goToAddrAPIBtn">주소 검색하기</button><br>
-	상세주소 <input type="text" name="address"><br>
-	회원구분
+<div class="container" style="width: 500px; float: center;">
+  <h2>회원가입</h2>
+  <hr style="width: 300px; float:left;"><br><br>
+  <form method="post" action="${pageContext.request.contextPath}/register-user.do" class="was-validated" id="registerForm" enctype="multipart/form-data">
+  <sec:csrfInput/>
+    <div class="form-group">
+      <label for="memberId">아이디 : </label>
+      <input type="text" name="id" id="memberId" class="form-control" placeholder="Enter Id" required>
+      <div class="valid-feedback"><span id="idCheckResult"></span></div>
+      <div class="invalid-feedback">  아이디를 입력해주세요.</div>
+    </div>
+    <div class="form-group">
+      <label for="passwordC">비밀번호 : </label>
+      <input type="password" name="password" id="passwordC" class="form-control" placeholder="Enter password" required>
+      <div class="valid-feedback"><span id="passwordResult"></span></div>
+      <div class="invalid-feedback">  비밀번호를 입력해주세요.</div>
+    </div>
+    <div class="form-group">
+      <label for="passwordChecked">비밀번호 확인 : </label>
+      <input type="password" id="passwordChecked" class="form-control"placeholder="Enter password for checking" required>
+	      <div class="valid-feedback"><span id="passwordCheckResult"></span></div>
+	      <div class="invalid-feedback">  비밀번호를 입력해주세요.</div>
+    </div>
+    
+    <hr style="width: 480px; float:left;"><br><br>
+    
+    <div class="form-group">
+      <label for="userName"> 이름 : </label>
+      <input type="text" name="name" id="userName" class="form-control" placeholder="Enter your name" required>
+	      <div class="valid-feedback"></div>
+	      <div class="invalid-feedback">  이름을 입력해주세요.</div>
+    </div>
+    
+    <div class="form-group">
+       <label for="memberNick"> 닉네임 : </label>
+      <input type="text" name="nickname" id="memberNick" class="form-control" placeholder="Enter your nickname" required>
+	      <div class="valid-feedback"><span id="nickCheckResult"></span></div>
+	      <div class="invalid-feedback">  닉네임을 입력해주세요.</div>
+    </div>
+    
+    <div class="form-group">
+       <label for="tel"> 휴대전화 번호 : </label>
+       <input type="text" name="tel"  id="tel" class="form-control" placeholder="Enter your phone number(숫자로만 입력해주세요)" required>
+	      <div class="valid-feedback"></div>
+	      <div class="invalid-feedback">  휴대전화 번호를 입력해주세요.</div>
+    </div>
+   
+    <div class="form-group">
+       <label for="address"> 주소 : <button type="button" class="btn btn-warning btn-sm" id="goToAddrAPIBtn">주소 검색하기</button></label>
+        <input type="text" name="address" id="address" value="" readonly="readonly" class="form-control"  
+       	 size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
+	      <div class="valid-feedback"></div>
+	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
+	      상세주소: <input type="text" name="address" size="50" style="margin-top: 10px; height: 20px;">
+    </div>
+    
+    <hr style="width: 480px; float:left;"><br>
+    
+    
+    <label class="radioMember">회원 구분</label><br>
 	<div class="form-check-inline">
 		<label class="form-check-label" for="radioMember">
-      			<input type="radio" class="classification" id="radioMember" value="ROLE_MEMBER" checked>일반
-    		</label>
- 		</div>
-    	<div class="form-check-inline">	 
+   			<input type="radio" class="classification" id="radioMember" value="ROLE_MEMBER" checked>일반
+   		</label>
+	</div>
+ 		
+   	<div class="form-check-inline">	 
    		<label class="form-check-label" for="radioManager">
         	<input type="radio" class="classification" id="radioManager" value="ROLE_MANAGER">사장
     	</label>
     </div>
- 	<br>
+    
+    <hr style="width: 480px; float:left;"><br>
+
  	<div id="managerInfo"></div>	
-	<input  type="submit" value="회원가입" class="btn btn-primary">
-</form>
+	<input type="submit" value="회원가입" class="btn btn-primary" style="float:center;">
+	
+  </form>
+  
+</div><!-- container -->
 </body>
 </html>

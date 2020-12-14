@@ -35,29 +35,28 @@ public class UserServiceImpl implements UserService{
 		AuthorityVO authority = new AuthorityVO(vo.getId(), "ROLE_MEMBER", vo);
 		userMapper.registerRole(authority);
 	}
-	
-	@Override
-	public void withdrawalUser(String id) {
-	}
+
+	//아이디 중복체크
 	@Override
 	public String idCheck(String id) {
 		int count = userMapper.idcheck(id);
 		return (count == 0) ? "ok" : "fail";
 	}
+	
+	//닉네임 중복체크
 	@Override
 	public String nickCheck(String nickname) {
 		int count = userMapper.nickcheck(nickname);
 		return (count == 0) ? "ok" : "fail";
 	}
+	
+	//아이디로 회원정보 반환
 	@Override
 	public UserVO findUserById(String id) {
 		return  userMapper.findUserById(id);
 	}
 	
-	@Override
-	public void grantAuthorization(String id, String authority) {
-	}
-	
+
 	@Override
 	public List<AuthorityVO> selectAuthorityByUsername(String username) {
 		return userMapper.selectAuthorityByUsername(username);
@@ -69,6 +68,7 @@ public class UserServiceImpl implements UserService{
 		return passwordEncoder.matches(password, userVO.getPassword()) ? "ok" : "fail";
 	}
 
+	
 	@Override
 	public void updateUser(UserVO userVO) {
 		String encodePassword = passwordEncoder.encode(userVO.getPassword());
@@ -76,9 +76,23 @@ public class UserServiceImpl implements UserService{
 		userMapper.updateUser(userVO);
 	}
 
+	//회원탈퇴
 	@Override
 	public void deleteUser(UserVO userVO) {
 		userMapper.deleteUser(userVO);
+	}
+
+	
+	@Override
+	public void withdrawalUser(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void grantAuthorization(String id, String authority) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

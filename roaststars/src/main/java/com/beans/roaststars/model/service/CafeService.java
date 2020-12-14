@@ -34,7 +34,12 @@ public interface CafeService {
 
 	String deleteCafe(String cafeNo);
 
-	void updateMenu(MenuVO menuVO);
+
+	String updateMenu(MenuVO menuVO);
+
+	List<MenuVO> updateMenuList(String cafeNo);
 
 	String menuNameCheck(String cafeNo, String menuName);
+
+	String deleteMenu(String cafeNo, String menuName);
 }
