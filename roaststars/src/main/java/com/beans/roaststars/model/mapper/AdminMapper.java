@@ -22,5 +22,5 @@ public interface AdminMapper {
 	
 	// 권한 부여하기
 	int grantAuthority(@Param("id") String id, @Param("authority") String authority);
-	
+
 }

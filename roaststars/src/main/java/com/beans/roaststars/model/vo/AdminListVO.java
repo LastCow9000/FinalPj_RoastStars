@@ -34,10 +34,10 @@ public class AdminListVO {
 	public void setPagingBean(PagingBean pagingBean) {
 		this.pagingBean = pagingBean;
 	}
+	
 	@Override
 	public String toString() {
 		return "AdminListVO [userList=" + userList + ", pagingBean=" + pagingBean + "]";
 	}
-	
 	
 }

@@ -456,6 +456,5 @@ CREATE TABLE my_pick(
 );
 CREATE SEQUENCE my_pick_seq;
 
-insert into my_pick
-values(my_pick_seq.nextval, 'java11', '4');
+insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
 

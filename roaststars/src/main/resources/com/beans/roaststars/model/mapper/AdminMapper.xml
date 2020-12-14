@@ -39,27 +39,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 멤버 권한 종류가져오기 -->
 	<select id="getUserAuthorityList" resultType="String">
-		 <![CDATA[select
-		distinct(authority)
-		from authorities
-		where authority <> 'ROLE_ADMIN']]>
+		 <![CDATA[
+		 SELECT distinct(authority)
+		 FROM   authorities
+		 WHERE  authority <> 'ROLE_ADMIN'
+		]]>
 	</select>
 	
 	<!-- 총 권한 대기 회원 수 -->
 	<select id="getTotalCountByWaitingMember" resultType="int">
 		<![CDATA[
-		select 	count(*)
-		from	(select  rs.id, rs.name, rs.business_name, rs.business_no, rs.business_pic,
-		rs.enabled, row_number() over(order by rs.id desc) as rnum
-		from 	(select count(authority), username
-				from   AUTHORITIES
-				group by username
-				having count(authority) < 2) au, rs_user rs 
-		where	rs.id = au.username
-		and not business_name is null
-		and not business_no is null
-		and not business_pic is null
-		and business_pic <> 'NO IMAGE') ra
+		SELECT 	count(*)
+		FROM 	(SELECT rs.id, rs.name, rs.business_name, rs.business_no, rs.business_pic,
+						rs.enabled
+				 FROM 	(select count(authority), username
+						from   AUTHORITIES
+						group by username
+						having count(authority) < 2) au, rs_user rs 
+				WHERE	rs.id = au.username
+						and not business_name is null
+						and not business_no is null
+						and not business_pic is null
+						and business_pic <> 'NO IMAGE') ra
 		]]>
 	</select>
 
@@ -68,5 +69,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into authorities
 		values(#{id},#{authority})
 	</insert>
+	
 
 </mapper>
