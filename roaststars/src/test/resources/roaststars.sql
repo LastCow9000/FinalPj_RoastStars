@@ -444,14 +444,24 @@ ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
 -- [20.12.10] 추가해야할 SQL
+drop table my_pick;
 CREATE TABLE my_pick(
 	pick_no number primary key,
 	id varchar2(100),
-	cafe_no number unique,
+	cafe_no number,
 	constraint fk_id foreign key(id) references rs_user(id) on delete cascade,
 	constraint fk_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade
 );
 CREATE SEQUENCE my_pick_seq;
+
+delete from my_pick;
+
+select *
+from   my_pick
+where  id='test4'
+
+select *
+from  cafe
 
 insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
 

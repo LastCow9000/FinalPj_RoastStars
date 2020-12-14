@@ -145,12 +145,15 @@ public class ManagerController {
 		return new ModelAndView("cafe/updateCafeResult.tiles", "cafeOperVO", cafeOperVO);
 	}
 	
-	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	//@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	//@PostMapping("deleteCafe-Ajax.do")
+	@Secured("ROLE_MANAGER")
 	@PostMapping("deleteCafe-Ajax.do")
 	@ResponseBody
 	public String deleteCafe(String cafeNo) {
 		return cafeService.deleteCafe(cafeNo);
 	}
+	
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@RequestMapping("update-menuForm.do")
 	public ModelAndView updateMenuForm(String cafeNo) {

@@ -122,8 +122,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCafeOperatingTime" parameterType="cafeOperatingTimeVO">
 		update operating_time set weekday_time=#{weekdayTime}, weekend_time=#{weekendTime},holiday_time=#{holidayTime}
 		where cafe_no=#{cafeVO.cafeNo}
-		</update>
-		<delete id="deleteCafe" parameterType="string">
+	</update>
+
+	<delete id="deleteCafe" parameterType="string">
 		delete from cafe where cafe_no=#{value}
 	</delete>
 	

@@ -11,23 +11,27 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$(document).on("click", "#del-btn", function() {
-		var cafeNo = $(this).prev().val();//상위에 있는 값 불러오기
-		//alert(cafeNo);
-		  $.ajax({
-	            type : "post",
-	            url : "${pageContext.request.contextPath}/deleteCafe-Ajax.do",
-	            data : "cafeNo="+cafeNo,
-	            beforeSend : function(xhr){   
-                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-	            },
-	            success : function(result) {
-	                if (result == "ok"){
-	         			alert("삭제되었습니다.");	
-		            	location.reload();
-	               } 
-	            }//ajax1 success
-	         });//ajax1
+	$(document).on("click", "#deleteCafeInfoBtn", function() {
+		if (confirm("카페 정보를 삭제하시겠습니까?")){
+			var cafeNo = $(this).prev().val();
+			  $.ajax({
+		            type : "post",
+		            url : "${pageContext.request.contextPath}/deleteCafe-Ajax.do",
+		            data : "cafeNo="+cafeNo,
+		            beforeSend : function(xhr){   
+	                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		            },
+		            success : function(result) {
+		                if (result == "ok"){
+		         			alert("삭제가 완료되었습니다.");
+			            	location.reload();
+		               } else {
+		            	   alert("세션이 만료되었습니다.\n다시 로그인해주세요.");
+		            	   location.href="${pageContext.request.contextPath}/home.do";
+		               }
+		            }//ajax1 success
+		         });//ajax1
+		} 
 	         
 			
 	});// end document click
@@ -37,11 +41,6 @@ $(document).ready(function() {
    		return confirm("카페 정보를 수정하시겠습니까?");
 	});//end updateCafeInfoForm
 
-
-     // 카페 삭제 시 한번 묻기
-     $("#deleteCafeInfoForm").submit(function() {
- 	   		return confirm("카페 정보를 삭제하시겠습니까?");
-	});//end deleteCafeInfoForm
 
 });// end ready
 </script>
@@ -74,12 +73,13 @@ $(document).ready(function() {
 			</td>
 			<td>
 				<%-- 삭제버튼 --%>
-            	<button type="submit" class="btn btn-danger btn-sm" form="deleteCafeInfoForm">삭제하기</button>
+            	
 
 				<%-- 삭제 폼 --%>
-				<form method="POST" action="${pageContext.request.contextPath}/delete-cafe.do" id="deleteCafeInfoForm">
+				<form method="POST" id="deleteCafeInfoForm">
 					<sec:csrfInput/>
 					<input type="hidden" name="cafeNo" value="${list.cafeNo}">
+					<input type="button" class="btn btn-danger btn-sm" id="deleteCafeInfoBtn" value="삭제하기">
 				 </form> 
 			</td>
 		</tr>

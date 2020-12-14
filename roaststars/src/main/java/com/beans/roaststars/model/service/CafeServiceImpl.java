@@ -73,6 +73,7 @@ public class CafeServiceImpl implements CafeService {
 		cafeMapper.updateCafeOperatingTime(cafeOperVO);
 	}
 
+	//카페 삭제하기
 	@Override
 	public String deleteCafe(String cafeNo) {
 		int count = cafeMapper.deleteCafe(cafeNo);
