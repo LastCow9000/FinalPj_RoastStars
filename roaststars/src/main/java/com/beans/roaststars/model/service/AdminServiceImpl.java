@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.beans.roaststars.model.mapper.AdminMapper;
 import com.beans.roaststars.model.vo.AdminListVO;
 
-
 @Service
 public class AdminServiceImpl implements AdminService{
 	@Resource
@@ -43,7 +42,7 @@ public class AdminServiceImpl implements AdminService{
        
        AdminListVO listVO 
           = new AdminListVO(adminMapper.getAllWatingForAuthor(pagingBean), pagingBean);
-       
+
        return listVO;
     }
    

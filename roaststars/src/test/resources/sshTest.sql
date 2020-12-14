@@ -44,3 +44,38 @@ insert into tablename(col1,col2) values(val1,val2)
 commit
 
 SELECT * FROM BEANS_PICK
+
+
+
+select beans_no, beans_title, beans_pic
+from BEANS_PICK
+where rnum between 1 and 2
+order by beans_no desc
+
+
+
+SELECT b.no,b.title,b.time_posted,b.hits,b.id,m.name
+FROM(SELECT row_number() over(order by no desc) as rnum,no,title,hits,
+	 to_char(time_posted,'YYYY.MM.DD') as time_posted,id
+	 FROM spring_board_inst) b,spring_member m 
+where b.id=m.id and rnum between 1 and 5 
+order by no desc;
+
+SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+FROM (SELECT ROWNUM RNUM, beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+FROM (SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
+WHERE RNUM BETWEEN 1 AND 4;
+
+SELECT *  FROM (SELECT ROWNUM RNUM, BEANS_PICK.*  
+FROM (SELECT * FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
+WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber};
+
+SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+FROM (SELECT ROWNUM RNUM, beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+FROM (SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
+WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber};
+
+
+
+
+

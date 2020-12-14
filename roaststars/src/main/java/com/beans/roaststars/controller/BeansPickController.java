@@ -44,7 +44,7 @@ public class BeansPickController {
 	public String formBeansPick() {
 		return "beansPick/registerFormBeansPick.tiles";
 	}
-	
+
 	//빈즈픽 등록
 	@Secured("ROLE_ADMIN")
 	@PostMapping("register-beansPick.do")

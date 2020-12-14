@@ -13,14 +13,13 @@ public class BeansPickListVO {
 		this.beansPickList = beansPickList;
 		this.pagingBean = pagingBean;
 		// 페이지 그룹 당 페이지 수
-		pagingBean.setPageNumberPerPageGroup(5);
+		pagingBean.setPageNumberPerPageGroup(3);
 		// 페이지 당 게시물 수
 		pagingBean.setContentNumberPerPage(3);
 	}
 
 	public BeansPickListVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<BeansPickVO> getBeansPickList() {

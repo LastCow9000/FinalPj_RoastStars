@@ -7,16 +7,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	namespace="com.beans.roaststars.model.mapper.BeansPickMapper">
 	<!-- 빈즈픽 게시물 리스트 받아오기 -->
 	<select id="getAllBeansPickList" resultType="beansPickVO">
-		select beans_no,
+	<!-- 	select beans_no,
 		beans_title, beans_pic
-		from BEANS_PICK order by beans_no desc
+		from BEANS_PICK order by beans_no desc -->
+		SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+		FROM (SELECT ROWNUM RNUM, beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+		FROM (SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
+		WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber};
 	</select>
 	<!-- 빈즈픽 게시물 총 수량 -->
 	<select id="getTotalCountBeansPick" resultType="int">
 		select count(*)
 		from BEANS_PICK
 	</select>
-	
+
 	<!-- 빈즈픽 게시물 받기 -->
 	<select id="getOneBeansPick" resultType="beansPickVO">
 		select
@@ -41,7 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 빈즈픽 수정 -->
 	<update id="updateFormBeansPick" parameterType="beansPickVO">
 		update BEANS_PICK
-		set beans_title=#{beansTitle}, beans_content=#{beansContent}, beans_pic=#{beansPic, jdbcType=VARCHAR}, beans_regdate=sysdate,id=#{userVO.id}
+		set beans_title=#{beansTitle}, beans_content=#{beansContent},
+		beans_pic=#{beansPic, jdbcType=VARCHAR},
+		beans_regdate=sysdate,id=#{userVO.id}
 		where beans_no=#{beansNo}
 	</update>
 	<!-- 빈즈픽 삭제 -->

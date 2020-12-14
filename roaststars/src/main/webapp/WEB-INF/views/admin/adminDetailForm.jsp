@@ -101,13 +101,13 @@
 							</select>
 						<input type="hidden" id="id" value="${lvo.userVO.id}">
 						</td>
-						<td><button type="button" id="addAuthorityBtn">권한 추가</button></td>
+						<td><button type="button" id="addAuthorityBtn">권한 부여</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</form>
-	<%-- 성호 : 화면비율 : 시작 --%>
+		<%-- 성호 : 화면비율 : 시작 --%>
 	<div class="col-sm-12">
 	<%-- 성호 : 화면비율 : 종료 --%>
 	<div class="pagingInfo">
@@ -126,9 +126,7 @@
                    jstl choose 를 이용  
                    예) <a href="DispatcherServlet?command=list&pageNo=...">               
      -->    
-     <%-- 성호 : 페이징 가운데 정렬 : 시작 --%>
-    <ul class="pagination justify-content-center">
-    <%-- 성호 : 페이징 가운데 정렬 : 종료 --%>
+    <ul class="pagination pagination-sm justify-content-center">
     <c:if test="${pb.previousPageGroup}">   
        <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
     </c:if>
@@ -149,9 +147,10 @@
     <c:if test="${pb.nextPageGroup}">   
        <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
     </c:if>
-    </ul>         
- </div>
+    </ul>          
+    
     </div><!-- 페이징 바 -->
+    </div>
 		<hr>
 </body>
 </html>

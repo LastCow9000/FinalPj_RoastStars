@@ -2,6 +2,7 @@ package com.beans.roaststars.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,30 +34,28 @@ public class MemberController {
 	
 	private String uploadPath; // 업로드 경로
 
-   // 로그인 폼 페이지
-   @RequestMapping("login-form.do")
-   public String loginForm() {
-      return "user/loginForm.tiles";
-   }
+	// 로그인 폼 페이지
+	@RequestMapping("login-form.do")
+	public String loginForm() {
+		return "user/loginForm.tiles";
+	}
 
-   // 로그아웃 완료 후 이동할 페이지
-   @RequestMapping("login-fail.do")
-   public String loginFail() {
-      return "user/loginFail";
-   }
+	// 로그아웃 완료 후 이동할 페이지
+	@RequestMapping("login-fail.do")
+	public String loginFail() {
+		return "user/loginFail";
+	}
 
-   // 회원가입 폼으로 이동
-   @RequestMapping("register-form.do")
-   public String registerForm() {
-      return "user/registerUserForm.tiles";
-   }
+	// 회원가입 폼으로 이동
+	@RequestMapping("register-form.do")
+	public String registerForm() {
+		return "user/registerUserForm.tiles";
+	}
 
 	// 회원가입
 	@PostMapping("register-user.do")
 	public String register(UserVO vo, MultipartHttpServletRequest request) {
-		// System.out.println("회원가입 시 패스워드 확인:"+vo.getPassword()+"----"+vo.getPassword().length());
 		//이미지 파일 업로드용
-		System.out.println(vo.getUploadFile());
 		if (vo.getUploadFile() != null) {
 			uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
 			File uploadDir = new File(uploadPath);
@@ -67,7 +66,6 @@ public class MemberController {
 				File uploadFile = new File(uploadPath + file.getOriginalFilename());
 				try {
 					file.transferTo(uploadFile);
-					System.out.println(uploadPath + file.getOriginalFilename());
 					vo.setBusinessPic(file.getOriginalFilename());
 					String localPath = "C:\\kosta203\\Final-project\\FinalPj_RoastStars\\roaststars\\src\\main\\webapp\\resources\\upload";
 					File localPathDir = new File(localPath);
@@ -85,41 +83,41 @@ public class MemberController {
 		return "redirect:register-resultView.do?id=" + vo.getId();
 	}
 
-   // 회원가입 결과 페이지로 이동
-   @RequestMapping("register-resultView.do")
-   public ModelAndView registerResultView(String id) {
-      UserVO vo = userService.findUserById(id);
-      return new ModelAndView("user/registerUserResult.tiles", "userVO", vo);
-   }
+	// 회원가입 결과 페이지로 이동
+	@RequestMapping("register-resultView.do")
+	public ModelAndView registerResultView(String id) {
+		UserVO vo = userService.findUserById(id);
+		return new ModelAndView("user/registerUserResult.tiles", "userVO", vo);
+	}
 
-   // 아이디 중복확인
-   @RequestMapping("id-checkAjax.do")
-   @ResponseBody
-   public String idcheckAjax(String id) {
-      return userService.idCheck(id);
-   }
+	// 아이디 중복확인
+	@RequestMapping("id-checkAjax.do")
+	@ResponseBody
+	public String idcheckAjax(String id) {
+		return userService.idCheck(id);
+	}
 
-   // 닉네임 중복확인
-   @RequestMapping("nick-checkAjax.do")
-   @ResponseBody
-   public String nickcheckAjax(String nickname) {
-      return userService.nickCheck(nickname);
-   }
+	// 닉네임 중복확인
+	@RequestMapping("nick-checkAjax.do")
+	@ResponseBody
+	public String nickcheckAjax(String nickname) {
+		return userService.nickCheck(nickname);
+	}
 
-   // 회원탈퇴시 비밀번호 확인
-   @Secured({"ROLE_MEMBER","ROLE_MANAGER"})
-   @PostMapping("pass-checkAjax.do")
-   @ResponseBody
-   public String passcheckAjax(String password) {
-      return userService.passCheck(password);
-   }
-   
-   //회원수정폼
-   @Secured({"ROLE_MEMBER","ROLE_MANAGER"})
-   @RequestMapping("update-userform.do")
-   public String updateForm() {
-      return "user/updateUserForm.tiles";
-   }
+	// 회원탈퇴시 비밀번호 확인
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
+	@PostMapping("pass-checkAjax.do")
+	@ResponseBody
+	public String passcheckAjax(String password) {
+		return userService.passCheck(password);
+	}
+	
+	//회원수정폼
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
+	@RequestMapping("update-userform.do")
+	public String updateForm() {
+		return "user/updateUserForm.tiles";
+	}
 
 	//회원수정
 	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})

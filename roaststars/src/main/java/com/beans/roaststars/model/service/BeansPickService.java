@@ -2,11 +2,12 @@ package com.beans.roaststars.model.service;
 
 import java.util.List;
 
+import com.beans.roaststars.model.vo.BeansPickListVO;
 import com.beans.roaststars.model.vo.BeansPickVO;
 
 public interface BeansPickService {
 
-	List<BeansPickVO> getAllBeansPickList();
+	BeansPickListVO getAllBeansPickList();
 	
 	List<BeansPickVO> getOneBeansPick(String beansNo);
 
@@ -17,5 +18,7 @@ public interface BeansPickService {
 	void updateFormBeansPick(BeansPickVO beansPickVO);
 
 	int getTotalCountBeansPick();
+
+	BeansPickListVO getAllBeansPickList(String pageNo);
 
 }

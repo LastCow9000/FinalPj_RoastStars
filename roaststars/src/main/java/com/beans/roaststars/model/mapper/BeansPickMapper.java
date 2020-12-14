@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.beans.roaststars.model.service.PagingBean;
+import com.beans.roaststars.model.vo.AuthorityVO;
 import com.beans.roaststars.model.vo.BeansPickVO;
 
 @Mapper
 public interface BeansPickMapper {
 
-	List<BeansPickVO> getAllBeansPickList();
-	
 	List<BeansPickVO> getOneBeansPick(String beansNo);
 
 	void registerBeansPick(BeansPickVO beansPickVO);
@@ -20,5 +20,9 @@ public interface BeansPickMapper {
 	void updateFormBeansPick(BeansPickVO beansPickVO);
 	
 	int getTotalCountBeansPick();
+
+	List<BeansPickVO> getAllBeansPickList(PagingBean pagingBean);
+
+	int getAllBeansPickList();
 	
 }

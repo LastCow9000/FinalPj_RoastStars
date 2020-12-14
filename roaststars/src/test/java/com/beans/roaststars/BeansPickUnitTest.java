@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beans.roaststars.model.mapper.BeansPickMapper;
 import com.beans.roaststars.model.service.BeansPickService;
+import com.beans.roaststars.model.service.PagingBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-model.xml",
@@ -67,4 +68,11 @@ public class BeansPickUnitTest {
 		//test.6 빈즈픽 총 수량
 //		System.out.println(beansPickService.getTotalCountBeansPick());
 //	}
+		//test.6 빈즈픽 페이징
+		PagingBean pb=new PagingBean(beansPickMapper.getAllBeansPickList(), 1);
+		pb.setContentNumberPerPage(1);
+		pb.setPageNumberPerPageGroup(1);
+		System.out.println(beansPickMapper.getAllBeansPickList(pb));
+	
+	}
 }
