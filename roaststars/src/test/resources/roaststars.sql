@@ -443,8 +443,10 @@ VALUES (cafe_seq.nextval, '테라로사 판교점', '성남시 분당구 운중�
 ALTER TABLE cafe MODIFY (cafe_pic DEFAULT 'no_image.jpg');
 ALTER TABLE BEANS_PICK MODIFY (beans_pic DEFAULT 'no_image.jpg');
 
--- [20.12.10] 추가해야할 SQL
-drop table my_pick;
+-- [20.12.14] 추가해야할 SQL
+DROP TABLE my_pick
+DROP SEQUENCE my_pick_seq;
+
 CREATE TABLE my_pick(
 	pick_no number primary key,
 	id varchar2(100),
@@ -453,15 +455,6 @@ CREATE TABLE my_pick(
 	constraint fk_cafe_no foreign key(cafe_no) references cafe(cafe_no) on delete cascade
 );
 CREATE SEQUENCE my_pick_seq;
-
-delete from my_pick;
-
-select *
-from   my_pick
-where  id='test4'
-
-select *
-from  cafe
 
 insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
 
