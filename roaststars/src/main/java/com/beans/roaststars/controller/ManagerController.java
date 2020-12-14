@@ -91,6 +91,17 @@ public class ManagerController {
 		model.addAttribute("list", list);
 		return "cafe/updateCafeList.tiles";
 	}
+
+	// 카페정보수정폼으로 이동하기 전에 자신의 카페 리스트 불러오기
+	@Secured("ROLE_MANAGER")
+	@RequestMapping("view-cafelist-for-menu.do")
+	public String ViewCafeListForMenu(Model model) {
+		UserVO userVO = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<CafeVO> list = cafeService.getCafeList(userVO.getId());
+		model.addAttribute("list", list);
+		return "cafe/updateCafeListForMenu.tiles";
+	}
+	
 	//카페정보 수정전 자신의 카페목록 불러오기.
 	@Secured("ROLE_MANAGER")
 	@RequestMapping("update-cafeform.do")
