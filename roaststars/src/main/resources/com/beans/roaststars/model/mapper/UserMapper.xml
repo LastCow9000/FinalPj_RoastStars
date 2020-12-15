@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원정보수정 -->
 	<update id="updateUser" parameterType="userVO">
-		update rs_user set password=#{password},name=#{name},address=#{address},tel=#{tel}, nickname=#{nickname}
+		update rs_user set name=#{name},address=#{address},tel=#{tel}, nickname=#{nickname}
 		where id=#{id}
 	</update>
 	
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id} and name=#{name}
 	</select>
 	
-	<!-- 발급된 임시비밀번호로 비밀번호 수정 -->
+	<!-- 발급된 임시비밀번호로 비밀번호 수정 (비밀번호 변경시에도 사용함)-->
 	<update id="updateTempPass">
 		update rs_user set password=#{password}
 		where id=#{id}

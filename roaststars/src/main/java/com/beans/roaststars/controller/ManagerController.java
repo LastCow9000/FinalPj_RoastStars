@@ -89,8 +89,8 @@ public class ManagerController {
 			   "cafeNo", cafeNo);
    }
 
-
-
+   
+   
 	// 카페정보수정폼으로 이동하기 전에 자신의 카페 리스트 불러오기
 	@Secured("ROLE_MANAGER")
 	@RequestMapping("update-cafelist.do")
@@ -176,26 +176,28 @@ public class ManagerController {
        return cafeService.deleteCafe(cafeNo);
     }
 	
-	// 메뉴 ajax로 수정하기(추가하기)
-	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
-	@PostMapping("updateMenu-Ajax.do")
-	@ResponseBody
-	public MenuKindVO updateMenu(MenuVO menuVO, String espresso, String cafeNo) {
-		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		CafeVO cafeVO = new CafeVO();
-		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
-		cafeVO.setUserVO(uvo); // cafeVO에 로그인중인 userVO 할당
-		
-		menuVO.setCafeVO(cafeVO); //menuVO에 cafeVO 할당
-		
-		MenuKindVO menuKindVO = new MenuKindVO();
-		menuKindVO.setMenuVO(menuVO); //menuKindVO에 menuVO 할당
-		menuKindVO.setEspresso(espresso);
-		
-		cafeService.updateMenu(menuKindVO);
-		return menuKindVO;
+	// 메뉴 ajax로 수정하기
+	 @Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	   @PostMapping("updateMenu-Ajax.do")
+	   @ResponseBody
+	   public MenuKindVO updateMenu(MenuVO menuVO, String espresso, String cafeNo) {
+	      UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	      CafeVO cafeVO = new CafeVO();
+	      cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
+	      cafeVO.setUserVO(uvo); // cafeVO에 로그인중인 userVO 할당
+	      
+	      menuVO.setCafeVO(cafeVO); //menuVO에 cafeVO 할당
+	      
+	      MenuKindVO menuKindVO = new MenuKindVO();
+	      menuKindVO.setMenuVO(menuVO); //menuKindVO에 menuVO 할당
+	      menuKindVO.setEspresso(espresso);
+	      
+	      cafeService.updateMenu(menuKindVO);
+	      return menuKindVO;
 
-	}
+	   }
+
+	
 	
 	// 메뉴 리스트 불러오기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
@@ -204,8 +206,7 @@ public class ManagerController {
 	public ModelAndView updateMenuList(String cafeNo, Model model) {
 		List<MenuKindVO> list = cafeService.updateMenuList(cafeNo);
 		model.addAttribute("cafeNo", cafeNo);
-		return new ModelAndView("cafe/updateMenuList.tiles", 
-				"menuList", list);
+		return new ModelAndView("cafe/updateMenuList.tiles", "menuList", list);
 	}
 	
 	// 메뉴 이름 중복 체크

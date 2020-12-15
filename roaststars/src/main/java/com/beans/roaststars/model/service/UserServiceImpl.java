@@ -71,9 +71,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void updateUser(UserVO userVO) {
-		String encodePassword = passwordEncoder.encode(userVO.getPassword());
-		userVO.setPassword(encodePassword);
+		
 		userMapper.updateUser(userVO);
+	
 	}
 
 	//회원탈퇴
@@ -99,6 +99,12 @@ public class UserServiceImpl implements UserService{
 		String encodePassword = passwordEncoder.encode(tempPw);// 비밀번호 암호화
 		userMapper.updateTempPass(id, encodePassword); //비밀번호 업데이트
 		return tempPw;
+	}
+
+	@Override
+	public void updateUserPassword(String id, String password) {
+		String encodePassword = passwordEncoder.encode(password);
+		userMapper.updateTempPass(id, encodePassword);
 	}
 	
 }

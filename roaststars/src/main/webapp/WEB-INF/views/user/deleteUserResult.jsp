@@ -14,12 +14,7 @@
 	});
 </script>
 </head>
-<body>
-<%-- <sec:authentication property="principal.name"/>님 회원탈퇴되었습니다. --%>
-
-  
-					
-				
+<body>			
 <form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post"
 		style="display: none">
 	<sec:csrfInput/>
