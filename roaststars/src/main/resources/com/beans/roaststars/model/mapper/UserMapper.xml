@@ -66,5 +66,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id=#{id}
 	</update>
 	
+	<!-- 비번찾기용 아이디 이름 일치 체크 -->
+	<select id="checkIdAndName" resultType="int">
+		select count(*) 
+		from rs_user
+		where id=#{id} and name=#{name}
+	</select>
+	
+	<!-- 발급된 임시비밀번호로 비밀번호 수정 -->
+	<update id="updateTempPass">
+		update rs_user set password=#{password}
+		where id=#{id}
+	</update>
 </mapper>
  

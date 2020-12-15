@@ -6,7 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인하기</title>
+<script type="text/javascript">
+	function findPassPopup(){
+		var options='width=450, height=450, top=150, left=500'; //팝업창 옵션
+		window.open("${pageContext.request.contextPath}/find-password-form.do", "findPassPopup", options);
+	}
+</script>
 </head>
 <body>
 	<br>
@@ -32,7 +38,7 @@
 
 
 	<input type="submit" value="로그인" class="btn btn-primary" style="float:center;">
-	
+	<input type="button" value="비밀번호 찾기" class="btn btn-danger" onclick="findPassPopup()" style="float:center;">
   </form>
   
 </div><!-- container -->

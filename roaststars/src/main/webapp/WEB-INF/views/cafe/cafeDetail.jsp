@@ -186,7 +186,7 @@
                
                  <!-- Modal Header -->
                  <div class="modal-header">
-                   <p class="modal-title" id="reviewTitle"><${cafeName}> 리뷰 작성</p>
+                   <p class="modal-title" id="reviewTitle">${cafeName}> 리뷰 작성</p>
                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                  </div>
              
@@ -254,7 +254,7 @@
                  	
                     //리뷰 폼 submit (registerReviewForm)
                     $("#registerReviewForm").submit(function() {
-                   	 var formData=$("#registerReviewForm").serialize();
+                   	 //var formData=$("#registerReviewForm").serialize();
                        //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
                        if (checkContent == ""){
                           alert("한줄평은 50자 이하로 작성해주세요.");
