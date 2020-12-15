@@ -126,7 +126,7 @@ public class ManagerController {
 	@Transactional
 	@Secured("ROLE_MANAGER")
 	@PostMapping("update-cafe.do")
-	public String updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
+	public String updateCafe(CafeVO cafeVO,CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		cafeVO.setUserVO(uvo);
 		cafeOperVO.setCafeVO(cafeVO);

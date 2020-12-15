@@ -20,11 +20,11 @@
 $(document).ready(function() {
     // 비밀번호 체크
     var checkPassword = "";
-    // 닉네임 체크
-    var checkNick="";
     // 기존 닉네임
     var orgNickValue = $("#memberNick").val();
-
+    // 닉네임 체크
+    var checkNick=$("#memberNick").val();
+	
     // 1. 비밀번호 길이 체크	
     $("#passwordC").keyup(function() {
        var passValue=$(this).val();  //기존 기입 비밀번호
@@ -69,19 +69,21 @@ $(document).ready(function() {
 
     // 2. 닉네임 길이 체크
     $("#memberNick").keyup(function() {
-   	 checkNick="";
      // 입력된 닉네임
      var nickValue= $(this).val().trim();
+    
+     // 원래 본인 닉네임을 다시 입력했을 경우, 중복체크 메서드가 돌아가지 않도록 막아줌
+     if (orgNickValue == nickValue){
+    	 nickValue = orgNickValue;
+    	 return;
+     }
+
+     checkNick = "";
+
      // 닉네임 길이 체크
      if(nickValue.length<2||nickValue.length>7){
         $("#nickCheckResult").html("닉네임은 2~7자 이내로 작성해주세요").css("color","red");
         return;
-     }
-     
-     // 원래 본인 닉네임을 다시 입력했을 경우, 중복체크 메서드가 돌아가지 않도록 막아줌
-     if (orgNickValue === nickValue){
-    	 nickValue = orgNickValue;
-    	 return;
      }
      
      // 닉네임 중복 체크
@@ -113,7 +115,7 @@ $(document).ready(function() {
       }
      
      // 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
-     if(checkNick==""){
+     if(checkNick == ""){
          alert("닉네임을 확인해주세요!");
          return false;
       }
@@ -172,13 +174,13 @@ $(document).ready(function() {
    <div class="form-group">
       <label for="userName"> 이름 : </label>
       <input type="text" name="name" id="userName" class="form-control" required
-  			value="<sec:authentication property="principal.name"/>" readonly="readonly">
+  			value="${userVO.name}" readonly="readonly">
     </div>
     
     <div class="form-group">
        <label for="memberNick"> 닉네임 : </label>
       <input type="text" name="nickname" id="memberNick" class="form-control"
-     	 value="<sec:authentication property="principal.nickname"/>"  required>
+     	 value="${userVO.nickname}"  required>
 	      <div class="valid-feedback"><span id="nickCheckResult"></span></div>
 	      <div class="invalid-feedback">  닉네임을 입력해주세요.</div>
     </div>
@@ -187,7 +189,7 @@ $(document).ready(function() {
        <label for="tel"> 휴대전화 번호 : </label>
        <input type="text" name="tel"  id="tel" class="form-control" 
        	placeholder="Enter your phone number(숫자로만 입력해주세요)" required
-       	value="<sec:authentication property="principal.tel"/>">
+       	value="${userVO.tel}">
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  휴대전화 번호를 입력해주세요.</div>
     </div>
@@ -203,7 +205,6 @@ $(document).ready(function() {
     </div>
    
    <hr style="width: 480px; float:left;"><br>
-   
    
    <input type="submit" class="btn btn-info" value="회원정보수정">
 </form>

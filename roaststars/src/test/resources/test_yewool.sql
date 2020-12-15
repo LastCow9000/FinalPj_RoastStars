@@ -19,7 +19,4 @@ where  c.cafe_no = p.cafe_no AND c.cafe_no=77
 
 select *
 from   rs_user
-where  id='test7'
-
-select *
-from   RS_USER
+where  id='testtest'
