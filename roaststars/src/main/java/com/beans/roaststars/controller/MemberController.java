@@ -2,7 +2,6 @@ package com.beans.roaststars.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.beans.roaststars.model.mapper.UserMapper;
 import com.beans.roaststars.model.service.MyPickService;
 import com.beans.roaststars.model.service.UserService;
 import com.beans.roaststars.model.vo.UserVO;
@@ -116,8 +114,10 @@ public class MemberController {
 	//회원수정폼
 	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@RequestMapping("update-userform.do")
-	public String updateForm() {
-		return "user/updateUserForm.tiles";
+	public ModelAndView updateForm(String id) {
+		UserVO userVO = userService.findUserById(id);
+		return new ModelAndView("user/updateUserForm.tiles", 
+				"userVO",userVO);
 	}
 
 	//회원수정
@@ -207,5 +207,4 @@ public class MemberController {
 		}
 		return pw;
 	}
-	
 }

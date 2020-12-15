@@ -24,7 +24,7 @@ $(document).ready(function() {
               
               if (result == "ok"){
                  $("#passwordResult").html("비밀번호가 맞습니다.").css(
-                       "color", "blue");
+                       "color", "green");
                  checkPass = passValue; 
               } else {
                  $("#passwordResult").html("비밀번호가 틀립니다.").css(

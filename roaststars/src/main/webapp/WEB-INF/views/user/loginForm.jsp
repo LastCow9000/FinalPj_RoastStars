@@ -16,13 +16,6 @@
 </head>
 <body>
 	<br>
-	<%-- <form action="${pageContext.request.contextPath}/login.do" 
-		  method="POST" id="loginForm">
-		<sec:csrfInput/>csrf 토큰
-		<input type="text" name="id" placeholder="ID" required="required"><br>
-		<input type="password" name="password" placeholder="PASSWORD" required="required"><br>
-		<input type="submit" value="로그인">
-	</form> --%>
 	<div class="container" style="width: 500px; float: center;">
   <h2>로그인</h2>
   <hr style="width: 300px; float:left;"><br><br>

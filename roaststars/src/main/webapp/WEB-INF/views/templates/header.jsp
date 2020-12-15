@@ -59,10 +59,11 @@
 			 --%>
 				<li><sec:authentication property="principal.name"/>님<li>&nbsp; &nbsp;
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a href="${pageContext.request.contextPath}/admin-detail.do">관리자 페이지</a>&nbsp; &nbsp;
+					<a href="${pageContext.request.contextPath}/admin-detail.do">관리자 페이지 </a>&nbsp; &nbsp;
 				</sec:authorize>
 				<sec:authorize access="!hasRole('ROLE_ADMIN')"> <%-- 관리자는 회원정보수정과 탈퇴하기가 불가 --%>
-					<a href="${pageContext.request.contextPath}/update-userform.do">회원정보수정</a>&nbsp; &nbsp;
+					<sec:authentication property="principal.id" var="loginId"/>
+					<a href="${pageContext.request.contextPath}/update-userform.do?id=${loginId}">회원정보수정</a>&nbsp; &nbsp;
 					<a href="${pageContext.request.contextPath}/delete-userform.do">탈퇴하기</a>&nbsp; &nbsp;
 				</sec:authorize>
 				

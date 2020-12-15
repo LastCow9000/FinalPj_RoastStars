@@ -1,5 +1,6 @@
 select *
-from   rs_user
+from   rs_user r, authorities a
+where  r.id = a.username and id='admin'
 
 
 delete from rs_user where id='admin';
@@ -14,8 +15,8 @@ from   authorities
 
 select *
 from   cafe c, PROPERTY p
-where  c.cafe_no = p.cafe_no AND c.cafe_no=36
+where  c.cafe_no = p.cafe_no AND c.cafe_no=77
 
 select *
 from   rs_user
-where  id='test1'
+where  id='testtest'
