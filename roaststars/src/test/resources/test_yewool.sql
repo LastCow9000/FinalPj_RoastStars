@@ -1,6 +1,6 @@
 select *
 from   rs_user r, authorities a
-where  r.id = a.username
+where  r.id = a.username and id='admin'
 
 
 delete from rs_user where id='admin';

@@ -252,22 +252,22 @@
                  		}
                  	});//click
                  	
-                      //리뷰 폼 submit (registerReviewForm)
-                      $("#registerReviewForm").submit(function() {
-                      
-                         //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
-                         if (checkContent == ""){
-                            alert("한줄평은 50자 이하로 작성해주세요.");
-                            $("#reviewContent").val(overLengthContent.substring(0, 50));// 51자부터 글자 all 삭제
-                            $("#reviewContent").focus();
-                            return false;
-                         }
-                      });//registerReviewForm
-                      
-                      // 리뷰 삭제 시 한번 묻기
-                      $("#deleteReviewForm").submit(function() {
-                    	  return confirm("리뷰를 삭제하시겠습니까?");
-					});//deleteReviewBtn
+                    //리뷰 폼 submit (registerReviewForm)
+                    $("#registerReviewForm").submit(function() {
+                   	 var formData=$("#registerReviewForm").serialize();
+                       //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
+                       if (checkContent == ""){
+                          alert("한줄평은 50자 이하로 작성해주세요.");
+                          $("#reviewContent").val(overLengthContent.substring(0, 50));// 51자부터 글자 all 삭제
+                          $("#reviewContent").focus();
+                          return false;
+                       }
+                    });//registerReviewForm
+                    
+                    // 리뷰 삭제 시 한번 묻기
+                    $("#deleteReviewForm").submit(function() {
+                   	  return confirm("리뷰를 삭제하시겠습니까?");
+				 	});//deleteReviewBtn
 					
 					//마이픽 추가
 					$(document).on("click", "#halfMyPickIcon",function(){
@@ -365,31 +365,6 @@
                             <td><input type="radio" name="diversity" value="-2"></td>
                          </tr>
                          
-                         <%-- [20.12.04_예울]
-                            	이모티콘으로 선택하기 실패 -- 나중에 시간나면 하겠습니다
-                         
-                         <c:forEach items="맛, 가격, 서비스, 분위기, 다양한 메뉴" var="property" varStatus="order">
-                         <tr class="reviewTableProperty">
-                            <td><strong>${property}</strong></td>
-                            <td class="like">
-                               <a type="button" id="likeBtn">
-                                  <span class="propertyIcon" id="likeIcon">
-                                     <i class="far fa-grin-hearts fa-2x"></i>
-                                  </span>
-                               </a>
-                            </td>
-                            <td>
-                               <a type="button" id="sosoBtn">
-                                  <span class="propertyIcon sosoIcon"><i class="far fa-grin fa-2x"></i></span>
-                               </a>
-                            </td>
-                            <td>
-                               <a type="button" id="dislikeBtn">
-                                  <span class="propertyIcon dislikeIcon"><i class="far fa-angry fa-2x"></i></span>
-                               </a>
-                            </td>
-                         </tr>
-                         </c:forEach>--%>
                       </table>
                       
                       <!-- 한줄평 작성 -->
@@ -400,7 +375,7 @@
                             placeholder="한줄평을 작성해주세요" style="width:500px; height:30px; margin-top: 10px;">-->
                             <textarea name="reviewContent" id="reviewContent" class="form-control property_kind" maxlength="50" 
                               cols="2" style="overflow:auto; margin-top: 10px;  font-weight: bolder" 
-                              wrap="hard" required="required" placeholder="한줄평을 작성해주세요"></textarea>
+                              wrap="hard" required placeholder="한줄평을 작성해주세요"></textarea>
                       </div>
                  </div><!-- modal-body -->
                  
