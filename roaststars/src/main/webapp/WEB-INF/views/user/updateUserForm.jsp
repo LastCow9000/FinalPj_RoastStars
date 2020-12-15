@@ -207,6 +207,7 @@ $(document).ready(function() {
    <hr style="width: 480px; float:left;"><br>
    
    <input type="submit" class="btn btn-info" value="회원정보수정">
+   <a href="${pageContext.request.contextPath}/delete-userform.do" type="button" role="button" class="btn btn-danger">탈퇴하기</a>
 </form>
 
 </div><!-- container -->

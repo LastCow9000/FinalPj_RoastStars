@@ -15,7 +15,6 @@ import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.MyPickService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
-import com.beans.roaststars.model.vo.CafeVO;
 import com.beans.roaststars.model.vo.MyPickVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 import com.beans.roaststars.model.vo.ReviewListVO;
