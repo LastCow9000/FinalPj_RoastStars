@@ -1,6 +1,8 @@
 package com.beans.roaststars;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -11,9 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
-import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.MenuKindVO;
-import com.beans.roaststars.model.vo.MenuVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml","file:src/main/webapp/WEB-INF/spring-security.xml"})
@@ -114,10 +114,12 @@ public class CafeUnitTest {
 		System.out.println(cafeService.findCafeByCafeNo("1"));	*/
 		 
 		// 메뉴 검색 리스트 test
-		/*List<MenuKindVO> list = cafeMapper.updateMenuList("71");
+		List<MenuKindVO> list = cafeMapper.updateMenuList("71");
 		for (MenuKindVO vo:list) {
 			System.out.println(vo);
-		}*/
+		}
+		
+		/*
 		
 		// 메뉴 등록 test
 		CafeOperatingTimeVO cafeOperVO = cafeService.findCafeByCafeNo("71");
@@ -128,7 +130,7 @@ public class CafeUnitTest {
 		MenuKindVO menuKindVO = new MenuKindVO();
 		menuKindVO.setEspresso("1");
 		menuKindVO.setMenuVO(menuVO);
-		System.out.println(cafeService.updateMenu(menuKindVO));
+		System.out.println(cafeService.updateMenu(menuKindVO));*/
 	}
 
 }

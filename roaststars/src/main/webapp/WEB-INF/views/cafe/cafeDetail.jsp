@@ -74,7 +74,7 @@
          <!-- 메뉴판 모달 영역 -->
 		  <!-- The Modal -->
 		  <div class="modal fade" id="menuModal">
-		    <div class="modal-dialog modal-lg">
+		    <div class="modal-dialog">
 		      <div class="modal-content">
 		      
 		        <!-- Modal Header -->
@@ -85,9 +85,54 @@
 		        
 		        <!-- Modal body -->
 		        <div class="modal-body">
-		          
-		        </div>
+		        <c:choose>
+		        <%-- 등록된 메뉴가 없을 때 --%>
+		        <c:when test="${menuList.size()==0}">
+		        	등록된 메뉴가 없습니다.
+		        </c:when>
 		        
+  		        <%-- 등록된 메뉴가 있을 때 --%>
+		        <c:otherwise>
+		          <table class="table">
+		          	<thead class="thead-dark">
+		          		<tr>
+		          			<th colspan="2">COFFEE</th>
+		          		</tr>
+		          	</thead>
+		          	<tbody>
+		          		<c:forEach items="${menuList}" var="menuTotal">
+		          		<%-- 커피 메뉴 --%>
+		          		<c:if test="${menuTotal.espresso == '1'}">
+		          		<tr>
+		          			<td>${menuTotal.menuVO.menuName}</td>
+		          			<td>${menuTotal.menuVO.menuPrice}</td>
+		          		</tr>
+		          		</c:if>
+		          		</c:forEach>
+		          	</tbody>
+                  </table>
+                  
+       		 	 <table class="table">
+		          	<thead class="thead-dark">
+		          		<tr>
+		          			<th colspan="2">NON-COFFEE</th>
+		          		</tr>
+		          	</thead>
+		          	<tbody>
+		          		<c:forEach items="${menuList}" var="menuTotal">
+		          		<%-- 논 커피 메뉴 --%>
+		          		<c:if test="${menuTotal.espresso == '0'}">
+		          		<tr>
+		          			<td>${menuTotal.menuVO.menuName}</td>
+		          			<td>${menuTotal.menuVO.menuPrice}</td>
+		          		</tr>
+		          		</c:if>
+		          		</c:forEach>
+		          	</tbody>
+                  </table>
+                </c:otherwise>
+		        </c:choose>
+		        </div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

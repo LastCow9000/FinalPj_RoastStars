@@ -16,6 +16,7 @@ import com.beans.roaststars.model.service.MyPickService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuKindVO;
 import com.beans.roaststars.model.vo.MyPickVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 import com.beans.roaststars.model.vo.ReviewListVO;
@@ -60,6 +61,10 @@ public class CafeController {
 			}
 		}
 		model.addAttribute("flag",flag);
+
+		// 카페번호로 메뉴 리스트 보내기
+		List<MenuKindVO> menuList = cafeService.updateMenuList(cafeNo);
+		model.addAttribute("menuList", menuList);
 		
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
