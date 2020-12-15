@@ -89,6 +89,7 @@ public class ManagerController {
    }
 
 
+
 	// 카페정보수정폼으로 이동하기 전에 자신의 카페 리스트 불러오기
 	@Secured("ROLE_MANAGER")
 	@RequestMapping("update-cafelist.do")
@@ -186,14 +187,11 @@ public class ManagerController {
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
 	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
-
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CafeVO cafeVO = new CafeVO();
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
-
 		cafeVO.setUserVO(uvo);
 		menuVO.setCafeVO(cafeVO);
-
 		cafeService.updateMenu(menuVO);
 		return menuVO;
 	}

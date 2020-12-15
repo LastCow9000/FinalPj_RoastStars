@@ -185,7 +185,7 @@
 		$(document).on("click", "#halfMyPickIcon",function(){
 			var cafeNo=$("#detailCafeNo").val();
 			$.ajax({
-				type:"post",
+				type:"POST",
 				data:"id=${loginId}&cafeNo="+cafeNo,
 				url:"${pageContext.request.contextPath}/my-pick-add.do",
 				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
@@ -205,7 +205,7 @@
 		$(document).on("click", "#fullMyPickIcon",function(){
 			var cafeNo=$("#detailCafeNo").val();
 			$.ajax({
-				type:"post",
+				type:"POST",
 				data:"id=${loginId}&cafeNo="+cafeNo,
 				url:"${pageContext.request.contextPath}/my-pick-delete-by-id-cafeNo.do",
 				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
@@ -214,6 +214,8 @@
 				success:function(delResult){
 					if(delResult == 'ok'){
 						$(".myPickStar").html('<a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a>');
+					} else {
+						return;
 					}
 				}//end function
 			});//end ajax
