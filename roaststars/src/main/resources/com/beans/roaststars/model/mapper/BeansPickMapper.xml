@@ -7,13 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	namespace="com.beans.roaststars.model.mapper.BeansPickMapper">
 	<!-- 빈즈픽 게시물 리스트 받아오기 -->
 	<select id="getAllBeansPickList" resultType="beansPickVO">
-	<!-- 	select beans_no,
-		beans_title, beans_pic
-		from BEANS_PICK order by beans_no desc -->
+		<!-- select beans_no, beans_title, beans_pic from BEANS_PICK order by beans_no 
+			desc -->
+		<![CDATA[
 		SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
 		FROM (SELECT ROWNUM RNUM, beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
 		FROM (SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
-		WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber};
+		WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber}
+		]]>
 	</select>
 	<!-- 빈즈픽 게시물 총 수량 -->
 	<select id="getTotalCountBeansPick" resultType="int">
@@ -24,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 빈즈픽 게시물 받기 -->
 	<select id="getOneBeansPick" resultType="beansPickVO">
 		select
-		beans_no,beans_title,beans_content,beans_regdate
+		beans_no,beans_title,beans_content,beans_regdate,beans_pic
 		from BEANS_PICK
 		where
 		beans_no=#{value}
@@ -43,15 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		jdbcType=VARCHAR}, sysdate,#{userVO.id})
 	</insert>
 	<!-- 빈즈픽 수정 -->
-	<update id="updateFormBeansPick" parameterType="beansPickVO">
+	<update id="updateBeansPick" parameterType="beansPickVO">
 		update BEANS_PICK
-		set beans_title=#{beansTitle}, beans_content=#{beansContent},
-		beans_pic=#{beansPic, jdbcType=VARCHAR},
-		beans_regdate=sysdate,id=#{userVO.id}
+		set beans_no=#{beansNo},beans_title=#{beansTitle}, beans_content=#{beansContent},
+		beans_pic=#{beansPic, jdbcType=VARCHAR}, beans_regdate=sysdate,id=#{userVO.id}
 		where beans_no=#{beansNo}
 	</update>
 	<!-- 빈즈픽 삭제 -->
-	<delete id="deleteFormBeansPick" parameterType="string">
+	<delete id="deleteBeansPick" parameterType="string">
 		delete from
 		BEANS_PICK where beans_no=#{beansNo}
 	</delete>

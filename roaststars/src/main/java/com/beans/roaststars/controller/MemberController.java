@@ -2,7 +2,6 @@ package com.beans.roaststars.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -115,8 +114,10 @@ public class MemberController {
 	//회원수정폼
 	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@RequestMapping("update-userform.do")
-	public String updateForm() {
-		return "user/updateUserForm.tiles";
+	public ModelAndView updateForm(String id) {
+		UserVO userVO = userService.findUserById(id);
+		return new ModelAndView("user/updateUserForm.tiles", 
+				"userVO",userVO);
 	}
 
 	//회원수정
@@ -188,5 +189,22 @@ public class MemberController {
 	public String MyPickDeleteByIdAndCafeNo(String id, String cafeNo) {
 		int count=myPickService.deleteMyPickByIdAndCafeNo(id, cafeNo);
 		return (count>=1) ? "ok":"fail";
+	}
+	
+	//비밀번호 찾기 폼 이동
+	@RequestMapping("find-password-form.do")
+	public String findPasswordForm() {
+		return "user/findPasswordForm";
+	}
+	
+	//비밀번호 찾기 ajax
+	@PostMapping("find-password.do")
+	@ResponseBody
+	public String findPassword(String id, String name) {
+		String pw=null;
+		if(userService.checkIdAndName(id, name)==1) { //id와 name이 일치하면
+			pw=userService.updateTempPass(id); //임시 비밀번호 발급 실행
+		}
+		return pw;
 	}
 }

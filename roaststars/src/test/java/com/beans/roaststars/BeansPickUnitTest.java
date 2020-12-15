@@ -1,5 +1,9 @@
 package com.beans.roaststars;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -10,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.beans.roaststars.model.mapper.BeansPickMapper;
 import com.beans.roaststars.model.service.BeansPickService;
 import com.beans.roaststars.model.service.PagingBean;
+import com.beans.roaststars.model.vo.BeansPickVO;
+import com.beans.roaststars.model.vo.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-model.xml",
@@ -47,32 +53,46 @@ public class BeansPickUnitTest {
 //		System.out.println(ivo);
 //	}
 		// test.4 빈즈픽 수정
-//		UserVO userVO = new UserVO();
-//		BeansPickVO ivo = new BeansPickVO();
-//		System.out.println(beansPickMapper.getOneBeansPick("61"));
-//		ivo.setBeansTitle("아몬드1111");
-//		ivo.setBeansContent("롯데");
-//		ivo.setBeansPic("default");
-//		ivo.setBeansNo("61");
-//		ivo.setUserVO(userVO);
-//		userVO.setId("admin");
-//		beansPickMapper.updateFormBeansPick(ivo);
-//		System.out.println(beansPickMapper.getOneBeansPick("61"));
-//	}
+		UserVO userVO = new UserVO();
+		BeansPickVO ivo = new BeansPickVO();
+		System.out.println(beansPickMapper.getOneBeansPick("71"));
+		ivo.setBeansTitle("아211");
+		ivo.setBeansContent("롯데");
+		ivo.setBeansPic("default");
+		ivo.setBeansNo("71");
+		ivo.setUserVO(userVO);
+		userVO.setId("admin");
+		beansPickMapper.updateBeansPick(ivo);
+		System.out.println(beansPickMapper.getOneBeansPick("71"));
+	}
 		//test.5 빈즈픽 삭제
 		
 //		System.out.println(beansPickMapper.getOneBeansPick("123"));
-//		beansPickService.deleteFormBeansPick("123");
+//		beansPickService.deleteBeansPick("123");
 //		System.out.println(beansPickMapper.getOneBeansPick("123"));
 //		}
 		//test.6 빈즈픽 총 수량
 //		System.out.println(beansPickService.getTotalCountBeansPick());
 //	}
 		//test.6 빈즈픽 페이징
-		PagingBean pb=new PagingBean(beansPickMapper.getAllBeansPickList(), 1);
-		pb.setContentNumberPerPage(1);
-		pb.setPageNumberPerPageGroup(1);
-		System.out.println(beansPickMapper.getAllBeansPickList(pb));
-	
-	}
+//		final int NOW_PAGE = 1; 
+//		PagingBean pb=new PagingBean(beansPickMapper.getTotalCountBeansPick(), NOW_PAGE);
+//		pb.setContentNumberPerPage(1);
+//		pb.setPageNumberPerPageGroup(1);
+//		assertEquals(pb.getTotalPage(), 6);
+//	}
+//	
+//	@Test
+//	public void getAllBeansPickList() {
+//		final int NOW_PAGE = 1; 
+//		PagingBean pb=new PagingBean(beansPickMapper.getTotalCountBeansPick(), NOW_PAGE);
+//		pb.setContentNumberPerPage(3);
+//		pb.setPageNumberPerPageGroup(1);
+//		List<BeansPickVO> bpvo = beansPickMapper.getAllBeansPickList(pb);
+//		assertEquals(3, bpvo.size());
+//		assertEquals("66", bpvo.get(0).getBeansNo());
+//		//assertEquals("zxc",bpvo.get(5).getBeansTitle());
+//		
+//		
+//	}
 }

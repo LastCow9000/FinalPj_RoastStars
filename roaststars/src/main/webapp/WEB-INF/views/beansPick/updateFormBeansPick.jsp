@@ -8,14 +8,16 @@
 <title>Beans Pick Form</title>
 </head>
 <body>
-<%-- 	<form method="post" action="${pageContext.request.contextPath}/update-form-beansPick.do" enctype="multipart/form-data">
-
-		 <sec:csrfInput/>
+${beansPickVO}
+<form method="post" action="${pageContext.request.contextPath}/update-result-beansPick.do" enctype="multipart/form-data">
+		
+		 <sec:csrfInput/><br>
+		 <input type="hidden" name="beansNo" value="${beansPickVO.beansNo}">
 		 BeansPick 사진 : <input type="file" name="uploadFile"  required="required" value="${beansPickVO.beansPic}"><br>
 		 BeansPick 제목 : <input type="text" name="beansTitle"  required="required" value="${beansPickVO.beansTitle}"><br>
-		 BeansPick 내용 : <textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="beansContent" required="required">${beansPickVO.beansContent}</textarea>
+		 BeansPick 내용 : <textarea rows="10" cols="120" placeholder="${beansPickVO.beansContent}" name="beansContent" required="required"></textarea>
 		 
 		 <input type="submit" value="수정하기">
-	</form> --%>
+	</form> 
 </body>
 </html>

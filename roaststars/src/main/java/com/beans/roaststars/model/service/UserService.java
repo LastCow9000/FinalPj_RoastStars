@@ -26,4 +26,8 @@ public interface UserService {
 	void updateUser(UserVO userVO);
 
 	void deleteUser(UserVO userVO);
+	
+	int checkIdAndName(String id, String name);
+	
+	String updateTempPass(String id);
 }

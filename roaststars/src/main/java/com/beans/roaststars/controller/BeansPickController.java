@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beans.roaststars.model.service.BeansPickService;
+import com.beans.roaststars.model.vo.BeansPickListVO;
 import com.beans.roaststars.model.vo.BeansPickVO;
 import com.beans.roaststars.model.vo.UserVO;
 
@@ -27,28 +27,30 @@ public class BeansPickController {
 	private BeansPickService beansPickService;
 	private String uploadPath;
 	//빈즈픽 게시글 리스트
-	@RequestMapping("form-beansPick.do")
-	public String beansPickForm(Model model) {
-		model.addAttribute("list", beansPickService.getAllBeansPickList());
+	@RequestMapping("main-beansPick.do")
+	public String beansPickForm(String pageNo,Model model) {
+//		model.addAttribute("list", beansPickService.getAllBeansPickList());
 		model.addAttribute("beansPickTotalCount", beansPickService.getTotalCountBeansPick());
-		return "beansPick/formBeansPick.tiles";
+		BeansPickListVO lvo=beansPickService.getAllBeansPickList(pageNo);
+		model.addAttribute("lvo",lvo);
+		return "beansPick/mainBeansPick.tiles";
 	}
 	//빈즈픽 게시글 하나
 	@RequestMapping("detail-beansPick.do")
 	public String beansPickDetail(String no, Model model) {
-		model.addAttribute("beansNo", beansPickService.getOneBeansPick(no));
+		model.addAttribute("BeansPickNo", beansPickService.getOneBeansPick(no));
 		return "beansPick/detailBeansPick.tiles";
 	}
 	//빈즈픽 등록폼
 	@RequestMapping("register-form-beansPick.do")
-	public String formBeansPick() {
+	public String registerFormBeansPick() {
 		return "beansPick/registerFormBeansPick.tiles";
 	}
 
 	//빈즈픽 등록
 	@Secured("ROLE_ADMIN")
-	@PostMapping("register-beansPick.do")
-	public ModelAndView registerBeansPick(BeansPickVO beansPickVO,MultipartHttpServletRequest request) {
+	@PostMapping("register-result-beansPick.do")
+	public ModelAndView registerResultBeansPick(BeansPickVO beansPickVO,MultipartHttpServletRequest request) {
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		beansPickVO.setUserVO(uvo);
 		if (beansPickVO.getUploadFile() !=null) {
@@ -67,7 +69,7 @@ public class BeansPickController {
 					File localPathDir = new File(localPath);
 					if (localPathDir.exists() == false)
 						localPathDir.mkdirs();
-					FileCopyUtils.copy(file.getBytes(),
+					FileCopyUtils.copy(uploadFile,
 							new File(localPath + File.separator + file.getOriginalFilename()));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
@@ -77,11 +79,17 @@ public class BeansPickController {
 		beansPickService.registerBeansPick(beansPickVO);
 		return new ModelAndView("beansPick/registerResultBeansPick.tiles", "beansPickVO", beansPickVO);
 	}
+	//빈즈픽 수정폼
+	@RequestMapping("update-form-beansPick.do")
+	public String updateFormBeansPick(String no, Model model) {
+		model.addAttribute("beansPickVO", beansPickService.getOneBeansPick(no));
+		return "beansPick/updateFormBeansPick.tiles";
+	}
+	
 	//빈즈픽 수정
-	@Transactional
 	@Secured("ROLE_ADMIN")
-	@PostMapping("update-form-beansPick.do")
-	public ModelAndView updateFormBeansPick(BeansPickVO beansPickVO,MultipartHttpServletRequest request) {
+	@PostMapping("update-result-beansPick.do")
+	public ModelAndView updateResultBeansPick(BeansPickVO beansPickVO,MultipartHttpServletRequest request) {
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		beansPickVO.setUserVO(uvo);
 		if (beansPickVO.getUploadFile() !=null) {
@@ -100,23 +108,23 @@ public class BeansPickController {
 					File localPathDir = new File(localPath);
 					if (localPathDir.exists() == false)
 						localPathDir.mkdirs();
-					FileCopyUtils.copy(file.getBytes(),
+					FileCopyUtils.copy(uploadFile,
 							new File(localPath + File.separator + file.getOriginalFilename()));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		beansPickVO=(BeansPickVO) beansPickService.getOneBeansPick(beansPickVO.getBeansNo());
-		beansPickService.updateFormBeansPick(beansPickVO);
-		return new ModelAndView("beansPick/updateFormBeansPick.titles","beansPickVO", beansPickVO);
+//		beansPickVO=(BeansPickVO) beansPickService.getOneBeansPick(beansPickVO.getBeansNo());
+		beansPickService.updateBeansPick(beansPickVO);
+		return new ModelAndView("beansPick/updateResultBeansPick.tiles","beansPickVO", beansPickVO);
 	}
-	
+
 	//빈즈픽 제거
 	@Secured("ROLE_ADMIN")
-	@PostMapping("delete-form-beansPick.do")
+	@PostMapping("delete-beansPick.do")
 	public String deleteFormBeansPick(String no) {
-		beansPickService.deleteFormBeansPick(no);
-		return "beansPick/deleteFormBeansPick.tiles";
+		beansPickService.deleteBeansPick(no);
+		return "beansPick/deleteBeansPick.tiles";
 	}
 }

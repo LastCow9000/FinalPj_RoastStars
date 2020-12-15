@@ -16,12 +16,6 @@ public class BeansPickServiceImpl implements BeansPickService{
 	@Resource
 	private BeansPickMapper beansPickMapper;
 	
-	//빈즈픽 리스트 불러오기
-	/*
-	 * @Override public List<BeansPickVO> getAllBeansPickList(){ return
-	 * beansPickMapper.getAllBeansPickList(); }
-	 */
-	
 	@Override
     public BeansPickListVO getAllBeansPickList() {
        return getAllBeansPickList("1");
@@ -51,11 +45,9 @@ public class BeansPickServiceImpl implements BeansPickService{
        return listVO;
     }
 	
-	
-	
 	//빈즈픽 불러오기
 	@Override
-	public List<BeansPickVO> getOneBeansPick(String beansNo){
+	public BeansPickVO getOneBeansPick(String beansNo){
 		return beansPickMapper.getOneBeansPick(beansNo);
 	}
 	//빈즈픽 등록하기
@@ -65,13 +57,14 @@ public class BeansPickServiceImpl implements BeansPickService{
 	}
 	//빈즈픽 수정하기
 	@Override
-	public void updateFormBeansPick(BeansPickVO beansPickVO) {
-		beansPickMapper.updateFormBeansPick(beansPickVO);
+	public void updateBeansPick(BeansPickVO beansPickVO) {
+		beansPickMapper.updateBeansPick(beansPickVO);
 	}
+	
 	//빈즈픽 삭제하기
 	@Override
-	public void deleteFormBeansPick(String beansNo) {
-		beansPickMapper.deleteFormBeansPick(beansNo);
+	public void deleteBeansPick(String beansNo) {
+		beansPickMapper.deleteBeansPick(beansNo);
 	}
 	//빈즈픽 총 수량
 	@Override

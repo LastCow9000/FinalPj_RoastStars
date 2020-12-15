@@ -107,9 +107,7 @@
 			</tbody>
 		</table>
 	</form>
-		<%-- 성호 : 화면비율 : 시작 --%>
-	<div class="col-sm-12">
-	<%-- 성호 : 화면비율 : 종료 --%>
+	
 	<div class="pagingInfo">
     <%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
     <c:set var="pb" value="${lvo.pagingBean}"/>
@@ -150,7 +148,6 @@
     </ul>          
     
     </div><!-- 페이징 바 -->
-    </div>
 		<hr>
 </body>
 </html>

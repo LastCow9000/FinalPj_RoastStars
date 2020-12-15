@@ -8,7 +8,7 @@
 <title>Beans Pick Form</title>
 </head>
 <body>
-	<form method="post" action="${pageContext.request.contextPath}/register-beansPick.do" enctype="multipart/form-data">
+	<form method="post" action="${pageContext.request.contextPath}/register-result-beansPick.do" enctype="multipart/form-data">
 		 <sec:csrfInput/>
 		 BeansPick 사진 : <input type="file" name="uploadFile"  required="required"><br>
 		 BeansPick 제목 : <input type="text" name="beansTitle"  required="required"><br>

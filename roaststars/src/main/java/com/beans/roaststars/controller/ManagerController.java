@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
@@ -40,7 +41,7 @@ public class ManagerController {
    @Transactional
    @Secured("ROLE_MANAGER")
    @PostMapping("register-cafe.do")
-   public ModelAndView registerCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) {
+   public String registerCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) {
       // 로그인한 유저정보 불러오기
       UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
       cafeVO.setUserVO(uvo);
@@ -74,9 +75,17 @@ public class ManagerController {
       cafeService.registerCafe(cafeVO, cafeOperVO);
       // cafeNo 보내주기
       cafeVO = cafeService.findcafeByNoNotJoin(cafeVO.getCafeNo());
-      cafeOperVO.setCafeVO(cafeVO);
-      cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
-      return new ModelAndView("cafe/registerCafeResult.tiles", "cafeOperVO", cafeOperVO);
+      String cafeNo = cafeVO.getCafeNo();
+      //cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
+      return "redirect:register-cafe-result.do?cafeNo="+cafeNo;
+   }
+   
+   // 카페 등록 완료 페이지로 이동
+   @Secured("ROLE_MANAGER")
+   @RequestMapping("register-cafe-result.do")
+   public ModelAndView viewRegisterCafeResult(String cafeNo) {
+	   return new ModelAndView("cafe/registerCafeResult.tiles",
+			   "cafeNo", cafeNo);
    }
 
 
@@ -104,17 +113,19 @@ public class ManagerController {
 	@Secured("ROLE_MANAGER")
 	@PostMapping("update-cafe-form.do")
 	public ModelAndView updateCafeForm(String cafeNo, Model model) {
-		model.addAttribute(cafeNo);
+		model.addAttribute("cafeNo", cafeNo);
 		CafeVO cafeVO = new CafeVO();
 		cafeVO = cafeService.findcafeByNoNotJoin(cafeNo);
-		return new ModelAndView("cafe/updateCafeForm.tiles", "cafeVO", cafeVO);
+		CafeOperatingTimeVO cafeOperVO = new CafeOperatingTimeVO();
+		cafeOperVO = cafeService.findCafeByCafeNo(cafeNo);
+		return new ModelAndView("cafe/updateCafeForm.tiles", "cafeOperVO", cafeOperVO);
 	}
 
 	// 카페정보수정하기
 	@Transactional
 	@Secured("ROLE_MANAGER")
 	@PostMapping("update-cafe.do")
-	public ModelAndView updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
+	public String updateCafe(CafeVO cafeVO,CafeOperatingTimeVO cafeOperVO,MultipartHttpServletRequest request) { // 로그인한 유저정보 불러오기
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		cafeVO.setUserVO(uvo);
 		cafeOperVO.setCafeVO(cafeVO);
@@ -133,7 +144,7 @@ public class ManagerController {
 					File localPathDir = new File(localPath);
 					if (localPathDir.exists() == false)
 						localPathDir.mkdirs();
-					FileCopyUtils.copy(file.getBytes(),
+					FileCopyUtils.copy(uploadFile,
 							new File(localPath + File.separator + file.getOriginalFilename()));
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
@@ -142,8 +153,18 @@ public class ManagerController {
 		}
 		cafeService.updateCafe(cafeVO, cafeOperVO);
 		cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
-		return new ModelAndView("cafe/updateCafeResult.tiles", "cafeOperVO", cafeOperVO);
+		// cafeNo 보내주기
+	    String cafeNo = cafeOperVO.getCafeVO().getCafeNo();
+	    return "redirect:register-cafe-result.do?cafeNo="+cafeNo;
 	}
+	
+	// 카페정보수정 후 결과페이지로 이동
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-cafe-result.do")
+    public ModelAndView viewUpdateCafeResult(String cafeNo) {
+ 	   return new ModelAndView("cafe/updateCafeResult.tiles",
+ 			   "cafeNo", cafeNo);
+    }
 	
 	// 카페 삭제하기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
@@ -165,15 +186,18 @@ public class ManagerController {
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
 	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
+
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CafeVO cafeVO = new CafeVO();
-		
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
+
 		cafeVO.setUserVO(uvo);
 		menuVO.setCafeVO(cafeVO);
+
 		cafeService.updateMenu(menuVO);
 		return menuVO;
 	}
+	
 	
 	// 메뉴 리스트 불러오기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})

@@ -66,9 +66,9 @@ $(document).ready(function() {
       
     $(".classification").change(function(){ //라디오 버튼 변화 시
           var tags='';
-          if( $(this).val() == "open"){   //사장 체크 시 
+          if($("input:radio[name='holidayTime']:checked")){   //사장 체크 시 
              alert("공휴일에도 일을 한다구?!");
-             tags+='<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
+             tags+='<input type="text" name="holidayTime" class="timeBox" onKeyup="inputTimeColon(this);" value="${cafeOperVO.holidayTime}" placeholder="HH:MM~HH:MM" maxlength="12"/>';
              $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
           }else{
              tags='';
@@ -134,32 +134,33 @@ function inputTimeColon(time) {
 </head>
 <body>
 <div class="container" style="width: 800px; float: center;">
+
   <h2>카페 수정하기</h2>
 <form method="post" action="${pageContext.request.contextPath}/update-cafe.do"
 	 id="updateCafeForm" enctype="multipart/form-data">
 	<input type="hidden" name="command" value="register">
-	<input type="hidden" name="cafeNo" value="${cafeVO.cafeNo}">
+	<input type="hidden" name="cafeNo" value="${cafeNo}">
    <sec:csrfInput/>
    <table class="table table-sm">
    	<thead></thead>
    	<tbody>
    		<tr>
 			<td>카페명</td>
-			<td colspan=2><input type="text" name="cafeName" id="registCafeName" size=50 value="${cafeVO.cafeName}" required>
+			<td colspan=2><input type="text" name="cafeName" id="registCafeName" size=50 value="${cafeOperVO.cafeVO.cafeName}" required>
 			<span id="nameCheckResult"></span>/10</td>
 		</tr>
 		 
   	 	<tr>
 			<td>주소</td>
 			<td colspan=2>
-			<input type="text" name="cafeLoc" id="address" value="${cafeVO.cafeLoc}" readonly="readonly" required size=50>
+			<input type="text" name="cafeLoc" id="address" value="${cafeOperVO.cafeVO.cafeLoc}" readonly="readonly" required size=50>
 				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>전화번호</td>
-			<td colspan=2><input type="text" name="cafeTel" value="${cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50></td>
+			<td colspan=2><input type="text" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50></td>
 		</tr>
 		
 		<tr>
@@ -174,7 +175,7 @@ function inputTimeColon(time) {
 		<tr>
 			<td colspan="3">
 				<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"
-					 name="cafeInfo" required>${cafeVO.cafeInfo}</textarea>
+					 name="cafeInfo" required>${cafeOperVO.cafeVO.cafeInfo}</textarea>
 			</td>
 		</tr>
    	
@@ -184,13 +185,13 @@ function inputTimeColon(time) {
 		<tr>
 			<td>평일</td>
 			<td colspan="2">
-				<input type="text" name="weekdayTime" value="${weekdayTime}" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" />
+				<input type="text" name="weekdayTime" value="${cafeOperVO.weekdayTime}" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" />
 			</td>
 		</tr>
 		<tr>
 			<td>주말</td>
 			<td colspan="2">
-				<input type="text" name="weekendTime" value="${weekendTime}" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>
+				<input type="text" name="weekendTime" value="${cafeOperVO.weekendTime}" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>
 			</td>
 		</tr>
 		<tr>
@@ -199,12 +200,12 @@ function inputTimeColon(time) {
 				<div id="managerInfo"></div>
 				<div class="form-check-inline">
 			      <label class="form-check-label" for="radioMember">
-	              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+	              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" checked>운영안함
 			      </label>
 			    </div>
 			    <div class="form-check-inline">    
 	         		<label class="form-check-label" for="radioManager">
-			       	  <input type="radio" name="holidayTime" class="classification" id="radioOpen"  value="open" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
+			       	  <input type="radio" name="holidayTime" class="classification" id="radioOpen" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
 			    	</label>
 			    </div>
 			</td>

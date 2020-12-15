@@ -75,7 +75,7 @@ FROM (SELECT ROWNUM RNUM, beans_no, beans_title, beans_content, beans_pic, beans
 FROM (SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
 WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber};
 
-
+select BEANS_PICK
 
 
 

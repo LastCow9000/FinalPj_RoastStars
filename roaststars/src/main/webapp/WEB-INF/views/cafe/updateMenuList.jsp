@@ -102,35 +102,63 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-${cafeNo }
-<table>
-<tr>
-<td>메뉴명</td><td>메뉴가격</td><td>비고</td>
-</tr>
+<div class="container" style="width: 500px; float: center;">
+  <h2>메뉴 추가하기</h2>
+  <hr style="width: 300px; float:left;"><br><br>
+  <form method="post" action="${pageContext.request.contextPath}/updateMenu-Ajax.do" class="was-validated" id="updateMenuForm" enctype="multipart/form-data">
+  <sec:csrfInput/>
+    <div class="form-group">
+       메뉴명 : 
+      <input type="text" name="menuName" id="updateMenuName"  class="form-control" placeholder="메뉴명(ICE) or 메뉴명(HOT)" required>
+      <div class="valid-feedback"></div>
+      <div class="invalid-feedback">메뉴를 입력해주세요.</div>
+      <span id="nameCheckResult"></span>
+    </div>
+    <div class="form-group">
+     메뉴가격 :
+      <input type="text" name="menuPrice" id="updateMenuPrice" class="form-control" placeholder="가격은 숫자로만 입력해주세요." required>
+      <div class="valid-feedback"></div>
+      <div class="invalid-feedback">  가격을 입력해주세요.</div>
+    </div>
 
-<c:forEach items="${menuList}" var="list">
-<tr>
-<td>${list.menuName }</td><td>${list.menuPrice}</td>
-	<td>
-		<form method="POST" action="${pageContext.request.contextPath}/deleteMenu-Ajax.do">
-			<sec:csrfInput/>
-			<input type="hidden" name="menuName" value="${list.menuName}">
-			<input type="button" id="del-btn" value="삭제하기">	
-		 </form> 
-	</td>
-</tr>
-</c:forEach>
-</table>
+    <hr style="width: 480px; float:left;"><br>
+
+
+	<input type="button" value="추가하기" class="btn btn-primary" id="menu-btn" style="float:center;">
+	
+  </form>
+  
+</div><!-- container -->
 <hr>
-<form method="post" action="${pageContext.request.contextPath}/updateMenu-Ajax.do" id="updateMenuForm" enctype="multipart/form-data">
-<sec:csrfInput/>
-<input type="hidden" name="command" value="update">
-   메뉴명: <input type="text" name="menuName" id="updateMenuName" placeholder="메뉴명(ICE) or 메뉴명(HOT)" required="required" size=30><span id="nameCheckResult"></span><br>
-   가격: <input type="text" name="menuPrice" id="updateMenuPrice" required="required" size=30 placeholder="가격은 숫자로만 입력해주세요."><br>
-  <!-- 메뉴사진 <input type="file" name="uploadFile">
-    -->
- <input  type="button" id="menu-btn" value="추가하기">
-</form>
+<table class="table table-hover">
+<thead>
+   <tr>
+      <th scope="col">메뉴명</th>
+      <th scope="col">메뉴가격</th>
+      <th colspan="2">삭제</th>
+   </tr>
+</thead>
+<tbody>
+   <c:forEach items="${menuList}" var="list">
+      <tr>
+         <td>${list.menuName}</td>
+         <td>${list.menuPrice}</td>
+         <td>
+            <%-- 삭제 폼 --%>
+            <form method="POST" action="${pageContext.request.contextPath}/deleteMenu-Ajax.do">
+               <sec:csrfInput/>
+               <input type="hidden" name="cafeNo" value="${list.menuName}">
+               <input type="button" class="btn btn-danger btn-sm" id="del-btn" value="삭제하기">
+             </form> 
+         </td>
+      </tr>
+   </c:forEach>
+</tbody>   
+</table>
+
+<hr>
+
+
 <input type="hidden" name="cafeNo" value="${cafeNo}">
 </body>
 </html>

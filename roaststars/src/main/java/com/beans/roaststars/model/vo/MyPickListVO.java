@@ -14,6 +14,8 @@ public class MyPickListVO {
 		super();
 		this.myPickList = myPickList;
 		this.pagingBean = pagingBean;
+		pagingBean.setContentNumberPerPage(6);
+		pagingBean.setPageNumberPerPageGroup(4);
 	}
 	public List<MyPickVO> getMyPickList() {
 		return myPickList;
