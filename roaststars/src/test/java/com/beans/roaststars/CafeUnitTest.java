@@ -1,8 +1,6 @@
 package com.beans.roaststars;
 
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -14,10 +12,8 @@ import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
-import com.beans.roaststars.model.vo.CafeVO;
-import com.beans.roaststars.model.vo.PropertyVO;
-import com.beans.roaststars.model.vo.UserVO;
-
+import com.beans.roaststars.model.vo.MenuKindVO;
+import com.beans.roaststars.model.vo.MenuVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml","file:src/main/webapp/WEB-INF/spring-security.xml"})
@@ -103,11 +99,11 @@ public class CafeUnitTest {
 		  
 		// test 5. 카페리스트 특성에 따라 정렬하기
 		  
-		String[] arrOption= {"taste", "null" , "service"};
+		/*String[] arrOption= {"taste", "null" , "service"};
 		List<PropertyVO> list= cafeMapper.cafeListSortByProperty(arrOption, "부천");
 		for (PropertyVO vo:list) {
 			System.out.println(vo);
-		}
+		}*/
 		/*List<PropertyVO> list=cafeService.cafeListSortByProperty(arrOption, "부천");
 		for(PropertyVO vo: list)
 			System.out.println(vo);
@@ -116,30 +112,23 @@ public class CafeUnitTest {
 			System.out.println(vo);
 		}
 		System.out.println(cafeService.findCafeByCafeNo("1"));	*/
-		  
+		 
+		// 메뉴 검색 리스트 test
+		/*List<MenuKindVO> list = cafeMapper.updateMenuList("71");
+		for (MenuKindVO vo:list) {
+			System.out.println(vo);
+		}*/
+		
+		// 메뉴 등록 test
+		CafeOperatingTimeVO cafeOperVO = cafeService.findCafeByCafeNo("71");
+		MenuVO menuVO = new MenuVO();
+		menuVO.setMenuName("시나몬카페라떼(HOT)");
+		menuVO.setMenuPrice("3000");
+		menuVO.setCafeVO(cafeOperVO.getCafeVO());
+		MenuKindVO menuKindVO = new MenuKindVO();
+		menuKindVO.setEspresso("1");
+		menuKindVO.setMenuVO(menuVO);
+		System.out.println(cafeService.updateMenu(menuKindVO));
 	}
 
 }
-
-		//        사용법 예시             //
-		/*
-		@Resource
-		ItemDAO itemDAO;
-		@Test
-		public void itemCountTest() {
-			//System.out.println(itemDAO.getItemCount());
-			//								1. 기대값		2.실제값
-			//Assert.assertEquals(8, itemDAO.getItemCount());
-			//Assert.assertNotNull(itemDAO.findItemByNo(2));
-			//System.out.println(itemDAO.findItemByNo(1));
-			// 아이템 등록 테스트
-			// 아이템 번호는 시퀀스로 자동 생성
-			ItemVO ivo=new ItemVO();
-			ivo.setName("아몬드");
-			ivo.setMaker("롯데");
-			ivo.setPrice(1000);
-			System.out.println("동록전: "+ ivo);
-			itemDAO.registerItem(ivo);
-			System.out.println("등록완료: "+ivo);
-		}
-		*/

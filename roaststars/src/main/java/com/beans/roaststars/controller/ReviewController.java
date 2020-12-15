@@ -40,15 +40,7 @@ public class ReviewController {
 	public String registerReviewAndupdateProperty(ReviewVO reviewVO, PropertyVO propertyVO,
 			String cafeNo, String id) {
 		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, cafeNo, id);
-		return "redirect:register-review-result.do?cafeNo="+cafeNo;
-	}
-	
-	// 리뷰 작성 결과 alert으로 이동
-	@Secured("ROLE_MEMBER")
-	@RequestMapping("register-review-result.do")
-	public ModelAndView registerReviewResult(String cafeNo) {
-		return new ModelAndView("review/registerReviewResult.tiles",
-				"cafeNo", cafeNo);
+		return "redirect:cafe-detail.do?cafeNo="+cafeNo;
 	}
 	
 	// 리뷰 삭제

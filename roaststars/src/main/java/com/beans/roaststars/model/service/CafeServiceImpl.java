@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.beans.roaststars.model.mapper.CafeMapper;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
-import com.beans.roaststars.model.vo.MenuVO;
+import com.beans.roaststars.model.vo.MenuKindVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 @Service
@@ -64,6 +64,8 @@ public class CafeServiceImpl implements CafeService {
 	public List<CafeVO> getCafeList(String id) {
 		return cafeMapper.getCafeList(id);
 	}
+	
+	// 카페 정보 수정하기
 	@Transactional
 	@Override
 	public void updateCafe(CafeVO cafeVO, CafeOperatingTimeVO cafeOperVO) {
@@ -80,29 +82,32 @@ public class CafeServiceImpl implements CafeService {
 		return (count == 1) ? "ok" : "fail";
 	}
 
+	// 메뉴 등록 
+	// 1 : menu table에 등록
+	// 2: menu_kind table에 등록
+	@Transactional
 	@Override
-	public String updateMenu(MenuVO menuVO) {
-		int count = cafeMapper.updateMenu(menuVO);
-		return (count == 1) ? "ok" : "fail";
+	public String updateMenu(MenuKindVO menuKindVO) {
+		int count1 = cafeMapper.updateMenu(menuKindVO.getMenuVO());
+		int count2 = cafeMapper.updateMenuKind(menuKindVO);
+		return (count1 == 1 && count2 ==1) ? "ok" : "fail";
 	}
+	
 
+	// 카페 번호로 메뉴 찾기
 	@Override
-	public List<MenuVO> findMenuByCafeNo(String cafeNo) {
-		return cafeMapper.findMenuByCafeNo(cafeNo);
-	}
-
-	@Override
-	public List<MenuVO> updateMenuList(String cafeNo) {
-		
+	public List<MenuKindVO> updateMenuList(String cafeNo) {
 		return cafeMapper.updateMenuList(cafeNo);
 	}
-
+	
+	//메뉴 이름 중복 체크
 	@Override
 	public String menuNameCheck(String cafeNo, String menuName) {
 		int count = cafeMapper.menuNameCheck(cafeNo,menuName);
 		return (count==0)? "ok":"fail";
 	}
-
+	
+	//메뉴 삭제
 	@Override
 	public String deleteMenu(String cafeNo, String menuName) {
 		int count = cafeMapper.deleteMenu(cafeNo,menuName);

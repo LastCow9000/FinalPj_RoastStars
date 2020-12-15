@@ -96,6 +96,5 @@ public class CafeController {
 		List<PropertyVO> cafeList=cafeService.cafeListSortByProperty(arrOption, loc);
 		return cafeList;
 	}
-
 	
 }
