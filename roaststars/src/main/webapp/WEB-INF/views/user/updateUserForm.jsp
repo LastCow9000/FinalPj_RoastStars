@@ -18,55 +18,13 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    // 비밀번호 체크
-    var checkPassword = "";
     // 기존 닉네임
     var orgNickValue = $("#memberNick").val();
     // 닉네임 체크
     var checkNick=$("#memberNick").val();
 	//현재 비밀번호 체크
     var checkPassNow=""; 
-    // 1. 비밀번호 길이 체크	
-    $("#passwordC").keyup(function() {
-       var passValue=$(this).val();  //기존 기입 비밀번호
-       //$("#passwordResult").html($(this).val());
-       if(passValue.length<4||passValue.length>12){
-          $("#passwordResult").html("비밀번호는 4~12자 이내로 작성해주세요").css("color","red");
-          checkPassword="";
-          return;
-       } else {
-          $("#passwordResult").html("적합한 비밀번호입니다.").css("color","green");
-          checkPassword=passValue;
-       }
-      
-       //비밀번호 일치 여부 체크 (기존 기입 비밀번호 변경 시)
-     	 checkPassword="";
-       $("#passwordCheckResult").html("");
-       var passChecked = $("#passwordChecked").val(); // 비밀번호 확인 기입 비밀번호
-       if(passChecked === passValue){
-          $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","green");
-          checkPassword = passChecked;
-       } else if (checkPassword == "" || passChecked !=passValue){
-          $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
-          checkPassword="";
-       }
-       
-    });// end passwordC
-    
-    //비밀번호 일치 여부 체크 (비밀번호 확인 기입 비밀번호)
-    $("#passwordChecked").keyup(function() {
-  	 checkPassword="";
-       var passValue =$("#passwordC").val(); //기존 기입 비밀번호
-       var passChecked = $(this).val(); // 비밀번호 확인 기입 비밀번호
-       if(passChecked===passValue){
-          $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","green");
-          checkPassword = passChecked;
-       }else{
-          $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
-          checkPassword="";
-       }
-    });// end passwordChecked
-     
+    // 1. 비밀번호 길이 체크	 
     //현재 비밀번호 체크하기
     $("#passwordNow").keyup(function() {
     	checkPassNow="";
@@ -138,12 +96,7 @@ $(document).ready(function() {
 	         alert("현재비밀번호를 확인해주세요!");
 	         return false;
 	      } 
-      // 비밀번호 일치 여부 체크해서 사용가능 상태일때만 수정되도록 한다.
-      if(checkPassword==""){
-         alert("비밀번호를 확인해주세요!");
-         return false;
-      } 
-     
+
      // 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
      if(checkNick == ""){
          alert("닉네임을 확인해주세요!");
@@ -192,18 +145,7 @@ $(document).ready(function() {
       <input type="password" name="passwordNow" id="passwordNow" class="form-control" placeholder="현재 비밀번호를 입력해주세요.">
       <span id="passwordNowResult"></span>
     </div>
-    <div class="form-group">
-      <label for="passwordC">비밀번호 : </label>
-      <input type="password" name="password" id="passwordC" class="form-control" placeholder="변경할 비밀번호를 입력해주세요.">
-      <span id="passwordResult"></span>
-    </div>
-    
-    <div class="form-group">
-      <label for="passwordChecked">비밀번호 확인 : </label>
-      <input type="password" id="passwordChecked" class="form-control" placeholder="변경할 비밀번호를 다시 한번 입력해주세요.">
-	  <span id="passwordCheckResult"></span>
-    </div>
-    
+   
    <hr style="width: 480px; float:left;"><br><br>
     
    <div class="form-group">
@@ -242,6 +184,8 @@ $(document).ready(function() {
    <hr style="width: 480px; float:left;"><br>
    
    <input type="submit" class="btn btn-info" value="회원정보수정">
+   <sec:authentication property="principal.id" var="loginId"/>
+   <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}">비밀번호 변경하기</a>
 </form>
 
 </div><!-- container -->
