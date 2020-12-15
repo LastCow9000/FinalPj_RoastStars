@@ -61,7 +61,7 @@ $(document).ready(function() {
  	  var tags='';
  	  if( $(this).val() == "open"){	//사장 체크 시 
  		  alert("공휴일에도 일을 한다구?!");
- 		  tags+='<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
+ 		  tags+='<input type="text" name="holidayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
  		  $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
  	  }else{
  		  tags='';
@@ -192,12 +192,12 @@ function inputTimeColon(time) {
 					<div id="managerInfo"></div>
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="radioMember">
-		              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+		              	<input type="radio"  name="radioHolidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
 				      </label>
 				    </div>
 				    <div class="form-check-inline">    
 		         		<label class="form-check-label" for="radioManager">
-				       	  <input type="radio" name="holidayTime" class="classification" id="radioOpen"  value="open" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
+				       	  <input type="radio" name="radioHolidayTime" class="classification" id="radioOpen"  value="open" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
 				    	</label>
 				    </div>
 				</td>

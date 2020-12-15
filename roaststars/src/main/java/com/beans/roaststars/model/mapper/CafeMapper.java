@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuKindVO;
 import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
@@ -39,11 +40,15 @@ public interface CafeMapper {
 	void updateCafeOperatingTime(CafeOperatingTimeVO cafeOperVO);
 	//카페 삭제하기
 	int deleteCafe(String cafeNo);
-	//메뉴 등록하기
+
+	//메뉴 등록 1 : menu table에 등록
 	int updateMenu(MenuVO menuVO);
-	//해당하는 커페넘버로 메뉴 리스트 불러오기
-	List<MenuVO> updateMenuList(String cafeNo);
-	//중복된 메뉴 체크하기
+	
+	//메뉴 등록 2 : menu_kind table에 등록
+	int updateMenuKind(MenuKindVO menuKindVO);
+
+	List<MenuKindVO> updateMenuList(String cafeNo);
+
 	int menuNameCheck(@Param("cafeNo")String cafeNo,@Param("menuName")String menuName);
 	//메뉴삭제하기
 	int deleteMenu(@Param("cafeNo")String cafeNo, @Param("menuName")String menuName);

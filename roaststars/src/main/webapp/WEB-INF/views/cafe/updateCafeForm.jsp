@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>   
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%>   
 
 <!DOCTYPE html>
 <html>
@@ -50,32 +50,32 @@ $(document).ready(function() {
                  $("#address").val(data.address);
              }//oncomplete 
          }).open();
-   });//goToAddrAPIBtn
+   	  });//goToAddrAPIBtn
    
-   /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
+  	  /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
       $("#noOperating").click(function() {
          //alert($(this).val());
          $('#holidayTimeCheck').val($(this).val());
       });//noOperating
-     $("#updateCafeForm").submit(function() {
+      $("#updateCafeForm").submit(function() {
           if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
              return true;
           }else
              return false;
-    });
+      });
       
-    $(".classification").change(function(){ //라디오 버튼 변화 시
+      $(".classification").change(function(){ //라디오 버튼 변화 시
           var tags='';
-          if($("input:radio[name='holidayTime']:checked")){   //운영함 체크 시 
+          if($(this).val() == "open"){   
              alert("공휴일에도 일을 한다구?!");
              tags+='<input type="text" name="holidayTime" class="timeBox" onKeyup="inputTimeColon(this);" value="${cafeOperVO.holidayTime}" placeholder="HH:MM~HH:MM" maxlength="12"/>';
-             $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
+             $(".classification:input[value='closed']").prop("checked", false);
           }else{
              tags='';
-             $(".classification:input[value='open']").prop("checked", false);//일반 체크시 사장체크 풀림
+             $(".classification:input[value='open']").prop("checked", false);
           }
           $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
-       });
+      });
     
 });//ready
 function inputTimeColon(time) {
@@ -200,12 +200,12 @@ function inputTimeColon(time) {
 				<div id="managerInfo"></div>
 				<div class="form-check-inline">
 			      <label class="form-check-label" for="radioMember">
-	              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" checked>운영안함
+	              	<input type="radio" name="radioHolidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
 			      </label>
 			    </div>
 			    <div class="form-check-inline">    
 	         		<label class="form-check-label" for="radioManager">
-			       	  <input type="radio" name="holidayTime" class="classification" id="radioOpen" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
+			       	  <input type="radio" name="radioHolidayTime" class="classification" id="radioOpen" value="open">운영함
 			    	</label>
 			    </div>
 			</td>

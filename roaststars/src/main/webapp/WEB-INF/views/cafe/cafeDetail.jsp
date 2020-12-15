@@ -65,12 +65,85 @@
                </tr>
                
                <tr>
-                  <td colspan="2" align="center"><button class="btn btn-info"><strong>바로 주문하기</strong></button></td>
+               	  <%-- 메뉴보기 모달 버튼 --%>
+                  <td colspan="2" align="center"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#menuModal"><strong>메뉴 보기</strong></button></td>
                </tr>
             </table>
-            </div>
-         </div><!-- 카페 상세보기 영역 -->
-      
+        </div>
+         
+         <!-- 메뉴판 모달 영역 -->
+		  <!-- The Modal -->
+		  <div class="modal fade" id="menuModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">카페 <${cafeName}> 메뉴</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		        <c:choose>
+		        <%-- 등록된 메뉴가 없을 때 --%>
+		        <c:when test="${menuList.size()==0}">
+		        	등록된 메뉴가 없습니다.
+		        </c:when>
+		        
+  		        <%-- 등록된 메뉴가 있을 때 --%>
+		        <c:otherwise>
+		          <table class="table">
+		          	<thead class="thead-dark">
+		          		<tr>
+		          			<th colspan="2">COFFEE</th>
+		          		</tr>
+		          	</thead>
+		          	<tbody>
+		          		<c:forEach items="${menuList}" var="menuTotal">
+		          		<%-- 커피 메뉴 --%>
+		          		<c:if test="${menuTotal.espresso == '1'}">
+		          		<tr>
+		          			<td>${menuTotal.menuVO.menuName}</td>
+		          			<td>${menuTotal.menuVO.menuPrice}</td>
+		          		</tr>
+		          		</c:if>
+		          		</c:forEach>
+		          	</tbody>
+                  </table>
+                  
+       		 	 <table class="table">
+		          	<thead class="thead-dark">
+		          		<tr>
+		          			<th colspan="2">NON-COFFEE</th>
+		          		</tr>
+		          	</thead>
+		          	<tbody>
+		          		<c:forEach items="${menuList}" var="menuTotal">
+		          		<%-- 논 커피 메뉴 --%>
+		          		<c:if test="${menuTotal.espresso == '0'}">
+		          		<tr>
+		          			<td>${menuTotal.menuVO.menuName}</td>
+		          			<td>${menuTotal.menuVO.menuPrice}</td>
+		          		</tr>
+		          		</c:if>
+		          		</c:forEach>
+		          	</tbody>
+                  </table>
+                </c:otherwise>
+		        </c:choose>
+		        </div>
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+		        </div>
+		        
+		      </div>
+		    </div>
+		  </div><!-- 메뉴판 모달 영역 -->
+		
+		</div><!-- 카페 상세보기 영역 -->
+		   
       
          <!-- 리뷰 영역 -->
            <div class="col-sm-5 offset-sm-1 reviewArea" style="background-color: #cbf1f5; margin-top: 30px">
@@ -112,7 +185,8 @@
 							 <form action="delete-review.do" id="deleteReviewForm" method="POST">
 							 	<sec:csrfInput/><%-- csrf 토큰 --%>
 							 	<input type="hidden" name="reviewNo" value="${review.reviewNo}">	
-							 	<input type="hidden" name="cafeNo" value="${cafeNo}">		
+							 	<input type="hidden" name="cafeNo" value="${cafeNo}">
+							 	<input type="hidden" name="id" value="${loginUser}">
 							 </form>
                      	</td>
                    	  </c:when>

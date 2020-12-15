@@ -186,6 +186,7 @@ $(document).ready(function() {
    <input type="submit" class="btn btn-info" value="회원정보수정">
    <sec:authentication property="principal.id" var="loginId"/>
    <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}">비밀번호 변경하기</a>
+   <a href="${pageContext.request.contextPath}/delete-userform.do" type="button" role="button" class="btn btn-danger">탈퇴하기</a>
 </form>
 
 </div><!-- container -->

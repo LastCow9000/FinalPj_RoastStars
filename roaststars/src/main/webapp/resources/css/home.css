@@ -113,8 +113,8 @@ tr.reviewTableProperty {
 	justify-content: left;
 	align-items: center;
 	top:0%;
-	width:100%;
-	height:100%;
+	width:30%;
+	height:30%;
 	background-color: gray; 
 	z-index: 100;
 	background:rgba(255,255,255,0.5);
@@ -133,10 +133,10 @@ tr.reviewTableProperty {
 	justify-content: center;
 }
 
-/*
+
 .bigPicture img {
 	width:600px;
-}*/
+}
 
 /* 메인배너 동영상 관련 */
 .bannerbox { 
@@ -155,6 +155,7 @@ tr.reviewTableProperty {
 .banner-text h2 { 
 	margin-top: -24px; text-align: center; font-size: 32px; color: #ffffff; 
 }
+
 /* 마이픽 카드 */
 .myPickrow {
   display: flex; /* 요소가 늘어나면 차곡차곡 가로로 채워지는데 한 줄로 쭉 늘여 세운다. */

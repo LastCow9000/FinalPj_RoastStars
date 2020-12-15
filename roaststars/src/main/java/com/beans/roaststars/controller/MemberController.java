@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -165,7 +163,7 @@ public class MemberController {
 	//회원탈퇴하기
 	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})		
 	@PostMapping("delete-useraction.do")
-	public String deleteUserAction(UserVO userVO, HttpSession session) {
+	public String deleteUserAction(UserVO userVO) {
 		userService.deleteUser(userVO);
 		return "user/deleteUserResult.tiles";
 	} 

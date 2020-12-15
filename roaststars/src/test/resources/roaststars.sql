@@ -53,7 +53,7 @@ VALUES('sajang4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4'
 -- update rs_user SET is_enabled=0, nickname='알수없음' WHERE id=?
 
 SELECT *
-FROM   rs_user where id='testtest'
+FROM   rs_user where id='testtest14'
 
 -- 2. authorities 
 drop table authorities;
@@ -267,13 +267,12 @@ select * from BEANS_PICK
 DROP TABLE menu;
 CREATE TABLE menu(
    menu_name      varchar2(100) not null,
-   menu_price       NUMBER         not null,
+   menu_price      NUMBER         not null,
    cafe_no         NUMBER        NOT NULL,
    constraint fk_menu_cafe foreign key(cafe_no) references cafe(cafe_no) on delete cascade,
    constraint pk_menu_cafe primary key(cafe_no, menu_name)
 );
 
-DROP SEQUENCE menu_seq;
 select*from menu;
 
 --메뉴 insert
@@ -457,3 +456,16 @@ CREATE TABLE my_pick(
 CREATE SEQUENCE my_pick_seq;
 
 insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
+
+
+-- [20.12.15] 추가 수정 해야할 SQL
+
+-- 메뉴 종류를 담고 있는 테이블 생성
+CREATE TABLE menu_kind(
+   menu_name     varchar2(100)  NOT NULL,
+   cafe_no       NUMBER         NOT NULL,
+   espresso      NUMBER         DEFAULT 1 NOT NULL, -- 1:에스프레소 / 0:논 에스프레소
+   constraint fk_menu_kind foreign key(cafe_no, menu_name) references menu(cafe_no, menu_name) on delete cascade,
+   constraint pk_menu_kind primary key(cafe_no, menu_name)
+);
+
