@@ -33,5 +33,7 @@ public interface UserMapper {
 	
 	//회원탈퇴하기
 	void deleteUser(UserVO userVO);
+	//비밀번호 수정 없이 회원 정보 수정하기
+	void updateUserWithoutPassword(UserVO userVO);
 	
 }

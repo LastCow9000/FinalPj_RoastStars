@@ -53,6 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update rs_user set password=#{password},name=#{name},address=#{address},tel=#{tel}, nickname=#{nickname}
 		where id=#{id}
 	</update>
+	 
+	<!-- 회원정보수정 -->
+	<update id="updateUserWithoutPassword" parameterType="userVO">
+		update rs_user set name=#{name},address=#{address},tel=#{tel}, nickname=#{nickname}
+		where id=#{id}
+	</update>
 	
 	<!-- 회원탈퇴 -->
 	<update id="deleteUser" parameterType="userVO">

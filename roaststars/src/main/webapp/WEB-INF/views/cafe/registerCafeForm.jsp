@@ -20,7 +20,7 @@
 /* 길이 체크 공간 */
 
 $(document).ready(function() {
-   var checkTitle="";
+   //var checkTitle="";
    // 제목 길이 체크
    $("#registCafeName").keyup(function() {
       checkName = "";

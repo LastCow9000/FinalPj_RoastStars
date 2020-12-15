@@ -31,20 +31,20 @@ public interface CafeMapper {
 
 	// 카페 번호로 카페 정보 조회(+특성까지)
 	PropertyVO findCafeAndPropertyByCafeNo(String cafeNo);
-
+	//아이디로 자기가 등록한 카페목록 불러오기
 	List<CafeVO> getCafeList(String id);
-
+	//카페 정보수정하기
 	void updateCafe(CafeVO cafeVO);
-
+	//카페정보중 운영시간 수정하기
 	void updateCafeOperatingTime(CafeOperatingTimeVO cafeOperVO);
-
+	//카페 삭제하기
 	int deleteCafe(String cafeNo);
-
+	//메뉴 등록하기
 	int updateMenu(MenuVO menuVO);
-
+	//해당하는 커페넘버로 메뉴 리스트 불러오기
 	List<MenuVO> updateMenuList(String cafeNo);
-
+	//중복된 메뉴 체크하기
 	int menuNameCheck(@Param("cafeNo")String cafeNo,@Param("menuName")String menuName);
-
+	//메뉴삭제하기
 	int deleteMenu(@Param("cafeNo")String cafeNo, @Param("menuName")String menuName);
 }

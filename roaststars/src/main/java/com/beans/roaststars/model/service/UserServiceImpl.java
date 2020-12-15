@@ -73,7 +73,13 @@ public class UserServiceImpl implements UserService{
 	public void updateUser(UserVO userVO) {
 		String encodePassword = passwordEncoder.encode(userVO.getPassword());
 		userVO.setPassword(encodePassword);
+		System.out.println(userVO);
+		if(userVO.getPassword()==null) {
+			userMapper.updateUserWithoutPassword(userVO);
+		}else {
 		userMapper.updateUser(userVO);
+		}
+		System.out.println(userVO);
 	}
 
 	//회원탈퇴

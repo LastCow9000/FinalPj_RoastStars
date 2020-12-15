@@ -175,12 +175,15 @@ public class ManagerController {
        return cafeService.deleteCafe(cafeNo);
     }
 
-	// 카페 메뉴 수정 폼
-	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
-	@RequestMapping("update-menuForm.do")
-	public ModelAndView updateMenuForm(String cafeNo) {
-		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
-	}
+	/*
+	 * // 카페 메뉴 수정 폼
+	 * 
+	 * @Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	 * 
+	 * @RequestMapping("update-menuForm.do") public ModelAndView
+	 * updateMenuForm(String cafeNo) { return new
+	 * ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo); }
+	 */
 	
 	// 메뉴 ajax로 수정하기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})

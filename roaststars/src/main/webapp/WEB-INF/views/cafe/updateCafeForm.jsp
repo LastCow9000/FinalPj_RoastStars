@@ -66,7 +66,7 @@ $(document).ready(function() {
       
     $(".classification").change(function(){ //라디오 버튼 변화 시
           var tags='';
-          if($("input:radio[name='holidayTime']:checked")){   //사장 체크 시 
+          if($("input:radio[name='holidayTime']:checked")){   //운영함 체크 시 
              alert("공휴일에도 일을 한다구?!");
              tags+='<input type="text" name="holidayTime" class="timeBox" onKeyup="inputTimeColon(this);" value="${cafeOperVO.holidayTime}" placeholder="HH:MM~HH:MM" maxlength="12"/>';
              $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
