@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
@@ -89,6 +88,7 @@ public class ManagerController {
 	   return new ModelAndView("cafe/registerCafeResult.tiles",
 			   "cafeNo", cafeNo);
    }
+
 
 
 	// 카페정보수정폼으로 이동하기 전에 자신의 카페 리스트 불러오기
@@ -175,6 +175,13 @@ public class ManagerController {
     public String deleteCafe(String cafeNo) {
        return cafeService.deleteCafe(cafeNo);
     }
+
+	// 카페 메뉴 수정 폼
+	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
+	@RequestMapping("update-menuForm.do")
+	public ModelAndView updateMenuForm(String cafeNo) {
+		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
+	}
 	
 	// 메뉴 ajax로 수정하기(추가하기)
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})

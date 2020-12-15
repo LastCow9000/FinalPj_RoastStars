@@ -8,7 +8,6 @@ import com.beans.roaststars.model.vo.MenuKindVO;
 import com.beans.roaststars.model.vo.PropertyVO;
 
 public interface CafeService {
-	//List<MenuVO> findMenuByCafeNo(String cafeNo);
 	
 	//no로 카페 찾기
 	CafeVO findcafeByNoNotJoin(String cafeNo);
