@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beans.roaststars.model.mapper.UserMapper;
 import com.beans.roaststars.model.service.MyPickService;
 import com.beans.roaststars.model.service.UserService;
 import com.beans.roaststars.model.vo.UserVO;
@@ -189,4 +190,22 @@ public class MemberController {
 		int count=myPickService.deleteMyPickByIdAndCafeNo(id, cafeNo);
 		return (count>=1) ? "ok":"fail";
 	}
+	
+	//비밀번호 찾기 폼 이동
+	@RequestMapping("find-password-form.do")
+	public String findPasswordForm() {
+		return "user/findPasswordForm";
+	}
+	
+	//비밀번호 찾기 ajax
+	@PostMapping("find-password.do")
+	@ResponseBody
+	public String findPassword(String id, String name) {
+		String pw=null;
+		if(userService.checkIdAndName(id, name)==1) { //id와 name이 일치하면
+			pw=userService.updateTempPass(id); //임시 비밀번호 발급 실행
+		}
+		return pw;
+	}
+	
 }

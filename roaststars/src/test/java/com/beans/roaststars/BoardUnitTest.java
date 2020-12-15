@@ -37,37 +37,41 @@ public class BoardUnitTest {
 	@Resource
 	private ReviewService reviewService;
 	
-	/*@Test
+	@Test
 	public void userTest() {
 		// test1. 아이디로 회원정보 찾기
+		/*
 		UserVO userVO = userService.findUserById("sajang");
 		System.out.println(userVO);
-		
 		UserVO userVO = userService.findUserById("java");
-		System.out.println(userVO);
+		System.out.println(userVO); */
 		
 		// test2. 아이디(username)으로 권한 조회
+		/*
 		List<AuthorityVO> list = userMapper.selectAuthorityByUsername("java");
 		for(AuthorityVO vo:list) {
 			System.out.println(vo);
-		}
+		}*/
 		
 		// test3. 카페 번호로 카페 정보 조회
+		/*
 		CafeVO cafeVO = cafeService.findCafeByCafeNo("9");
 		System.out.println(cafeVO);
-	}
-	
-	
-}*/
-	@Test
-	public void reviewTest() {
-		//test1. 카페넘버로 리뷰 목록 불러오기
+		*/
+		
+		// test4. 카페넘버로 리뷰 목록 불러오기
 		/*
-		 * List<ReviewVO> list = reviewService.findReviewListByCafeNo("9"); for(ReviewVO
-		 * vo:list) { System.out.println(vo); }
+		  List<ReviewVO> list = reviewService.findReviewListByCafeNo("9"); for(ReviewVO
+		  vo:list) { System.out.println(vo); }
+		  System.out.println(userService.findUserById("tree1"));
 		 */
-		System.out.println(userService.findUserById("tree1"));
+		
+		// test5. 비밀번호찾기 테스트
+		System.out.println(userService.checkIdAndName("java15", "123"));
+		
 	}
+}
+	
 		//        사용법 예시             //
 		/* 
 		@Resource
@@ -90,4 +94,3 @@ public class BoardUnitTest {
 			System.out.println("등록완료: "+ivo);
 		}
 		*/
-}

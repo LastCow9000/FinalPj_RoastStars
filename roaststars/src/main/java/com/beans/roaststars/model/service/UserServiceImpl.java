@@ -81,4 +81,22 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteUser(userVO);
 	}
 	
+	//비번찾기용 아이디 이름 일치 체크
+	@Override
+	public int checkIdAndName(String id, String name) {
+		return userMapper.checkIdAndName(id, name);
+	}
+
+	//발급된 임시비밀번호로 비밀번호 수정
+	@Override
+	public String updateTempPass(String id) {
+		String tempPw="";
+		for (int i = 0; i < 8; i++) {
+			tempPw += (char)((Math.random() * 26)+97);	//난수 발생시켜서 소문자 a~z까지 8글자 임시비밀번호 발급
+		}
+		String encodePassword = passwordEncoder.encode(tempPw);// 비밀번호 암호화
+		userMapper.updateTempPass(id, encodePassword); //비밀번호 업데이트
+		return tempPw;
+	}
+	
 }
