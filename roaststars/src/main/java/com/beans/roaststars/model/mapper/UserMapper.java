@@ -3,6 +3,7 @@ package com.beans.roaststars.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.beans.roaststars.model.vo.AuthorityVO;
 import com.beans.roaststars.model.vo.UserVO;
@@ -34,4 +35,9 @@ public interface UserMapper {
 	//회원탈퇴하기
 	void deleteUser(UserVO userVO);
 	
+	//비번찾기용 아이디 이름 일치 체크
+	int checkIdAndName(@Param("id") String id, @Param("name") String name);
+	
+	//발급된 임시비밀번호로 비밀번호 수정
+	void updateTempPass(@Param("id") String id, @Param("password") String password);
 }

@@ -2,7 +2,6 @@ package com.beans.roaststars.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -151,4 +150,20 @@ public class MemberController {
 		return "user/deleteUserResult.tiles";
 	} 
 	
+	//비밀번호 찾기 폼 이동
+	@RequestMapping("find-password-form.do")
+	public String findPasswordForm() {
+		return "user/findPasswordForm";
+	}
+	
+	//비밀번호 찾기 ajax
+	@PostMapping("find-password.do")
+	@ResponseBody
+	public String findPassword(String id, String name) {
+		String pw=null;
+		if(userService.checkIdAndName(id, name)==1) { //id와 name이 일치하면
+			pw=userService.updateTempPass(id); //임시 비밀번호 발급 실행
+		}
+		return pw;
+	}
 }

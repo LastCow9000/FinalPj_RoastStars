@@ -92,7 +92,6 @@ public class CafeServiceImpl implements CafeService {
 		int count2 = cafeMapper.updateMenuKind(menuKindVO);
 		return (count1 == 1 && count2 ==1) ? "ok" : "fail";
 	}
-	
 
 	// 카페 번호로 메뉴 찾기
 	@Override

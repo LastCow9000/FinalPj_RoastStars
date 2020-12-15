@@ -188,7 +188,6 @@ public class ManagerController {
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
 	public MenuKindVO updateMenu(MenuVO menuVO, String espresso, String cafeNo) {
-
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CafeVO cafeVO = new CafeVO();
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
@@ -202,6 +201,7 @@ public class ManagerController {
 		
 		cafeService.updateMenu(menuKindVO);
 		return menuKindVO;
+
 	}
 	
 	
