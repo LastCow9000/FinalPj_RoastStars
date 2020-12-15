@@ -141,7 +141,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="cafeVO.cafeInfo" column="cafe_info"/>
       <result property="cafeVO.cafeTel" column="cafe_tel"/>
    </resultMap>
-	 <select id="findMenuByCafeNo" resultMap="MenuRM" parameterType="string">
+   
+   <select id="findMenuByCafeNo" resultMap="MenuRM" parameterType="string">
      SELECT  m.menu_name,m.menu_price, c.cafe_no,
               c.cafe_name, c.cafe_loc, c.cafe_pic, c.cafe_info, c.cafe_tel
       FROM     cafe c, menu m

@@ -1,8 +1,11 @@
 package com.beans.roaststars.model.vo;
 
+import java.io.Serializable;
+
 import org.springframework.web.multipart.MultipartFile;
 
-public class UserVO {
+public class UserVO implements Serializable{
+   private static final long serialVersionUID = -7571110702655908931L;
    private String id;
    private String password;
    private String name;
