@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beans.roaststars.model.service.CafeService;
 import com.beans.roaststars.model.vo.CafeOperatingTimeVO;
 import com.beans.roaststars.model.vo.CafeVO;
+import com.beans.roaststars.model.vo.MenuKindVO;
 import com.beans.roaststars.model.vo.MenuVO;
 import com.beans.roaststars.model.vo.UserVO;
 @Controller
@@ -182,18 +183,25 @@ public class ManagerController {
 		return new ModelAndView("cafe/updateMenuForm.tiles","cafeNo",cafeNo);
 	}
 	
-	// 메뉴 ajax로 수정하기
+	// 메뉴 ajax로 수정하기(추가하기)
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
-	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
+	public MenuKindVO updateMenu(MenuVO menuVO, String espresso, String cafeNo) {
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CafeVO cafeVO = new CafeVO();
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
-		cafeVO.setUserVO(uvo);
-		menuVO.setCafeVO(cafeVO);
-		cafeService.updateMenu(menuVO);
-		return menuVO;
+		cafeVO.setUserVO(uvo); // cafeVO에 로그인중인 userVO 할당
+		
+		menuVO.setCafeVO(cafeVO); //menuVO에 cafeVO 할당
+		
+		MenuKindVO menuKindVO = new MenuKindVO();
+		menuKindVO.setMenuVO(menuVO); //menuKindVO에 menuVO 할당
+		menuKindVO.setEspresso(espresso);
+		
+		cafeService.updateMenu(menuKindVO);
+		return menuKindVO;
+
 	}
 	
 	
@@ -202,9 +210,10 @@ public class ManagerController {
 	@RequestMapping("update-menuList.do")
 	@ResponseBody
 	public ModelAndView updateMenuList(String cafeNo, Model model) {
-		List<MenuVO> list = cafeService.updateMenuList(cafeNo);
+		List<MenuKindVO> list = cafeService.updateMenuList(cafeNo);
 		model.addAttribute("cafeNo", cafeNo);
-		return new ModelAndView("cafe/updateMenuList.tiles", "menuList", list);
+		return new ModelAndView("cafe/updateMenuList.tiles", 
+				"menuList", list);
 	}
 	
 	// 메뉴 이름 중복 체크

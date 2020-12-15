@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.beans.roaststars.model.service.ReviewService;
 import com.beans.roaststars.model.vo.PropertyVO;
@@ -42,15 +41,6 @@ public class ReviewController {
 		reviewService.registerReviewAndUpdateProperty(reviewVO, propertyVO, cafeNo, id);
 		return "redirect:cafe-detail.do?id="+id+"&cafeNo="+cafeNo;
 	}
-	
-	/*
-	// 리뷰 작성 결과 alert으로 이동
-	@Secured("ROLE_MEMBER")
-	@RequestMapping("register-review-result.do")
-	public ModelAndView registerReviewResult(String cafeNo) {
-		return new ModelAndView("review/registerReviewResult.tiles",
-				"cafeNo", cafeNo);
-	}*/
 	
 	// 리뷰 삭제
 	@Secured("ROLE_MEMBER")
