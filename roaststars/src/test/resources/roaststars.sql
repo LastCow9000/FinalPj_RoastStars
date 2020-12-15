@@ -458,6 +458,20 @@ CREATE SEQUENCE my_pick_seq;
 insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+-- [20.12.15] 추가 수정 해야할 SQL
+
+-- 메뉴 종류를 담고 있는 테이블 생성
+CREATE TABLE menu_kind(
+   menu_name     varchar2(100)  NOT NULL,
+   cafe_no       NUMBER         NOT NULL,
+   espresso      NUMBER         DEFAULT 1 NOT NULL, -- 1:에스프레소 / 0:논 에스프레소
+   constraint fk_menu_kind foreign key(cafe_no, menu_name) references menu(cafe_no, menu_name) on delete cascade,
+   constraint pk_menu_kind primary key(cafe_no, menu_name)
+);
+=======
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
+
 -- [20.12.15] 추가 수정 해야할 SQL
 
 -- 메뉴 종류를 담고 있는 테이블 생성
@@ -469,16 +483,8 @@ CREATE TABLE menu_kind(
    constraint pk_menu_kind primary key(cafe_no, menu_name)
 );
 
--- [20.12.15] 추가 수정 해야할 SQL
-
--- 메뉴 종류를 담고 있는 테이블 생성
-CREATE TABLE menu_kind(
-   menu_name     varchar2(100)  NOT NULL,
-   cafe_no       NUMBER         NOT NULL,
-   espresso      NUMBER         DEFAULT 1 NOT NULL, -- 1:에스프레소 / 0:논 에스프레소
-   constraint fk_menu_kind foreign key(cafe_no, menu_name) references menu(cafe_no, menu_name) on delete cascade,
-   constraint pk_menu_kind primary key(cafe_no, menu_name)
-);
+<<<<<<< HEAD
 
 
-
+=======
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git

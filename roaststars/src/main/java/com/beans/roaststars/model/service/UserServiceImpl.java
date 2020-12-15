@@ -82,6 +82,10 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteUser(userVO);
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 	//비번찾기용 아이디 이름 일치 체크
 	@Override
 	public int checkIdAndName(String id, String name) {
