@@ -457,7 +457,6 @@ CREATE SEQUENCE my_pick_seq;
 
 insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
 
-<<<<<<< HEAD
 
 -- [20.12.15] 추가 수정 해야할 SQL
 
@@ -470,12 +469,3 @@ CREATE TABLE menu_kind(
    constraint pk_menu_kind primary key(cafe_no, menu_name)
 );
 
-
-
-
-
-
-
-
-=======
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
