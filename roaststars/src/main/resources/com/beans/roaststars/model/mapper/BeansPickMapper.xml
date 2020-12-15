@@ -7,14 +7,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	namespace="com.beans.roaststars.model.mapper.BeansPickMapper">
 	<!-- 빈즈픽 게시물 리스트 받아오기 -->
 	<select id="getAllBeansPickList" resultType="beansPickVO">
-		select beans_no,
-		beans_title, beans_pic
-		from BEANS_PICK order by beans_no desc
+		<!-- select beans_no, beans_title, beans_pic from BEANS_PICK order by beans_no 
+			desc -->
+		<![CDATA[
+		SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+		FROM (SELECT ROWNUM RNUM, beans_no, beans_title, beans_content, beans_pic, beans_regdate,id
+		FROM (SELECT beans_no, beans_title, beans_content, beans_pic, beans_regdate,id FROM BEANS_PICK ORDER BY beans_no DESC) BEANS_PICK) 
+		WHERE RNUM BETWEEN #{startRowNumber} and #{endRowNumber}
+		]]>
 	</select>
+	<!-- 빈즈픽 게시물 총 수량 -->
+	<select id="getTotalCountBeansPick" resultType="int">
+		select count(*)
+		from BEANS_PICK
+	</select>
+
 	<!-- 빈즈픽 게시물 받기 -->
 	<select id="getOneBeansPick" resultType="beansPickVO">
-		select beans_no,beans_title,beans_content,beans_regdate
+		select
+		beans_no,beans_title,beans_content,beans_regdate,beans_pic
 		from BEANS_PICK
-		where beans_no=${value}
+		where
+		beans_no=#{value}
 	</select>
+	<!-- 빈즈픽 등록 -->
+	<insert id="registerBeansPick" parameterType="beansPickVO">
+		<selectKey keyProperty="beansNo" resultType="string"
+			order="BEFORE">
+			select beans_pick_seq.nextval as beansNo
+			from dual
+		</selectKey>
+		insert into beans_pick(beans_no, beans_title, beans_content,
+		beans_pic, beans_regdate,id)
+		values
+		(#{beansNo},#{beansTitle},#{beansContent},#{beansPic,
+		jdbcType=VARCHAR}, sysdate,#{userVO.id})
+	</insert>
+	<!-- 빈즈픽 수정 -->
+	<update id="updateBeansPick" parameterType="beansPickVO">
+		update BEANS_PICK
+		set beans_no=#{beansNo},beans_title=#{beansTitle}, beans_content=#{beansContent},
+		beans_pic=#{beansPic, jdbcType=VARCHAR}, beans_regdate=sysdate,id=#{userVO.id}
+		where beans_no=#{beansNo}
+	</update>
+	<!-- 빈즈픽 삭제 -->
+	<delete id="deleteBeansPick" parameterType="string">
+		delete from
+		BEANS_PICK where beans_no=#{beansNo}
+	</delete>
 </mapper>
