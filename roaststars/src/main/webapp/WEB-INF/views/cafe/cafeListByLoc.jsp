@@ -64,14 +64,15 @@
 				for(key in dictProperty) {	//동적으로 생성된 셀렉트폼의 옵션값을 dictionary에서 받아옴 
 					tags+='<option value="' + key + '">' + dictProperty[key] + '</option>';
 				}	
-				tags+=' </select>';
+				tags+='</select>';
 				$("#selectFilter").append(tags); //옵션값 동적으로 추가
-				
+
 				//alert(Object.keys(dictProperty)); //사전에 들어있는 키값 확인
 				number++; // 다음 셀렉트폼을 선택하기 위하여 값 증가
 				pri_num++; // 다음 옵션값을 선택하기 위하여 값 증가
 				arrIndex++;
-			}
+			} 
+			
 			if(number == 4 || pri_num == 4){
 				tags+='';
 			}
