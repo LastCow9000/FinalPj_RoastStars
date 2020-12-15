@@ -52,7 +52,7 @@
 				<p class="card-text">주소 : ${myPickVO.cafeVO.cafeLoc}</p>	
 				<p class="card-text">전화번호 : ${myPickVO.cafeVO.cafeTel}</p>
 				<div style="text-align: center">
-					<a href="${pageContext.request.contextPath}/cafe-detail.do?cafeNo=${myPickVO.cafeVO.cafeNo}" class="btn btn-primary">카페 상세정보</a>
+					<a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginId}&cafeNo=${myPickVO.cafeVO.cafeNo}" class="btn btn-primary">카페 상세정보</a>
 				</div>
 			</div>
 		</div>

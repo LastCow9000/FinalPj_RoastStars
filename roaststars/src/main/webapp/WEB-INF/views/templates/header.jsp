@@ -61,12 +61,6 @@
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<a href="${pageContext.request.contextPath}/admin-detail.do">관리자 페이지 </a>&nbsp; &nbsp;
 				</sec:authorize>
-				<sec:authorize access="!hasRole('ROLE_ADMIN')"> <%-- 관리자는 회원정보수정과 탈퇴하기가 불가 --%>
-					<sec:authentication property="principal.id" var="loginId"/>
-					<a href="${pageContext.request.contextPath}/update-userform.do?id=${loginId}">회원정보수정</a>&nbsp; &nbsp;
-					<a href="${pageContext.request.contextPath}/delete-userform.do">탈퇴하기</a>&nbsp; &nbsp;
-				</sec:authorize>
-				
 				<sec:authorize access="hasRole('ROLE_MANAGER')">
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
@@ -80,6 +74,11 @@
 					</div>
 				</li> &nbsp;
 				</sec:authorize>
+				<sec:authorize access="!hasRole('ROLE_ADMIN')"> <%-- 관리자는 회원정보수정과 탈퇴하기가 불가 --%>
+					<sec:authentication property="principal.id" var="loginId"/>
+					<a href="${pageContext.request.contextPath}/update-userform.do?id=${loginId}">회원정보수정</a>&nbsp; &nbsp;
+				</sec:authorize>
+				
 				
 				<%-- spring security logout은 다음과 같은 처리가 필요하다
 				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>

@@ -185,7 +185,8 @@
 							 <form action="delete-review.do" id="deleteReviewForm" method="POST">
 							 	<sec:csrfInput/><%-- csrf 토큰 --%>
 							 	<input type="hidden" name="reviewNo" value="${review.reviewNo}">	
-							 	<input type="hidden" name="cafeNo" value="${cafeNo}">		
+							 	<input type="hidden" name="cafeNo" value="${cafeNo}">
+							 	<input type="hidden" name="id" value="${loginUser}">
 							 </form>
                      	</td>
                    	  </c:when>

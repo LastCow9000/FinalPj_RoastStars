@@ -45,8 +45,8 @@ public class ReviewController {
 	// 리뷰 삭제
 	@Secured("ROLE_MEMBER")
 	@PostMapping("delete-review.do")
-	public String deleteReview(String reviewNo, String cafeNo) {
+	public String deleteReview(String reviewNo, String cafeNo, String id) {
 		reviewService.deleteReviewAndRollbackProperty(reviewNo);
-		return "redirect:cafe-detail.do?cafeNo="+cafeNo;
+		return "redirect:cafe-detail.do?id="+id+"&cafeNo="+cafeNo;
 	}
 }
