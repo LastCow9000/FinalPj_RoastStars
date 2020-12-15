@@ -114,10 +114,12 @@ public class ManagerController {
 	@Secured("ROLE_MANAGER")
 	@PostMapping("update-cafe-form.do")
 	public ModelAndView updateCafeForm(String cafeNo, Model model) {
-		model.addAttribute(cafeNo);
+		model.addAttribute("cafeNo", cafeNo);
 		CafeVO cafeVO = new CafeVO();
 		cafeVO = cafeService.findcafeByNoNotJoin(cafeNo);
-		return new ModelAndView("cafe/updateCafeForm.tiles", "cafeVO", cafeVO);
+		CafeOperatingTimeVO cafeOperVO = new CafeOperatingTimeVO();
+		cafeOperVO = cafeService.findCafeByCafeNo(cafeNo);
+		return new ModelAndView("cafe/updateCafeForm.tiles", "cafeOperVO", cafeOperVO);
 	}
 
 	// 카페정보수정하기
@@ -185,15 +187,18 @@ public class ManagerController {
 	@PostMapping("updateMenu-Ajax.do")
 	@ResponseBody
 	public MenuVO updateMenu(MenuVO menuVO,String cafeNo) {
+
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		CafeVO cafeVO = new CafeVO();
-		
 		cafeVO= cafeService.findcafeByNoNotJoin(cafeNo);
+
 		cafeVO.setUserVO(uvo);
 		menuVO.setCafeVO(cafeVO);
+
 		cafeService.updateMenu(menuVO);
 		return menuVO;
 	}
+	
 	
 	// 메뉴 리스트 불러오기
 	@Secured({"ROLE_MANAGER","ROLE_ADMIN"})

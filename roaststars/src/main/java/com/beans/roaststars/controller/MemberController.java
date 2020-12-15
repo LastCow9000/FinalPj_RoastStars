@@ -115,8 +115,10 @@ public class MemberController {
 	//회원수정폼
 	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@RequestMapping("update-userform.do")
-	public String updateForm() {
-		return "user/updateUserForm.tiles";
+	public ModelAndView updateForm(String id) {
+		UserVO userVO = userService.findUserById(id);
+		return new ModelAndView("user/updateUserForm.tiles", 
+				"userVO",userVO);
 	}
 
 	//회원수정
@@ -148,5 +150,5 @@ public class MemberController {
 		userService.deleteUser(userVO);
 		return "user/deleteUserResult.tiles";
 	} 
-
+	
 }
