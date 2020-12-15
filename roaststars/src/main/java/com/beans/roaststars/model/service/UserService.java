@@ -9,13 +9,9 @@ public interface UserService {
 	
 	void registerUser(UserVO vo);
 	
-	void withdrawalUser(String id);
-	
 	String idCheck(String id);
 	
 	UserVO findUserById(String id);
-	
-	void grantAuthorization(String id, String authority);
 	
 	List<AuthorityVO> selectAuthorityByUsername(String username);
 

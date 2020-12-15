@@ -130,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteCafe" parameterType="string">
 		delete from cafe where cafe_no=#{value}
 	</delete>
-	
+
 	<!-- 메뉴 등록 1 : menu table에 등록-->
 	<insert id="updateMenu" parameterType="menuVO">
 		insert into menu(menu_name,menu_price,cafe_no) 
@@ -155,8 +155,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	  <result property="menuVO.cafeVO.cafePic" column="cafe_pic"/>
    	  <result property="menuVO.cafeVO.cafeInfo" column="cafe_info"/>
    	  <result property="menuVO.cafeVO.cafeTel" column="cafe_tel"/>
+
    </resultMap>
-   
    <!-- 카페 번호로 메뉴 리스트 찾기 -->
    <select id="updateMenuList" resultMap="menuKindRM">
   	  SELECT   m.menu_name, m.menu_price, c.cafe_no,

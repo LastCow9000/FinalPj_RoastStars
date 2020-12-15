@@ -201,7 +201,6 @@ public class ManagerController {
 		
 		cafeService.updateMenu(menuKindVO);
 		return menuKindVO;
-
 	}
 	
 	

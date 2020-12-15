@@ -42,6 +42,7 @@ public interface CafeMapper {
 	int deleteCafe(String cafeNo);
 
 	//메뉴 등록 1 : menu table에 등록
+
 	int updateMenu(MenuVO menuVO);
 	
 	//메뉴 등록 2 : menu_kind table에 등록
