@@ -11,35 +11,34 @@
 <script type="text/javascript">
 $(document).ready(function() {
    
-   $(document).on("click", "#deleteCafeInfoBtn", function() {
-      if (confirm("카페 정보를 삭제하시겠습니까?")){
-         var cafeNo = $(this).prev().val();
-           $.ajax({
-                  type : "post",
-                  url : "${pageContext.request.contextPath}/deleteCafe-Ajax.do",
-                  data : "cafeNo="+cafeNo,
-                  beforeSend : function(xhr){   
-                       xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                  },
-                  success : function(result) {
-                      if (result == "ok"){
-                        alert("삭제가 완료되었습니다.");
-                        location.reload();
-                     } else {
-                        alert("세션이 만료되었습니다.\n다시 로그인해주세요.");
-                        location.href="${pageContext.request.contextPath}/home.do";
-                     }
-                  }//ajax1 success
-               });//ajax1
-      } 
-            
-         
-   });// end document click
+	$(document).on("click", "#deleteCafeInfoBtn", function() {
+		if (confirm("카페 정보를 삭제하시겠습니까?")){
+			var cafeNo = $(this).prev().val();
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/deleteCafe-Ajax.do",
+				data : "cafeNo="+cafeNo,
+				beforeSend : function(xhr){   
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success : function(result) {
+					if (result == "ok"){
+					alert("삭제가 완료되었습니다.");
+					location.reload();
+					} else {
+					alert("세션이 만료되었습니다.\n다시 로그인해주세요.");
+					location.href="${pageContext.request.contextPath}/home.do";
+					}
+				}//ajax1 success
+			});//ajax1
+		} 
+	});// end document click
    
      // 카페 수정 시 한번 묻기
      $("#updateCafeInfoForm").submit(function() {
          return confirm("카페 정보를 수정하시겠습니까?");
    });//end updateCafeInfoForm
+
 
 });// end ready
 </script>
@@ -68,7 +67,6 @@ $(document).ready(function() {
             <form method="POST" action="${pageContext.request.contextPath}/update-cafe-form.do" id="updateCafeInfoForm">
                <sec:csrfInput/>
                <input type="hidden" name="cafeNo" value="${list.cafeNo}">
-               
              </form>
          </td>
          <td>
