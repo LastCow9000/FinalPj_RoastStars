@@ -32,8 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- MyPick 등록 -->
 	<insert id="addMyPick">
+      <selectKey keyProperty="pickNo" resultType="string" order="BEFORE">
+         SELECT my_pick_seq.nextval
+         FROM   dual
+      </selectKey>
 		insert into my_pick
-		values(my_pick_seq.nextval, #{id}, #{cafeNo})
+		values (#{pickNo}, #{id}, #{cafeNo})
 	</insert>
 	
 	<!-- MyPick 삭제(pk) -->
