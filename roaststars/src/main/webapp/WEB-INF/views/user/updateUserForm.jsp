@@ -141,9 +141,11 @@ $(document).ready(function() {
     </div>
     
      <div class="form-group">
-      <label for="passwordNow">현재 비밀번호 : </label>
-      <input type="password" name="passwordNow" id="passwordNow" class="form-control" placeholder="현재 비밀번호를 입력해주세요.">
-      <span id="passwordNowResult"></span>
+      <label for="passwordNow">현재 비밀번호 : </label> 
+      <input type="password" name="passwordNow" id="passwordNow" class="form-control" placeholder="현재 비밀번호를 입력해주세요." required>
+       <div class="valid-feedback"><span id="passwordNowResult"></span></div>
+      
+       <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
     </div>
    
    <hr style="width: 480px; float:left;"><br><br>
@@ -178,14 +180,13 @@ $(document).ready(function() {
         size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
-	      상세주소: <input type="text" name="address" size="50" style="margin-top: 10px; height: 20px;">
     </div>
    
    <hr style="width: 480px; float:left;"><br>
    
    <input type="submit" class="btn btn-info" value="회원정보수정">
    <sec:authentication property="principal.id" var="loginId"/>
-   <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}">비밀번호 변경하기</a>
+   <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}" type="submit" class="btn btn-info">비밀번호 변경하기</a>
    <a href="${pageContext.request.contextPath}/delete-userform.do" type="button" role="button" class="btn btn-danger">탈퇴하기</a>
 </form>
 
