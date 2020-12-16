@@ -113,19 +113,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectCafe"/>
 		where id=#{value}
 	</select>
-
 	<!-- 카페 정보 수정하기 1 -->
 	<update id="updateCafe" parameterType="cafeVO">
 		update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
 		where cafe_no = #{cafeNo}
 	</update>
-	
 	<!-- 카페 정보 수정하기 2 : 운영 시간 -->
 	<update id="updateCafeOperatingTime" parameterType="cafeOperatingTimeVO">
 		update operating_time set weekday_time=#{weekdayTime}, weekend_time=#{weekendTime},holiday_time=#{holidayTime}
 		where cafe_no=#{cafeVO.cafeNo}
 	</update>
-
 	<!-- 카페 삭제 -->
 	<delete id="deleteCafe" parameterType="string">
 		delete from cafe where cafe_no=#{value}
@@ -155,8 +152,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	  <result property="menuVO.cafeVO.cafePic" column="cafe_pic"/>
    	  <result property="menuVO.cafeVO.cafeInfo" column="cafe_info"/>
    	  <result property="menuVO.cafeVO.cafeTel" column="cafe_tel"/>
-
    </resultMap>
+   
    <!-- 카페 번호로 메뉴 리스트 찾기 -->
    <select id="updateMenuList" resultMap="menuKindRM">
   	  SELECT   m.menu_name, m.menu_price, c.cafe_no,
@@ -174,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   from cafe c, menu m 
 	   where m.cafe_no = c.cafe_no and c.cafe_no=#{cafeNo} and m.menu_name=#{menuName}
    </select>
-   
+
    <!-- 메뉴 삭제 -->
    <delete id="deleteMenu">
    delete from menu where cafe_no=#{cafeNo} and menu_name=#{menuName}

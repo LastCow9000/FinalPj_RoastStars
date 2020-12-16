@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -116,14 +114,21 @@ public class MemberController {
 	@RequestMapping("update-userform.do")
 	public ModelAndView updateForm(String id) {
 		UserVO userVO = userService.findUserById(id);
-		return new ModelAndView("user/updateUserForm.tiles", 
-				"userVO",userVO);
+		return new ModelAndView("user/updateUserForm.tiles", "userVO",userVO);
 	}
-
+	
+	//비밀번호 변경 폼으로 이동.
+		@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})
+		@RequestMapping("update-PasswordForm.do")
+		public ModelAndView updatePasswordForm(String id) {
+			UserVO userVO = userService.findUserById(id);
+			return new ModelAndView("user/updatePasswordForm.tiles","userVO",userVO);
+		} 
+	
 	//회원수정
 	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
 	@PostMapping("update-useraction.do")
-	public String updateUserAction(HttpServletRequest request, UserVO userVO) {
+	public String updateUserAction(UserVO userVO) {
 		// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
 		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		userService.updateUser(userVO);//service에서 변경될 비밀번호를 암호화한다 
@@ -132,6 +137,19 @@ public class MemberController {
 		uvo.setName(userVO.getName());
 		uvo.setAddress(userVO.getAddress());
 		uvo.setTel(userVO.getTel());
+		return "user/updateUserResult.tiles";
+	}
+	
+	//비밀번호 변경
+	@Secured({"ROLE_MEMBER","ROLE_MANAGER"})
+	@PostMapping("update-userPasswordaction.do")
+	public String updateUserPasswordAction(String password, Model model) {
+		// 회원정보 수정위해 Spring Security 세션 회원정보를 반환받는다
+		UserVO uvo = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id=uvo.getId();
+		userService.updateUserPassword(id, password);//service에서 변경될 비밀번호를 암호화한다 
+		// 수정한 회원정보로 Spring Security 세션 회원정보를 업데이트한다
+		model.addAttribute("userVO",uvo);
 		return "user/updateUserResult.tiles";
 	}
 	
@@ -145,7 +163,7 @@ public class MemberController {
 	//회원탈퇴하기
 	@Secured({"ROLE_MANAGER", "ROLE_MEMBER"})		
 	@PostMapping("delete-useraction.do")
-	public String deleteUserAction(UserVO userVO, HttpSession session) {
+	public String deleteUserAction(UserVO userVO) {
 		userService.deleteUser(userVO);
 		return "user/deleteUserResult.tiles";
 	} 

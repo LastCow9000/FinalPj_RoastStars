@@ -9,7 +9,8 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function() {
-	 var checkPass=""; 
+	//비밀번호 확인하기 
+	var checkPass=""; 
      $("#passwordC").keyup(function() {
     	checkPass="";
     	 var passValue= $(this).val().trim();
@@ -63,24 +64,10 @@ $(document).ready(function() {
       <div class="valid-feedback"><span id="passwordResult"></span></div>
       <div class="invalid-feedback">  비밀번호를 입력해주세요.</div>
     </div>
-
     <hr style="width: 480px; float:left;"><br>
-
-
 	<input type="submit" value="회웥탈퇴" class="btn btn-primary" style="float:center;">
 	
   </form>
- <%--  <form method="post" action="${pageContext.request.contextPath}/delete-useraction.do" id="deleteUserForm">
-	<input type="hidden" name="command" value="delete">
-	 
-	 		csrf 토큰 : csrf 공격을 막기 위한 1회성 인증키인 
-	 		              csrf토큰을 함께 전달해야 전송이 가능하다
-	
-	<sec:csrfInput/>
-	아이디 : <input type="text" name="id" value="<sec:authentication property="principal.id"/>" readonly>
-	<br>패스워드 <input type="password" id="passwordChecked" required="required"><span id="passwordCheckResult"></span><br>
-	<br><input type="submit" value="탈퇴하기">
- </form> --%>
 </div><!-- container -->
 </sec:authorize>
 </body>

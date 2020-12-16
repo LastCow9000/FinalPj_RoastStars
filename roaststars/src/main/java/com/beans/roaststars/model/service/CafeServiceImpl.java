@@ -94,9 +94,7 @@ public class CafeServiceImpl implements CafeService {
 	}
 
 	// 카페 번호로 메뉴 찾기
-
 	@Override
-
 	public List<MenuKindVO> updateMenuList(String cafeNo) {
 		return cafeMapper.updateMenuList(cafeNo);
 	}

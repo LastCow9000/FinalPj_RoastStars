@@ -26,4 +26,6 @@ public interface UserService {
 	int checkIdAndName(String id, String name);
 	
 	String updateTempPass(String id);
+
+	void updateUserPassword(String id, String password);
 }
