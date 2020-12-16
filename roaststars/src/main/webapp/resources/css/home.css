@@ -11,7 +11,6 @@
 
 .footer,.header,.btn,.pagination  {
 	font-family:"Layout Font";
-	font-weight: bolder;
 	font-size: 20px;
 } 	
 
@@ -32,7 +31,13 @@
 
 .myPickStar{
 	float: right;
-	margin-right: 15px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+/* icon 2x 적용한 부분 사이즈 조금 작게*/
+.fa-2x {
+    font-size: 37px !important;
 }
 
 /* 리뷰 타이틀 및 리뷰 총 개수 조정 */
@@ -138,14 +143,6 @@ tr.reviewTableProperty {
 	align-items: center;
 }
 
-/* 빈즈픽 레이아웃*/
-.card{
-	padding: 10px;
-	margin: 5px;
-	justify-content: center;
-}
-
-
 .bigPicture img {
 	width:600px;
 }
@@ -174,13 +171,11 @@ tr.reviewTableProperty {
   flex-wrap: wrap; /* 컨테이너 너비를 넘어가면 다음 줄로 요소를 배치 */
   justify-content: flex-start;
 }
-.card {
+
+.card { /* 카페 간략정보도 포함 !*/
     max-height: 600px;
+    font-size:20px;
 }
-
-
-
-
 
 /*------------paging용 test도 포함--------------*/
 html *{
@@ -238,3 +233,52 @@ html *{
     border-color: #f44336;
     box-shadow: 0 4px 5px 0 rgba(244,67,54,.14), 0 1px 10px 0 rgba(244,67,54,.12), 0 2px 4px -1px rgba(244,67,54,.2);
 }
+
+/*예울 CSS 추가 사항 시작 */
+.cafe-simple-card{
+	font-family:"Layout Font";
+	font-size: 15px;
+}
+
+.cafe-simple-card-title{
+    font-size: 30px !important;
+    margin-left: 10px !important;
+    margin-top: 3px !important;
+}
+
+.cafe-detail-info{
+	width:500px;
+	font-family:"Main Font";
+	font-size: 20px;
+	
+	overflow:auto !important; /* 영어 입력 시, 자동 줄바꿈*/
+	margin-left: 10px;
+	margin-top: 5px;
+	
+	/*자동 줄바꿈*/
+	word-wrap: break-word;
+	white-space: pre-line;
+	word-break:break-all;
+}
+
+/* 카페 등록/수정 시, 본문 내용 글자 수 span 영역*/
+#infoCheckResultSpan{
+	float:right;
+}
+
+/*예울 CSS 추가 사항 끝*/
+
+
+/*성호 CSS 추가 사항 시작 */
+
+/*성호 CSS 추가 사항 끝*/
+
+
+/*영섭 CSS 추가 사항 시작 */
+
+/*영섭 CSS 추가 사항 끝*/
+
+
+/*병철 CSS 추가 사항 시작 */
+
+/*병철 CSS 추가 사항 끝*/

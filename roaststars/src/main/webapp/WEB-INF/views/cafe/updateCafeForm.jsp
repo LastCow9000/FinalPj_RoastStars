@@ -17,8 +17,12 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	   // 제목 체크 (기존 제목)
+	   var checkName=$("#registCafeName").val();
 
-	   var checkTitle="";
+	   // 카페 정보 체크 (기존 내용)
+	   var checkInfo=$("#cafeInfo").val();
+	   
 	   // 제목 길이 체크
 	   $("#registCafeName").keyup(function() {
 	      checkName = "";
@@ -32,16 +36,57 @@ $(document).ready(function() {
 	         $("#nameCheckResult").html(nameValue.length).css("color","grey");
 	         checkName = nameValue;
 	      }
-	   });//keyup
+	   });//end registCafeName keyup
 	    
-	   /* 길이 넘었을 때 submit 안 되도록 막기 */
-	   $("#registerCafeForm").submit(function() {
-	      if(checkName == ""){
-	         alert("상호명은 10자 이내로 작성해주세요.");
-	         return false;
+	   // 제목 영역 클릭하면 글자 수 표현하기
+	   $("#updateCafeNameArea").click(function() {
+	      checkName = "";
+	      var nameValue= $("#registCafeName").val().trim();
+	      
+	      //제목 길이 10자 넘어가면 빨갛게
+	      if(nameValue.length > 10){
+	         $("#nameCheckResult").html(nameValue.length).css("color","red");
+	         return;
+	      //제목 길이 평소에는 grey로
+	      } else {
+	         $("#nameCheckResult").html(nameValue.length).css("color","grey");
+	         checkName = nameValue;
 	      }
-	   });//sumit
+	   });// end updateCafeNameArea click
+	   
+	   
+	   // 본문 (카페정보 길이 체크)
+	   $("#cafeInfo").keyup(function() {
+		   checkInfo = "";
+		   var infoValue = $(this).val().trim();
 		   
+		   //본문 길이 200자 넘어가면 빨갛게
+	       if(infoValue.length > 200){
+	           $("#infoCheckResult").html(infoValue.length).css("color","red");
+	           return;
+	        //본문 길이 평소에는 grey로
+	        } else {
+	           $("#infoCheckResult").html(infoValue.length).css("color","grey");
+	           checkInfo = infoValue;
+	        }
+	   });// end registCafeName keyup
+	   
+	   // 본문 영역 클릭하면 글자 수 표현하기
+	   $("#updateCafeInfoArea").click(function() {
+		   checkInfo = "";
+		   var infoValue = $("#cafeInfo").val().trim();
+		   
+	      //본문 길이 200자 넘어가면 빨갛게
+	      if(infoValue.length > 200){
+	         $("#infoCheckResult").html(infoValue.length).css("color","red");
+	         return;
+	      //본문 길이 평소에는 grey로
+	      } else {
+	         $("#infoCheckResult").html(infoValue.length).css("color","grey");
+	         checkInfo = infoValue;
+	      }
+	   });// end updateCafeInfoArea click
+	  
 		   
      // 주소 팝업   
       $("#goToAddrAPIBtn").click(function() {
@@ -57,7 +102,21 @@ $(document).ready(function() {
          //alert($(this).val());
          $('#holidayTimeCheck').val($(this).val());
       });//noOperating
+      
+	  /* 길이 넘었을 때 submit 안 되도록 막기 */
       $("#updateCafeForm").submit(function() {
+		  // 제목 길이 체크
+	      if(checkName == ""){
+	         alert("상호명은 10자 이내로 작성해주세요.");
+	         return false;
+	      } 
+		   
+		  // 본문 길이 체크
+	      if(checkInfo == ""){
+	          alert("카페 소개는 200자 이내로 작성해주세요.");
+	          return false;
+	       } 
+		  
           if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
              return true;
           }else
@@ -146,7 +205,7 @@ function inputTimeColon(time) {
    	<tbody>
    		<tr>
 			<td>카페명</td>
-			<td colspan=2><input type="text" name="cafeName" id="registCafeName" size=50 value="${cafeOperVO.cafeVO.cafeName}" required>
+			<td colspan=2 id="updateCafeNameArea"><input type="text" name="cafeName" id="registCafeName" size=50 value="${cafeOperVO.cafeVO.cafeName}" required>
 			<span id="nameCheckResult"></span>/10</td>
 		</tr>
 		 
@@ -173,9 +232,11 @@ function inputTimeColon(time) {
 		</tr>
 		
 		<tr>
-			<td colspan="3">
-				<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"
+			<td colspan="3" id="updateCafeInfoArea">
+				<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"  id="cafeInfo" 
 					 name="cafeInfo" required>${cafeOperVO.cafeVO.cafeInfo}</textarea>
+				<br><span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
+					 
 			</td>
 		</tr>
    	
@@ -200,7 +261,7 @@ function inputTimeColon(time) {
 				<div id="managerInfo"></div>
 				<div class="form-check-inline">
 			      <label class="form-check-label" for="radioMember">
-	              	<input type="radio" name="radioHolidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+	              	<input type="radio" name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
 			      </label>
 			    </div>
 			    <div class="form-check-inline">    

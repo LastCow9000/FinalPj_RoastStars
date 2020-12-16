@@ -20,11 +20,15 @@
 /* 길이 체크 공간 */
 
 $(document).ready(function() {
-   //var checkTitle="";
+	
+   var checkName="";
+   var checkInfo="";
+   
    // 제목 길이 체크
    $("#registCafeName").keyup(function() {
-      checkName = "";
+	  checkName = "";
       var nameValue= $(this).val().trim();
+      
       //제목 길이 10자 넘어가면 빨갛게
       if(nameValue.length > 10){
          $("#nameCheckResult").html(nameValue.length).css("color","red");
@@ -34,14 +38,43 @@ $(document).ready(function() {
          $("#nameCheckResult").html(nameValue.length).css("color","grey");
          checkName = nameValue;
       }
-   });//keyup
+   });// end registCafeName keyup
+   
+   // 본문 길이 체크
+   $("#cafeInfo").keyup(function() {
+	   checkInfo = "";
+	   var infoValue = $(this).val().trim();
+	   
+	   //본문 길이 200자 넘어가면 빨갛게
+       if(infoValue.length > 200){
+           $("#infoCheckResult").html(infoValue.length).css("color","red");
+           return;
+        //본문 길이 평소에는 grey로
+        } else {
+           $("#infoCheckResult").html(infoValue.length).css("color","grey");
+           checkInfo = infoValue;
+        }
+   });// end registCafeName keyup
+   
     
    /* 길이 넘었을 때 submit 안 되도록 막기 */
    $("#registerCafeForm").submit(function() {
+	   // 제목 길이 체크
       if(checkName == ""){
          alert("상호명은 10자 이내로 작성해주세요.");
          return false;
-      }
+      } 
+	   // 본문 길이 체크
+      if(checkInfo == ""){
+          alert("카페 소개는 200자 이내로 작성해주세요.");
+          return false;
+       } 
+	   
+      if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
    });//sumit
    
    /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
@@ -50,12 +83,6 @@ $(document).ready(function() {
       $('#radioClosed').val($(this).val());
    });//noOperating
    
-   $("#registerCafeForm").submit(function() {
-   		if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
-   			return true;
-   		}else
-   			return false;
-   });
    
    $(".classification").change(function(){ //라디오 버튼 변화 시
  	  var tags='';
@@ -151,7 +178,6 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
-
 				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
   				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
 
@@ -170,8 +196,9 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td colspan="3">
-					<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"
-						 name="cafeInfo" required></textarea>
+					<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
+						 name="cafeInfo" required></textarea><br>
+					<span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
 				</td>
 			</tr>
 			<tr>
@@ -180,21 +207,13 @@ function inputTimeColon(time) {
 			<tr>
 				<td>평일</td>
 				<td colspan="2">
-<<<<<<< HEAD
-					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
-=======
 					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
 			<tr>
 				<td>주말</td>
 				<td colspan="2">
-<<<<<<< HEAD
-					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
-=======
 					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
 			<tr>
