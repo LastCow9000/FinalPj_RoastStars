@@ -151,7 +151,7 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan=2><input type="text" name="cafeLoc" id="address" readonly="readonly" required size=50 placeholder="주소 검색으로 주소를 입력해주세요">&nbsp;<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+				<td colspan=2><input type="text" name="cafeLoc" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required size=50 placeholder="주소 검색으로 주소를 입력해주세요">&nbsp;<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
@@ -177,13 +177,13 @@ function inputTimeColon(time) {
 			<tr>
 				<td>평일</td>
 				<td colspan="2">
-					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" />
+					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
 				</td>
 			</tr>
 			<tr>
 				<td>주말</td>
 				<td colspan="2">
-					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>
+					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
 				</td>
 			</tr>
 			<tr>
@@ -192,7 +192,7 @@ function inputTimeColon(time) {
 					<div id="managerInfo"></div>
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="radioMember">
-		              	<input type="radio"  name="radioHolidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+		              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
 				      </label>
 				    </div>
 				    <div class="form-check-inline">    

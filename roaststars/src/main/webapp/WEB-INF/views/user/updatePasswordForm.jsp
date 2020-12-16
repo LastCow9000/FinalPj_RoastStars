@@ -73,14 +73,20 @@ $(document).ready(function() {
   <sec:csrfInput/>
     <div class="form-group">
       <label for="passwordC">비밀번호 : </label>
-      <input type="password" name="password" id="passwordC" class="form-control" placeholder="변경할 비밀번호를 입력해주세요.">
-      <span id="passwordResult"></span>
+      <input type="password" name="password" id="passwordC" class="form-control" placeholder="변경할 비밀번호를 입력해주세요." required>  
+      <div class="valid-feedback"> <span id="passwordResult"></span></div>
+      
+       <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+    
     </div>
     
     <div class="form-group">
-      <label for="passwordChecked">비밀번호 확인 : </label>
-      <input type="password" id="passwordChecked" class="form-control" placeholder="변경할 비밀번호를 다시 한번 입력해주세요.">
-	  <span id="passwordCheckResult"></span>
+      <label for="passwordChecked">비밀번호 확인 : </label> 
+      <input type="password" id="passwordChecked" class="form-control" placeholder="변경할 비밀번호를 다시 한번 입력해주세요." required>
+       <div class="valid-feedback"><span id="passwordCheckResult"></span></div>
+      
+       <div class="invalid-feedback"> 비밀번호를 입력해주세요.</div>
+	  
     </div>
     <hr style="width: 480px; float:left;"><br>
 	<input type="submit" value="비밀번호 수정" class="btn btn-primary" style="float:center;">
