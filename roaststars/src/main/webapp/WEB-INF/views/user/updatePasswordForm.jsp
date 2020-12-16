@@ -11,7 +11,33 @@
 $(document).ready(function() {
     // 비밀번호 체크
     var checkPassword = "";
+  //현재 비밀번호 체크하기
+    $("#passwordNow").keyup(function() {
+    	checkPassNow="";
+   	 var passValue= $(this).val().trim();
+       $.ajax({
+          type : "post",
+          url : "${pageContext.request.contextPath}/pass-checkAjax.do",
+          data : "password="+passValue,
+          beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                  xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+              }, 
+          success : function(result) {
+             
+             if (result == "ok"){
+                $("#passwordNowResult").html("비밀번호가 맞습니다.").css(
+                      "color", "green");
+                checkPassNow = passValue; 
+             } else {
+                $("#passwordNowResult").html("비밀번호가 틀립니다.").css(
+                      "color", "red");
+                checkPassNow="";
+             }
+          }//success
+       });//ajax
+    });//keyup
     // 1. 비밀번호 길이 체크	
+    
     $("#passwordC").keyup(function() {
        var passValue=$(this).val();  //기존 기입 비밀번호
    
@@ -53,7 +79,11 @@ $(document).ready(function() {
   
   /* 서브밋 확인 공간 */   
   $("#updateUserPassForm").submit(function() {
-      // 비밀번호 일치 여부 체크해서 사용가능 상태일때만 수정되도록 한다.
+	  if(checkPassNow==""){
+	         alert("현재비밀번호를 확인해주세요!");
+	         return false;
+	      } 
+	  // 비밀번호 일치 여부 체크해서 사용가능 상태일때만 수정되도록 한다.
       if(checkPassword==""){
          alert("비밀번호를 확인해주세요!");
          return false;
@@ -71,6 +101,14 @@ $(document).ready(function() {
   <hr style="width: 300px; float:left;"><br><br>
   <form method="post" action="${pageContext.request.contextPath}/update-userPasswordaction.do" class="was-validated" id="updateUserPassForm" enctype="multipart/form-data">
   <sec:csrfInput/>
+  	<div class="form-group">
+      <label for="passwordNow">현재 비밀번호 : </label> 
+      <input type="password" name="passwordNow" id="passwordNow" class="form-control" placeholder="현재 비밀번호를 입력해주세요." required>
+       <div class="valid-feedback"><span id="passwordNowResult"></span></div>
+      
+       <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+    </div>
+  
     <div class="form-group">
       <label for="passwordC">비밀번호 : </label>
       <input type="password" name="password" id="passwordC" class="form-control" placeholder="변경할 비밀번호를 입력해주세요." required>  

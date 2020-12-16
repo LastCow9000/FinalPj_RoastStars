@@ -71,9 +71,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void updateUser(UserVO userVO) {
-		
 		userMapper.updateUser(userVO);
-	
 	}
 
 	//회원탈퇴
