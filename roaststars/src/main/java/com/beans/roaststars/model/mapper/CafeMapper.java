@@ -39,6 +39,7 @@ public interface CafeMapper {
 	//카페정보중 운영시간 수정하기
 	void updateCafeOperatingTime(CafeOperatingTimeVO cafeOperVO);
 	//카페 삭제하기
+
 	int deleteCafe(String cafeNo);
 
 	//메뉴 등록 1 : menu table에 등록
