@@ -71,9 +71,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void updateUser(UserVO userVO) {
-		
 		userMapper.updateUser(userVO);
-	
 	}
 
 	//회원탈퇴
@@ -82,7 +80,6 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteUser(userVO);
 	}
 
-	
 	//비번찾기용 아이디 이름 일치 체크
 	@Override
 	public int checkIdAndName(String id, String name) {

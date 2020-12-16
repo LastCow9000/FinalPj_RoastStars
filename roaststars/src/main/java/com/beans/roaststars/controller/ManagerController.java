@@ -88,6 +88,8 @@ public class ManagerController {
 	   return new ModelAndView("cafe/registerCafeResult.tiles",
 			   "cafeNo", cafeNo);
    }
+
+   
    
 	// 카페정보수정폼으로 이동하기 전에 자신의 카페 리스트 불러오기
 	@Secured("ROLE_MANAGER")

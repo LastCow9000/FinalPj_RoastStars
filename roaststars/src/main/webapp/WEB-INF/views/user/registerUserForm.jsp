@@ -7,13 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- 부트스트랩4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -22,7 +15,7 @@
       var checkId="";
       var checkNick="";
       var checkPassword = "";
-      
+      var checkTel="";
       /* 길이 체크 공간 */
       
       // 1. 아이디 길이 체크
@@ -164,7 +157,18 @@
 	      }).open();
 		
 	});// end goToAddrAPIBtn
-	
+	//전화번호 문자 입력 불가 
+	 $("#tel").keyup(function() {
+		 var telValue=$(this).val().trim();
+	   		if(isFinite(telValue) == false){
+	   			$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+	            checkTel="";
+	   		}else{
+	            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+	   			checkTel=telValue;
+	   		}
+	    
+	   });
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {
   	  // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
@@ -184,10 +188,18 @@
            alert("비밀번호를 확인해주세요!");
            return false;
         }
+       
+       //전화번호 문자 입력 시 alert
+       if(checkTel==""){
+           alert("전화번호를 확인해주세요!");
+           return false;
+        }
     }); // end registerForm submit
     
-   });//ready
    
+});//ready
+   
+  
 
 </script>
 </head>
@@ -235,17 +247,17 @@
     <div class="form-group">
        <label for="tel"> 휴대전화 번호 : </label>
        <input type="text" name="tel"  id="tel" class="form-control" placeholder="Enter your phone number(숫자로만 입력해주세요)" required>
-	      <div class="valid-feedback"></div>
+	      <div class="valid-feedback"><span id="telResult"></span></div>
 	      <div class="invalid-feedback">  휴대전화 번호를 입력해주세요.</div>
     </div>
    
     <div class="form-group">
        <label for="address"> 주소 : <button type="button" class="btn btn-warning btn-sm" id="goToAddrAPIBtn">주소 검색하기</button></label>
-        <input type="text" name="address" id="address" value="" readonly="readonly" class="form-control"  
+        <input type="text" name="address" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required class="form-control"  
        	 size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
-	      상세주소: <input type="text" name="address" size="50" style="margin-top: 10px; height: 20px;">
+
     </div>
     
     <hr style="width: 480px; float:left;"><br>

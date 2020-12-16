@@ -13,7 +13,6 @@
 <title>Main</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/main-beansPick.do">BeansPick</a> <!-- 나중에 헤더로 이동 -->
 	<div class="bannerbox">
 		<video src="resources/upload/main_banner.mp4" width="1200px" height="700px" autoplay loop muted></video>
 		<div class="banner-form">
@@ -25,7 +24,7 @@
 				<form class="form-inline" action="findListByLoc.do">
 					<div class="input-group">
 						<input type="text" name="loc" class="form-control" size="100" placeholder="지역을 입력해주세요" required="required">
-						<button type="submit" class="btn btn-dark">검색</button>
+						<button type="submit" class="btn btn-outline-dark"><font color="white">검색</font></button>
 					</div> 
 				</form>
 			</div>

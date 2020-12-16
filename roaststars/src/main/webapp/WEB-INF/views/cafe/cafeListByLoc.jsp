@@ -8,13 +8,14 @@
 <meta charset="UTF-8">
 <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER','ROLE_ADMIN')" var="hasRole">  <%-- var를 이용하여 js에서 등급확인을 할 수 있다 --%>
 	<sec:authentication property='principal.id' var='loginId'/>
+	<sec:authentication property='principal.nickname' var='nickname'/>
 </sec:authorize>
 <title>지역검색 결과</title>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e0eb306fda064dda6bc06fd37a1eb729&libraries=services"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		//셀렉트 옵션으로 우선순위 실시간 필터링
+		//셀렉트 옵션으로 우선순위 실시간 필터링 
 		var number = 2; // 기존에 처음 셀렉트폼(우선순위1)은 존재하므로 2부터 시작
 		var pri_num = 1; // 처음 셀렉트폼(우선순위1, '#cafeFilter1')부터 옵션값을 받아와야 되므로
 		var arrIndex = 0;
@@ -36,17 +37,17 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
-							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='250' height='250'></div>";
+							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
-							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='250' height='250'></div>";
+							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
 							tags+="</div>";
 						}
 						$("#cafeList").html();
@@ -64,14 +65,15 @@
 				for(key in dictProperty) {	//동적으로 생성된 셀렉트폼의 옵션값을 dictionary에서 받아옴 
 					tags+='<option value="' + key + '">' + dictProperty[key] + '</option>';
 				}	
-				tags+=' </select>';
+				tags+='</select>';
 				$("#selectFilter").append(tags); //옵션값 동적으로 추가
-				
+
 				//alert(Object.keys(dictProperty)); //사전에 들어있는 키값 확인
 				number++; // 다음 셀렉트폼을 선택하기 위하여 값 증가
 				pri_num++; // 다음 옵션값을 선택하기 위하여 값 증가
 				arrIndex++;
-			}
+			} 
+			
 			if(number == 4 || pri_num == 4){
 				tags+='';
 			}
@@ -92,35 +94,38 @@
 				url:"${pageContext.request.contextPath}/cafe-simple.do",
 				data:"cafeNo=" + cafeNo + "&id=${loginId}",
 				success:function(list){
-					var tag="";
-					tag +='<h2>' + list[0].cafeVO.cafeName;
+					
+					// 카페 간략 정보 카드
+					var card_tag ="";
+					card_tag +='<div class="card" style="width:350px; height:1000px; margin-top: 30px; margin-left: 0px;">';
+					card_tag +='<div class="card-header bg-dark text-white" style="height:70px;">';
+					card_tag +='<h4 class="card-title" style="font-weight:bold">'+list[0].cafeVO.cafeName;
 					if(${hasRole} == true){	//로그인 했을 시
 						if(list[1] == true){
-							tag +='<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
+							card_tag +='<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
 						}else{
-							tag +='<span class="myPickStar"><a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
+							card_tag +='<span class="myPickStar"><a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
 						}
 					}	
-					tag +='</h2><div class="img">';		
-					tag +="<img src='resources/upload/"+list[0].cafeVO.cafePic+"' width='500' height='300'></div>";			
-					tag +='</div>';			
-					tag +='<table class="table cafeSimple">';		
-					tag +='<tr>';		
-					tag +='<td>위치</td>';		
-					tag +='<td>' + list[0].cafeVO.cafeLoc + '</td>';			
-					tag +='</tr><tr>';				
-					tag +='<td>운영시간</td>';				
-					tag +='<td>';			
-					tag +='평일 : ' + list[0].weekdayTime + '<br>';			
-					tag +='주말 : ' + list[0].weekendTime + ' | 공휴일 : ' + list[0].holidayTime;				
-					tag +='</td></tr>';				
-					tag +='<tr>';				
-					tag +='<td colspan="2" align="center"><button type="button" onclick="detailBtn()">카페 상세정보 보기</button></td>';
-					tag +='</tr>';				
-					tag +='</table>';			
-					tag +='<input type="hidden" id="detailCafeNo" value="'+cafeNo+'">';			
-					$("#cafeSimple").html(tag);
-				}
+					card_tag +='</h4></div>'; //cafe-header 끝
+					
+					card_tag +="<img class='card-img-top' src='resources/upload/"+list[0].cafeVO.cafePic+" 'style='height:275px; width:326px; float:center;'>";
+					card_tag +='<div class="card-body">';
+					card_tag +='<p class="card-text"><주소> '+list[0].cafeVO.cafeLoc+'</p>';
+					card_tag +='<p class="card-text"><운영시간><br>';
+					card_tag +='평일: '+list[0].weekdayTime+'  |  ';
+					card_tag +='주말: '+list[0].weekendTime+'<br>';
+					card_tag +='공휴일: '+list[0].holidayTime+'</p>';
+					card_tag +='<div style="text-align: center"><button type="button" class="btn btn-secondary" onclick="detailBtn()">카페 상세정보 보기</button></div>';
+					card_tag +='</div>'; //card-body 끝
+					
+					card_tag +='</div>'; //card 끝
+					
+					card_tag +='<input type="hidden" id="detailCafeNo" value="'+cafeNo+'">';
+					 
+					$("#cafeSimple").html(card_tag);
+					
+				}//success
 			}); //ajax
 		
 			/*
@@ -233,12 +238,22 @@
 </head>
 <body>
 <div class="container">
-	<h4>선호 포인트</h4>
-	<p>선호 하는 요소를 선택해주세요!</p>
-	   <!-- 선호 요소 선택 부분 -->
-   
+
    <div class="row">
-   <div class="col-sm-7">
+   
+   <!-- 선호요소 선택 && 카페 리스트 영역 -->
+   <div class="col-sm-8" >
+	
+	<!-- 선호초기화버튼 -->
+	<div style="margin-top: 10px">
+		<button type="button" class="btn btn-secondary btn-sm" onclick="location.reload()">선택 초기화</button>	
+	</div><!-- 선호초기화버튼 끝 -->
+	
+    <!-- 선호 요소 선택 부분 -->
+    <div style="text-align: center; margin-top: 60px; background-color: #d4a5a5; height: 150px;">
+	<h4>나만의 카페 찾기 !</h4>
+ 	   <p>${nickname}님이 선호하는 요소를 선택해주세요!</p>
+ 	   
      	<div id="selectFilter">
 	      <select class="cafeFilter" id="cafeFilter1" required="required">
 	      	<option value="">--1순위--</option>
@@ -249,56 +264,57 @@
 	        <option value="diversity">메뉴의 다양성</option>
 	      </select>
       	</div>
-   </div><!-- 필터링 셀렉트옵션 sm-7영역 -->
+      </div><!-- 선호요소 선택 부분 -->
+      
+      	<!-- (추천결과) 카페 리스트 부분 -->
+      	<div style="margin-top: 50px;">
+      	<h3>추천 카페</h3>
+        <p>당신에게 꼭 맞는 카페를 추천해드려요!</p>
    
-   <!-- 지도 나타나는 부분 -->
-   <div class="col-sm-5">
-  	<div id="map" style="width: 100%; height: 400px;"></div>
-   </div><!-- 지도 영역 -->
-   </div><!-- row -->
-  
-   <div class="row">
-   <div class="col-sm-7"><!-- 카페 리스트 부분 -->
-   
-      <h3>검색 결과</h3>
-      <div class="row cafeList" id="cafeList">
-      <c:forEach items="${cafeList}" var="list" varStatus="order">
+        <div class="row cafeList" id="cafeList">
+        <c:forEach items="${cafeList}" var="list" varStatus="order">
          <c:choose>
             <c:when test="${order.count % 2 == 1}">
                <div class="col-sm-6" style="margin-top: 10px">
-                  <strong>${order.count}</strong> <!-- count -->
+                  <strong>${order.count}위</strong> <!-- count -->
                   <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>
                   <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <input type="hidden" value="${list.cafeVO.cafeLoc}">
                   <div class="img">
-                        <img src="resources/upload/${list.cafeVO.cafePic}" width="250" height="250">
+                        <img src="resources/upload/${list.cafeVO.cafePic}" width="300" height="300">
                   </div>
                </div>   
             </c:when>
             <c:otherwise>
                <div class="col-sm-6" style="margin-top: 10px">
-                  <strong>${order.count}</strong> <!-- count -->
+                  <strong>${order.count}위</strong> <!-- count -->
                   <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>   
                   <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <input type="hidden" value="${list.cafeVO.cafeLoc}">
                   <div class="img">
-                        <img src="resources/upload/${list.cafeVO.cafePic}" width="250" height="250">
+                        <img src="resources/upload/${list.cafeVO.cafePic}" width="300" height="300">
                   </div>
                </div>
             </c:otherwise>
          </c:choose>
-      </c:forEach>
-      </div>
-      
-   </div><!-- 카페 리스트 부분 -->
-
-   <!-- 카페 간략정보 영역 -->
+        </c:forEach>
+        </div><!-- 카페 리스트 부분 -->
+        </div><!-- (추천결과) 카페 리스트 부분 -->
+   </div><!-- 필터링 셀렉트옵션 & 추천결과 sm-8영역 -->
+   
+   
+   <!-- 지도 나타나는 부분 && 카페 간략정보 영역 -->
    <div class="col-sm-4">
-	   <!-- 카페 간략정보 표시 -->
-	   <p id="cafeSimple"></p>
-   </div><!-- 카페 간략정보 영역 -->
-      	
-  </div><!-- 아래쪽 영역 row -->
+   
+	   	<!-- 지도 나타나는 부분 -->
+		<div id="map" style="width: 100%; height: 400px;"></div>
+		
+		<!-- 카페 간략정보 표시 -->
+		<p id="cafeSimple"></p>
+		
+   </div><!-- 지도 나타나는 부분 && 카페 간략정보 영역 -->
+      
+   </div><!-- row -->   	
 </div><!-- container -->
 </body>   
 </html>

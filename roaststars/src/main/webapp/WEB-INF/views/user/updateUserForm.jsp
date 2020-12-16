@@ -22,8 +22,14 @@ $(document).ready(function() {
     var orgNickValue = $("#memberNick").val();
     // 닉네임 체크
     var checkNick=$("#memberNick").val();
+    
 	//현재 비밀번호 체크
     var checkPassNow=""; 
+	
+	//전화번호 숫자 체크(기존 전화번호)
+	var checkTel=$("#tel").val();
+
+	
     // 1. 비밀번호 길이 체크	 
     //현재 비밀번호 체크하기
     $("#passwordNow").keyup(function() {
@@ -81,7 +87,6 @@ $(document).ready(function() {
               $("#nickCheckResult").html("사용가능한 닉네임입니다.").css(
                     "color", "green");
               checkNick = nickValue; 
-              //alert($(this).text());
            } else { // 닉네임 사용불가하면 = 중복이면
               $("#nickCheckResult").html("중복된 닉네임입니다.").css(
                     "color", "red");
@@ -90,21 +95,45 @@ $(document).ready(function() {
      });
   });// end memberNick keyup    
     
-  /* 서브밋 확인 공간 */   
-  $("#updateUserForm").submit(function() {
-	  if(checkPassNow==""){
-	         alert("현재비밀번호를 확인해주세요!");
-	         return false;
-	      } 
 
-     // 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
-     if(checkNick == ""){
-         alert("닉네임을 확인해주세요!");
-         return false;
-      }
-  }); // end updateUserForm submit
+	//전화번호 문자 입력 불가 
+	 $("#tel").keyup(function() {
+		 // 입력된 tel
+		 var telValue=$(this).val().trim();
+		 
+	     checkTel ="";
+   		 
+	     // 전화번호 문자 들어오는지 체크
+	     if(isFinite(telValue) == false){
+   		 	$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+   	     }else{
+            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+   	 		checkTel=telValue;
+   		 }
+	   });// end tel keyup
   
-  
+	   
+   /* 서브밋 확인 공간 */   
+   $("#updateUserForm").submit(function() {
+ 	  if(checkPassNow==""){
+ 	         alert("현재비밀번호를 확인해주세요!");
+ 	         return false;
+ 	      } 
+
+      // 닉네임 중복확인해서 사용가능 상태일때만 가입되도록 한다.
+      if(checkNick == ""){
+          alert("닉네임을 확인해주세요!");
+          return false;
+       }
+      
+      //전화번호 문자 입력 시 alert
+      if(checkTel==""){
+          alert("전화번호를 확인해주세요!");
+          return false;
+       }
+   }); // end updateUserForm submit
+	   
+	   
     // 주소 팝업
  	  $("#goToAddrAPIBtn").click(function() {
 	      new daum.Postcode({
@@ -133,7 +162,6 @@ $(document).ready(function() {
 	
 	 --%>
 	<sec:csrfInput/>
-	<input type="hidden" name="command" value="update">
 	
 	<div class="form-group">
       <label for="id">아이디 : </label>
@@ -141,9 +169,11 @@ $(document).ready(function() {
     </div>
     
      <div class="form-group">
-      <label for="passwordNow">현재 비밀번호 : </label>
-      <input type="password" name="passwordNow" id="passwordNow" class="form-control" placeholder="현재 비밀번호를 입력해주세요.">
-      <span id="passwordNowResult"></span>
+      <label for="passwordNow">현재 비밀번호 : </label> 
+      <input type="password" name="passwordNow" id="passwordNow" class="form-control" placeholder="현재 비밀번호를 입력해주세요." required>
+       <div class="valid-feedback"><span id="passwordNowResult"></span></div>
+      
+       <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
     </div>
    
    <hr style="width: 480px; float:left;"><br><br>
@@ -167,7 +197,7 @@ $(document).ready(function() {
        <input type="text" name="tel"  id="tel" class="form-control" 
        	placeholder="Enter your phone number(숫자로만 입력해주세요)" required
        	value="${userVO.tel}">
-	      <div class="valid-feedback"></div>
+	      <div class="valid-feedback"><span id="telResult"></span></div>
 	      <div class="invalid-feedback">  휴대전화 번호를 입력해주세요.</div>
     </div>
        
@@ -178,14 +208,13 @@ $(document).ready(function() {
         size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
-	      상세주소: <input type="text" name="address" size="50" style="margin-top: 10px; height: 20px;">
     </div>
    
    <hr style="width: 480px; float:left;"><br>
    
    <input type="submit" class="btn btn-info" value="회원정보수정">
    <sec:authentication property="principal.id" var="loginId"/>
-   <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}">비밀번호 변경하기</a>
+   <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}" type="submit" class="btn btn-info">비밀번호 변경하기</a>
    <a href="${pageContext.request.contextPath}/delete-userform.do" type="button" role="button" class="btn btn-danger">탈퇴하기</a>
 </form>
 

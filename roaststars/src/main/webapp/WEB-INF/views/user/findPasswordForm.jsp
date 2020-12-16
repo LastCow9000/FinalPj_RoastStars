@@ -19,8 +19,14 @@
 		self.close();
 	}
 	$(document).ready(function(){
+		var nameCheck ="";
 		$("#submitBtn").click(function(){ 	//비밀번호 찾기 버튼 클릭시
 			var tags='';
+			var nameCheck = $("#name").val();
+			 if(nameCheck===""){
+		         alert("이름을 입력해주세요!");
+		         return false;
+		      }else{
 			$.ajax({
 				type:"POST",
 				data:"id="+$("#id").val()+"&name="+$("#name").val(),
@@ -39,9 +45,36 @@
 					tags+="<input type='button' value='닫기' id='closeBtn' class='btn btn-success' style='float:center;' onclick='closePopup();'>";
 					$(".was-validated").html(tags);
 				}
-			});//end ajax 
+			
+			});//end ajax
+		      }
 		});//end submitBtn click
 		
+		//입력한 아이디와 이름이 일치하는지 확인하기
+		$("#name").keyup(function() {
+	    	checkName="";
+	   	 var nameValue= $("#name").val().trim();
+	       $.ajax({
+	          type : "post",
+	          url : "${pageContext.request.contextPath}/name-checkAjax.do",
+	          data:"id="+$("#id").val()+"&name="+nameValue,
+	          beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                  xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	              }, 
+	          success : function(result) {
+	             
+	             if (result == 1){
+	                $("#nameResult").html("이름이 일치합니다").css(
+	                      "color", "green");
+	                checkName = nameValue; 
+	             } else {
+	                $("#nameResult").html("이름이 일치하지 않습니다.").css(
+	                      "color", "red");
+	                checkName="";
+	             }
+	          }//success
+	       });//ajax
+	    });//keyup
 	});//end ready
 </script>
 </head>
@@ -60,8 +93,9 @@
     <div class="form-group">
        이름 :
       <input type="text" id="name" class="form-control" placeholder="사용자의 이름을 적어주세요" required>
-      <div class="valid-feedback"></div>
+      <div class="valid-feedback">  <span id="nameResult"></span></div>
       <div class="invalid-feedback">  이름을 입력해주세요.</div>
+     
     </div>
 
     <hr style="width: 480px; float:left;"><br>

@@ -147,6 +147,7 @@ $(document).ready(function() {
 
     <hr style="width: 480px; float:left;"><br>
 
+
 	<input type="button" value="추가하기" class="btn btn-primary" id="menu-btn" style="float:center;">
 	
   </form>
@@ -158,6 +159,7 @@ $(document).ready(function() {
 <c:when test="${menuList.size() > 0}">
 <table class="table table-hover">
 <thead>
+
    <tr>	
       <th scope="col">종류</th>
       <th scope="col">메뉴명</th>
@@ -196,6 +198,7 @@ $(document).ready(function() {
 
 <%-- 등록된 메뉴가 없는 경우 --%>
 <c:otherwise>
+
 	<div class="container" style="width:100%; text-align: center;">
 		<h3>등록된 메뉴가 없습니다.</h3>
 		<h3>상단에서 카페의 메뉴를 등록해주세요!</h3>
