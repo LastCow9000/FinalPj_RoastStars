@@ -151,10 +151,17 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
+<<<<<<< HEAD
 
 				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
   				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
 
+=======
+
+				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
+  				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 			</tr>
 			<tr>
 				<td>전화번호</td>
@@ -181,9 +188,17 @@ function inputTimeColon(time) {
 				<td>평일</td>
 				<td colspan="2">
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
 =======
 					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
+=======
+<<<<<<< HEAD
+					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
+=======
+					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 >>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
@@ -191,9 +206,17 @@ function inputTimeColon(time) {
 				<td>주말</td>
 				<td colspan="2">
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
 =======
 					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
+=======
+<<<<<<< HEAD
+					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
+=======
+					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 >>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
