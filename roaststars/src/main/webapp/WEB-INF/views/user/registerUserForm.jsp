@@ -169,10 +169,10 @@
 		 var telValue=$(this).val().trim();
 	   		if(isFinite(telValue) == false){
 	   			$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
-	   			checkTel=telValue;
+	   			checkTel="";
 	   		}else{
 	            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
-	            checkTel="";
+	            checkTel=telValue;
 	   		}
 	    
 	   });
