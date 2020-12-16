@@ -20,7 +20,7 @@
 /* 길이 체크 공간 */
 
 $(document).ready(function() {
-   var checkTitle="";
+   //var checkTitle="";
    // 제목 길이 체크
    $("#registCafeName").keyup(function() {
       checkName = "";
@@ -151,8 +151,10 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
+
 				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
   				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+
 			</tr>
 			<tr>
 				<td>전화번호</td>
@@ -178,13 +180,21 @@ function inputTimeColon(time) {
 			<tr>
 				<td>평일</td>
 				<td colspan="2">
+<<<<<<< HEAD
 					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
+=======
+					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
 			<tr>
 				<td>주말</td>
 				<td colspan="2">
+<<<<<<< HEAD
 					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
+=======
+					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
 			<tr>

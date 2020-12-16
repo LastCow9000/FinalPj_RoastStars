@@ -53,7 +53,7 @@ VALUES('sajang4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4'
 -- update rs_user SET is_enabled=0, nickname='알수없음' WHERE id=?
 
 SELECT *
-FROM   rs_user
+FROM   rs_user where id='testtest14'
 
 -- 2. authorities 
 drop table authorities;
@@ -467,7 +467,4 @@ CREATE TABLE menu_kind(
    constraint fk_menu_kind foreign key(cafe_no, menu_name) references menu(cafe_no, menu_name) on delete cascade,
    constraint pk_menu_kind primary key(cafe_no, menu_name)
 );
-
-
-
 
