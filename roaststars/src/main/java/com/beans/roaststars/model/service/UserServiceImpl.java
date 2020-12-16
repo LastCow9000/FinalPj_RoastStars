@@ -82,19 +82,6 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteUser(userVO);
 	}
 
-	
-	@Override
-	public void withdrawalUser(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void grantAuthorization(String id, String authority) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	//비번찾기용 아이디 이름 일치 체크
 	@Override
 	public int checkIdAndName(String id, String name) {

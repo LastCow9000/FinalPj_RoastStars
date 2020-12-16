@@ -31,13 +31,12 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link" href="#">Beans Pick</a></li>
+			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main-beansPick.do">Beans Pick</a></li>
 			<sec:authorize access="hasRole('ROLE_MEMBER')">
 			<sec:authentication property="principal.id" var="loginId"/>
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}">My Pick</a></li>
 			</sec:authorize>
 		</ul>
-
 
 		<%--로그인 X 사용자 (인증X) --%>
 		<sec:authorize access="!hasAnyRole('ROLE_MEMBER','ROLE_MANAGER','ROLE_ADMIN')">
@@ -57,7 +56,7 @@
 			Spring Security를 이용하면 Authentication Bean 이 생성
 			로그인 한 사용자의 정보는 Authentication 객체의 principal 에 저장된다 
 			 --%>
-				<li><sec:authentication property="principal.name"/>님<li>&nbsp; &nbsp;
+				<li><sec:authentication property="principal.nickname"/>님<li>&nbsp; &nbsp;
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<a href="${pageContext.request.contextPath}/admin-detail.do">관리자 페이지 </a>&nbsp; &nbsp;
 				</sec:authorize>
@@ -65,7 +64,7 @@
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-						내 카페 관리하기
+						<font size=4>내 카페 관리하기</font>
 					</a>
 					<div class="dropdown-menu">
 					<a class="dropdown-item" href="${pageContext.request.contextPath}/register-cafeform.do">카페 등록</a>&nbsp; &nbsp;
@@ -78,7 +77,6 @@
 					<sec:authentication property="principal.id" var="loginId"/>
 					<a href="${pageContext.request.contextPath}/update-userform.do?id=${loginId}">회원정보수정</a>&nbsp; &nbsp;
 				</sec:authorize>
-				
 				
 				<%-- spring security logout은 다음과 같은 처리가 필요하다
 				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
