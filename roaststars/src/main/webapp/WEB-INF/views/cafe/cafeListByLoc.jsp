@@ -242,11 +242,11 @@
    <div class="row">
    
    <!-- 선호요소 선택 && 카페 리스트 영역 -->
-   <div class="col-sm-8" >
+   <div class="col-sm-8">
 	
 	<!-- 선호초기화버튼 -->
 	<div style="margin-top: 10px">
-		<button type="button" class="btn btn-secondary btn-sm" onclick="location.reload()">선택 초기화</button>	
+		<button type="button" class="initPropertyBtn" onclick="location.reload()">선택 초기화</button>	
 	</div><!-- 선호초기화버튼 끝 -->
 	
     <!-- 선호 요소 선택 부분 -->
@@ -267,7 +267,7 @@
       </div><!-- 선호요소 선택 부분 -->
       
       	<!-- (추천결과) 카페 리스트 부분 -->
-      	<div style="margin-top: 50px;">
+      	<div style="margin-top: 50px;" class="shadow-sm p-4 mb-4 bg-white">
       	<h3>추천 카페</h3>
         <p>당신에게 꼭 맞는 카페를 추천해드려요!</p>
    
