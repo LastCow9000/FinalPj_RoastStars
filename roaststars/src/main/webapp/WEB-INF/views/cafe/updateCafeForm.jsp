@@ -23,6 +23,9 @@ $(document).ready(function() {
 	   // 카페 정보 체크 (기존 내용)
 	   var checkInfo=$("#cafeInfo").val();
 	   
+	   // 전화번호 문자&길이 체크 (기존 내용)
+	   var checkTel = $("cafeTel").val();
+	   
 	   // 제목 길이 체크
 	   $("#registCafeName").keyup(function() {
 	      checkName = "";
@@ -88,6 +91,25 @@ $(document).ready(function() {
 	   });// end updateCafeInfoArea click
 	  
 		   
+   //전화번호 문자 입력 불가 & 길이제한
+   $("#cafeTel").keyup(function() {
+	  checkTel="";
+      var telValue=$(this).val().trim();
+           
+         if(telValue.length<3||telValue.length>11){
+              $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+              return;
+           } else {
+        	   if(isFinite(telValue) == false){
+                   $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                }else{
+                   $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+                   checkTel=telValue;
+                }
+           }
+     }); //end cafeTel keyup
+     
+     
      // 주소 팝업   
       $("#goToAddrAPIBtn").click(function() {
          new daum.Postcode({
@@ -117,6 +139,12 @@ $(document).ready(function() {
 	          return false;
 	       } 
 		  
+	      //전화번호 문자 입력 시 alert
+          if(checkTel==""){
+              alert("전화번호를 확인해주세요.");
+              return false;
+           }
+	      
           if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
              return true;
           }else
@@ -219,7 +247,8 @@ function inputTimeColon(time) {
 		
 		<tr>
 			<td>전화번호</td>
-			<td colspan=2><input type="text" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50></td>
+			<td colspan=2><input type="text" id="cafeTel" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50>
+			&nbsp;<span id="telResult"></span></td>
 		</tr>
 		
 		<tr>

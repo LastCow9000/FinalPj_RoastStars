@@ -23,6 +23,7 @@ $(document).ready(function() {
 	
    var checkName="";
    var checkInfo="";
+   var checkTel="";
    
    // 제목 길이 체크
    $("#registCafeName").keyup(function() {
@@ -56,6 +57,27 @@ $(document).ready(function() {
         }
    });// end registCafeName keyup
    
+   
+   //전화번호 문자 입력 불가 & 길이제한
+   $("#cafeTel").keyup(function() {
+      var telValue=$(this).val().trim();
+           
+         if(telValue.length<3||telValue.length>11){
+              $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+              checkTel="";
+              return;
+           } else {
+        	   if(isFinite(telValue) == false){
+                   $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                   checkTel="";
+                }else{
+                   $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+                   checkTel=telValue;
+                }
+           }
+     }); //end cafeTel keyup
+   
     
    /* 길이 넘었을 때 submit 안 되도록 막기 */
    $("#registerCafeForm").submit(function() {
@@ -70,6 +92,12 @@ $(document).ready(function() {
           return false;
        } 
 	   
+      //전화번호 문자 입력 시 alert
+      if(checkTel==""){
+          alert("전화번호를 확인해주세요.");
+          return false;
+       }
+      
       if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
  			return true;
  		}else{
@@ -108,6 +136,7 @@ $(document).ready(function() {
 	});//goToAddrAPIBtn
 
 });//ready
+
 function inputTimeColon(time) {
     // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
     var replaceTime = time.value.replace(/\:/g, "");
@@ -184,7 +213,8 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td colspan=2><input type="text" name="cafeTel" required placeholder="전화번호를 숫자로만 입력해주세요" size=50 ></td>
+				<td colspan=2><input type="text" name="cafeTel" id="cafeTel" required placeholder="전화번호를 숫자로만 입력해주세요" size=50 >
+				&nbsp;<span id="telResult"></span></td>
 			</tr>
 			<tr>
 				<td>카페사진</td>
