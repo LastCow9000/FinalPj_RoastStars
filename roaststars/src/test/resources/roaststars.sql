@@ -53,7 +53,7 @@ VALUES('sajang4', '1', '스퉐붝스4', '커피왕4', '410-2475-2081', '용인4'
 -- update rs_user SET is_enabled=0, nickname='알수없음' WHERE id=?
 
 SELECT *
-FROM   rs_user where id='testtest14'
+FROM   rs_user;
 
 -- 2. authorities 
 drop table authorities;
@@ -63,7 +63,7 @@ create table authorities(
    constraint fk_authorities foreign key(username) references rs_user(id) on delete cascade,
    constraint pk_authorities primary key(username, authority)
 )
-
+delete authorities
 -- 관리자 권한 부여 (admin)
 INSERT INTO authorities VALUES('admin', 'ROLE_ADMIN');
 
@@ -467,4 +467,5 @@ CREATE TABLE menu_kind(
    constraint fk_menu_kind foreign key(cafe_no, menu_name) references menu(cafe_no, menu_name) on delete cascade,
    constraint pk_menu_kind primary key(cafe_no, menu_name)
 );
+drop table menu_kind;
 

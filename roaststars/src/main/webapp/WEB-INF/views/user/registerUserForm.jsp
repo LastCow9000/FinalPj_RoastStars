@@ -143,11 +143,7 @@
                  }
             }
  	 });//end tel keyup 
-<<<<<<< HEAD
 
-=======
-
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
     	  var tags='';

@@ -49,26 +49,28 @@ input, textarea{
 
 /* 이미지 클릭시 크게 보기*/
 .bigPictureWrapper {
-   position: absolute;
+   position: fixed;
    display: none;
-   justify-content: left;
-   align-items: center;
-   top:0%;
-   width:30%;
-   height:30%;
+   justify-content: flex-end;
+   align-items:center;
+   top:55%;
+   width:1%;
+   height:1%;
    background-color: gray; 
    z-index: 100;
    background:rgba(255,255,255,0.5);
 }
 .bigPicture {
-   position: relative;
+   position: fixed;
    display:flex;
-   justify-content: left;
+   justify-content: inherit;
    align-items: center;
+   margin-left: 250px;
 }
 
 .bigPicture img {
-   width:600px;
+   width:500px;
+   height: 400px;
 }
 
 /* 메인배너 동영상 관련 */
