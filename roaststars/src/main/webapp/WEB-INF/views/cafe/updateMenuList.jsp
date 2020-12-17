@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메뉴 추가</title>
 <script type="text/javascript">
 $(document).ready(function() {
 	var cafeNo = ${cafeNo};

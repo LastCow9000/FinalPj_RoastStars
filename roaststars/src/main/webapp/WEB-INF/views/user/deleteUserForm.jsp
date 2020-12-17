@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 삭제 폼</title>
 <script type="text/javascript">
 $(document).ready(function() {
 	//비밀번호 확인하기 
