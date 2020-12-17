@@ -1,159 +1,168 @@
  /* 글씨체 적용 */
 @font-face{
-	font-family: "Main Font";
-	src: url("main-font.ttf");
+   font-family: "Main Font";
+   src: url("main-font.ttf");
 }
 
-* {
-	font-family:"Main Font";
-	font-weight: bolder;
-	font-size: 20px;
+@font-face{
+   font-family: "Layout Font";
+   src: url("layout-font.otf"); 
 }
+
+.footer,.header,.btn,.pagination  {
+   font-family:"Layout Font";
+   font-size: 20px;
+}    
+
+.main{
+   font-family:"Main Font";
+   font-weight: bolder;
+   font-size: 20px;
+}
+
 
 /* 카페 정보 상세보기 페이지 설정 */
 
 /* 카페 상세보기 영역 */
 #cafeDetailCafeTitle {
-	float: left;
-	font-size: 30px;
+   float: left;
+   font-size: 30px;
 }
 
 .myPickStar{
-	float: right;
-	margin-right: 15px;
+   float: right;
+   margin-right: 5px;
+   margin-bottom: 10px;
+}
+
+/* icon 2x 적용한 부분 사이즈 조금 작게*/
+.fa-2x {
+    font-size: 37px !important;
 }
 
 /* 리뷰 타이틀 및 리뷰 총 개수 조정 */
 
 /* 리뷰 전체 영역(리뷰 + 페이징 바)*/
 .reviewArea{
-	position: relative;
+   position: relative;
 }
 
 #reviewTitle{
-	float: left;
-	font-size: 25px;
-	margin-left: 10px;
+   float: left;
+   font-size: 25px;
+   margin-left: 10px;
 }
 
 /* 리뷰 테이블 */
 #reviewTableInfo {
-	font-size: 18px;
-	color : #6c5b7b;
+   font-size: 18px;
+   color : #6c5b7b;
 }
 
 /* 리뷰작성 버튼 위치 조정 */
 #reviewRegisterBtn {
-	float: right;
-	color : #155263;
-	text-decoration: none;
-	margin-right: 10px;
+   float: right;
+   color : #155263;
+   text-decoration: none;
+   margin-right: 10px;
 }
 
 #reviewRegisterBtn:hover{
-	cursor: pointer;
+   cursor: pointer;
 }
 
 /* 리뷰 삭제 버튼 크기 조정 */
 .deleteReviewBtn{
-	line-height: 1px;
-	border-radius: .2rem;
-	padding-bottom: 0.5rem;
-	padding-top: 0.5rem;
-	background-color: #e23e57;
-	color:white;
-	outline: 0;
-	border: 0;
+   line-height: 1px;
+   border-radius: .2rem;
+   padding-bottom: 0.5rem;
+   padding-top: 0.5rem;
+   background-color: #e23e57;
+   color:white;
+   outline: 0;
+   border: 0;
 }
 
 /* 리뷰작성 모달 */
 .modalBtn{
-	font-weight: bolder;
+   font-weight: bolder;
 }
 
 /* 리뷰 리스트 테이블 */
 .reviewTable{
-	/*테이블 가운데 정렬*/
-	width: 100%;
+   /*테이블 가운데 정렬*/
+   width: 100%;
 }
 
 
 /*리뷰작성 폼 테이블 크기 조정*/
 .reviewForm{
-	/*테이블 가운데 정렬*/
-	float: center;
-	width: 100%;
+   /*테이블 가운데 정렬*/
+   float: center;
+   width: 100%;
 }
 
 tr.reviewTableProperty {
-	margin-bottom:1000px;
-	text-align: center;
+   margin-bottom:1000px;
+   text-align: center;
 }
 
 .property_kind {
-	font-size: 10px;
+   font-size: 10px;
 }
 
 
 /* 페이징 바 */
 .pagingInfo{
-	background-color: white;
-	width: 100%;
-	position: absolute;
-	margin: auto;
-	/*align-items: center; 세로에서 가운데에 요소를 배치*/
-	/*justify-content: cetner; 가로에서 가운데에 요소를 배치*/
-	font-size: 20px;
+   background-color: white;
+   width: 100%;
+   position: absolute;
+   margin: auto;
+   /*align-items: center; 세로에서 가운데에 요소를 배치*/
+   /*justify-content: cetner; 가로에서 가운데에 요소를 배치*/
+   font-size: 20px;
 }
 
 /* 이미지 클릭시 크게 보기*/
 .bigPictureWrapper {
-	position: absolute;
-	display: none;
-	justify-content: left;
-	align-items: center;
-	top:0%;
-	width:30%;
-	height:30%;
-	background-color: gray; 
-	z-index: 100;
-	background:rgba(255,255,255,0.5);
+   position: absolute;
+   display: none;
+   justify-content: left;
+   align-items: center;
+   top:0%;
+   width:30%;
+   height:30%;
+   background-color: gray; 
+   z-index: 100;
+   background:rgba(255,255,255,0.5);
 }
 .bigPicture {
-	position: relative;
-	display:flex;
-	justify-content: left;
-	align-items: center;
+   position: relative;
+   display:flex;
+   justify-content: left;
+   align-items: center;
 }
-
-/* 빈즈픽 레이아웃*/
-.card{
-	padding: 10px;
-	margin: 5px;
-	justify-content: center;
-}
-
 
 .bigPicture img {
-	width:600px;
+   width:600px;
 }
 
 /* 메인배너 동영상 관련 */
 .bannerbox { 
-	width: 100%; 
-	height: 500px; 
-	overflow: hidden;
-	margin: 0px auto; 
-	position: relative; 
+   width: 100%; 
+   height: 500px; 
+   overflow: hidden;
+   margin: 0px auto; 
+   position: relative; 
 }
 .banner-form { 
-	position: absolute; top: 50%; width: 100%; 
+   position: absolute; top: 50%; width: 100%; 
 }
 .banner-text h1 { 
-	margin-top: -50px; text-align: center; font-size: 48px; color: #ffffff; font-weight: bold;
+   margin-top: -50px; text-align: center; font-size: 48px; color: #ffffff; font-weight: bold;
 }
 .banner-text h2 { 
-	margin-top: -24px; text-align: center; font-size: 32px; color: #ffffff; 
+   margin-top: -24px; text-align: center; font-size: 32px; color: #ffffff; 
 }
 
 /* 마이픽 카드 */
@@ -162,6 +171,90 @@ tr.reviewTableProperty {
   flex-wrap: wrap; /* 컨테이너 너비를 넘어가면 다음 줄로 요소를 배치 */
   justify-content: flex-start;
 }
-.card {
+
+.card { /* 카페 간략정보도 포함 !*/
     max-height: 600px;
+    font-size:20px;
 }
+
+/*------------paging용 test도 포함--------------*/
+html *{
+    -webkit-font-smoothing: antialiased;
+}
+.pagination .page-link:focus{
+    box-shadow: none;
+}
+.pagination>.page-item>.page-link, .pagination>.page-item>span {
+    border: 0;
+    border-radius: 30px!important;
+    transition: all .3s;
+    padding: 0 11px !important;
+    margin: 0 3px !important;
+    min-width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #999;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    background: 0 0;
+    text-align: center;
+}
+
+.pagination>.page-item.active>a, .pagination>.page-item.active>a:focus, .pagination>.page-item.active>a:hover, .pagination>.page-item.active>span, .pagination>.page-item.active>span:focus, .pagination>.page-item.active>span:hover {
+    background-color: #9c27b0;
+    border-color: #9c27b0;
+    color: #fff;
+    box-shadow: 0 4px 5px 0 rgba(156,39,176,.14), 0 1px 10px 0 rgba(156,39,176,.12), 0 2px 4px -1px rgba(156,39,176,.2);
+}
+
+
+.pagination.pagination-info>.page-item.active>a, .pagination.pagination-info>.page-item.active>a:focus, .pagination.pagination-info>.page-item.active>a:hover, .pagination.pagination-info>.page-item.active>span, .pagination.pagination-info>.page-item.active>span:focus, .pagination.pagination-info>.page-item.active>span:hover {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    box-shadow: 0 4px 5px 0 rgba(0,188,212,.14), 0 1px 10px 0 rgba(0,188,212,.12), 0 2px 4px -1px rgba(0,188,212,.2);
+}
+
+
+.pagination.pagination-success>.page-item.active>a, .pagination.pagination-success>.page-item.active>a:focus, .pagination.pagination-success>.page-item.active>a:hover, .pagination.pagination-success>.page-item.active>span, .pagination.pagination-success>.page-item.active>span:focus, .pagination.pagination-success>.page-item.active>span:hover {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    box-shadow: 0 4px 5px 0 rgba(76,175,80,.14), 0 1px 10px 0 rgba(76,175,80,.12), 0 2px 4px -1px rgba(76,175,80,.2);
+}
+
+.pagination.pagination-warning>.page-item.active>a, .pagination.pagination-warning>.page-item.active>a:focus, .pagination.pagination-warning>.page-item.active>a:hover, .pagination.pagination-warning>.page-item.active>span, .pagination.pagination-warning>.page-item.active>span:focus, .pagination.pagination-warning>.page-item.active>span:hover {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    box-shadow: 0 4px 5px 0 rgba(255,152,0,.14), 0 1px 10px 0 rgba(255,152,0,.12), 0 2px 4px -1px rgba(255,152,0,.2);
+}
+
+.pagination.pagination-danger>.page-item.active>a, .pagination.pagination-danger>.page-item.active>a:focus, .pagination.pagination-danger>.page-item.active>a:hover, .pagination.pagination-danger>.page-item.active>span, .pagination.pagination-danger>.page-item.active>span:focus, .pagination.pagination-danger>.page-item.active>span:hover {
+    background-color: #f44336;
+    border-color: #f44336;
+    box-shadow: 0 4px 5px 0 rgba(244,67,54,.14), 0 1px 10px 0 rgba(244,67,54,.12), 0 2px 4px -1px rgba(244,67,54,.2);
+}
+
+/*예울 CSS 추가 사항 시작 */
+
+/*예울 CSS 추가 사항 끝*/
+
+
+/*성호 CSS 추가 사항 시작 */
+
+/*성호 CSS 추가 사항 끝*/
+
+
+/*영섭 CSS 추가 사항 시작 */
+.card { /* 카페 간략정보도 포함 !*/
+    max-height: 600px;
+    font-size:20px;
+    padding: 10px;
+   margin: 5px;
+   justify-content: center;
+}
+/*영섭 CSS 추가 사항 끝*/
+
+
+/*병철 CSS 추가 사항 시작 */
+
+/*병철 CSS 추가 사항 끝*/

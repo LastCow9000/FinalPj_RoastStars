@@ -135,7 +135,7 @@ VALUES (cafe_seq.nextval, '스타벅스4', '부천', '맛있습니다!!!!!', '33
 --delete from cafe where id=2
 
 SELECT *
-FROM   cafe
+FROM   cafe 
 
 -- 4. operating_time
 DROP TABLE operating_time;

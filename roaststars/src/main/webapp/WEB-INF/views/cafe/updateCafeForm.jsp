@@ -33,14 +33,27 @@ $(document).ready(function() {
 	         checkName = nameValue;
 	      }
 	   });//keyup
-	    
-	   /* 길이 넘었을 때 submit 안 되도록 막기 */
-	   $("#registerCafeForm").submit(function() {
-	      if(checkName == ""){
-	         alert("상호명은 10자 이내로 작성해주세요.");
-	         return false;
-	      }
-	   });//sumit
+	 //전화번호 문자 입력 불가 
+		 $("#cafeTel").keyup(function() {
+			 var telValue=$(this).val().trim();
+		   		if(isFinite(telValue) == false){
+		   			$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+		            checkTel="";
+		   		}else{
+		            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+		   			checkTel=telValue;
+		   		}
+		   	 if(telValue.length<3||telValue.length>11){
+		            $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+		            checkTel="";
+		            return;
+		         } else {
+		            $("#telResult").html("적합한 전화번호입니다.").css("color","green");
+		            checkTel=telValue;
+		         } 
+		   });
+	   
 		   
 		   
      // 주소 팝업   
@@ -76,7 +89,18 @@ $(document).ready(function() {
           }
           $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
       });
-    
+      /* 길이 넘었을 때 submit 안 되도록 막기 */
+	   $("#registerCafeForm").submit(function() {
+	      if(checkName == ""){
+	         alert("상호명은 10자 이내로 작성해주세요.");
+	         return false;
+	      }
+	    //전화번호 문자 입력 시 alert
+	       if(checkTel==""){
+	           alert("전화번호를 확인해주세요!");
+	           return false;
+	        }
+	   });//sumit
 });//ready
 function inputTimeColon(time) {
     // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
@@ -160,7 +184,8 @@ function inputTimeColon(time) {
 		
 		<tr>
 			<td>전화번호</td>
-			<td colspan=2><input type="text" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50></td>
+			<td colspan=2><input type="text" name="cafeTel" id="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50>
+			<span id="telResult"></span></td>
 		</tr>
 		
 		<tr>
@@ -200,7 +225,7 @@ function inputTimeColon(time) {
 				<div id="managerInfo"></div>
 				<div class="form-check-inline">
 			      <label class="form-check-label" for="radioMember">
-	              	<input type="radio" name="radioHolidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+	              	<input type="radio" name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
 			      </label>
 			    </div>
 			    <div class="form-check-inline">    

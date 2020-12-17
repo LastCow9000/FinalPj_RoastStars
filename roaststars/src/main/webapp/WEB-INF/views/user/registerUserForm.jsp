@@ -111,26 +111,10 @@
             $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
             checkPassword="";
          }
-         
-      });// end passwordC
       
-      //비밀번호 일치 여부 체크 (비밀번호 확인 기입 비밀번호)
-      $("#passwordChecked").keyup(function() {
-    	 checkPassword="";
-         var passValue =$("#passwordC").val(); //기존 기입 비밀번호
-         var passChecked = $(this).val(); // 비밀번호 확인 기입 비밀번호
-         if(passChecked===passValue){
-            $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","green");
-            checkPassword = passChecked;
-         }else{
-            $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
-            checkPassword="";
-            //$(".pass valid-feedback").attr('class', ".pass invalid-feedback");
-            
-         }
       });// end passwordChecked
       
-
+	
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
     	  var tags='';
@@ -175,7 +159,14 @@
 
 	   			checkTel=telValue;
 	   		}
-	    
+	   	 if(telValue.length<3||telValue.length>11){
+	            $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+	            checkTel="";
+	            return;
+	         } else {
+	            $("#telResult").html("적합한 전화번호입니다.").css("color","green");
+	            checkTel=telValue;
+	         } 
 	   });
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {

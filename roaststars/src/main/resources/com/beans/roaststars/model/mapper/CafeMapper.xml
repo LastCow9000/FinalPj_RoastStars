@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 카페 정보 수정하기 1 -->
 	<update id="updateCafe" parameterType="cafeVO">
-		update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR}
+		update cafe set cafe_name=#{cafeName}, cafe_loc=#{cafeLoc},cafe_tel=#{cafeTel},cafe_pic =#{cafePic,jdbcType=VARCHAR},cafe_info=#{cafeInfo}
 		where cafe_no = #{cafeNo}
 	</update>
 	<!-- 카페 정보 수정하기 2 : 운영 시간 -->
