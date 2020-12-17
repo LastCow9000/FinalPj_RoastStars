@@ -37,14 +37,14 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName btn btn-success' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName btn btn-success' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
@@ -242,11 +242,11 @@
    <div class="row">
    
    <!-- 선호요소 선택 && 카페 리스트 영역 -->
-   <div class="col-sm-8" >
+   <div class="col-sm-8">
 	
 	<!-- 선호초기화버튼 -->
 	<div style="margin-top: 10px">
-		<button type="button" class="btn btn-secondary btn-sm" onclick="location.reload()">선택 초기화</button>	
+		<button type="button" class="initPropertyBtn" onclick="location.reload()">선택 초기화</button>	
 	</div><!-- 선호초기화버튼 끝 -->
 	
     <!-- 선호 요소 선택 부분 -->
@@ -267,7 +267,7 @@
       </div><!-- 선호요소 선택 부분 -->
       
       	<!-- (추천결과) 카페 리스트 부분 -->
-      	<div style="margin-top: 50px;">
+      	<div style="margin-top: 50px;" class="shadow-sm p-4 mb-4 bg-white">
       	<h3>추천 카페</h3>
         <p>당신에게 꼭 맞는 카페를 추천해드려요!</p>
    
@@ -307,7 +307,7 @@
    <div class="col-sm-4">
    
 	   	<!-- 지도 나타나는 부분 -->
-		<div id="map" style="width: 100%; height: 400px;"></div>
+		<div id="map" class="rounded-lg" style="width: 100%; height: 400px;"></div>
 		
 		<!-- 카페 간략정보 표시 -->
 		<p id="cafeSimple"></p>

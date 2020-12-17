@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 변경 완료</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 			alert("비밀번호가 변경되었습니다.\n다시 로그인해주세요.");

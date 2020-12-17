@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카페 수정</title>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
@@ -231,7 +231,8 @@ function inputTimeColon(time) {
 </script>
 </head>
 <body>
-<div class="container" style="width: 800px; float: center;">
+<div class="shadow-sm p-4 mb-4 bg-white">
+<div class="container" style="width: 800px; float: center; margin-left:81px; ">
 
   <h2>카페 수정하기</h2>
 <form method="post" action="${pageContext.request.contextPath}/update-cafe.do"
@@ -322,5 +323,6 @@ function inputTimeColon(time) {
 </table>
 </form>
 </div><!-- container -->
+</div>
 </body>
 </html>

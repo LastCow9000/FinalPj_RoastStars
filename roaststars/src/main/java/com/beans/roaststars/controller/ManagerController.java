@@ -116,8 +116,6 @@ public class ManagerController {
 	@PostMapping("update-cafe-form.do")
 	public ModelAndView updateCafeForm(String cafeNo, Model model) {
 		model.addAttribute("cafeNo", cafeNo);
-		CafeVO cafeVO = new CafeVO();
-		cafeVO = cafeService.findcafeByNoNotJoin(cafeNo);
 		CafeOperatingTimeVO cafeOperVO = new CafeOperatingTimeVO();
 		cafeOperVO = cafeService.findCafeByCafeNo(cafeNo);
 		return new ModelAndView("cafe/updateCafeForm.tiles", "cafeOperVO", cafeOperVO);

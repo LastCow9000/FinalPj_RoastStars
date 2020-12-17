@@ -83,7 +83,7 @@
 </head>
 <body>
 	<br>
-	<div class="container" style="width: 500px; float: center;">
+	<div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
   <h2>비밀번호 찾기</h2>
   <hr style="width: 300px; float:left;"><br><br>
   <form class="was-validated" id="loginForm">

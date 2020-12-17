@@ -1,25 +1,25 @@
 /* 배경이미지 적용*/
 body {
-	z-index: -1;
+	z-index: 1;
+    position: relative;
+    min-height: 100vh;
 }
 body::after {
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: url("../upload/background.jpg");
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -2;
-  opacity: 0.45;
+  	width: 100%;
+  	height: 100%;
+  	content: "";
+  	background: url("../upload/background_v01.jpg");
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	z-index: -2;
+ 	opacity: 0.15;
 }
-
  /* 글씨체 적용 */
 @font-face{
    font-family: "Main Font";
    src: url("main-font.ttf");
 }
-
 
 @font-face{
    font-family: "Layout Font";
@@ -46,100 +46,6 @@ input, textarea{
 	font-family:"Layout Font" !important; 
 	font-size: 15px !important;
 }
-
-/* 카페 정보 상세보기 페이지 설정 */
-
-/* 카페 상세보기 영역 */
-#cafeDetailCafeTitle {
-   float: left;
-   font-size: 30px;
-}
-
-.myPickStar{
-
-	float: right;
-	margin-right: 5px;
-	margin-bottom: 10px;
-
-}
-
-/* icon 2x 적용한 부분 사이즈 조금 작게*/
-.fa-2x {
-    font-size: 37px !important;
-}
-
-/* 리뷰 타이틀 및 리뷰 총 개수 조정 */
-
-/* 리뷰 전체 영역(리뷰 + 페이징 바)*/
-.reviewArea{
-   position: relative;
-}
-
-#reviewTitle{
-   float: left;
-   font-size: 25px;
-   margin-left: 10px;
-}
-
-/* 리뷰 테이블 */
-#reviewTableInfo {
-   font-size: 18px;
-   color : #6c5b7b;
-}
-
-/* 리뷰작성 버튼 위치 조정 */
-#reviewRegisterBtn {
-   float: right;
-   color : #155263;
-   text-decoration: none;
-   margin-right: 10px;
-}
-
-#reviewRegisterBtn:hover{
-   cursor: pointer;
-}
-
-/* 리뷰 삭제 버튼 크기 조정 */
-.deleteReviewBtn{
-   line-height: 1px;
-   border-radius: .2rem;
-   padding-bottom: 0.5rem;
-   padding-top: 0.5rem;
-   background-color: #e23e57;
-   color:white;
-   outline: 0;
-   border: 0;
-}
-
-/* 리뷰작성 모달 */
-.modalBtn{
-   font-weight: bolder;
-}
-
-/* 리뷰 리스트 테이블 */
-.reviewTable{
-   /*테이블 가운데 정렬*/
-   width: 100%;
-}
-
-
-/*리뷰작성 폼 테이블 크기 조정*/
-.reviewForm{
-   /*테이블 가운데 정렬*/
-   float: center;
-   width: 100%;
-}
-
-tr.reviewTableProperty {
-   margin-bottom:1000px;
-   text-align: center;
-}
-
-.property_kind {
-   font-size: 10px;
-
-}
-
 
 /* 이미지 클릭시 크게 보기*/
 .bigPictureWrapper {
@@ -196,7 +102,6 @@ tr.reviewTableProperty {
     padding: 10px;
 	margin: 5px;
 	justify-content: center;
-
 }
 
 /*------------paging용 test도 포함--------------*/
@@ -256,9 +161,13 @@ html *{
     box-shadow: 0 4px 5px 0 rgba(244,67,54,.14), 0 1px 10px 0 rgba(244,67,54,.12), 0 2px 4px -1px rgba(244,67,54,.2);
 }
 
+/************ 예울 CSS 추가 사항 시작************/
 
+/* 전체 이미지 태그 둥그렇게 */
+img {
+	border-radius: 15px !important;
+}
 
-/*예울 CSS 추가 사항 시작*/
 .cafe-simple-card{
 	font-family:"Layout Font";
 	font-size: 15px;
@@ -271,13 +180,13 @@ html *{
 }
 
 .cafe-detail-info{
-	width:500px;
+	width:460px;
 	font-family:"Main Font";
-	font-size: 20px;
+	font-size: 21px;
 	
 	overflow:auto !important; /* 영어 입력 시, 자동 줄바꿈*/
-	margin-left: 10px;
-	margin-top: 5px;
+	margin-left: 8px;
+	margin-top: 8px;
 	
 	/*자동 줄바꿈*/
 	word-wrap: break-word;
@@ -290,14 +199,171 @@ html *{
 	float:right;
 }
 
-/*예울 CSS 추가 사항 끝*/
+/* 별로여서 기각됨
+.theme{
+	width: 90%;
+	float: center !important;
+	box-shadow: 5px 5px #b8b0b0;
+	background-color: #dfd3d3 !important;
+	opacity: 0.7 !important;
+	border-radius: 10px !important;
+	padding: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+}*/
+
+/* 카페 정보 상세보기 페이지 설정 */
+
+/* 카페 상세보기 영역 */
+#cafeDetailCafeTitle {
+   float: left;
+   font-size: 33px;
+   margin-left: 5px;
+}
+
+.myPickStar{
+	float: right;
+	margin-right: 5px;
+	margin-bottom: 10px;
+
+}
+
+/* icon 2x 적용한 부분 사이즈 조금 작게*/
+.fa-2x {
+    font-size: 37px !important;
+}
+
+/* 리뷰 타이틀 및 리뷰 총 개수 조정 */
+
+/* 리뷰 전체 영역(리뷰 + 페이징 바)*/
+.reviewArea{
+   position: relative;
+}
+
+#reviewTitle{
+   float: left;
+   font-size: 28px;
+   margin-left: 10px;
+}
+
+/* 리뷰 테이블 */
+#reviewTableInfo {
+   font-size: 18px;
+   color : #6c5b7b;
+}
+
+/* 리뷰작성 버튼 위치 조정 */
+#reviewRegisterBtn {
+   float: right;
+   color : #155263;
+   text-decoration: none;
+   margin-right: 10px;
+}
+
+#reviewRegisterBtn:hover{
+   cursor: pointer;
+}
+
+/* 리뷰 삭제 버튼 크기 조정 */
+.deleteReviewBtn{
+   line-height: 1px;
+   border-radius: .2rem;
+   padding-bottom: 0.5rem;
+   padding-top: 0.5rem;
+   background-color: #e23e57;
+   color:white;
+   outline: 0;
+   border: 0;
+}
+
+/* 리뷰작성 모달 */
+.modalBtn{
+   font-weight: bolder;
+}
+
+/* 리뷰 리스트 테이블 */
+.reviewTable{
+   /*테이블 가운데 정렬*/
+   width: 100%;
+}
+
+
+/*리뷰작성 폼 테이블 크기 조정*/
+.reviewForm{
+   /*테이블 가운데 정렬*/
+   float: center;
+   width: 100%;
+}
+
+/*리뷰 작성 폼 테이블 글씨 크기 조정*/
+.reviewTableProperty>td{
+	font-size: 20px;
+	text-align: center;
+}
+
+/*리뷰 작성 한줄평 글씨 조정 */
+.reviewContent{
+	overflow:auto;
+	margin-top: 10px;
+	font-weight: bolder !important;
+	font-family:Main Font !important;
+	font-size:20px !important;
+}
+
+
+/*리뷰 작성 모달에서 '등록', '취소' 버튼 */
+.reviewSubmitBtn{
+	float: right;
+	margin-right: 40px;
+}
+
+
+/*header 닉네임 크기 조정*/
+#loginNicknameHeader{
+    font-size: 17px !important;
+    margin-bottom: 3px;
+}
+
+/*비밀번호 변경 폼 버튼 위치 조정*/
+#updatePasswordBtn{
+    width: 100%;
+    text-align: center;
+}
+
+
+/* 관리자 페이지 - 권한 부여 버튼 */
+#addAuthorityBtn{
+	border-radius: .2rem;
+	padding: 0.2rem;
+	padding-right: 0.2rem;
+	padding-left: 0.2rem;
+	background-color:#4d4545;
+    color:white;
+	outline: 0;
+  	border: 0;
+}
+
+/* 카페 지역 별 리스트 페이지 - 초기화 버튼 */
+.initPropertyBtn{
+	border-radius: .2rem;
+	padding: 0.2rem;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	background-color:#4d4545;
+    color:white;
+	outline: 0;
+  	border: 0;
+}
+/************ 예울 CSS 추가 사항 끝 ************/
 
 
 /*성호 CSS 추가 사항 시작 */
-
+.beansPickimg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 /*성호 CSS 추가 사항 끝*/
-
-
 
 /*영섭 CSS 추가 사항 시작 */
 .my-pick-card{
@@ -305,6 +371,10 @@ html *{
    font-size: 18px;	
 }
 
+th{
+	font-size: 25px !important;
+	font-weight: bold !important;
+}
 /*영섭 CSS 추가 사항 끝*/
 
 /*병철 CSS 추가 사항 시작 */
