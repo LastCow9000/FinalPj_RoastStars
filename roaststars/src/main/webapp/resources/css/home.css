@@ -20,6 +20,7 @@ body::after {
    src: url("main-font.ttf");
 }
 
+
 @font-face{
    font-family: "Layout Font";
    src: url("layout-font.otf"); 
@@ -254,6 +255,7 @@ html *{
     border-color: #f44336;
     box-shadow: 0 4px 5px 0 rgba(244,67,54,.14), 0 1px 10px 0 rgba(244,67,54,.12), 0 2px 4px -1px rgba(244,67,54,.2);
 }
+
 
 /*영섭 CSS 추가 사항 시작 */
 .my-pick-card{

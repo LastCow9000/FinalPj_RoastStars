@@ -135,6 +135,19 @@ $(document).ready(function() {
 		
 	});//goToAddrAPIBtn
 
+	 /* 길이 넘었을 때 submit 안 되도록 막기 */
+	   $("#registerCafeForm").submit(function() {
+	      if(checkName == ""){
+	         alert("상호명은 10자 이내로 작성해주세요.");
+	         return false;
+	      }
+	    //전화번호 문자 입력 시 alert
+	      if(checkTel==""){
+	          alert("전화번호를 확인해주세요!");
+	          return false;
+	       }
+	   });//sumit
+	
 });//ready
 
 function inputTimeColon(time) {
@@ -207,7 +220,7 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
+				<td colspan=2><input type="text" name="cafeLoc" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
   				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
 
 			</tr>

@@ -163,7 +163,18 @@ $(document).ready(function() {
           }
           $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
       });
-    
+      /* 길이 넘었을 때 submit 안 되도록 막기 */
+	   $("#registerCafeForm").submit(function() {
+	      if(checkName == ""){
+	         alert("상호명은 10자 이내로 작성해주세요.");
+	         return false;
+	      }
+	    //전화번호 문자 입력 시 alert
+	       if(checkTel==""){
+	           alert("전화번호를 확인해주세요!");
+	           return false;
+	        }
+	   });//sumit
 });//ready
 function inputTimeColon(time) {
     // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
@@ -240,13 +251,14 @@ function inputTimeColon(time) {
   	 	<tr>
 			<td>주소</td>
 			<td colspan=2>
-			<input type="text" name="cafeLoc" id="address" value="${cafeOperVO.cafeVO.cafeLoc}" readonly="readonly" required size=50>
+			<input type="text" name="cafeLoc" id="address" value="${cafeOperVO.cafeVO.cafeLoc}" onkeydown="return false;" style="caret-color: transparent !important;" required required size=50>
 				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>전화번호</td>
+
 			<td colspan=2><input type="text" id="cafeTel" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50>
 			&nbsp;<span id="telResult"></span></td>
 		</tr>

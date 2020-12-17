@@ -1,13 +1,10 @@
 package com.beans.roaststars.model.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.beans.roaststars.model.mapper.BeansPickMapper;
-import com.beans.roaststars.model.vo.AdminListVO;
 import com.beans.roaststars.model.vo.BeansPickListVO;
 import com.beans.roaststars.model.vo.BeansPickVO;
 

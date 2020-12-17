@@ -109,7 +109,7 @@
 					}	
 					card_tag +='</h4></div>'; //cafe-header 끝
 					
-					card_tag +="<img class='card-img-top' src='resources/upload/"+list[0].cafeVO.cafePic+" 'style='height:275px; width:330px; margin-left:5px; margin-top:5px;'>";
+					card_tag +="<img class='card-img-top' src='resources/upload/"+list[0].cafeVO.cafePic+" 'style='height:275px; width:320px; margin-top:5px;'>";
 					card_tag +='<div class="card-body cafe-simple-card">';
 					card_tag +='<p class="card-text"><주소><br> '+list[0].cafeVO.cafeLoc+'</p>';
 					card_tag +='<p class="card-text"><운영시간><br>';
