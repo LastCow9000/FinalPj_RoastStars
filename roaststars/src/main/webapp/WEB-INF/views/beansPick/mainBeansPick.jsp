@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>BeansPick Main</title>
-<link rel="stylesheet" href="resources/css/home.css">
 </head>
 <body>
 	<c:set var="pb" value="${lvo.pagingBean}" />

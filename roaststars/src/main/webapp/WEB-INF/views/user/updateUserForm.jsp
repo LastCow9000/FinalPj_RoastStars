@@ -98,7 +98,8 @@ $(document).ready(function() {
 
 	//전화번호 문자 입력 불가 & 길이제한
 	 $("#tel").keyup(function() {
-		 var telValue=$(this).val().trim();
+	   checkTel="";
+	   var telValue=$(this).val().trim();
       
       if(telValue.length<3||telValue.length>11){
            $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");

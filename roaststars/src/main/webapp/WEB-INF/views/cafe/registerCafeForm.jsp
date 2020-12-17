@@ -76,35 +76,9 @@ $(document).ready(function() {
                    checkTel=telValue;
                 }
            }
-     }); //end cafeTel keyup
+	}); //end cafeTel keyup
    
     
-   /* 길이 넘었을 때 submit 안 되도록 막기 */
-   $("#registerCafeForm").submit(function() {
-	   // 제목 길이 체크
-      if(checkName == ""){
-         alert("상호명은 10자 이내로 작성해주세요.");
-         return false;
-      } 
-	   // 본문 길이 체크
-      if(checkInfo == ""){
-          alert("카페 소개는 200자 이내로 작성해주세요.");
-          return false;
-       } 
-	   
-      //전화번호 문자 입력 시 alert
-      if(checkTel==""){
-          alert("전화번호를 확인해주세요.");
-          return false;
-       }
-      
-      if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
- 			return true;
- 		}else{
- 			return false;
- 		}
-   });//sumit
-   
    /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
    $("#noOperating").click(function() {
       //alert($(this).val());
@@ -135,6 +109,32 @@ $(document).ready(function() {
 		
 	});//goToAddrAPIBtn
 
+   /* 길이 넘었을 때 submit 안 되도록 막기 */
+   $("#registerCafeForm").submit(function() {
+	   // 제목 길이 체크
+      if(checkName == ""){
+         alert("상호명은 10자 이내로 작성해주세요.");
+         return false;
+      } 
+	   // 본문 길이 체크
+      if(checkInfo == ""){
+          alert("카페 소개는 200자 이내로 작성해주세요.");
+          return false;
+       } 
+	   
+      //전화번호 문자 입력 시 alert
+      if(checkTel==""){
+          alert("전화번호를 확인해주세요.");
+          return false;
+       }
+      
+      if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+   });//sumit
+   
 });//ready
 
 function inputTimeColon(time) {
@@ -207,7 +207,7 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
+				<td colspan=2><input type="text" name="cafeLoc" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
   				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
 
 			</tr>
@@ -219,14 +219,14 @@ function inputTimeColon(time) {
 			<tr>
 				<td>카페사진</td>
 				<td colspan=2>
-					<div class="input-group mb-3">
-				   	<input type="file" class="form-control" name="uploadFile" id="inputGroupFile02">
+					<div class="input-group mb-1">
+				   	<input type="file" class="form-control" name="uploadFile" id="inputGroupFile02" size=50>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3">
-					<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
+					<textarea rows="7" cols="105" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
 						 name="cafeInfo" required></textarea><br>
 					<span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
 				</td>

@@ -105,9 +105,8 @@
             $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
             checkPassword="";
          }
-         
-      });// end passwordC
       
+      });// end passwordC
       //비밀번호 일치 여부 체크 (비밀번호 확인 기입 비밀번호)
       $("#passwordChecked").keyup(function() {
     	 checkPassword="";
@@ -144,8 +143,7 @@
                  }
             }
  	 });//end tel keyup 
- 	 
- 	 
+
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
     	  var tags='';
@@ -179,8 +177,32 @@
 	      }).open();
 		
 	});// end goToAddrAPIBtn
+<<<<<<< HEAD
 	
 	 
+=======
+
+	//전화번호 문자 입력 불가 & 길이제한
+    $("#tel").keyup(function() {
+       var telValue=$(this).val().trim();
+         
+         if(telValue.length<3||telValue.length>11){
+              $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+              checkTel="";
+              return;
+           } else {
+              if(isFinite(telValue) == false){
+                   $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                   checkTel="";
+                }else{
+                   $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+                   checkTel=telValue;
+                }
+           }
+    });//end tel keyup 
+
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {
   	  // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
@@ -208,11 +230,7 @@
         }
     }); // end registerForm submit
     
-   
 });//ready
-   
-  
-
 </script>
 </head>
 <body>

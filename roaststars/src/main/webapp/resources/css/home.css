@@ -56,6 +56,7 @@ input, textarea{
 }
 
 .myPickStar{
+
 	float: right;
 	margin-right: 5px;
 	margin-bottom: 10px;
@@ -255,8 +256,9 @@ html *{
     box-shadow: 0 4px 5px 0 rgba(244,67,54,.14), 0 1px 10px 0 rgba(244,67,54,.12), 0 2px 4px -1px rgba(244,67,54,.2);
 }
 
-/*예울 CSS 추가 사항 시작 */
 
+
+/*예울 CSS 추가 사항 시작*/
 .cafe-simple-card{
 	font-family:"Layout Font";
 	font-size: 15px;
@@ -288,14 +290,13 @@ html *{
 	float:right;
 }
 
-
-
 /*예울 CSS 추가 사항 끝*/
 
 
 /*성호 CSS 추가 사항 시작 */
 
 /*성호 CSS 추가 사항 끝*/
+
 
 
 /*영섭 CSS 추가 사항 시작 */
@@ -305,7 +306,6 @@ html *{
 }
 
 /*영섭 CSS 추가 사항 끝*/
-
 
 /*병철 CSS 추가 사항 시작 */
 

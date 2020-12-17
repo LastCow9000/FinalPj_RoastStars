@@ -48,7 +48,7 @@
 				</h4>
 			</div>
 			<img class="card-img-top" src="resources/upload/${myPickVO.cafeVO.cafePic}" style="height:205px">
-			<div class="card-body">
+			<div class="card-body my-pick-card">
 				<p class="card-text">주소 : ${myPickVO.cafeVO.cafeLoc}</p>	
 				<p class="card-text">전화번호 : ${myPickVO.cafeVO.cafeTel}</p>
 				<div style="text-align: center">
