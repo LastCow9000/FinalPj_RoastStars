@@ -1,24 +1,43 @@
+/* 배경이미지 적용*/
+body {
+	z-index: -1;
+}
+body::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: url("../upload/background.jpg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  opacity: 0.45;
+}
+
  /* 글씨체 적용 */
 @font-face{
    font-family: "Main Font";
    src: url("main-font.ttf");
 }
 
+
 @font-face{
-	font-family: "Layout Font";
-	src: url("layout-font.otf"); 
+   font-family: "Layout Font";
+   src: url("layout-font.otf"); 
 }
 
 .footer,.header,.btn,.pagination  {
+
 	font-family:"Layout Font";
 	font-size: 20px;
 } 	
 
 .main{
-	font-family:"Main Font";
-	font-weight: bolder;
-	font-size: 20px;
+   font-family:"Main Font";
+   font-weight: bolder;
+   font-size: 20px;
 }
+
 
 /* 카페 정보 상세보기 페이지 설정 */
 
@@ -32,6 +51,7 @@
 	float: right;
 	margin-right: 5px;
 	margin-bottom: 10px;
+
 }
 
 /* icon 2x 적용한 부분 사이즈 조금 작게*/
@@ -174,6 +194,9 @@ tr.reviewTableProperty {
 .card { /* 카페 간략정보도 포함 !*/
     max-height: 600px;
     font-size:20px;
+    padding: 10px;
+   margin: 5px;
+   justify-content: center;
 }
 
 /*------------paging용 test도 포함--------------*/
@@ -235,6 +258,7 @@ html *{
 
 /*예울 CSS 추가 사항 시작 */
 
+
 .cafe-simple-card{
 	font-family:"Layout Font";
 	font-size: 15px;
@@ -282,3 +306,4 @@ html *{
 /*병철 CSS 추가 사항 시작 */
 
 /*병철 CSS 추가 사항 끝*/
+

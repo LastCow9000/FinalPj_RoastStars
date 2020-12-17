@@ -1,13 +1,10 @@
 package com.beans.roaststars.model.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.beans.roaststars.model.mapper.BeansPickMapper;
-import com.beans.roaststars.model.vo.AdminListVO;
 import com.beans.roaststars.model.vo.BeansPickListVO;
 import com.beans.roaststars.model.vo.BeansPickVO;
 
@@ -37,7 +34,7 @@ public class BeansPickServiceImpl implements BeansPickService{
        // 페이지 그룹 당 페이지 수
 	   pagingBean.setPageNumberPerPageGroup(3);
 	   //페이지 당 게시물 수
-	   pagingBean.setContentNumberPerPage(3);
+	   pagingBean.setContentNumberPerPage(2);
        
 	   BeansPickListVO listVO 
           = new BeansPickListVO(beansPickMapper.getAllBeansPickList(pagingBean), pagingBean);

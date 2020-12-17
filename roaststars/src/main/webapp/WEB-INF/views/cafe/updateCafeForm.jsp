@@ -251,7 +251,7 @@ function inputTimeColon(time) {
   	 	<tr>
 			<td>주소</td>
 			<td colspan=2>
-			<input type="text" name="cafeLoc" id="address" value="${cafeOperVO.cafeVO.cafeLoc}" readonly="readonly" required size=50>
+			<input type="text" name="cafeLoc" id="address" value="${cafeOperVO.cafeVO.cafeLoc}" onkeydown="return false;" style="caret-color: transparent !important;" required required size=50>
 				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button>
 			</td>
 		</tr>
