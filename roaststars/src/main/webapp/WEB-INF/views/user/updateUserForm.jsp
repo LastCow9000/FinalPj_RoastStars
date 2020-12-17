@@ -6,13 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 부트스트랩4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>회원정보 수정</title>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -96,7 +90,6 @@ $(document).ready(function() {
   });// end memberNick keyup    
     
 
-
 	//전화번호 문자 입력 불가 & 길이제한
 	 $("#tel").keyup(function() {
 	   checkTel="";
@@ -116,7 +109,8 @@ $(document).ready(function() {
                 checkTel=telValue;
              }
         }
-	 });//end tel keyup   
+	 });//end tel keyup 
+  
 	   
    /* 서브밋 확인 공간 */   
    $("#updateUserForm").submit(function() {
@@ -156,7 +150,7 @@ $(document).ready(function() {
 </head>
 <body>
 <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
-<div class="container" style="width: 500px; float: center;">
+<div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
 	<h2>회원정보 수정</h2>
   	<hr style="width: 300px; float:left;"><br><br>
 
@@ -215,9 +209,9 @@ $(document).ready(function() {
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
     </div>
    
-   <hr style="width: 480px; float:left;"><br>
+   <hr style="width: 454px; float:left;"><br>
    
-   <input type="submit" class="btn btn-info" value="회원정보수정">
+   <input type="submit" class="btn btn-success" value="회원정보수정">
    <sec:authentication property="principal.id" var="loginId"/>
    <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}" type="submit" class="btn btn-info">비밀번호 변경하기</a>
    <a href="${pageContext.request.contextPath}/delete-userform.do" type="button" role="button" class="btn btn-danger">탈퇴하기</a>
