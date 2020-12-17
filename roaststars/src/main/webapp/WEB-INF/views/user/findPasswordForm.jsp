@@ -26,27 +26,30 @@
 			 if(nameCheck===""){
 		         alert("이름을 입력해주세요!");
 		         return false;
-		      }else{
-			$.ajax({
-				type:"POST",
-				data:"id="+$("#id").val()+"&name="+$("#name").val(),
-				url:"${pageContext.request.contextPath}/find-password.do",
-				beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                },
-				success:function(result){
-					tags+="발급받은 임시 비밀번호 :";
-					tags+="<p>";
-					tags+="<span style=' font: bold 2em Georgia, serif ; color: violet;'>";
-					tags+=result;
-					tags+="</span>";
-					tags+="</p>";
-					tags+="<hr style='width: 480px; float:left;'><br>";
-					tags+="<input type='button' value='닫기' id='closeBtn' class='btn btn-success' style='float:center;' onclick='closePopup();'>";
-					$(".was-validated").html(tags);
-				}
+			 }else if(checkName===""){
+	        	 alert("이름을 확인해주세요!");
+		         return false;
+		     }else{
+				$.ajax({
+					type:"POST",
+					data:"id="+$("#id").val()+"&name="+$("#name").val(),
+					url:"${pageContext.request.contextPath}/find-password.do",
+					beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	                },
+					success:function(result){
+						tags+="발급받은 임시 비밀번호 :";
+						tags+="<p>";
+						tags+="<span style=' font: bold 2em Georgia, serif ; color: violet;'>";
+						tags+=result;
+						tags+="</span>";
+						tags+="</p>";
+						tags+="<hr style='width: 480px; float:left;'><br>";
+						tags+="<input type='button' value='닫기' id='closeBtn' class='btn btn-success' style='float:center;' onclick='closePopup();'>";
+						$(".was-validated").html(tags);
+					}
 			
-			});//end ajax
+				});//end ajax
 		      }
 		});//end submitBtn click
 		
@@ -94,7 +97,7 @@
        이름 :
       <input type="text" id="name" class="form-control" placeholder="사용자의 이름을 적어주세요" required>
       <div class="valid-feedback">  <span id="nameResult"></span></div>
-      <div class="invalid-feedback">  이름을 입력해주세요.</div>
+      <div class="invalid-feedback"> 이름을 입력해주세요.</div>
      
     </div>
 

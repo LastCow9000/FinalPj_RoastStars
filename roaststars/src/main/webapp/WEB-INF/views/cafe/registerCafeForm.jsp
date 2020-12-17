@@ -180,21 +180,13 @@ function inputTimeColon(time) {
 			<tr>
 				<td>평일</td>
 				<td colspan="2">
-<<<<<<< HEAD
-					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
-=======
 					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
 			<tr>
 				<td>주말</td>
 				<td colspan="2">
-<<<<<<< HEAD
-					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12" required="required"/>
-=======
 					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 				</td>
 			</tr>
 			<tr>

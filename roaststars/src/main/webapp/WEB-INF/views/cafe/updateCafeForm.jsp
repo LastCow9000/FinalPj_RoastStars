@@ -200,7 +200,7 @@ function inputTimeColon(time) {
 				<div id="managerInfo"></div>
 				<div class="form-check-inline">
 			      <label class="form-check-label" for="radioMember">
-	              	<input type="radio" name="radioHolidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+	              	<input type="radio" name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
 			      </label>
 			    </div>
 			    <div class="form-check-inline">    

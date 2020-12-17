@@ -327,27 +327,27 @@
                               jstl choose 를 이용  
                               예) <a href="DispatcherServlet?command=list&pageNo=...">               
                 -->    
-               <ul class="pagination pagination-sm justify-content-center">
+               <ul class="pagination pagination-sm pagination-success justify-content-center">
                <c:if test="${pb.previousPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+                  <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}" class="page-link">&laquo;</a></li>
 	               &nbsp;
                </c:if>
                
                <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
                   <c:choose>
                      <c:when test="${pb.nowPage!=i}">
-                     <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}">${i}</a></li> 
+                     <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}" class="page-link">${i}</a></li> 
                      </c:when>
                      
                      <c:otherwise>
-                     <li class="active"><a href="#">${i}</a></li>
+                     <li class="active page-item"><a href="#" class="page-link">${i}</a></li>
                      </c:otherwise>
                   </c:choose>
                   &nbsp; 
                </c:forEach>
                
                <c:if test="${pb.nextPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+                  <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}" class="page-link">&raquo;</a></li>
                </c:if>
                </ul>          
                
