@@ -26,9 +26,10 @@ body::after {
 }
 
 .footer,.header,.btn,.pagination  {
-   font-family:"Layout Font";
-   font-size: 20px;
-}    
+
+	font-family:"Layout Font";
+	font-size: 20px;
+} 	
 
 .main{
    font-family:"Main Font";
@@ -46,9 +47,10 @@ body::after {
 }
 
 .myPickStar{
-   float: right;
-   margin-right: 5px;
-   margin-bottom: 10px;
+	float: right;
+	margin-right: 5px;
+	margin-bottom: 10px;
+
 }
 
 /* icon 2x 적용한 부분 사이즈 조금 작게*/
@@ -195,6 +197,7 @@ tr.reviewTableProperty {
    margin: 5px;
    justify-content: center;
 }
+
 /*------------paging용 test도 포함--------------*/
 html *{
     -webkit-font-smoothing: antialiased;
@@ -254,6 +257,37 @@ html *{
 
 /*예울 CSS 추가 사항 시작 */
 
+.cafe-simple-card{
+	font-family:"Layout Font";
+	font-size: 15px;
+}
+
+.cafe-simple-card-title{
+    font-size: 30px !important;
+    margin-left: 10px !important;
+    margin-top: 3px !important;
+}
+
+.cafe-detail-info{
+	width:500px;
+	font-family:"Main Font";
+	font-size: 20px;
+	
+	overflow:auto !important; /* 영어 입력 시, 자동 줄바꿈*/
+	margin-left: 10px;
+	margin-top: 5px;
+	
+	/*자동 줄바꿈*/
+	word-wrap: break-word;
+	white-space: pre-line;
+	word-break:break-all;
+}
+
+/* 카페 등록/수정 시, 본문 내용 글자 수 span 영역*/
+#infoCheckResultSpan{
+	float:right;
+}
+
 /*예울 CSS 추가 사항 끝*/
 
 
@@ -270,3 +304,4 @@ html *{
 /*병철 CSS 추가 사항 시작 */
 
 /*병철 CSS 추가 사항 끝*/
+
