@@ -196,7 +196,6 @@ public class ManagerController {
 	      return menuKindVO;
 
 	   }
-
 	
 	
 	// 메뉴 리스트 불러오기

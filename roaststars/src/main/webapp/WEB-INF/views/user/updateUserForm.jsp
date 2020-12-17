@@ -96,21 +96,25 @@ $(document).ready(function() {
   });// end memberNick keyup    
     
 
-	//전화번호 문자 입력 불가 
+	//전화번호 문자 입력 불가 & 길이제한
 	 $("#tel").keyup(function() {
-		 // 입력된 tel
 		 var telValue=$(this).val().trim();
-		 
-	     checkTel ="";
-   		 
-	     // 전화번호 문자 들어오는지 체크
-	     if(isFinite(telValue) == false){
-   		 	$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
-   	     }else{
-            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
-   	 		checkTel=telValue;
-   		 }
-	   });// end tel keyup
+      
+      if(telValue.length<3||telValue.length>11){
+           $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+           checkTel="";
+           return;
+        } else {
+     	   if(isFinite(telValue) == false){
+                $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                checkTel="";
+             }else{
+                $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+                checkTel=telValue;
+             }
+        }
+	 });//end tel keyup 
   
 	   
    /* 서브밋 확인 공간 */   

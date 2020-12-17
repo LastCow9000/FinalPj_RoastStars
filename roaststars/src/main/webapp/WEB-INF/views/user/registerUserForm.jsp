@@ -16,6 +16,7 @@
       var checkNick="";
       var checkPassword = "";
       var checkTel="";
+      
       /* 길이 체크 공간 */
       
       // 1. 아이디 길이 체크
@@ -124,6 +125,27 @@
       });// end passwordChecked
       
 
+    //전화번호 문자 입력 불가 & 길이제한
+ 	 $("#tel").keyup(function() {
+ 		 var telValue=$(this).val().trim();
+          
+          if(telValue.length<3||telValue.length>11){
+               $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+               checkTel="";
+               return;
+            } else {
+         	   if(isFinite(telValue) == false){
+                    $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                    checkTel="";
+                 }else{
+                    $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+                    checkTel=telValue;
+                 }
+            }
+ 	 });//end tel keyup 
+ 	 
+ 	 
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
     	  var tags='';
@@ -157,18 +179,8 @@
 	      }).open();
 		
 	});// end goToAddrAPIBtn
-	//전화번호 문자 입력 불가 
-	 $("#tel").keyup(function() {
-		 var telValue=$(this).val().trim();
-	   		if(isFinite(telValue) == false){
-	   			$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
-	            checkTel="";
-	   		}else{
-	            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
-	   			checkTel=telValue;
-	   		}
-	    
-	   });
+	
+	 
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {
   	  // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
