@@ -19,7 +19,6 @@ DROP TABLE menu;
 DROP TABLE cafe;
 DROP TABLE rs_user;
 
-
 DROP SEQUENCE cafe_seq;
 DROP SEQUENCE review_seq;
 DROP SEQUENCE beans_pick_seq;
