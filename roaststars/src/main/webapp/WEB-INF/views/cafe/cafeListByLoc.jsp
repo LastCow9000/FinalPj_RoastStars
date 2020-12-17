@@ -37,14 +37,14 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName btn btn-success' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName btn btn-success' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
@@ -307,7 +307,7 @@
    <div class="col-sm-4">
    
 	   	<!-- 지도 나타나는 부분 -->
-		<div id="map" style="width: 100%; height: 400px;"></div>
+		<div id="map" class="rounded-lg" style="width: 100%; height: 400px;"></div>
 		
 		<!-- 카페 간략정보 표시 -->
 		<p id="cafeSimple"></p>

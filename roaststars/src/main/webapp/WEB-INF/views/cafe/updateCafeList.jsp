@@ -42,6 +42,7 @@ $(document).ready(function() {
 <c:choose>
 <%-- 등록된 카페가 있는 경우 : 카페 리스트를 보여준다 --%>
 <c:when test="${list.size() > 0}">
+<div class="shadow-sm p-4 mb-4 bg-white">
 <table class="table table-hover">
 <thead>
    <tr>
@@ -77,6 +78,7 @@ $(document).ready(function() {
    </c:forEach>
 </tbody>   
 </table>
+</div>
 </c:when>
 
 <%-- 등록된 카페가 없는 경우 : 카페 등록 버튼을 보여준다 --%>

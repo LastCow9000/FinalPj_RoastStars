@@ -38,7 +38,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="container"  style="width: 800px; margin-top: 20px; float: center;">
+<div class="container shadow-sm p-4 mb-4 bg-white"  style="width: 800px; margin-top: 20px; float: center;">
 <table class="table table-hover">
 <thead>
 	<tr>

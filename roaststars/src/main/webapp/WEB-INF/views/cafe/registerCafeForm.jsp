@@ -20,14 +20,14 @@
 /* 길이 체크 공간 */
 
 $(document).ready(function() {
-	
+   
    var checkName="";
    var checkInfo="";
    var checkTel="";
    
    // 제목 길이 체크
    $("#registCafeName").keyup(function() {
-	  checkName = "";
+     checkName = "";
       var nameValue= $(this).val().trim();
       
       //제목 길이 10자 넘어가면 빨갛게
@@ -43,10 +43,10 @@ $(document).ready(function() {
    
    // 본문 길이 체크
    $("#cafeInfo").keyup(function() {
-	   checkInfo = "";
-	   var infoValue = $(this).val().trim();
-	   
-	   //본문 길이 200자 넘어가면 빨갛게
+      checkInfo = "";
+      var infoValue = $(this).val().trim();
+      
+      //본문 길이 200자 넘어가면 빨갛게
        if(infoValue.length > 200){
            $("#infoCheckResult").html(infoValue.length).css("color","red");
            return;
@@ -67,7 +67,7 @@ $(document).ready(function() {
               checkTel="";
               return;
            } else {
-        	   if(isFinite(telValue) == false){
+              if(isFinite(telValue) == false){
                    $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
                    checkTel="";
                 }else{
@@ -76,7 +76,7 @@ $(document).ready(function() {
                    checkTel=telValue;
                 }
            }
-	}); //end cafeTel keyup
+   }); //end cafeTel keyup
    
     
    /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
@@ -87,41 +87,41 @@ $(document).ready(function() {
    
    
    $(".classification").change(function(){ //라디오 버튼 변화 시
- 	  var tags='';
- 	  if( $(this).val() == "open"){	//사장 체크 시 
- 		  alert("공휴일에도 일을 한다구?!");
- 		  tags+='<input type="text" name="holidayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
- 		  $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
- 	  }else{
- 		  tags='';
- 		  $(".classification:input[value='open']").prop("checked", false);//일반 체크시 사장체크 풀림
- 	  }
- 	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
+      var tags='';
+      if( $(this).val() == "open"){   //사장 체크 시 
+         alert("공휴일에도 일을 한다구?!");
+         tags+='<input type="text" name="holidayTime" class="timeBox" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>';
+         $(".classification:input[value='closed']").prop("checked", false);//일반회원 체크라디오버튼 풀림
+      }else{
+         tags='';
+         $(".classification:input[value='open']").prop("checked", false);//일반 체크시 사장체크 풀림
+      }
+      $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
    });
 // 주소 팝업
-	  $("#goToAddrAPIBtn").click(function() {
-	      new daum.Postcode({
-	          oncomplete: function(data) {
-	              $("#address").val(data.address);
-	          }//oncomplete
-	      
-	      }).open();
-		
-	});//goToAddrAPIBtn
+     $("#goToAddrAPIBtn").click(function() {
+         new daum.Postcode({
+             oncomplete: function(data) {
+                 $("#address").val(data.address);
+             }//oncomplete
+         
+         }).open();
+      
+   });//goToAddrAPIBtn
 
    /* 길이 넘었을 때 submit 안 되도록 막기 */
    $("#registerCafeForm").submit(function() {
-	   // 제목 길이 체크
+      // 제목 길이 체크
       if(checkName == ""){
          alert("상호명은 10자 이내로 작성해주세요.");
          return false;
       } 
-	   // 본문 길이 체크
+      // 본문 길이 체크
       if(checkInfo == ""){
           alert("카페 소개는 200자 이내로 작성해주세요.");
           return false;
        } 
-	   
+      
       //전화번호 문자 입력 시 alert
       if(checkTel==""){
           alert("전화번호를 확인해주세요.");
@@ -129,10 +129,10 @@ $(document).ready(function() {
        }
       
       if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
- 			return true;
- 		}else{
- 			return false;
- 		}
+          return true;
+       }else{
+          return false;
+       }
    });//sumit
    
 });//ready
@@ -192,88 +192,87 @@ function inputTimeColon(time) {
 </script>
 </head>
 <body>
-<div class="container" style="width: 800px; float: center;">
+<div class="shadow-sm p-4 mb-4 bg-white">
+<div class="container" style="width: 800px; float: center; margin-left:81px;">
   <h2>카페 등록하기</h2>
 <form method="post" action="${pageContext.request.contextPath}/register-cafe.do" 
-		id="registerCafeForm" enctype="multipart/form-data">
-	<input type="hidden" name="command" value="register">
-	<sec:csrfInput/>
-	<table class="table table-sm">
-		<thead></thead>
-		<tbody>
-			<tr>
-				<td>카페명</td>
-				<td colspan=2><input type="text" name="cafeName" size=50 id="registCafeName" placeholder="카페명을 입력해주세요" required>&nbsp;<span id="nameCheckResult"></span>/10</td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td colspan=2><input type="text" name="cafeLoc" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
-  				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+      id="registerCafeForm" enctype="multipart/form-data">
+   <input type="hidden" name="command" value="register">
+   <sec:csrfInput/>
+   <table class="table table-sm">
+      <thead></thead>
+      <tbody>
+         <tr>
+            <td>카페명</td>
+            <td colspan=1><input type="text" name="cafeName" size=50 id="registCafeName" placeholder="카페명을 입력해주세요" required>&nbsp;<span id="nameCheckResult"></span>/10</td>
+         </tr>
+         <tr>
+            <td>주소</td>
+            <td colspan=1><input type="text" name="cafeLoc" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
+              <button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
 
-			</tr>
-			<tr>
-				<td>전화번호</td>
-				<td colspan=2><input type="text" name="cafeTel" id="cafeTel" required placeholder="전화번호를 숫자로만 입력해주세요" size=50 >
-				&nbsp;<span id="telResult"></span></td>
-			</tr>
-			<tr>
-				<td>카페사진</td>
-				<td colspan=2>
-					<div class="input-group mb-1">
-				   	<input type="file" class="form-control" name="uploadFile" id="inputGroupFile02" size=50>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-					<textarea rows="7" cols="105" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
-						 name="cafeInfo" required></textarea><br>
-					<span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
-				</td>
-			</tr>
-			<tr>
-				<td rowspan="4">운영시간</td>
-			</tr>
-			<tr>
-				<td>평일</td>
-				<td colspan="2">
-					<input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
-				</td>
-			</tr>
-			<tr>
-				<td>주말</td>
-				<td colspan="2">
-					<input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
-				</td>
-			</tr>
-			<tr>
-				<td>공휴일</td>
-				<td colspan="2">
-					<div id="managerInfo"></div>
-					<div class="form-check-inline">
-				      <label class="form-check-label" for="radioMember">
-		              	<input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
-				      </label>
-				    </div>
-				    <div class="form-check-inline">    
-		         		<label class="form-check-label" for="radioManager">
-				       	  <input type="radio" name="radioHolidayTime" class="classification" id="radioOpen"  value="open" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
-				    	</label>
-				    </div>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="3" align="center">
-					<input type="submit" class="btn btn-success" value="등록하기">
-				</td>
-			</tr>
-		</tbody>
+         </tr>
+         <tr>
+            <td>전화번호</td>
+            <td colspan=1><input type="text" name="cafeTel" id="cafeTel" required placeholder="전화번호를 숫자로만 입력해주세요" size=50 >
+            &nbsp;<span id="telResult"></span></td>
+         </tr>
+         <tr>
+            <td>카페사진</td>
+            <td colspan=1>
+               <div class="input-group mb-1">
+                  <input type="file" class="form-control" name="uploadFile" id="inputGroupFile02" size=50>
+               </div>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="3">
+               <textarea rows="7" cols="100" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
+                   name="cafeInfo" required></textarea><br>
+               <span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
+            </td>
+         </tr>
+         <tr>
+            <td rowspan="4">운영시간</td>
+         </tr>
+         <tr>
+            <td colspan="1">평일 &nbsp;
+               <input type="text" name="weekdayTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12" />
+            </td>
+         </tr>
+         <tr>
+            <td colspan="1">주말 &nbsp;
+               <input type="text" name="weekendTime" class="timeBox" onKeyup="inputTimeColon(this);" required placeholder="HH:MM~HH:MM" maxlength="12"/>
+            </td>
+         </tr>
+         <tr>
+            <td colspan="1">공휴일
+               <div class="form-check-inline">
+                  <label class="form-check-label" for="radioMember">
+                       <input type="radio"  name="holidayTime" class="classification" id="radioClosed" value="closed" checked>운영안함
+                  </label>
+                </div>
+                <div class="form-check-inline">    
+                     <label class="form-check-label" for="radioManager">
+                        <input type="radio" name="radioHolidayTime" class="classification" id="radioOpen"  value="open" onKeyup="inputTimeColon(this);" placeholder="HH:MM~HH:MM" maxlength="12"/>운영함
+                   </label>
+                </div>
+                <div id="managerInfo"></div>
+            </td>
+         </tr>
+         
+         <tr>
+            <td colspan="3" align="center">
+               <input type="submit" class="btn btn-success" value="등록하기">
+            </td>
+         </tr>
+      </tbody>
 
-	</table>
-	
-	
+   </table>
+   
+   
 </form>
 </div><!-- container -->
+</div>
 </body>
 </html>

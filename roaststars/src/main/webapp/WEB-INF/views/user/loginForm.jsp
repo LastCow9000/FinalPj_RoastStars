@@ -9,14 +9,14 @@
 <title>로그인하기</title>
 <script type="text/javascript">
 	function findPassPopup(){
-		var options='width=450, height=450, top=150, left=500'; //팝업창 옵션
+		var options='width=470, height=450, top=150, left=500'; //팝업창 옵션
 		window.open("${pageContext.request.contextPath}/find-password-form.do", "findPassPopup", options);
 	}
 </script>
 </head>
 <body>
 	<br>
-	<div class="container" style="width: 500px; float: center;">
+	<div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
   <h2>로그인</h2>
   <hr style="width: 300px; float:left;"><br><br>
   <form method="post" action="${pageContext.request.contextPath}/login.do" class="was-validated" id="loginForm" enctype="multipart/form-data">
@@ -34,7 +34,7 @@
       <div class="invalid-feedback">  비밀번호를 입력해주세요.</div>
     </div>
 
-    <hr style="width: 480px; float:left;"><br>
+    <hr style="width: 454px; float:left;"><br>
 
 
 	<input type="submit" value="로그인" class="btn btn-primary" style="float:center;">
