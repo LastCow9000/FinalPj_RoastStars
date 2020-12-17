@@ -104,7 +104,6 @@ $(document).ready(function() {
 	            },
 	            success : function(result) {
 	                if (result == "ok"){
-	         			alert("삭제되었습니다.");	
 		            	location.reload();
 	               }
 	               else{
