@@ -90,9 +90,6 @@
 						<td>${lvo.userVO.businessNo}</td>	
 						<td class="img"><a href="#" id="businessImg"><img src="resources/upload/${lvo.userVO.businessPic}" width="150" height="150"/>
 						<input type="hidden" id="businessImg" value="${lvo.userVO.businessPic}"></a>
-						<div class="bigPictureWrapper">
-							<div class="bigPicture"></div>
-						</div>
 						</td>
 						<td><select name="authority" id="getUserPositionList">
 								<option value="">등급</option>
@@ -100,6 +97,9 @@
 									<option value="${auth}">${auth}</option>
 								</c:forEach>
 							</select>
+						<div class="bigPictureWrapper">
+							<div class="bigPicture"></div>
+						</div>
 						<input type="hidden" id="id" value="${lvo.userVO.id}">
 						</td>
 						<td><button type="button" id="addAuthorityBtn">권한 부여</button></td>
