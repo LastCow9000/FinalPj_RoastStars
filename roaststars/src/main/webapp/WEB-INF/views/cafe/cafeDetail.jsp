@@ -139,9 +139,6 @@
             <div style="margin-top: 10px; margin-bottom: 0px;" class="shadow-sm p-4 mb-4 bg-white">
             
             &nbsp;<p id="cafeDetailCafeTitle" class="font-weight-bolder">${cafeTotal.cafeVO.cafeName}</p> 
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            	<button class="btn btn-danger"><strong>이 카페 데이터 지우기</strong></button>
-            </sec:authorize>
             <sec:authorize access="hasRole('ROLE_MEMBER')">
             <c:if test="${flag==true}">
             	<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>

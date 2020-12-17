@@ -37,14 +37,14 @@
 					for(var i=0;i<cafeList.length;i++){
 						if(i%2==0){
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName btn btn-success' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong>&nbsp;<a href='#' class='cafeName btn btn-success btn-sm' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
 							tags+="</div>";
 						}else{
 							tags+="<div class='col-sm-6' style='margin-top: 10px'>";
-							tags+="<strong>" + (i+1) + "위</strong><a href='#' class='cafeName btn btn-success' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
+							tags+="<strong>" + (i+1) + "위</strong>&nbsp;<a href='#' class='cafeName btn btn-success btn-sm' role='button'> "+cafeList[i].cafeVO.cafeName+"</a>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeNo+"'>";
 							tags+="<input type='hidden' value='"+cafeList[i].cafeVO.cafeLoc+"'>";
 							tags+="<div class='img'><img src='resources/upload/"+cafeList[i].cafeVO.cafePic+"' width='300' height='300'></div>";
@@ -276,8 +276,7 @@
          <c:choose>
             <c:when test="${order.count % 2 == 1}">
                <div class="col-sm-6" style="margin-top: 10px">
-                  <strong>${order.count}위</strong> <!-- count -->
-                  <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>
+                  <strong>${order.count}위</strong>&nbsp;<a href="#" class='cafeName btn btn-success btn-sm' role='button'>${list.cafeVO.cafeName}</a>
                   <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <input type="hidden" value="${list.cafeVO.cafeLoc}">
                   <div class="img">
@@ -287,8 +286,7 @@
             </c:when>
             <c:otherwise>
                <div class="col-sm-6" style="margin-top: 10px">
-                  <strong>${order.count}위</strong> <!-- count -->
-                  <a href="#" class="cafeName">${list.cafeVO.cafeName}</a>   
+                  <strong>${order.count}위</strong>&nbsp;<a href="#" class='cafeName btn btn-success btn-sm' role='button'>${list.cafeVO.cafeName}</a>
                   <input type="hidden" value="${list.cafeVO.cafeNo}">
                   <input type="hidden" value="${list.cafeVO.cafeLoc}">
                   <div class="img">

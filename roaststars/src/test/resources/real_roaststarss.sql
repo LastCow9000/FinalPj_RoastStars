@@ -3,19 +3,20 @@
 drop table menu_kind;
 DROP TABLE my_pick;
 DROP TABLE evaluated_property;
+drop table menu_espresso;
 
 /* 한번만 실행하고 		
 DROP TABLE order_detail;
 DROP TABLE order_info;
   			 지워도 됨*/
 
-DROP TABLE menu;
 DROP TABLE beans_pick;
 DROP TABLE property;
 DROP TABLE review;
 DROP TABLE operating_time;
-DROP TABLE cafe;
 drop table authorities;
+DROP TABLE menu;
+DROP TABLE cafe;
 DROP TABLE rs_user;
 
 
@@ -182,34 +183,34 @@ VALUES('user7', '1234', '정예울7', '파프리카7', '71035959818', '경기도
 
 -- 사장 가입 시 SQL문
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang2', '1234', '스퉐붝스2', '백종원2', '21024752081', '용인2','스타벅스2','no_image.jpg','002');
+VALUES('sajang2', '1234', '스퉐붝스2', '고병철2', '21024752081', '용인2','스타벅스2','no_image.jpg','002');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang3', '1234', '스퉐붝스3', '백종원3', '31024752081', '용인3','스타벅스3','no_image.jpg','003');
+VALUES('sajang3', '1234', '스퉐붝스3', '고병철3', '31024752081', '용인3','스타벅스3','no_image.jpg','003');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang4', '1234', '스퉐붝스4', '백종원4', '41024752081', '용인4','스타벅스4','no_image.jpg','004');
+VALUES('sajang4', '1234', '스퉐붝스4', '고병철4', '41024752081', '용인4','스타벅스4','no_image.jpg','004');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang5', '1234', '스퉐붝스5', '백종원5', '51024752081', '용인5','스타벅스5','no_image.jpg','005');
+VALUES('sajang5', '1234', '스퉐붝스5', '고병철5', '51024752081', '용인5','스타벅스5','no_image.jpg','005');
 
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang6', '1234', '스퉐붝스6', '백종원6', '61024752081', '용인6','스타벅1','no_image.jpg','001');
+VALUES('sajang6', '1234', '스퉐붝스6', '고병철6', '61024752081', '용인6','스타벅1','no_image.jpg','001');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang7', '1234', '스퉐붝스7', '백종원7', '71024752081', '용인7','스타벅스2','no_image.jpg','002');
+VALUES('sajang7', '1234', '스퉐붝스7', '고병철7', '71024752081', '용인7','스타벅스2','no_image.jpg','002');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang8', '1234', '스퉐붝스8', '백종원8', '81024752081', '용인8','스타벅스3','no_image.jpg','003');
+VALUES('sajang8', '1234', '스퉐붝스8', '고병철8', '81024752081', '용인8','스타벅스3','no_image.jpg','003');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang9', '1234', '스퉐붝스9', '백종원9', '91024752081', '용인9','스타벅스4','no_image.jpg','004');
+VALUES('sajang9', '1234', '스퉐붝스9', '고병철9', '91024752081', '용인9','스타벅스4','no_image.jpg','004');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang10', '1234', '스퉐붝스10', '백종원10', '10024752081', '용인10','스타벅스5','no_image.jpg','005');
+VALUES('sajang10', '1234', '스퉐붝스10', '고병철10', '10024752081', '용인10','스타벅스5','no_image.jpg','005');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang11', '1234', '스퉐붝스11', '백종원11', '11024752081', '용인11','스타벅1','no_image.jpg','001');
+VALUES('sajang11', '1234', '스퉐붝스11', '고병철11', '11024752081', '용인11','스타벅1','no_image.jpg','001');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang12', '1234', '스퉐붝스12', '백종원12', '12024752081', '용인12','스타벅스2','no_image.jpg','002');
+VALUES('sajang12', '1234', '스퉐붝스12', '고병철12', '12024752081', '용인12','스타벅스2','no_image.jpg','002');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang13', '1234', '스퉐붝스13', '백종원13', '13024752081', '용인13','스타벅스3','no_image.jpg','003');
+VALUES('sajang13', '1234', '스퉐붝스13', '고병철13', '13024752081', '용인13','스타벅스3','no_image.jpg','003');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang14', '1234', '스퉐붝스14', '백종원14', '14024752081', '용인14','스타벅스4','no_image.jpg','004');
+VALUES('sajang14', '1234', '스퉐붝스14', '고병철14', '14024752081', '용인14','스타벅스4','no_image.jpg','004');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang15', '1234', '스퉐붝스15', '백종원15', '15024752081', '용인15','스타벅스5','no_image.jpg','005');
+VALUES('sajang15', '1234', '스퉐붝스15', '고병철15', '15024752081', '용인15','스타벅스5','no_image.jpg','005');
 -- 관리자 권한 부여 (admin) --authorities
 --회원가입 admin으로 한 후에 권한 줘야함
 
