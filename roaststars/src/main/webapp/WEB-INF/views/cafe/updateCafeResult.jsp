@@ -5,6 +5,6 @@
 	<sec:authentication property="principal.id" var="loginId"/>
 </sec:authorize>    
 <script type="text/javascript">
-	alert("${cafeOperVO.cafeVO.cafeName} 카페정보가 수정되었습니다.");
+	alert("카페정보가 수정되었습니다.");
 	location.href="cafe-detail.do?id=${loginId}&cafeNo=${cafeNo}";
 </script>

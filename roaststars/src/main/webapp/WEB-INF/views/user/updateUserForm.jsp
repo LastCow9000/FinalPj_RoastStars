@@ -6,13 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 부트스트랩4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title>회원정보 수정</title>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -96,21 +90,26 @@ $(document).ready(function() {
   });// end memberNick keyup    
     
 
-	//전화번호 문자 입력 불가 
+	//전화번호 문자 입력 불가 & 길이제한
 	 $("#tel").keyup(function() {
-		 // 입력된 tel
-		 var telValue=$(this).val().trim();
-		 
-	     checkTel ="";
-   		 
-	     // 전화번호 문자 들어오는지 체크
-	     if(isFinite(telValue) == false){
-   		 	$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
-   	     }else{
-            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
-   	 		checkTel=telValue;
-   		 }
-	   });// end tel keyup
+	   checkTel="";
+	   var telValue=$(this).val().trim();
+      
+      if(telValue.length<3||telValue.length>11){
+           $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+           checkTel="";
+           return;
+        } else {
+     	   if(isFinite(telValue) == false){
+                $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                checkTel="";
+             }else{
+                $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+                checkTel=telValue;
+             }
+        }
+	 });//end tel keyup 
   
 	   
    /* 서브밋 확인 공간 */   
@@ -151,7 +150,7 @@ $(document).ready(function() {
 </head>
 <body>
 <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
-<div class="container" style="width: 500px; float: center;">
+<div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
 	<h2>회원정보 수정</h2>
   	<hr style="width: 300px; float:left;"><br><br>
 
@@ -212,7 +211,7 @@ $(document).ready(function() {
    
    <hr style="width: 480px; float:left;"><br>
    
-   <input type="submit" class="btn btn-info" value="회원정보수정">
+   <input type="submit" class="btn btn-success" value="회원정보수정">
    <sec:authentication property="principal.id" var="loginId"/>
    <a href="${pageContext.request.contextPath}/update-PasswordForm.do?id=${loginId}" type="submit" class="btn btn-info">비밀번호 변경하기</a>
    <a href="${pageContext.request.contextPath}/delete-userform.do" type="button" role="button" class="btn btn-danger">탈퇴하기</a>

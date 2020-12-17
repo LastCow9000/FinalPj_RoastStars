@@ -135,8 +135,8 @@
    <div class="container" style="margin-top: 10px">
       <div class="row">
          <!-- 카페 상세정보 영역 -->
-         <div class="col-sm-6" style="background-color: #ffe2e2">
-            <div style="margin-top: 10px">
+         <div class="col-sm-6">
+            <div style="margin-top: 10px; margin-bottom: 0px;" class="shadow-sm p-4 mb-4 bg-white">
             
             &nbsp;<p id="cafeDetailCafeTitle" class="font-weight-bolder">${cafeTotal.cafeVO.cafeName}</p> 
             <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -154,7 +154,7 @@
             
             <div>
                <img src="resources/upload/${cafeTotal.cafeVO.cafePic}" alt="no image"
-                    width="500" height="300" style="margin-left: 10px;">
+                    width="473" height="300" style="margin-left: 3px; margin-top: 0px;">
             </div>
            	
            	<pre class="cafe-detail-info" >
@@ -260,9 +260,9 @@
 		</div><!-- 카페 상세보기 영역 -->
 		   
       
-         <!-- 리뷰 영역 -->
-           <div class="col-sm-5 offset-sm-1 reviewArea" style="background-color: #cbf1f5; margin-top: 30px">
-           	<div style="margin-top: 10px">
+          <!-- 리뷰 영역 -->
+           <div class="col-sm-5 offset-sm-1 reviewArea" style="margin-top: 30px">
+           	<div style="margin-top: 10px; border-radius: 15px !important;" class="shadow-sm p-4 mb-4 bg-white">
            	  <p id="reviewTitle" class="font-weight-bolder">리뷰 (${reviewTotalCount})</p>
               
               <%--로그인한 사용자만 보여지도록 secure 처리 --%>
@@ -280,21 +280,22 @@
             </sec:authorize>
             <br>
             
+             <hr>
+            
              <div class="col-sm-11" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 10px;">
               <%-- 리뷰 테이블 영역 --%>
               <%-- <table class="table"> --%>
-              <table class="reviewTable">
+              <span class="reviewTable">
                 <c:forEach items="${lvo.reviewList}" var="review">
-                   <tr>
+                  	<div align="left" id="reviewTableInfo"><%-- 닉네임, 작성일시 (+삭제버튼) --%>
+                   	
                    	<c:choose>
                    	
                    	  <c:when test="${adminId == true || review.userVO.id == loginUser}">
-                   	  	<td align="left" id="reviewTableInfo">
-                   	  		${review.userVO.nickname}
-                     		
+	                	  <span id="reviewTableInfo" style="float:left;">${review.userVO.nickname}
                      		&nbsp;
                      		<!-- 삭제 버튼 -->
-                     		<button type="submit" class="deleteReviewBtn" form="deleteReviewForm" value="${review.reviewNo}">삭제</button>
+                     		<button type="submit" class="deleteReviewBtn" form="deleteReviewForm" value="${review.reviewNo}">삭제</button></span>
                      		<!-- 삭제 form -->
 							 <form action="delete-review.do" id="deleteReviewForm" method="POST">
 							 	<sec:csrfInput/><%-- csrf 토큰 --%>
@@ -302,20 +303,26 @@
 							 	<input type="hidden" name="cafeNo" value="${cafeNo}">
 							 	<input type="hidden" name="id" value="${loginUser}">
 							 </form>
-                     	</td>
                    	  </c:when>
-                   	 
                    	  <c:otherwise>
-                   	    <td align="left" id="reviewTableInfo">${review.userVO.nickname}</td>
+              	  	      <span id="reviewTableInfo" style="float:left;">${review.userVO.nickname}</span>
                    	  </c:otherwise>
+                   	  
                    	 </c:choose>
-                      <td align="right" id="reviewTableInfo">${review.reviewRegdate}</td>
-                   </tr>
-                   <tr>
-                      <td colspan="2" align="left">${review.reviewContent}</td>
-                   </tr>
+                     <span id="reviewTableInfo" style="float:right;">${review.reviewRegdate}</span>
+                   	 </div><%-- 닉네임, 작성일시 (+삭제버튼) 끝 --%>
+                   	 
+                   	 <br>
+                   	 
+                   	 <div><%-- 리뷰 내용 --%> 
+                    	  <p align="left" style="margin-top: 0px !important; padding: 0px !important; margin-bottom: 0px !important;">${review.reviewContent}</p>
+                	 </div>
+                	 
+                	 <hr>
                 </c:forEach>
-              </table> <%-- 리뷰 테이블 영역 --%>
+              </span> <%-- 리뷰 테이블 영역 --%>
+              
+              <br>
               
               <div class="pagingInfo">
                <!-- 
@@ -331,27 +338,27 @@
                               jstl choose 를 이용  
                               예) <a href="DispatcherServlet?command=list&pageNo=...">               
                 -->    
-               <ul class="pagination pagination-sm justify-content-center">
+               <ul class="pagination pagination-sm pagination-warning justify-content-center">
                <c:if test="${pb.previousPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+                  <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}" class="page-link">&laquo;</a></li>
 	               &nbsp;
                </c:if>
                
                <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
                   <c:choose>
                      <c:when test="${pb.nowPage!=i}">
-                     <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}">${i}</a></li> 
+                     <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}" class="page-link">${i}</a></li> 
                      </c:when>
                      
                      <c:otherwise>
-                     <li class="active"><a href="#">${i}</a></li>
+                     <li class="active page-item"><a href="#" class="page-link">${i}</a></li>
                      </c:otherwise>
                   </c:choose>
                   &nbsp; 
                </c:forEach>
                
                <c:if test="${pb.nextPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+                  <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}" class="page-link">&raquo;</a></li>
                </c:if>
                </ul>          
                
@@ -370,9 +377,10 @@
                
                  <!-- Modal Header -->
                  <div class="modal-header">
-                   <p class="modal-title" id="reviewTitle">${cafeName}> 리뷰 작성</p>
+                   <p class="modal-title" id="reviewTitle"><${cafeName}> 리뷰 작성</p>
                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                  </div>
+                 
                  <!-- Modal body -->
                 <form action="register-review.do" method="POST" id="registerReviewForm">
                  <div class="modal-body">
@@ -384,7 +392,7 @@
                     
                     <!-- 리뷰 특성 선택 table -->
                       <table class="reviewForm">
-                         <tr class="reviewTableProperty property_kind">
+                         <tr class="reviewTableProperty">
                             <td></td>
                             <td>좋아요! <i class="far fa-grin-hearts propertyIcon"></i></td>
                             <td>보통이에요 <i class="far fa-grin propertyIcon"></i></td>
@@ -393,35 +401,35 @@
                          
                          <tr></tr>
                          
-                         <tr class="reviewTableProperty property_kind">
+                         <tr class="reviewTableProperty">
                             <td>맛</td>
                             <td><input type="radio" name="taste" value="1"></td>
                             <td><input type="radio" name="taste" value="0" checked></td>
                             <td><input type="radio" name="taste" value="-2"></td>
                          </tr>
                          
-                         <tr class="reviewTableProperty property_kind">
+                         <tr class="reviewTableProperty">
                             <td>가격</td>
                             <td><input type="radio" name="price" value="1"></td>
                             <td><input type="radio" name="price" value="0" checked></td>
                             <td><input type="radio" name="price" value="-2"></td>
                          </tr>
                          
-                        <tr class="reviewTableProperty property_kind">
+                        <tr class="reviewTableProperty">
                             <td>서비스</td>
                             <td><input type="radio" name="service" value="1"></td>
                             <td><input type="radio" name="service" value="0" checked></td>
                             <td><input type="radio" name="service" value="-2"></td>
                          </tr>
                          
-                        <tr class="reviewTableProperty property_kind">
+                        <tr class="reviewTableProperty">
                             <td>분위기</td>
                             <td><input type="radio" name="mood" value="1"></td>
                             <td><input type="radio" name="mood" value="0" checked></td>
                             <td><input type="radio" name="mood" value="-2"></td>
                          </tr>
                          
-                        <tr class="reviewTableProperty property_kind">
+                        <tr class="reviewTableProperty">
                             <td>다양한 메뉴</td>
                             <td><input type="radio" name="diversity" value="1"></td>
                             <td><input type="radio" name="diversity" value="0" checked></td>
@@ -434,15 +442,15 @@
                       <hr>
                       <div style="margin-left: 20px; margin-right: 20px; ">
                          	한줄평 (<span id="reviewContentLen"></span>)<br>
-                            <textarea name="reviewContent" id="reviewContent" class="form-control property_kind" maxlength="50" 
-                              cols="2" style="overflow:auto; margin-top: 10px;  font-weight: bolder" 
-                              wrap="hard" required placeholder="한줄평을 작성해주세요"></textarea>
+                            <textarea name="reviewContent" id="reviewContent" class="form-control reviewContent" maxlength="50" 
+                              cols="2" wrap="hard" required placeholder="한줄평을 작성해주세요"></textarea>
                       </div>
                  </div><!-- modal-body -->
                  
                  <!-- Modal footer -->
-                 <div class="modal-footer">
+                 <div class="reviewSubmitBtn">
                    <button type="submit" class="btn btn-info btn-sm"><strong>리뷰 등록</strong></button>
+                   &nbsp;
                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><strong>취소</strong></button>
                  </div><!-- modal-footer -->
                  

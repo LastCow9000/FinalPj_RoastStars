@@ -116,8 +116,6 @@ public class ManagerController {
 	@PostMapping("update-cafe-form.do")
 	public ModelAndView updateCafeForm(String cafeNo, Model model) {
 		model.addAttribute("cafeNo", cafeNo);
-		CafeVO cafeVO = new CafeVO();
-		cafeVO = cafeService.findcafeByNoNotJoin(cafeNo);
 		CafeOperatingTimeVO cafeOperVO = new CafeOperatingTimeVO();
 		cafeOperVO = cafeService.findCafeByCafeNo(cafeNo);
 		return new ModelAndView("cafe/updateCafeForm.tiles", "cafeOperVO", cafeOperVO);
@@ -157,7 +155,7 @@ public class ManagerController {
 		cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
 		// cafeNo 보내주기
 	    String cafeNo = cafeOperVO.getCafeVO().getCafeNo();
-	    return "redirect:register-cafe-result.do?cafeNo="+cafeNo;
+	    return "redirect:update-cafe-result.do?cafeNo="+cafeNo;
 	}
 	
 	// 카페정보수정 후 결과페이지로 이동

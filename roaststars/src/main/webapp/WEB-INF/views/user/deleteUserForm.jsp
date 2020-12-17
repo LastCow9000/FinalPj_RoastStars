@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 삭제 폼</title>
 <script type="text/javascript">
 $(document).ready(function() {
 	//비밀번호 확인하기 
@@ -47,7 +47,7 @@ $(document).ready(function() {
 </head>
 <body>
 <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
- <div class="container" style="width: 500px; float: center;">
+ <div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
   <h2>회원탈퇴</h2>
   <hr style="width: 300px; float:left;"><br><br>
   <form method="post" action="${pageContext.request.contextPath}/delete-useraction.do" class="was-validated" id="deleteUserForm" enctype="multipart/form-data">
@@ -64,7 +64,7 @@ $(document).ready(function() {
       <div class="valid-feedback"><span id="passwordResult"></span></div>
       <div class="invalid-feedback">  비밀번호를 입력해주세요.</div>
     </div>
-    <hr style="width: 480px; float:left;"><br>
+    <hr style="width: 454px; float:left;"><br>
 	<input type="submit" value="회웥탈퇴" class="btn btn-primary" style="float:center;">
 	
   </form>

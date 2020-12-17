@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카페 관리</title>
 <script type="text/javascript">
 $(document).ready(function() {
    
@@ -42,13 +42,14 @@ $(document).ready(function() {
 <c:choose>
 <%-- 등록된 카페가 있는 경우 : 카페 리스트를 보여준다 --%>
 <c:when test="${list.size() > 0}">
+<div class="shadow-sm p-4 mb-4 bg-white">
 <table class="table table-hover">
 <thead>
    <tr>
       <th scope="col">카페명</th>
       <th scope="col">카페 주소</th>
       <th scope="col">카페 전화번호</th>
-      <th colspan="2">수정 | 삭제</th>
+      <th colspan="2"></th>
    </tr>
 </thead>
 <tbody>
@@ -77,6 +78,7 @@ $(document).ready(function() {
    </c:forEach>
 </tbody>   
 </table>
+</div>
 </c:when>
 
 <%-- 등록된 카페가 없는 경우 : 카페 등록 버튼을 보여준다 --%>

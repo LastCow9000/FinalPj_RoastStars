@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메뉴 추가</title>
 <script type="text/javascript">
 $(document).ready(function() {
 	var cafeNo = ${cafeNo};
@@ -118,7 +118,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<div class="container" style="width: 500px; float: center;">
+<div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
   <h2>메뉴 추가하기</h2>
   <hr style="width: 300px; float:left;"><br><br>
   <form method="post" action="${pageContext.request.contextPath}/updateMenu-Ajax.do" class="was-validated" id="updateMenuForm" enctype="multipart/form-data">
@@ -145,7 +145,7 @@ $(document).ready(function() {
       <span id="priceCheckResult"></span>
     </div>
 
-    <hr style="width: 480px; float:left;"><br>
+    <hr style="width: 454px; float:left;"><br>
 
 
 	<input type="button" value="추가하기" class="btn btn-primary" id="menu-btn" style="float:center;">
@@ -157,6 +157,7 @@ $(document).ready(function() {
 <c:choose>
 <%-- 등록된 메뉴가 있는 경우 : 메뉴 리스트를 보여준다 --%>
 <c:when test="${menuList.size() > 0}">
+<div class="shadow p-4 mb-4 bg-white">
 <table class="table table-hover">
 <thead>
 
@@ -194,12 +195,12 @@ $(document).ready(function() {
    </c:forEach>
 </tbody>   
 </table>
+</div>
 </c:when>
-
 <%-- 등록된 메뉴가 없는 경우 --%>
 <c:otherwise>
 
-	<div class="container" style="width:100%; text-align: center;">
+	<div class="container shadow p-4 mb-4 bg-white" style="width:100%; text-align: center;">
 		<h3>등록된 메뉴가 없습니다.</h3>
 		<h3>상단에서 카페의 메뉴를 등록해주세요!</h3>
 	</div>

@@ -15,17 +15,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/87f055c024.js" crossorigin="anonymous"></script>
 <title>Header</title>
+
 <script type="text/javascript">
 	// 드롭다운에서 한 가지 영역 클릭하여 이동 시, 
 	// 다시 드롭다운이 활성화되지 않는 오류를 해결하기 위해 jQuery 추가
 	$(document).ready(function() {
 	    $(".dropdown-toggle").dropdown();
+	    $("#logoutAction").click(function() {
+			$("#logoutForm").submit();
+		});
 	});
 </script>
+
 </head>
 <%-- Header Start --%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="home.do">Roast Stars</a>
+	<a class="navbar-brand" href="home.do"><span class="border border-secondary"><strong>Roast Stars</strong></span></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -39,63 +44,50 @@
 		</ul>
 
 		<%--로그인 X 사용자 (인증X) --%>
+		<div class="btn-group">
 		<sec:authorize access="!hasAnyRole('ROLE_MEMBER','ROLE_MANAGER','ROLE_ADMIN')">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="register-form.do"> <span class="glyphicon glyphicon-user"></span> 회원가입
-				</a></li> &nbsp; &nbsp;
-				<li><a href="login-form.do"> <span class="glyphicon glyphicon-log-in"></span> 로그인
-				</a></li>
-			</ul>
+				<a href="register-form.do" role="button" class="btn btn-dark"><i class="fas fa-user-plus"></i> 회원가입</a>
+				<a href="login-form.do" role="button" class="btn btn-dark"><i class="fas fa-sign-in-alt"></i> 로그인</a>
 		</sec:authorize>
-
+		</div>
 		<%-- 로그인 O 사용자 (인증O) --%>
 		<sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
-			<ul class="nav navbar-nav navbar-right">
 
 				<%-- 
 			Spring Security를 이용하면 Authentication Bean 이 생성
 			로그인 한 사용자의 정보는 Authentication 객체의 principal 에 저장된다 
 			 --%>
-				<li><sec:authentication property="principal.nickname"/>님<li>&nbsp; &nbsp;
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a href="${pageContext.request.contextPath}/admin-detail.do">관리자 페이지 </a>&nbsp; &nbsp;
-				</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_MANAGER')">
-				<!-- Dropdown -->
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-						<font size=4>내 카페 관리하기</font>
-					</a>
-					<div class="dropdown-menu">
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/register-cafeform.do">카페 등록</a>&nbsp; &nbsp;
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/update-cafelist.do">카페 수정 | 삭제</a>&nbsp; &nbsp;
-					<a class="dropdown-item" href="${pageContext.request.contextPath}/view-cafelist-for-menu.do">메뉴 관리</a>&nbsp; &nbsp;
-					</div>
-				</li> &nbsp;
-				</sec:authorize>
-				<sec:authorize access="!hasRole('ROLE_ADMIN')"> <%-- 관리자는 회원정보수정과 탈퇴하기가 불가 --%>
-					<sec:authentication property="principal.id" var="loginId"/>
-					<a href="${pageContext.request.contextPath}/update-userform.do?id=${loginId}">회원정보수정</a>&nbsp; &nbsp;
-				</sec:authorize>
-				
-				<%-- spring security logout은 다음과 같은 처리가 필요하다
-				로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
-				<script type="text/javascript">
 
-					$(document).ready(function() {
-						$("#logoutAction").click(function() {
-							$("#logoutForm").submit();
-						});
-					});
-				</script>
-				<li><a href="#" id="logoutAction">로그아웃</a>
-				<form id="logoutForm"
-					action="${pageContext.request.contextPath}/logout.do" method="post"
-					style="display: none">
-					<sec:csrfInput/>
-				</form></li>
-
-			</ul>
+				<span id="loginNicknameHeader"><sec:authentication property="principal.nickname"/>님</span>&nbsp; &nbsp;
+				<div class="btn-group">
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<a href="${pageContext.request.contextPath}/admin-detail.do" role="button" class="btn btn-warning">관리자 페이지 </a>
+					</sec:authorize>
+					
+					<sec:authorize access="hasRole('ROLE_MANAGER')">
+					<!-- Dropdown -->
+						<a class="nav-link dropdown-toggle btn btn-dark" href="#" id="navbardrop" data-toggle="dropdown" role="button">
+							<font size=3>내 카페 관리하기</font>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/register-cafeform.do">카페 등록</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/update-cafelist.do">카페 수정 | 삭제</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/view-cafelist-for-menu.do">메뉴 관리</a>
+						</div>
+					</sec:authorize>
+					
+					<sec:authorize access="!hasRole('ROLE_ADMIN')"> <%-- 관리자는 회원정보수정과 탈퇴하기가 불가 --%>
+						<sec:authentication property="principal.id" var="loginId"/>
+						<a href="${pageContext.request.contextPath}/update-userform.do?id=${loginId}" role="button" class="btn btn-info">회원정보수정</a>
+					</sec:authorize>
+					
+					<%-- spring security logout은 다음과 같은 처리가 필요하다
+					로그인,로그아웃은 모두 post 방식 요청으로 해야 하면  csrf 토큰처리가 필요하다 --%>
+					<a href="#" id="logoutAction" role="button" class="btn btn-danger">로그아웃</a>
+				</div>
+					<form id="logoutForm" action="${pageContext.request.contextPath}/logout.do" method="post" style="display: none">
+						<sec:csrfInput/>
+					</form>
 			
 		</sec:authorize>
 	</div>
