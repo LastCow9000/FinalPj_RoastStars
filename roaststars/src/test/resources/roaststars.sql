@@ -456,11 +456,7 @@ CREATE TABLE my_pick(
 CREATE SEQUENCE my_pick_seq;
 
 insert into my_pick values(my_pick_seq.nextval, 'java11', '4');
-<<<<<<< HEAD
 
-=======
-
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
 -- [20.12.15] 추가 수정 해야할 SQL
 
 -- 메뉴 종류를 담고 있는 테이블 생성

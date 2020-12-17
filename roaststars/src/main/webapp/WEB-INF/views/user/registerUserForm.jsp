@@ -257,11 +257,7 @@
        	 size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
-<<<<<<< HEAD
 
-=======
-
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
     </div>
     
     <hr style="width: 480px; float:left;"><br>
