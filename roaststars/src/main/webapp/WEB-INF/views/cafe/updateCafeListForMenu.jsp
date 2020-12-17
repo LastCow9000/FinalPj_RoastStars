@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카페 메뉴 관리</title>
 <script type="text/javascript">
 $(document).ready(function() {
 	

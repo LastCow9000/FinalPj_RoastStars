@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 삭제 결과</title>
 <script type="text/javascript">
 	$(document).ready(function() {
 			alert("탈퇴되었습니다.");
