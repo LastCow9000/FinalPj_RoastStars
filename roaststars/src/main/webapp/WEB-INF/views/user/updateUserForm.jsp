@@ -175,7 +175,7 @@ $(document).ready(function() {
        <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
     </div>
    
-   <hr style="width: 480px; float:left;"><br><br>
+   <hr style="width: 454px; float:left;"><br><br>
     
    <div class="form-group">
       <label for="userName"> 이름 : </label>
@@ -209,7 +209,7 @@ $(document).ready(function() {
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
     </div>
    
-   <hr style="width: 480px; float:left;"><br>
+   <hr style="width: 454px; float:left;"><br>
    
    <input type="submit" class="btn btn-success" value="회원정보수정">
    <sec:authentication property="principal.id" var="loginId"/>
