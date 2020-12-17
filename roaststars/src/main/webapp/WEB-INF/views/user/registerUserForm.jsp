@@ -7,13 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- 부트스트랩4 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- 주소 API -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -113,7 +106,21 @@
          }
       
       });// end passwordChecked
-      
+      //비밀번호 일치 여부 체크 (비밀번호 확인 기입 비밀번호)
+      $("#passwordChecked").keyup(function() {
+    	 checkPassword="";
+         var passValue =$("#passwordC").val(); //기존 기입 비밀번호
+         var passChecked = $(this).val(); // 비밀번호 확인 기입 비밀번호
+         if(passChecked===passValue){
+            $("#passwordCheckResult").html("비밀번호가 일치합니다.").css("color","green");
+            checkPassword = passChecked;
+         }else{
+            $("#passwordCheckResult").html("비밀번호가 불일치합니다.").css("color","red");
+            checkPassword="";
+            //$(".pass valid-feedback").attr('class', ".pass invalid-feedback");
+            
+         }
+      });// end passwordChecked
 	
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
@@ -256,6 +263,7 @@
        	 size=80  placeholder="'주소검색'을 통해 입력해주세요" required>
 	      <div class="valid-feedback"></div>
 	      <div class="invalid-feedback">  주소를 입력해주세요.</div>
+
     </div>
     
     <hr style="width: 480px; float:left;"><br>

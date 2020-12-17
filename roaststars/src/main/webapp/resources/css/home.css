@@ -5,21 +5,20 @@
 }
 
 @font-face{
-   font-family: "Layout Font";
-   src: url("layout-font.otf"); 
+	font-family: "Layout Font";
+	src: url("layout-font.otf"); 
 }
 
 .footer,.header,.btn,.pagination  {
-   font-family:"Layout Font";
-   font-size: 20px;
-}    
+	font-family:"Layout Font";
+	font-size: 20px;
+} 	
 
 .main{
-   font-family:"Main Font";
-   font-weight: bolder;
-   font-size: 20px;
+	font-family:"Main Font";
+	font-weight: bolder;
+	font-size: 20px;
 }
-
 
 /* 카페 정보 상세보기 페이지 설정 */
 
@@ -30,9 +29,9 @@
 }
 
 .myPickStar{
-   float: right;
-   margin-right: 5px;
-   margin-bottom: 10px;
+	float: right;
+	margin-right: 5px;
+	margin-bottom: 10px;
 }
 
 /* icon 2x 적용한 부분 사이즈 조금 작게*/
@@ -236,6 +235,37 @@ html *{
 
 /*예울 CSS 추가 사항 시작 */
 
+.cafe-simple-card{
+	font-family:"Layout Font";
+	font-size: 15px;
+}
+
+.cafe-simple-card-title{
+    font-size: 30px !important;
+    margin-left: 10px !important;
+    margin-top: 3px !important;
+}
+
+.cafe-detail-info{
+	width:500px;
+	font-family:"Main Font";
+	font-size: 20px;
+	
+	overflow:auto !important; /* 영어 입력 시, 자동 줄바꿈*/
+	margin-left: 10px;
+	margin-top: 5px;
+	
+	/*자동 줄바꿈*/
+	word-wrap: break-word;
+	white-space: pre-line;
+	word-break:break-all;
+}
+
+/* 카페 등록/수정 시, 본문 내용 글자 수 span 영역*/
+#infoCheckResultSpan{
+	float:right;
+}
+
 /*예울 CSS 추가 사항 끝*/
 
 
@@ -245,13 +275,7 @@ html *{
 
 
 /*영섭 CSS 추가 사항 시작 */
-.card { /* 카페 간략정보도 포함 !*/
-    max-height: 600px;
-    font-size:20px;
-    padding: 10px;
-   margin: 5px;
-   justify-content: center;
-}
+
 /*영섭 CSS 추가 사항 끝*/
 
 

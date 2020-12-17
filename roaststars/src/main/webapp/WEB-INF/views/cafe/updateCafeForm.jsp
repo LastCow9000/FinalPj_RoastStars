@@ -17,8 +17,15 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	   // 제목 체크 (기존 제목)
+	   var checkName=$("#registCafeName").val();
 
-	   var checkTitle="";
+	   // 카페 정보 체크 (기존 내용)
+	   var checkInfo=$("#cafeInfo").val();
+	   
+	   // 전화번호 문자&길이 체크 (기존 내용)
+	   var checkTel = $("cafeTel").val();
+	   
 	   // 제목 길이 체크
 	   $("#registCafeName").keyup(function() {
 	      checkName = "";
@@ -32,30 +39,77 @@ $(document).ready(function() {
 	         $("#nameCheckResult").html(nameValue.length).css("color","grey");
 	         checkName = nameValue;
 	      }
-	   });//keyup
-	 //전화번호 문자 입력 불가 
-		 $("#cafeTel").keyup(function() {
-			 var telValue=$(this).val().trim();
-		   		if(isFinite(telValue) == false){
-		   			$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
-		            checkTel="";
-		   		}else{
-		            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
-
-		   			checkTel=telValue;
-		   		}
-		   	 if(telValue.length<3||telValue.length>11){
-		            $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
-		            checkTel="";
-		            return;
-		         } else {
-		            $("#telResult").html("적합한 전화번호입니다.").css("color","green");
-		            checkTel=telValue;
-		         } 
-		   });
+	   });//end registCafeName keyup
+	    
+	   // 제목 영역 클릭하면 글자 수 표현하기
+	   $("#updateCafeNameArea").click(function() {
+	      checkName = "";
+	      var nameValue= $("#registCafeName").val().trim();
+	      
+	      //제목 길이 10자 넘어가면 빨갛게
+	      if(nameValue.length > 10){
+	         $("#nameCheckResult").html(nameValue.length).css("color","red");
+	         return;
+	      //제목 길이 평소에는 grey로
+	      } else {
+	         $("#nameCheckResult").html(nameValue.length).css("color","grey");
+	         checkName = nameValue;
+	      }
+	   });// end updateCafeNameArea click
 	   
+	   
+	   // 본문 (카페정보 길이 체크)
+	   $("#cafeInfo").keyup(function() {
+		   checkInfo = "";
+		   var infoValue = $(this).val().trim();
 		   
+		   //본문 길이 200자 넘어가면 빨갛게
+	       if(infoValue.length > 200){
+	           $("#infoCheckResult").html(infoValue.length).css("color","red");
+	           return;
+	        //본문 길이 평소에는 grey로
+	        } else {
+	           $("#infoCheckResult").html(infoValue.length).css("color","grey");
+	           checkInfo = infoValue;
+	        }
+	   });// end registCafeName keyup
+	   
+	   // 본문 영역 클릭하면 글자 수 표현하기
+	   $("#updateCafeInfoArea").click(function() {
+		   checkInfo = "";
+		   var infoValue = $("#cafeInfo").val().trim();
 		   
+	      //본문 길이 200자 넘어가면 빨갛게
+	      if(infoValue.length > 200){
+	         $("#infoCheckResult").html(infoValue.length).css("color","red");
+	         return;
+	      //본문 길이 평소에는 grey로
+	      } else {
+	         $("#infoCheckResult").html(infoValue.length).css("color","grey");
+	         checkInfo = infoValue;
+	      }
+	   });// end updateCafeInfoArea click
+	  
+		   
+   //전화번호 문자 입력 불가 & 길이제한
+   $("#cafeTel").keyup(function() {
+	  checkTel="";
+      var telValue=$(this).val().trim();
+           
+         if(telValue.length<3||telValue.length>11){
+              $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+              return;
+           } else {
+        	   if(isFinite(telValue) == false){
+                   $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                }else{
+                   $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+                   checkTel=telValue;
+                }
+           }
+     }); //end cafeTel keyup
+     
+     
      // 주소 팝업   
       $("#goToAddrAPIBtn").click(function() {
          new daum.Postcode({
@@ -70,7 +124,27 @@ $(document).ready(function() {
          //alert($(this).val());
          $('#holidayTimeCheck').val($(this).val());
       });//noOperating
+      
+	  /* 길이 넘었을 때 submit 안 되도록 막기 */
       $("#updateCafeForm").submit(function() {
+		  // 제목 길이 체크
+	      if(checkName == ""){
+	         alert("상호명은 10자 이내로 작성해주세요.");
+	         return false;
+	      } 
+		   
+		  // 본문 길이 체크
+	      if(checkInfo == ""){
+	          alert("카페 소개는 200자 이내로 작성해주세요.");
+	          return false;
+	       } 
+		  
+	      //전화번호 문자 입력 시 alert
+          if(checkTel==""){
+              alert("전화번호를 확인해주세요.");
+              return false;
+           }
+	      
           if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
              return true;
           }else
@@ -170,7 +244,7 @@ function inputTimeColon(time) {
    	<tbody>
    		<tr>
 			<td>카페명</td>
-			<td colspan=2><input type="text" name="cafeName" id="registCafeName" size=50 value="${cafeOperVO.cafeVO.cafeName}" required>
+			<td colspan=2 id="updateCafeNameArea"><input type="text" name="cafeName" id="registCafeName" size=50 value="${cafeOperVO.cafeVO.cafeName}" required>
 			<span id="nameCheckResult"></span>/10</td>
 		</tr>
 		 
@@ -184,8 +258,9 @@ function inputTimeColon(time) {
 		
 		<tr>
 			<td>전화번호</td>
-			<td colspan=2><input type="text" name="cafeTel" id="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50>
-			<span id="telResult"></span></td>
+
+			<td colspan=2><input type="text" id="cafeTel" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50>
+			&nbsp;<span id="telResult"></span></td>
 		</tr>
 		
 		<tr>
@@ -198,9 +273,11 @@ function inputTimeColon(time) {
 		</tr>
 		
 		<tr>
-			<td colspan="3">
-				<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"
+			<td colspan="3" id="updateCafeInfoArea">
+				<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"  id="cafeInfo" 
 					 name="cafeInfo" required>${cafeOperVO.cafeVO.cafeInfo}</textarea>
+				<br><span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
+					 
 			</td>
 		</tr>
    	

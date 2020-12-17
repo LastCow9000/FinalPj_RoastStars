@@ -14,8 +14,8 @@ select *
 from   authorities
 
 select *
-from   cafe c, PROPERTY p
-where  c.cafe_no = p.cafe_no AND c.cafe_no=77
+from   cafe c
+where  cafe_no=71
 
 select *
 from   rs_user

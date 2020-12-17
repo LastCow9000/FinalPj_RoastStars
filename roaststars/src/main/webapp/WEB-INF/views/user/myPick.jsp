@@ -58,7 +58,7 @@
 		</div>
 	</c:forEach>
 </div>
-<div class="pagingInfo">
+<div class="pagingInfo col-sm-12">
     <%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
     <c:set var="pb" value="${lvo.pagingBean}"/>
     <!-- 
@@ -74,29 +74,29 @@
                    jstl choose 를 이용  
                    예) <a href="DispatcherServlet?command=list&pageNo=...">               
      -->    
-    <ul class="pagination pagination-sm">
+     
+    <ul class="pagination pagination-warning justify-content-center">
     <c:if test="${pb.previousPageGroup}">   
-       <li><a href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+       <li class="page-item"><a href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}&pageNo=${pb.startPageOfPageGroup-1}" class="page-link">&laquo;</a></li>
     </c:if>
     
     <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
        <c:choose>
           <c:when test="${pb.nowPage!=i}">
-          <li><a href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}&pageNo=${i}">${i}</a></li> 
+          <li class="page-item"><a href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}&pageNo=${i}" class="page-link">${i}</a></li> 
           </c:when>
           <c:otherwise>
-          <li class="active"><a href="#">${i}</a></li>
+          <li class="active page-item"><a href="#" class="page-link">${i}</a></li>
           </c:otherwise>
        </c:choose>
-       &nbsp; 
     </c:forEach>
     
     <c:if test="${pb.nextPageGroup}">   
-       <li><a href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+       <li class="page-item"><a href="${pageContext.request.contextPath}/my-pick-list.do?id=${loginId}&pageNo=${pb.endPageOfPageGroup+1}" class="page-link">&raquo;</a></li>
     </c:if>
     </ul>          
 </div><!-- 페이징 바 -->
-	<hr>
-	
+
+<hr>
 </body>
 </html>

@@ -3,24 +3,135 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- spring security custom tag를 사용하기 위한 선언 --%>
 <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%> 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>카페 상세보기</title>
-</head>
-
-<body>
-<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
-<c:set var="pb" value="${requestScope.lvo.pagingBean}"/>
 <%-- cafeNo도 변수에 담는다. --%>
 <c:set var="cafeNo" value="${cafeTotal.cafeVO.cafeNo}"/>
 <%-- 리뷰에서 쓸 cafeName도 변수에 담는다. --%>
 <c:set var="cafeName" value="${cafeTotal.cafeVO.cafeName}"/>
 <%-- 관리자 아이디 변수에 담기 --%>
 <sec:authorize access="hasRole('ROLE_ADMIN')" var="adminId"/>
-
+<%-- 로그인 아이디(세션) --%>
+<sec:authorize access="hasRole('ROLE_MEMBER')">
+	<sec:authentication var="loginUser" property="principal.id"/>
+</sec:authorize>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>카페 상세보기</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+		           	   
+		/* 한줄평 수정 시 길이 체크 공간 */
+		var checkContent="";
+		// 1. 리뷰 내용 부분에 입력을 시작하면 댓글 길이 나옴   
+		$("#registerReviewForm").on("keyup","#reviewContent",function(){
+			checkContent="";
+			overLengthContent = "";
+			var reviewContentVal  =  $("#reviewContent").val().trim();
+			//한줄평 내용 길이 50자 넘어가면 빨갛게
+			if(reviewContentVal.length > 50){
+				$("#reviewContentLen").html(reviewContentVal.length).css("color","red");
+				overLengthContent = reviewContentVal;
+				return;
+				//한줄평 내용 길이 평소에는 grey로
+			} else {
+				$("#reviewContentLen").html(reviewContentVal.length).css("color","grey");
+				checkContent = reviewContentVal; //이 경우에만 입력된 내용을 checkContent에 할당해줌
+			}
+		});//keyup
+		                 
+		// 2. 리뷰 부분 클릭하면 기존 리뷰 길이 나옴	
+		$("#reviewContent").mouseenter(function() {
+			var reviewContentVal = $(this).val().trim();
+			//한줄평 길이 20자 넘어가면 빨갛게
+			if(reviewContentVal.length > 50){
+				$("#reviewContentLen").html(reviewContentVal.length).css("color","red");
+			//한줄평 길이 평소에는 grey로
+			}else {
+				$("#reviewContentLen").html(reviewContentVal.length).css("color","grey");
+			}
+		});//click
+		
+		//리뷰 폼 submit (registerReviewForm)
+		$("#registerReviewForm").submit(function() {
+			//var formData=$("#registerReviewForm").serialize();
+			//한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
+			if (checkContent == ""){
+				alert("한줄평은 50자 이하로 작성해주세요.");
+				$("#reviewContent").val(overLengthContent.substring(0, 50));// 51자부터 글자 all 삭제
+				$("#reviewContent").focus();
+				return false;
+			}
+		});//registerReviewForm
+		  
+		// 리뷰 삭제 시 한번 묻기
+		$("#deleteReviewForm").submit(function() {
+			return confirm("리뷰를 삭제하시겠습니까?");
+		});//deleteReviewBtn
+		
+		//마이픽 추가
+		$(document).on("click", "#halfMyPickIcon",function(){
+			$.ajax({
+				type:"post",
+				data:"id=${loginUser}&cafeNo=${cafeNo}",
+				url:"${pageContext.request.contextPath}/my-pick-add.do",
+				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+					},
+				success:function(addResult){
+					if(addResult=="ok"){
+						$(".myPickStar").html('<a href="#" id="fullMyPickIcon"><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a>');
+					}else{
+						return;
+					}
+				}//end function
+			});//end ajax
+		});//end star click
+	
+		//마이픽 삭제
+		$(document).on("click", "#fullMyPickIcon",function(){
+			var cafeNo=$("#detailCafeNo").val();
+			$.ajax({
+				type:"post",
+				data:"id=${loginUser}&cafeNo=${cafeNo}",
+				url:"${pageContext.request.contextPath}/my-pick-delete-by-id-cafeNo.do",
+				beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+		        		xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		        	},
+				success:function(delResult){
+					if(delResult == 'ok'){
+						$(".myPickStar").html('<a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a>');
+					}
+				}//end function
+			});//end ajax
+		});//end star click
+	
+		
+	});//ready              
+	function openReviewModal(){
+		//현재 카페 정보
+		var cafeNo = ${cafeNo};
+		//현재 로그인한 아이디
+		var loginId = '${loginUser}';
+		$.ajax({
+			type:"GET",
+			url:"${pageContext.request.contextPath}/check-review-ajax.do",
+			data:"id="+loginId + "&cafeNo="+cafeNo,
+			success: function(result) {
+				if(result === 1){
+					alert("이미 리뷰를 등록하였습니다.");
+					location.href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo="+cafeNo;
+				}else{
+					$('#registerReviewForm').modal('show');
+				}//else
+			}//success
+		});//ajax
+	}
+</script>
+</head>
+<body>
+<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
+<c:set var="pb" value="${requestScope.lvo.pagingBean}"/>
    <div class="container" style="margin-top: 10px">
       <div class="row">
          <!-- 카페 상세정보 영역 -->
@@ -43,9 +154,13 @@
             
             <div>
                <img src="resources/upload/${cafeTotal.cafeVO.cafePic}" alt="no image"
-                    width="500" height="300">
+                    width="500" height="300" style="margin-left: 10px;">
             </div>
-            <p>${cafeTotal.cafeVO.cafeInfo}</p>
+           	
+           	<pre class="cafe-detail-info" >
+           		<span>${cafeTotal.cafeVO.cafeInfo}</span>
+           	</pre>
+            
             <table class="table">
                <tr>
                   <td>전화번호</td>
@@ -54,8 +169,8 @@
                <tr>
                   <td>운영시간</td>
                   <td>
-			                  평일 : ${cafeTotal.weekdayTime} <br>
-			                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
+	                  평일 : ${cafeTotal.weekdayTime} <br>
+	                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
                   </td>
                </tr>
                
@@ -66,7 +181,7 @@
                
                <tr>
                	  <%-- 메뉴보기 모달 버튼 --%>
-                  <td colspan="2" align="center"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#menuModal"><strong>메뉴 보기</strong></button></td>
+                  <td colspan="2" align="center"><button type="button" id="reviewModalBtn" class="btn btn-success" data-toggle="modal" data-target="#menuModal"><strong>메뉴 보기</strong></button></td>
                </tr>
             </table>
         </div>
@@ -147,9 +262,8 @@
       
          <!-- 리뷰 영역 -->
            <div class="col-sm-5 offset-sm-1 reviewArea" style="background-color: #cbf1f5; margin-top: 30px">
-              <div style="margin-top: 10px">
-              
-            <p id="reviewTitle" class="font-weight-bolder">리뷰 (${reviewTotalCount})</p>
+           	<div style="margin-top: 10px">
+           	  <p id="reviewTitle" class="font-weight-bolder">리뷰 (${reviewTotalCount})</p>
               
               <%--로그인한 사용자만 보여지도록 secure 처리 --%>
               <sec:authorize access="hasRole('ROLE_MEMBER')">
@@ -157,7 +271,7 @@
               <%-- 카페의 사장아이디와 로그인한 사용자의 아이디가 같은 경우도 안보이기--%> 
               <c:if test="${cafeTotal.cafeVO.userVO.id != loginUser}">
               <span id="reviewRegisterBtn">
-              	<a data-toggle="modal" data-target="#registerReviewForm" id="reviewBtn">
+              	<a onclick="openReviewModal()" id="reviewBtn">
                  <i class="fas fa-pencil-alt fa-1x" style="color:#155263"></i>
            		      리뷰 작성하기 
              	</a>
@@ -250,11 +364,7 @@
          
          <!-- 리뷰 작성 팝업(모달) -->
          <!-- The Modal -->
-           <div class="modal" id="registerReviewForm">
-           	 <sec:authorize access="hasRole('ROLE_MEMBER')">
-              <sec:authentication var="loginUser" property="principal.id"/>
-          	 </sec:authorize>
-            
+           <div class="modal fade" id="registerReviewForm">
              <div class="modal-dialog">
                <div class="modal-content">
                
@@ -263,127 +373,6 @@
                    <p class="modal-title" id="reviewTitle">${cafeName}> 리뷰 작성</p>
                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                  </div>
-             
-                <!-- 리뷰 작성 관련 script -->
-                <script type="text/javascript">
-                   $(document).ready(function() {
-                     
-                	   //리뷰 중복 여부 체크
-                	   $("#reviewRegisterBtn").click(function() {
-                		   //현재 카페 정보
-                  		   var cafeNo = ${cafeNo};
-                  		   //alert(cafeNo);
-                  		   
-                  		   //현재 로그인한 아이디
-                  		   var loginId = '${loginUser}';
-                  		   //alert(loginId);
-
-    	              	    $.ajax({
-    	          			   type:"GET",
-    	          			   url:"${pageContext.request.contextPath}/check-review-ajax.do",
-    	          			   data:"id="+loginId + "&cafeNo="+cafeNo,
-    	          			   success: function(result) {
-    								if(result === 1){
-    									alert("이미 리뷰를 등록하였습니다.");
-    									location.href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo="+cafeNo;
-    								}
-    							}//success
-    	          		   });//ajax
-					});//reviewRegisterBtn
-                	   
-                      // 한줄평 길이 제한 및 리뷰 기존 작성 중복 여부 체크
-                      /* 한줄평 수정 시 길이 체크 공간 */
-                      
-                      var checkContent="";
-                     
-                     // 1. 리뷰 내용 부분에 입력을 시작하면 댓글 길이 나옴   
-                     $("#registerReviewForm").on("keyup","#reviewContent",function(){
-                    	 
-                        checkContent="";
-                        overLengthContent = "";
-                        var reviewContentVal  =  $("#reviewContent").val().trim();
-                        //한줄평 내용 길이 50자 넘어가면 빨갛게
-                        if(reviewContentVal.length > 50){
-                           $("#reviewContentLen").html(reviewContentVal.length).css("color","red");
-                           overLengthContent = reviewContentVal;
-                           return;
-                        //한줄평 내용 길이 평소에는 grey로
-                        } else {
-                           $("#reviewContentLen").html(reviewContentVal.length).css("color","grey");
-                           checkContent = reviewContentVal; //이 경우에만 입력된 내용을 checkContent에 할당해줌
-                        }
-                     });//keyup
-                      
-                 	// 2. 리뷰 부분 클릭하면 기존 리뷰 길이 나옴	
-                 	$("#reviewContent").mouseenter(function() {
-                 		var reviewContentVal = $(this).val().trim();
-                 		//한줄평 길이 20자 넘어가면 빨갛게
-                        if(reviewContentVal.length > 50){
-                            $("#reviewContentLen").html(reviewContentVal.length).css("color","red");
-                 		//한줄평 길이 평소에는 grey로
-                 		} else {
-                            $("#reviewContentLen").html(reviewContentVal.length).css("color","grey");
-                 		}
-                 	});//click
-                 	
-                    //리뷰 폼 submit (registerReviewForm)
-                    $("#registerReviewForm").submit(function() {
-                   	 //var formData=$("#registerReviewForm").serialize();
-                       //한줄평 50글자 초과일 때 (checkContent에 아무것도 할당되지 않았을 때), submit 제한
-                       if (checkContent == ""){
-                          alert("한줄평은 50자 이하로 작성해주세요.");
-                          $("#reviewContent").val(overLengthContent.substring(0, 50));// 51자부터 글자 all 삭제
-                          $("#reviewContent").focus();
-                          return false;
-                       }
-                    });//registerReviewForm
-                    
-                    // 리뷰 삭제 시 한번 묻기
-                    $("#deleteReviewForm").submit(function() {
-                   	  return confirm("리뷰를 삭제하시겠습니까?");
-				 	});//deleteReviewBtn
-					
-					//마이픽 추가
-					$(document).on("click", "#halfMyPickIcon",function(){
-						$.ajax({
-							type:"post",
-							data:"id=${loginUser}&cafeNo=${cafeNo}",
-							url:"${pageContext.request.contextPath}/my-pick-add.do",
-							beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
-			                	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			                },
-							success:function(addResult){
-								if(addResult=="ok"){
-									$(".myPickStar").html('<a href="#" id="fullMyPickIcon"><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a>');
-								}else{
-									return;
-								}
-							}//end function
-						});//end ajax
-					});//end star click
-					
-					//마이픽 삭제
-					$(document).on("click", "#fullMyPickIcon",function(){
-						var cafeNo=$("#detailCafeNo").val();
-						$.ajax({
-							type:"post",
-							data:"id=${loginUser}&cafeNo=${cafeNo}",
-							url:"${pageContext.request.contextPath}/my-pick-delete-by-id-cafeNo.do",
-							beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
-				               	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-				               },
-							success:function(delResult){
-								if(delResult == 'ok'){
-									$(".myPickStar").html('<a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a>');
-								}
-							}//end function
-						});//end ajax
-					});//end star click
-					
-                   });//ready
-                   
-                </script>
-                 
                  <!-- Modal body -->
                 <form action="register-review.do" method="POST" id="registerReviewForm">
                  <div class="modal-body">
@@ -445,8 +434,6 @@
                       <hr>
                       <div style="margin-left: 20px; margin-right: 20px; ">
                          	한줄평 (<span id="reviewContentLen"></span>)<br>
-                         <!--  <input type="text" name="reviewContent" required="required" id="reviewContent"
-                            placeholder="한줄평을 작성해주세요" style="width:500px; height:30px; margin-top: 10px;">-->
                             <textarea name="reviewContent" id="reviewContent" class="form-control property_kind" maxlength="50" 
                               cols="2" style="overflow:auto; margin-top: 10px;  font-weight: bolder" 
                               wrap="hard" required placeholder="한줄평을 작성해주세요"></textarea>

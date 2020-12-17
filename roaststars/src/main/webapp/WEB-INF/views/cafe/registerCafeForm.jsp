@@ -20,11 +20,16 @@
 /* 길이 체크 공간 */
 
 $(document).ready(function() {
-   //var checkTitle="";
+	
+   var checkName="";
+   var checkInfo="";
+   var checkTel="";
+   
    // 제목 길이 체크
    $("#registCafeName").keyup(function() {
-      checkName = "";
+	  checkName = "";
       var nameValue= $(this).val().trim();
+      
       //제목 길이 10자 넘어가면 빨갛게
       if(nameValue.length > 10){
          $("#nameCheckResult").html(nameValue.length).css("color","red");
@@ -34,29 +39,71 @@ $(document).ready(function() {
          $("#nameCheckResult").html(nameValue.length).css("color","grey");
          checkName = nameValue;
       }
-   });//keyup
+   });// end registCafeName keyup
    
- //전화번호 문자 입력 불가 
-	 $("#cafeTel").keyup(function() {
-		 var telValue=$(this).val().trim();
-	   		if(isFinite(telValue) == false){
-	   			$("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
-	            checkTel="";
-	   		}else{
-	            $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+   // 본문 길이 체크
+   $("#cafeInfo").keyup(function() {
+	   checkInfo = "";
+	   var infoValue = $(this).val().trim();
+	   
+	   //본문 길이 200자 넘어가면 빨갛게
+       if(infoValue.length > 200){
+           $("#infoCheckResult").html(infoValue.length).css("color","red");
+           return;
+        //본문 길이 평소에는 grey로
+        } else {
+           $("#infoCheckResult").html(infoValue.length).css("color","grey");
+           checkInfo = infoValue;
+        }
+   });// end registCafeName keyup
+   
+   
+   //전화번호 문자 입력 불가 & 길이제한
+   $("#cafeTel").keyup(function() {
+      var telValue=$(this).val().trim();
+           
+         if(telValue.length<3||telValue.length>11){
+              $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+              checkTel="";
+              return;
+           } else {
+        	   if(isFinite(telValue) == false){
+                   $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                   checkTel="";
+                }else{
+                   $("#telResult").html("사용가능한 번호입니다.").css("color","green");
 
-	   			checkTel=telValue;
-	   		}
-	   	 if(telValue.length<3||telValue.length>11){
-	            $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
-	            checkTel="";
-	            return;
-	         } else {
-	            $("#telResult").html("적합한 전화번호입니다.").css("color","green");
-	            checkTel=telValue;
-	         } 
-	   });
-  
+                   checkTel=telValue;
+                }
+           }
+     }); //end cafeTel keyup
+   
+    
+   /* 길이 넘었을 때 submit 안 되도록 막기 */
+   $("#registerCafeForm").submit(function() {
+	   // 제목 길이 체크
+      if(checkName == ""){
+         alert("상호명은 10자 이내로 작성해주세요.");
+         return false;
+      } 
+	   // 본문 길이 체크
+      if(checkInfo == ""){
+          alert("카페 소개는 200자 이내로 작성해주세요.");
+          return false;
+       } 
+	   
+      //전화번호 문자 입력 시 alert
+      if(checkTel==""){
+          alert("전화번호를 확인해주세요.");
+          return false;
+       }
+      
+      if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+   });//sumit
    
    /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
    $("#noOperating").click(function() {
@@ -64,12 +111,6 @@ $(document).ready(function() {
       $('#radioClosed').val($(this).val());
    });//noOperating
    
-   $("#registerCafeForm").submit(function() {
-   		if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
-   			return true;
-   		}else
-   			return false;
-   });
    
    $(".classification").change(function(){ //라디오 버튼 변화 시
  	  var tags='';
@@ -108,6 +149,7 @@ $(document).ready(function() {
 	   });//sumit
 	
 });//ready
+
 function inputTimeColon(time) {
     // replace 함수를 사용하여 콜론( : )을 공백으로 치환한다.
     var replaceTime = time.value.replace(/\:/g, "");
@@ -178,12 +220,14 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td colspan=2><input type="text" name="cafeLoc" id="address" onkeydown="return false;" style="caret-color: transparent !important;" required size=50 placeholder="주소 검색으로 주소를 입력해주세요">&nbsp;<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+				<td colspan=2><input type="text" name="cafeLoc" id="address" size=50 placeholder="주소 검색으로 주소를 입력해주세요" onkeydown="return false;" style="caret-color: transparent !important;" required>&nbsp;
+  				<button type="button" class="btn btn-sm btn-warning" id="goToAddrAPIBtn">주소 검색하기</button></td>
+
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td colspan=2><input type="text" name="cafeTel" id="cafeTel" required placeholder="Enter your phone number(숫자로만 입력해주세요)" size=50 >
-				<span id="telResult"></span></td>
+				<td colspan=2><input type="text" name="cafeTel" id="cafeTel" required placeholder="전화번호를 숫자로만 입력해주세요" size=50 >
+				&nbsp;<span id="telResult"></span></td>
 			</tr>
 			<tr>
 				<td>카페사진</td>
@@ -195,8 +239,9 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td colspan="3">
-					<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"
-						 name="cafeInfo" required></textarea>
+					<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
+						 name="cafeInfo" required></textarea><br>
+					<span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
 				</td>
 			</tr>
 			<tr>

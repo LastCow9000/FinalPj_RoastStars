@@ -151,7 +151,7 @@ public class MemberController {
 		userService.updateUserPassword(id, password);//service에서 변경될 비밀번호를 암호화한다 
 		// 수정한 회원정보로 Spring Security 세션 회원정보를 업데이트한다
 		model.addAttribute("userVO",uvo);
-		return "user/updateUserResult.tiles";
+		return "user/updatePasswordResult.tiles";
 	}
 	
 	//회원탈퇴폼으로 이동.
