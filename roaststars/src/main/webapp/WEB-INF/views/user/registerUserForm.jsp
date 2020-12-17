@@ -175,7 +175,7 @@
     		  $(".classification:input[value='ROLE_MANAGER']").prop("checked", false);//일반 체크시 사장체크 풀림
     	  }
     	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
-      }; // end classification
+      }); // end classification
    	  
    	  
    	  // 주소 팝업

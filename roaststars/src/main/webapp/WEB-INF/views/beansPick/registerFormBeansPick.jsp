@@ -18,7 +18,6 @@
 					<textarea rows="10" cols="120" placeholder="본문 내용을 입력하세요" name="beansContent" required="required"></textarea>
 					<input type="submit" class="btn btn-primary" style="text-align: right" value="등록하기">
 				</form>
-			</div>
 		</div>
 	</div>
 </body>

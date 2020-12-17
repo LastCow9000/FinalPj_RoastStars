@@ -18,7 +18,6 @@ DROP TABLE cafe;
 drop table authorities;
 DROP TABLE rs_user;
 
-
 DROP SEQUENCE cafe_seq;
 DROP SEQUENCE review_seq;
 DROP SEQUENCE beans_pick_seq;

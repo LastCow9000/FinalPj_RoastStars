@@ -105,7 +105,24 @@
 				}//end function
 			});//end ajax
 		});//end star click
-	
+		
+		//어드민용 카페 삭제
+		$("#deleteCafe").click(function(){
+			if(confirm("이 카페를 정말 삭제하시겠습니까?")){
+				$.ajax({
+					type:"POST",
+					data:"cafeNo=${cafeNo}",
+					url:"${pageContext.request.contextPath}/deleteCafe-Ajax.do",
+					beforeSend : function(xhr){   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
+		        		xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		        	},
+					success:function(delResult){
+						alert("카페 정보 삭제 완료!");
+						location.href="${pageContext.request.contextPath}/home.do";
+					}
+				});//end ajax
+			}
+		});//end deleteCafe click
 		
 	});//ready              
 	function openReviewModal(){
@@ -139,9 +156,6 @@
             <div style="margin-top: 10px; margin-bottom: 0px;" class="shadow-sm p-4 mb-4 bg-white">
             
             &nbsp;<p id="cafeDetailCafeTitle" class="font-weight-bolder">${cafeTotal.cafeVO.cafeName}</p> 
-            <sec:authorize access="hasRole('ROLE_ADMIN')">
-            	<button class="btn btn-danger"><strong>이 카페 데이터 지우기</strong></button>
-            </sec:authorize>
             <sec:authorize access="hasRole('ROLE_MEMBER')">
             <c:if test="${flag==true}">
             	<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>
@@ -183,6 +197,14 @@
                	  <%-- 메뉴보기 모달 버튼 --%>
                   <td colspan="2" align="center"><button type="button" id="reviewModalBtn" class="btn btn-success" data-toggle="modal" data-target="#menuModal"><strong>메뉴 보기</strong></button></td>
                </tr>
+               
+               <sec:authorize access="hasRole('ROLE_ADMIN')">
+   	             <tr>
+   	             	<td colspan="2" align="center">
+            	 		<button class="btn btn-danger" id="deleteCafe"><strong>이 카페 데이터 지우기</strong></button>
+                 	</td>
+                 </tr>
+              </sec:authorize>
             </table>
         </div>
          
