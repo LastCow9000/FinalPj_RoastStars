@@ -352,8 +352,8 @@ img {
 .initPropertyBtn{
 	border-radius: .2rem;
 	padding: 0.2rem;
-	padding-right: 0.2rem;
-	padding-left: 0.2rem;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
 	background-color:#4d4545;
     color:white;
 	outline: 0;
