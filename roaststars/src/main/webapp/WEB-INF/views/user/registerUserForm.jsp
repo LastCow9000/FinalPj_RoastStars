@@ -143,7 +143,11 @@
                  }
             }
  	 });//end tel keyup 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
    	  //3. 회원구분 라디오 버튼 
       $(".classification").change(function(){ //라디오 버튼 변화 시
     	  var tags='';
@@ -175,7 +179,7 @@
     		  $(".classification:input[value='ROLE_MANAGER']").prop("checked", false);//일반 체크시 사장체크 풀림
     	  }
     	  $("#managerInfo").html(tags); //위의 tags를 동적으로 생성
-      });// end classification
+      }; // end classification
    	  
    	  
    	  // 주소 팝업
@@ -184,10 +188,28 @@
 	          oncomplete: function(data) {
 	              $("#address").val(data.address);
 	          }//oncomplete
-	      
 	      }).open();
-
 	});// end goToAddrAPIBtn
+
+	//전화번호 문자 입력 불가 & 길이제한
+    $("#tel").keyup(function() {
+       var telValue=$(this).val().trim();
+         
+         if(telValue.length<3||telValue.length>11){
+              $("#telResult").html("전화번호는 3~11자 이내로 작성해주세요").css("color","red");
+              checkTel="";
+              return;
+           } else {
+              if(isFinite(telValue) == false){
+                   $("#telResult").html("문자는 입력하실 수 없습니다.").css("color","red");
+                   checkTel="";
+                }else{
+                   $("#telResult").html("사용가능한 번호입니다.").css("color","green");
+
+                   checkTel=telValue;
+                }
+           }
+    });//end tel keyup 
 
 	//전화번호 문자 입력 불가 & 길이제한
     $("#tel").keyup(function() {

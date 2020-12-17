@@ -49,7 +49,7 @@ $(document).ready(function() {
       <th scope="col">카페명</th>
       <th scope="col">카페 주소</th>
       <th scope="col">카페 전화번호</th>
-      <th colspan="2">수정 | 삭제</th>
+      <th colspan="2"></th>
    </tr>
 </thead>
 <tbody>
