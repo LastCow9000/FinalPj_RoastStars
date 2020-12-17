@@ -105,7 +105,7 @@
             checkPassword="";
          }
       
-      });// end passwordChecked
+      });// end passwordC
       //비밀번호 일치 여부 체크 (비밀번호 확인 기입 비밀번호)
       $("#passwordChecked").keyup(function() {
     	 checkPassword="";
