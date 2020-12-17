@@ -20,23 +20,32 @@ body::after {
    src: url("main-font.ttf");
 }
 
+
 @font-face{
    font-family: "Layout Font";
    src: url("layout-font.otf"); 
 }
 
-.footer,.header,.btn,.pagination  {
+.header,.btn,.pagination{
+   font-family:"Layout Font"; 
+   font-size: 20px;
+}    
 
-	font-family:"Layout Font";
-	font-size: 20px;
-} 	
+.footer{
+   font-family:"Layout Font"; 
+   font-size: 13px;
+}    
 
 .main{
    font-family:"Main Font";
    font-weight: bolder;
    font-size: 20px;
 }
- 
+
+input, textarea{
+	font-family:"Layout Font" !important; 
+	font-size: 15px !important;
+}
 
 /* 카페 정보 상세보기 페이지 설정 */
 
@@ -127,19 +136,9 @@ tr.reviewTableProperty {
 
 .property_kind {
    font-size: 10px;
+
 }
 
-
-/* 페이징 바 */
-.pagingInfo{
-   background-color: white;
-   width: 100%;
-   position: absolute;
-   margin: auto;
-   /*align-items: center; 세로에서 가운데에 요소를 배치*/
-   /*justify-content: cetner; 가로에서 가운데에 요소를 배치*/
-   font-size: 20px;
-}
 
 /* 이미지 클릭시 크게 보기*/
 .bigPictureWrapper {
@@ -194,8 +193,9 @@ tr.reviewTableProperty {
     max-height: 600px;
     font-size:20px;
     padding: 10px;
-   margin: 5px;
-   justify-content: center;
+	margin: 5px;
+	justify-content: center;
+
 }
 
 /*------------paging용 test도 포함--------------*/
@@ -299,6 +299,10 @@ html *{
 
 
 /*영섭 CSS 추가 사항 시작 */
+.my-pick-card{
+   font-family:"Layout Font"; 
+   font-size: 18px;	
+}
 
 /*영섭 CSS 추가 사항 끝*/
 

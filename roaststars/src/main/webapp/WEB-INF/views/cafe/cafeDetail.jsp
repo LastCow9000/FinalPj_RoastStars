@@ -13,9 +13,6 @@
 <sec:authorize access="hasRole('ROLE_MEMBER')">
 	<sec:authentication var="loginUser" property="principal.id"/>
 </sec:authorize>
-<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
-<c:set var="pb" value="${requestScope.lvo.pagingBean}"/>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +23,7 @@
 		           	   
 		/* 한줄평 수정 시 길이 체크 공간 */
 		var checkContent="";
-		
-		/* 리뷰 */
-		
-		// 리뷰 내용 부분에 입력을 시작하면 댓글 길이 나옴   
+		// 1. 리뷰 내용 부분에 입력을 시작하면 댓글 길이 나옴   
 		$("#registerReviewForm").on("keyup","#reviewContent",function(){
 			checkContent="";
 			overLengthContent = "";
@@ -46,7 +40,7 @@
 			}
 		});//keyup
 		                 
-		// 리뷰 부분 클릭하면 기존 리뷰 길이 나옴	
+		// 2. 리뷰 부분 클릭하면 기존 리뷰 길이 나옴	
 		$("#reviewContent").mouseenter(function() {
 			var reviewContentVal = $(this).val().trim();
 			//한줄평 길이 20자 넘어가면 빨갛게
@@ -75,10 +69,7 @@
 			return confirm("리뷰를 삭제하시겠습니까?");
 		});//deleteReviewBtn
 		
-		
-		/* 마이픽 */
-		
-		// 마이픽 추가
+		//마이픽 추가
 		$(document).on("click", "#halfMyPickIcon",function(){
 			$.ajax({
 				type:"post",
@@ -114,9 +105,9 @@
 				}//end function
 			});//end ajax
 		});//end star click
+	
 		
 	});//ready              
-	
 	function openReviewModal(){
 		//현재 카페 정보
 		var cafeNo = ${cafeNo};
@@ -135,15 +126,14 @@
 				}//else
 			}//success
 		});//ajax
-	}// end openReviewModal
-	
+	}
 </script>
 </head>
 <body>
-
+<%-- 코드를 줄이기 위해 pb 변수에 pagingBean을 담는다. --%>
+<c:set var="pb" value="${requestScope.lvo.pagingBean}"/>
    <div class="container" style="margin-top: 10px">
       <div class="row">
-      
          <!-- 카페 상세정보 영역 -->
          <div class="col-sm-6" style="background-color: #ffe2e2">
             <div style="margin-top: 10px">
@@ -341,35 +331,35 @@
                               jstl choose 를 이용  
                               예) <a href="DispatcherServlet?command=list&pageNo=...">               
                 -->    
-               <ul class="pagination pagination-sm justify-content-center">
+               <ul class="pagination pagination-sm pagination-success justify-content-center">
                <c:if test="${pb.previousPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+                  <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.startPageOfPageGroup-1}" class="page-link">&laquo;</a></li>
 	               &nbsp;
                </c:if>
                
                <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
                   <c:choose>
                      <c:when test="${pb.nowPage!=i}">
-                     <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}">${i}</a></li> 
+                     <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${i}" class="page-link">${i}</a></li> 
                      </c:when>
                      
                      <c:otherwise>
-                     <li class="active"><a href="#">${i}</a></li>
+                     <li class="active page-item"><a href="#" class="page-link">${i}</a></li>
                      </c:otherwise>
                   </c:choose>
                   &nbsp; 
                </c:forEach>
                
                <c:if test="${pb.nextPageGroup}">   
-                  <li><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+                  <li class="page-item"><a href="${pageContext.request.contextPath}/cafe-detail.do?id=${loginUser}&cafeNo=${cafeNo}&pageNo=${pb.endPageOfPageGroup+1}" class="page-link">&raquo;</a></li>
                </c:if>
                </ul>          
                
                </div><!-- 페이징 바 -->
              
             </div> <!-- 리뷰테이블 영역 -->
-          </div><!-- 리뷰 마진 -->
-        </div><!-- 리뷰영역 -->
+            </div><!-- 리뷰 마진 -->
+           </div><!-- 리뷰영역 -->
          
          
          <!-- 리뷰 작성 팝업(모달) -->
@@ -460,7 +450,7 @@
                  
                </div>
              </div>
-           </div><!-- 리뷰 작성 팝업(모달) 끝 -->
+           </div>
            
       </div><!-- row -->
    </div><!-- container -->

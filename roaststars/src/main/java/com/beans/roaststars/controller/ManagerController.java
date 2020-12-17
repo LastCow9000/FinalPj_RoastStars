@@ -157,7 +157,7 @@ public class ManagerController {
 		cafeOperVO = cafeService.findCafeByCafeNo(cafeVO.getCafeNo());
 		// cafeNo 보내주기
 	    String cafeNo = cafeOperVO.getCafeVO().getCafeNo();
-	    return "redirect:register-cafe-result.do?cafeNo="+cafeNo;
+	    return "redirect:update-cafe-result.do?cafeNo="+cafeNo;
 	}
 	
 	// 카페정보수정 후 결과페이지로 이동
@@ -196,6 +196,7 @@ public class ManagerController {
 	      return menuKindVO;
 
 	   }
+
 	
 	
 	// 메뉴 리스트 불러오기
