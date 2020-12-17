@@ -157,7 +157,8 @@
 	      }).open();
 		
 	});// end goToAddrAPIBtn
-	//전화번호 문자 입력 불가 
+	
+	 //전화번호 문자 입력 불가 
 	 $("#tel").keyup(function() {
 		 var telValue=$(this).val().trim();
 	   		if(isFinite(telValue) == false){
@@ -168,7 +169,8 @@
 	   			checkTel=telValue;
 	   		}
 	    
-	   });
+	 });
+	
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {
   	  // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.
@@ -196,11 +198,7 @@
         }
     }); // end registerForm submit
     
-   
 });//ready
-   
-  
-
 </script>
 </head>
 <body>

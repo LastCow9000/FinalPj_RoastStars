@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BeansPick Main</title>
-<link rel="stylesheet" href="resources/css/home.css">
 </head>
-
 <body>
 	<c:set var="pb" value="${lvo.pagingBean}" />
 	<div class="container">
@@ -16,7 +14,7 @@
 		<div class="row">
 			<div id=beansPickLayout class="col-sm-12 row justify-content-center">
 				<c:forEach items="${requestScope.lvo.beansPickList}" var="BeansPickVO">
-					<div class="card col-sm-3 ">
+					<div class="card col-sm-5 ">
 						<img class="card-title" src="resources/upload/${BeansPickVO.beansPic}" alt="no image" width="500" height="300">
 						<div class="card-body">
 							<h4 class="card-title">${BeansPickVO.beansNo}</h4>
@@ -27,7 +25,7 @@
 				</c:forEach>
 			</div>
 		</div>
-<%--  	<%-- 성호 : 페이징 가운데 정렬 : 시작 --%>
+		<%--  	<%-- 성호 : 페이징 가운데 정렬 : 시작 --%>
 		<ul class="pagination justify-content-center">
 			<c:if test="${pb.previousPageGroup}">
 				<li><a href="${pageContext.request.contextPath}/main-beansPick.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>

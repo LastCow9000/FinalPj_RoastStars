@@ -97,25 +97,25 @@
 					
 					// 카페 간략 정보 카드
 					var card_tag ="";
-					card_tag +='<div class="card" style="width:350px; height:1000px; margin-top: 30px; margin-left: 0px;">';
+					card_tag +='<div class="card" style="width:340px; height:900px; margin-top: 30px; margin-left: 0px;">';
 					card_tag +='<div class="card-header bg-dark text-white" style="height:70px;">';
-					card_tag +='<h4 class="card-title" style="font-weight:bold">'+list[0].cafeVO.cafeName;
+					card_tag +='<h4 class="card-title cafe-simple-card-title" style="font-weight:bold">'+list[0].cafeVO.cafeName;
 					if(${hasRole} == true){	//로그인 했을 시
 						if(list[1] == true){
 							card_tag +='<span class="myPickStar"><a href="#" id="fullMyPickIcon" ><i class="fas fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
 						}else{
 							card_tag +='<span class="myPickStar"><a href="#" id="halfMyPickIcon" ><i class="far fa-star fa-2x" style="color:#ffc93c"></i></a></span>';
-						}
+						}	
 					}	
 					card_tag +='</h4></div>'; //cafe-header 끝
 					
-					card_tag +="<img class='card-img-top' src='resources/upload/"+list[0].cafeVO.cafePic+" 'style='height:275px; width:326px; float:center;'>";
-					card_tag +='<div class="card-body">';
-					card_tag +='<p class="card-text"><주소> '+list[0].cafeVO.cafeLoc+'</p>';
+					card_tag +="<img class='card-img-top' src='resources/upload/"+list[0].cafeVO.cafePic+" 'style='height:275px; width:330px; margin-left:5px; margin-top:5px;'>";
+					card_tag +='<div class="card-body cafe-simple-card">';
+					card_tag +='<p class="card-text"><주소><br> '+list[0].cafeVO.cafeLoc+'</p>';
 					card_tag +='<p class="card-text"><운영시간><br>';
 					card_tag +='평일: '+list[0].weekdayTime+'  |  ';
 					card_tag +='주말: '+list[0].weekendTime+'<br>';
-					card_tag +='공휴일: '+list[0].holidayTime+'</p>';
+					card_tag +='공휴일: '+list[0].holidayTime+'</p><br>';
 					card_tag +='<div style="text-align: center"><button type="button" class="btn btn-secondary" onclick="detailBtn()">카페 상세정보 보기</button></div>';
 					card_tag +='</div>'; //card-body 끝
 					

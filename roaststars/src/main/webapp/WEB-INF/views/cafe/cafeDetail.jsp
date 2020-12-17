@@ -154,9 +154,13 @@
             
             <div>
                <img src="resources/upload/${cafeTotal.cafeVO.cafePic}" alt="no image"
-                    width="500" height="300">
+                    width="500" height="300" style="margin-left: 10px;">
             </div>
-            <p>${cafeTotal.cafeVO.cafeInfo}</p>
+           	
+           	<pre class="cafe-detail-info" >
+           		<span>${cafeTotal.cafeVO.cafeInfo}</span>
+           	</pre>
+            
             <table class="table">
                <tr>
                   <td>전화번호</td>
@@ -165,8 +169,8 @@
                <tr>
                   <td>운영시간</td>
                   <td>
-			                  평일 : ${cafeTotal.weekdayTime} <br>
-			                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
+	                  평일 : ${cafeTotal.weekdayTime} <br>
+	                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
                   </td>
                </tr>
                

@@ -37,7 +37,7 @@ public class BeansPickServiceImpl implements BeansPickService{
        // 페이지 그룹 당 페이지 수
 	   pagingBean.setPageNumberPerPageGroup(3);
 	   //페이지 당 게시물 수
-	   pagingBean.setContentNumberPerPage(3);
+	   pagingBean.setContentNumberPerPage(2);
        
 	   BeansPickListVO listVO 
           = new BeansPickListVO(beansPickMapper.getAllBeansPickList(pagingBean), pagingBean);

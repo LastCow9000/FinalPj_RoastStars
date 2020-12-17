@@ -1,3 +1,19 @@
+/* 배경이미지 적용*/
+body {
+	z-index: -1;
+}
+body::after {
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: url("../upload/background.jpg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  opacity: 0.45;
+}
+
  /* 글씨체 적용 */
 @font-face{
    font-family: "Main Font";
@@ -29,6 +45,7 @@ input, textarea{
 	font-family:"Layout Font" !important; 
 	font-size: 15px !important;
 }
+
 /* 카페 정보 상세보기 페이지 설정 */
 
 /* 카페 상세보기 영역 */
@@ -38,9 +55,11 @@ input, textarea{
 }
 
 .myPickStar{
-   float: right;
-   margin-right: 5px;
-   margin-bottom: 10px;
+
+	float: right;
+	margin-right: 5px;
+	margin-bottom: 10px;
+
 }
 
 /* icon 2x 적용한 부분 사이즈 조금 작게*/
@@ -117,7 +136,9 @@ tr.reviewTableProperty {
 
 .property_kind {
    font-size: 10px;
+
 }
+
 
 /* 이미지 클릭시 크게 보기*/
 .bigPictureWrapper {
@@ -174,6 +195,7 @@ tr.reviewTableProperty {
     padding: 10px;
 	margin: 5px;
 	justify-content: center;
+
 }
 
 /*------------paging용 test도 포함--------------*/
@@ -233,7 +255,45 @@ html *{
     box-shadow: 0 4px 5px 0 rgba(244,67,54,.14), 0 1px 10px 0 rgba(244,67,54,.12), 0 2px 4px -1px rgba(244,67,54,.2);
 }
 
-/*예울 CSS 추가 사항 시작 */
+/*영섭 CSS 추가 사항 시작 */
+.my-pick-card{
+   font-family:"Layout Font"; 
+   font-size: 18px;	
+}
+
+/*영섭 CSS 추가 사항 끝*/
+
+/*예울 CSS 추가 사항 시작*/
+.cafe-simple-card{
+	font-family:"Layout Font";
+	font-size: 15px;
+}
+
+.cafe-simple-card-title{
+    font-size: 30px !important;
+    margin-left: 10px !important;
+    margin-top: 3px !important;
+}
+
+.cafe-detail-info{
+	width:500px;
+	font-family:"Main Font";
+	font-size: 20px;
+	
+	overflow:auto !important; /* 영어 입력 시, 자동 줄바꿈*/
+	margin-left: 10px;
+	margin-top: 5px;
+	
+	/*자동 줄바꿈*/
+	word-wrap: break-word;
+	white-space: pre-line;
+	word-break:break-all;
+}
+
+/* 카페 등록/수정 시, 본문 내용 글자 수 span 영역*/
+#infoCheckResultSpan{
+	float:right;
+}
 
 /*예울 CSS 추가 사항 끝*/
 
@@ -243,16 +303,7 @@ html *{
 /*성호 CSS 추가 사항 끝*/
 
 
-/*영섭 CSS 추가 사항 시작 */
-.my-pick-card{
-   font-family:"Layout Font"; 
-   font-size: 18px;	
-}
-
-
-/*영섭 CSS 추가 사항 끝*/
-
-
 /*병철 CSS 추가 사항 시작 */
 
 /*병철 CSS 추가 사항 끝*/
+

@@ -30,7 +30,7 @@
 </head>
 <%-- Header Start --%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="home.do">Roast Stars</a>
+	<a class="navbar-brand" href="home.do"><strong>Roast Stars</strong></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -69,9 +69,9 @@
 							<font size=3>내 카페 관리하기</font>
 						</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/register-cafeform.do">카페 등록</a>&nbsp; &nbsp;
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/update-cafelist.do">카페 수정 | 삭제</a>&nbsp; &nbsp;
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/view-cafelist-for-menu.do">메뉴 관리</a>&nbsp; &nbsp;
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/register-cafeform.do">카페 등록</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/update-cafelist.do">카페 수정 | 삭제</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/view-cafelist-for-menu.do">메뉴 관리</a>
 						</div>
 					</sec:authorize>
 					
