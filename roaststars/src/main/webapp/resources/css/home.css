@@ -8,7 +8,7 @@ body::after {
   content: "";
   background: url("../upload/background.jpg");
   position: absolute;
-  top: 0
+  top: 0;
   left: 0;
   z-index: -2;
   opacity: 0.45;
@@ -257,13 +257,6 @@ html *{
 }
 
 
-/*영섭 CSS 추가 사항 시작 */
-.my-pick-card{
-   font-family:"Layout Font"; 
-   font-size: 18px;	
-}
-
-/*영섭 CSS 추가 사항 끝*/
 
 /*예울 CSS 추가 사항 시작*/
 .cafe-simple-card{
@@ -304,6 +297,15 @@ html *{
 
 /*성호 CSS 추가 사항 끝*/
 
+
+
+/*영섭 CSS 추가 사항 시작 */
+.my-pick-card{
+   font-family:"Layout Font"; 
+   font-size: 18px;	
+}
+
+/*영섭 CSS 추가 사항 끝*/
 
 /*병철 CSS 추가 사항 시작 */
 

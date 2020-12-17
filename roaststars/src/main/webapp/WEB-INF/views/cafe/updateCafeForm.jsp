@@ -258,7 +258,6 @@ function inputTimeColon(time) {
 		
 		<tr>
 			<td>전화번호</td>
-
 			<td colspan=2><input type="text" id="cafeTel" name="cafeTel" value="${cafeOperVO.cafeVO.cafeTel}" required placeholder="전화번호를 숫자로만 입력해주세요" size=50>
 			&nbsp;<span id="telResult"></span></td>
 		</tr>
@@ -274,7 +273,7 @@ function inputTimeColon(time) {
 		
 		<tr>
 			<td colspan="3" id="updateCafeInfoArea">
-				<textarea rows="7" cols="140" placeholder="카페에 대한 소개를 입력해주세요!"  id="cafeInfo" 
+				<textarea rows="7" cols="105" placeholder="카페에 대한 소개를 입력해주세요!"  id="cafeInfo" 
 					 name="cafeInfo" required>${cafeOperVO.cafeVO.cafeInfo}</textarea>
 				<br><span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
 					 

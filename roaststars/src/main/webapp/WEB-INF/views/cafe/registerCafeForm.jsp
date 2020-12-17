@@ -79,32 +79,6 @@ $(document).ready(function() {
 	}); //end cafeTel keyup
    
     
-   /* 길이 넘었을 때 submit 안 되도록 막기 */
-   $("#registerCafeForm").submit(function() {
-	   // 제목 길이 체크
-      if(checkName == ""){
-         alert("상호명은 10자 이내로 작성해주세요.");
-         return false;
-      } 
-	   // 본문 길이 체크
-      if(checkInfo == ""){
-          alert("카페 소개는 200자 이내로 작성해주세요.");
-          return false;
-       } 
-	   
-      //전화번호 문자 입력 시 alert
-      if(checkTel==""){
-          alert("전화번호를 확인해주세요.");
-          return false;
-       }
-      
-      if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
- 			return true;
- 		}else{
- 			return false;
- 		}
-   });//sumit
-   
    /* 공휴일 운영 안함 체크 시, 공휴일 운영시간에 '운영 안 함' 할당하기*/
    $("#noOperating").click(function() {
       //alert($(this).val());
@@ -135,19 +109,32 @@ $(document).ready(function() {
 		
 	});//goToAddrAPIBtn
 
-	 /* 길이 넘었을 때 submit 안 되도록 막기 */
-	   $("#registerCafeForm").submit(function() {
-	      if(checkName == ""){
-	         alert("상호명은 10자 이내로 작성해주세요.");
-	         return false;
-	      }
-	    //전화번호 문자 입력 시 alert
-	      if(checkTel==""){
-	          alert("전화번호를 확인해주세요!");
-	          return false;
-	       }
-	   });//sumit
-	
+   /* 길이 넘었을 때 submit 안 되도록 막기 */
+   $("#registerCafeForm").submit(function() {
+	   // 제목 길이 체크
+      if(checkName == ""){
+         alert("상호명은 10자 이내로 작성해주세요.");
+         return false;
+      } 
+	   // 본문 길이 체크
+      if(checkInfo == ""){
+          alert("카페 소개는 200자 이내로 작성해주세요.");
+          return false;
+       } 
+	   
+      //전화번호 문자 입력 시 alert
+      if(checkTel==""){
+          alert("전화번호를 확인해주세요.");
+          return false;
+       }
+      
+      if(confirm("잘못된 정보를 입력할 경우 그대로 입력되니 주의하시길 바랍니다.")){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+   });//sumit
+   
 });//ready
 
 function inputTimeColon(time) {
@@ -239,7 +226,7 @@ function inputTimeColon(time) {
 			</tr>
 			<tr>
 				<td colspan="3">
-					<textarea rows="7" cols="100" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
+					<textarea rows="7" cols="105" placeholder="카페에 대한 소개를 입력해주세요!" id="cafeInfo" 
 						 name="cafeInfo" required></textarea><br>
 					<span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/200</span>
 				</td>
