@@ -177,10 +177,6 @@
 	      }).open();
 		
 	});// end goToAddrAPIBtn
-<<<<<<< HEAD
-	
-	 
-=======
 
 	//전화번호 문자 입력 불가 & 길이제한
     $("#tel").keyup(function() {
@@ -202,7 +198,6 @@
            }
     });//end tel keyup 
 
->>>>>>> branch 'main' of https://github.com/LastCow9000/FinalPj_RoastStars.git
     /* 중복 확인 공간 */   
     $("#registerForm").submit(function() {
   	  // 아이디 중복확인해서 사용가능 상태일때만 가입되도록 한다.

@@ -246,7 +246,7 @@
 	
 	<!-- 선호초기화버튼 -->
 	<div style="margin-top: 10px">
-		<button type="button" class="btn btn-secondary btn-sm" onclick="location.reload()">선택 초기화</button>	
+		<button type="button" class="initPropertyBtn" onclick="location.reload()">선택 초기화</button>	
 	</div><!-- 선호초기화버튼 끝 -->
 	
     <!-- 선호 요소 선택 부분 -->

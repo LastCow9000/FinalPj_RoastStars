@@ -57,14 +57,15 @@
 </script>
 </head>
 <body>
-	
+<div class="container shadow-sm p-4 mb-4 bg-white">
+
 	<!-- 성호 : 네비 : 시작 -->
-	<ul class="nav nav-tabs">
+	<%--<ul class="nav nav-tabs">
 		<li class="nav-item"><a class="nav-link active" href="#">등급관리</a></li>
-		<%--   <li class="nav-item">
+		   <li class="nav-item">
     <a class="nav-link" href="${pageContext.request.contextPath}/beanspick-detail-form.do">Bean's Pick관리</a>
-  </li> --%>
-	</ul>
+   </li> 
+	</ul>--%>
 	<%-- 성호 : 네비 : 종료 --%>
 	<%-- 성호 : 등급테이블 : 시작 --%>
 	<form class="grantAuthority">
@@ -124,31 +125,34 @@
                    jstl choose 를 이용  
                    예) <a href="DispatcherServlet?command=list&pageNo=...">               
      -->    
-    <ul class="pagination pagination-sm justify-content-center">
+   <ul class="pagination pagination-sm pagination-secondary justify-content-center">
     <c:if test="${pb.previousPageGroup}">   
-       <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+       <li class="page-item"><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.startPageOfPageGroup-1}"  class="page-link">&laquo;</a></li>
     </c:if>
     
     <c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
        <c:choose>
           <c:when test="${pb.nowPage!=i}">
-          <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${i}">${i}</a></li> 
+          <li class="page-item"><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${i}"  class="page-link">${i}</a></li> 
           </c:when>
           
           <c:otherwise>
-          <li class="active"><a href="#">${i}</a></li>
+          <li class="active page-item"><a href="#" class="page-link">${i}</a></li>
           </c:otherwise>
        </c:choose>
        &nbsp; 
     </c:forEach>
     
     <c:if test="${pb.nextPageGroup}">   
-       <li><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+       <li class="page-item"><a href="${pageContext.request.contextPath}/admin-detail.do?pageNo=${pb.endPageOfPageGroup+1}"  class="page-link">&raquo;</a></li>
     </c:if>
     </ul>          
     
     </div><!-- 페이징 바 -->
-		<hr>
+	
+	<hr>
+		
+</div>
 </body>
 </html>
 

@@ -57,8 +57,8 @@
 			Spring Security를 이용하면 Authentication Bean 이 생성
 			로그인 한 사용자의 정보는 Authentication 객체의 principal 에 저장된다 
 			 --%>
+				<span id="loginNicknameHeader"><sec:authentication property="principal.nickname"/>님</span>&nbsp; &nbsp;
 				<div class="btn-group">
-				<sec:authentication property="principal.nickname"/>님&nbsp; &nbsp;
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<a href="${pageContext.request.contextPath}/admin-detail.do">관리자 페이지 </a>&nbsp; &nbsp;
 					</sec:authorize>

@@ -96,7 +96,8 @@ $(document).ready(function() {
 <body>
 <sec:authorize access="hasAnyRole('ROLE_MEMBER','ROLE_MANAGER')">
 <%-- <input type="hidden" name="userVO" value="${userVO}">
- --%> <div class="container" style="width: 500px; float: center;">
+ --%> 
+<div class="container shadow-sm p-4 mb-4 bg-white" style="width: 500px; float: center;">
   <h2>비밀번호 수정하기</h2>
   <hr style="width: 300px; float:left;"><br><br>
   <form method="post" action="${pageContext.request.contextPath}/update-userPasswordaction.do" class="was-validated" id="updateUserPassForm" enctype="multipart/form-data">
@@ -126,9 +127,10 @@ $(document).ready(function() {
        <div class="invalid-feedback"> 비밀번호를 입력해주세요.</div>
 	  
     </div>
-    <hr style="width: 480px; float:left;"><br>
-	<input type="submit" value="비밀번호 수정" class="btn btn-primary" style="float:center;">
-	
+    <hr style="width: 454px; float:left;"><br>
+	<div id="updatePasswordBtn">
+		<input type="submit" value="비밀번호 수정 완료" class="btn btn-primary">
+	</div>
   </form>
 </div><!-- container -->
 </sec:authorize>
