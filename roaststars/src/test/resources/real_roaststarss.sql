@@ -456,3 +456,102 @@ insert into menu_kind values('아메리카노(HOT)',1,1);
 insert into menu_kind values('카페라떼(ICE)',1,1);
 insert into menu_kind values('카페라떼(HOT)',1,1);
 insert into menu_kind values('바닐라라떼(ICE)',1,1);
+
+-----------------------------------------------------------------------------------------
+-- 예울
+-- 카페 더미 데이터(실 주소) 추가
+
+-- cafe table
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, cafe_pic, id) 
+VALUES (cafe_seq.nextval, '어텀라이프', '경기 성남시 분당구 판교역로2번길 17', '어텀라이프는 품질과 혁신에 최선을 다하여 더카페를 찾는 모든 고객에게 최고의 커피 경험을 제공함으로
+누구나 마음껏 커피를 즐길 수 있는 커피 대중화의 선도적 역할을 수행하겠습니다.', '031-123-5421', 'cafe_img_1.png', 'sajang1');
+
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, cafe_pic, id) 
+VALUES (cafe_seq.nextval, '에리아', '경기 성남시 분당구 판교역로18번길 12', 
+'저희는 고객들이 원하는 가격, 맛, 분위기를 찾아내고 만들어내기 위해 고객들에게 묻고, 
+또 물었고, 결과를 반복적으로 피드백하여 고객뿐만이 아닌 가맹점주로부터 사랑 받는 카페게이트를 만들어가고 있습니다.',
+'031-708-9927', 'cafe_img_2.jpg', 'sajang1');
+
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, cafe_pic, id) 
+VALUES (cafe_seq.nextval, '얌이', '경기 성남시 분당구 판교역로10번길 14-3',
+'안녕하세요 :) 카페 로몽입니다 - 합정역 5번 출구 근처 골목길에 있는 건물 2층에 자리하고 있어요! 요렇게 나무로 된 계단을 올라오시면 로몽을 만나실 수 있어요', '031-8017-1992', 'cafe_img_3.png', 'sajang1');
+
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, cafe_pic, id) 
+VALUES (cafe_seq.nextval, '커피미학', '경기 성남시 분당구 동판교로177번길 25', 
+'클래식한 분위기의 커피전문점. 리필가능한 커피와 리필불가 커피가 있으니 잘 확인하고 주문할것. 핸드드립에서 에스프레소, 더치커피까지 판매합니다!',
+'031-8017-0723', 'cafe_img_4.jpg', 'sajang1');
+
+INSERT INTO cafe(cafe_no, cafe_name, cafe_loc, cafe_info, cafe_tel, cafe_pic, id) 
+VALUES (cafe_seq.nextval, '카페그랑주', '경기 성남시 분당구 판교역로192번길 14-2',
+'"편안하고 향이 좋은 커피를 매일 마시고 싶다" 라는 생각에서 카페그랑떼는 시작되었습니다. 아침마다 새롭고, 식후엔 고소하고, 휴식땐 나를 달래 줄 커피와 음료를 제공합니다.', 
+'031-705-8882', 'cafe_img_5.jpg', 'sajang1');
+
+-- cafe operating time table
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(31, '08:00~20:00', '10:00~15:00','공휴일휴무');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(32, '10:00~22:00', '10:00~22:00','12:00~18:00');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(33, '10:00~22:00', '10:00~15:00','10:00~15:00');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(34, '08:00~20:00', '10:00~20:00','10:00~20:00');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(35, '08:00~22:00', '10:00~20:00','공휴일휴무');
+
+
+-- property table
+INSERT INTO property VALUES (31, 10, 8, 8, 10, 4);
+INSERT INTO property VALUES (32, 5, 4, 12, 11, 3);
+INSERT INTO property VALUES (33, 9, 10, 8, 5, 8);
+INSERT INTO property VALUES (34, 8, 2, 7, 4, 12);
+INSERT INTO property VALUES (35, 2, 7, 3, 12, 9);
+-----------------------------------------------------------------------------------------
+
+insert into CAFE
+values (cafe_seq.nextval, '수하담', '경기 성남시 분당구 판교로 190-8', 'cafe_img_6.jpg', '어텀라이프는 품질과 혁신에 최선을 다하여 더카페를 찾는 모든 고객에게 최고의 커피 경험을 제공함으로
+누구나 마음껏 커피를 즐길 수 있는 커피 대중화의 선도적 역할을 수행하겠습니다.', '031-8016-6170', 'sajang1');
+
+insert into CAFE
+values (cafe_seq.nextval, '오픈커피', '경기 성남시 분당구 판교역로14번길 15 성음아트센터', 'cafe_img_7.jpg', '저희는 고객들이 원하는 가격, 맛, 분위기를 찾아내고 만들어내기 위해 고객들에게 묻고, 
+또 물었고, 결과를 반복적으로 피드백하여 고객뿐만이 아닌 가맹점주로부터 사랑 받는 카페게이트를 만들어가고 있습니다.', '070-4633-0691', 'sajang1');
+
+insert into CAFE
+values (cafe_seq.nextval, '세시셀라 아브뉴프랑점 ', '경기 성남시 분당구 동판교로177번길 25', 'cafe_img_8.jpg', '어텀라이프는 품질과 혁신에 최선을 다하여 더카페를 찾는 모든 고객에게 최고의 커피 경험을 제공함으로
+누구나 마음껏 커피를 즐길 수 있는 커피 대중화의 선도적 역할을 수행하겠습니다.', '031-000-0000', 'sajang1');
+
+insert into CAFE
+values (cafe_seq.nextval, '알레그리아 판교테크노밸리점', '경기 성남시 분당구 판교역로 230 삼환하이펙스 B동', 'cafe_img_9.jpg', '안녕하세요 :) 카페 로몽입니다 - 합정역 5번 출구 근처 골목길에 있는 건물 2층에 자리하고 있어요! 요렇게 나무로 된 계단을 올라오시면 로몽을 만나실 수 있어요', '031-696-0305', 'sajang1');
+
+insert into CAFE
+values (cafe_seq.nextval, '올덴브라운', '경기 성남시 분당구 동판교로52번길 17-7', 'cafe_img_10.jpg', '"편안하고 향이 좋은 커피를 매일 마시고 싶다" 라는 생각에서 카페그랑떼는 시작되었습니다. 아침마다 새롭고, 식후엔 고소하고, 휴식땐 나를 달래 줄 커피와 음료를 제공합니다.', '031-000-0000', 'sajang1');
+
+insert into OPERATING_TIME
+values(36, '08:00~22:01', '10:00~20:00','10:00~20:00');
+insert into OPERATING_TIME
+values(37, '08:00~22:01', '10:00~20:00','공휴일휴무');
+insert into OPERATING_TIME
+values (38, '08:00~22:01', '10:00~20:00','10:00~20:00');
+insert into OPERATING_TIME
+values (39, '08:00~22:01', '10:00~20:00','공휴일휴무');
+insert into OPERATING_TIME
+values (40, '08:00~22:01', '10:00~20:00','10:00~20:00'); 
+insert into PROPERTY
+VALUES (36, 3, 8, 9, 4, 4);   
+insert into PROPERTY
+VALUES (37, 2, 5, 6, 3, 3);
+insert into PROPERTY
+VALUES (38, 4, 2, 3, 6, 1);
+insert into PROPERTY
+VALUES (39, 5, 7, 8, 8, 2);
+insert into PROPERTY
+VALUES (40, 8, 3, 5, 1, 7);
+
+
+
+select * from cafe order by cafe_no desc
+
+select * from rs_user where id='user2'
