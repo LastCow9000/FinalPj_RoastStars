@@ -1,3 +1,3 @@
 <h1> # FinalPj_RoastStars </h1>
 
-<img src="https://user-images.githubusercontent.com/68089565/102707003-659ca300-42da-11eb-9989-8cd9171d79ca.png">
+<img src="https://user-images.githubusercontent.com/68089565/102735248-427afd80-4385-11eb-9588-76017e6085f6.png">
