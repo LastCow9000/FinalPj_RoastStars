@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Beans Pick Form</title>
+
 </head>
 <body>
 	<div class="shadow-sm p-4 mb-4 bg-white">

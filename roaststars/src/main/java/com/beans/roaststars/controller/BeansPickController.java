@@ -29,7 +29,6 @@ public class BeansPickController {
 	//빈즈픽 게시글 리스트
 	@RequestMapping("main-beansPick.do")
 	public String beansPickForm(String pageNo,Model model) {
-//		model.addAttribute("list", beansPickService.getAllBeansPickList());
 		model.addAttribute("beansPickTotalCount", beansPickService.getTotalCountBeansPick());
 		BeansPickListVO lvo=beansPickService.getAllBeansPickList(pageNo);
 		model.addAttribute("lvo",lvo);
@@ -115,7 +114,6 @@ public class BeansPickController {
 				}
 			}
 		}
-//		beansPickVO=(BeansPickVO) beansPickService.getOneBeansPick(beansPickVO.getBeansNo());
 		beansPickService.updateBeansPick(beansPickVO);
 		return new ModelAndView("beansPick/updateResultBeansPick.tiles","beansPickVO", beansPickVO);
 	}

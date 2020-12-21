@@ -6,28 +6,40 @@
 <head>
 <meta charset="UTF-8">
 <title>BeansPick Main</title>
+<style type="text/css">
+.card { 
+	max-height: 100%;
+	justify-content: center;
+}
+</style>
 </head>
 <body>
 	<c:set var="pb" value="${lvo.pagingBean}" />
 	<div class="container">
 		<h2>Bean's Pick</h2>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<div style="text-align: right;">
-		<sec:csrfInput/>
-			<a href="${pageContext.request.contextPath}/register-form-beansPick.do" class="btn btn-info" >등록하기</a>
-		</div>
+			<div style="text-align: right;">
+				<sec:csrfInput />
+				<a href="${pageContext.request.contextPath}/register-form-beansPick.do" class="btn btn-info">등록하기</a>
+			</div>
 		</sec:authorize>
-		<div id=beansPickLayout class="row justify-content-center">
+		<div class="row justify-content-center">
 			<c:forEach items="${requestScope.lvo.beansPickList}" var="BeansPickVO">
-				<div class="card col-sm-5 ">
-					<div class="card-header">
-						<img class="card-title beansPickimg" src="resources/upload/${BeansPickVO.beansPic}" alt="no image">
-					</div>
-					<div class="card-body">
-						<h4 class="card-title">${BeansPickVO.beansNo}</h4>
-						<p class="card-text">${BeansPickVO.beansTitle}</p>
-						<div style="text-align: right">
-							<a href="${pageContext.request.contextPath}/detail-beansPick.do?no=${BeansPickVO.beansNo}" class="btn btn-info">See Pick</a>
+				<div class="col-6">
+					<div class="card h-100 border-0 shadow">
+						<div class="card-img-top">
+							<div class="embed-responsive embed-responsive-4by3">
+								<div class="embed-responsive-item">
+									<img class="card-title beansPickimg" src="resources/upload/${BeansPickVO.beansPic}" alt="no image">
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<h4 class="card-title">${BeansPickVO.beansNo}</h4>
+							<p class="card-text">${BeansPickVO.beansTitle}</p>
+							<div style="text-align: right">
+								<a href="${pageContext.request.contextPath}/detail-beansPick.do?no=${BeansPickVO.beansNo}" class="btn btn-info">See Pick</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -45,12 +57,10 @@
 				<c:when test="${pb.nowPage!=i}">
 					<li class="page-item"><a href="${pageContext.request.contextPath}/main-beansPick.do?pageNo=${i}" class="page-link">${i}</a></li>
 				</c:when>
-
 				<c:otherwise>
 					<li class="active page-item"><a href="#" class="page-link" class="page-link">${i}</a></li>
 				</c:otherwise>
-			</c:choose>
-       &nbsp; 
+			</c:choose>&nbsp; 
     </c:forEach>
 		<c:if test="${pb.nextPageGroup}">
 			<li class="page-item"><a href="${pageContext.request.contextPath}/main-beansPick.do?pageNo=${pb.endPageOfPageGroup+1}" class="page-link">&raquo;</a></li>
