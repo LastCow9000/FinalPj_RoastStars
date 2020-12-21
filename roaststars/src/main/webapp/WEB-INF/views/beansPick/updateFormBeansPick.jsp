@@ -6,25 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Beans Pick Form</title>
-
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<style type="text/css">
-.timeBox {
-	text-align: center;
-	width: 200px;
-}
-</style>
 <script type="text/javascript">
 	/* 길이 체크 공간 */
-
 	$(document).ready(
 			function() {
-
 				var checkName = "";
 				var checkInfo = "";
 				var checkTel = "";
-
 				// 제목 길이 체크
 				$("#registCafeName").keyup(
 						function() {
@@ -84,7 +73,7 @@
 </head>
 <body>
 	<div class="shadow-sm p-4 mb-4 bg-white">
-		<div class="container" style="width: 800px; float: center; margin-left: 130px;">
+		<div class="container" style="width: 800px; float: center; margin-left: 55px;">
 			<h2>BeansPick 수정하기</h2>
 			<form method="post" action="${pageContext.request.contextPath}/update-result-beansPick.do" id="registerForm" enctype="multipart/form-data">
 				<input type="hidden" name="beansNo" value="${beansPickVO.beansNo}">

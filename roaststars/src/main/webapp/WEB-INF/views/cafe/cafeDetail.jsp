@@ -225,7 +225,7 @@
 		          		<c:if test="${menuTotal.espresso == '1'}">
 		          		<tr>
 		          			<td>${menuTotal.menuVO.menuName}</td>
-		          			<td>${menuTotal.menuVO.menuPrice}</td>
+		          			<td>${menuTotal.menuVO.menuPrice}원</td>
 		          		</tr>
 		          		</c:if>
 		          		</c:forEach>
@@ -244,7 +244,7 @@
 		          		<c:if test="${menuTotal.espresso == '0'}">
 		          		<tr>
 		          			<td>${menuTotal.menuVO.menuName}</td>
-		          			<td>${menuTotal.menuVO.menuPrice}</td>
+		          			<td>${menuTotal.menuVO.menuPrice}원</td>
 		          		</tr>
 		          		</c:if>
 		          		</c:forEach>
