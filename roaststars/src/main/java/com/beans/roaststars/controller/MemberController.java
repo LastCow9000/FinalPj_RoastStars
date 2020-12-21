@@ -187,9 +187,9 @@ public class MemberController {
 	}
 	
 	// 아이디에 해당하는 이름 확인
-		@RequestMapping("name-checkAjax.do")
-		@ResponseBody
-		public int namecheckAjax(String id, String name) {
-			return userService.checkIdAndName(id, name);
-		}
+	@RequestMapping("name-checkAjax.do")
+	@ResponseBody
+	public int namecheckAjax(String id, String name) {
+		return userService.checkIdAndName(id, name);
+	}
 }

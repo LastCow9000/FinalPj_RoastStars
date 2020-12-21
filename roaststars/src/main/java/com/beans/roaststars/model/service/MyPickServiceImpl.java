@@ -16,11 +16,13 @@ public class MyPickServiceImpl implements MyPickService {
 	@Resource
 	MyPickMapper myPickMapper;
 	
+	//마이픽 리스트 1페이지용
 	@Override
 	public MyPickListVO getMyPickList(String id) {
 		return getMyPickList(id ,"1");
 	}
-
+	
+	//마이픽 리스트 페이징용
 	@Override
 	public MyPickListVO getMyPickList(String id, String pageNo) {
 		// 사용자별 마이픽 총 갯수

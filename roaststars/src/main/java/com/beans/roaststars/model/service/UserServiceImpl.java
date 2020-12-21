@@ -97,7 +97,8 @@ public class UserServiceImpl implements UserService{
 		userMapper.updateTempPass(id, encodePassword); //비밀번호 업데이트
 		return tempPw;
 	}
-
+	
+	//비밀번호 변경
 	@Override
 	public void updateUserPassword(String id, String password) {
 		String encodePassword = passwordEncoder.encode(password);

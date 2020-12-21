@@ -67,12 +67,6 @@ public class CafeController {
 		
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
-
-
-	public ModelAndView viewCafeDetail(String cafeNo) {
-		return new ModelAndView("cafe/cafeDetail.tiles",
-				"cafeTotal", cafeService.findCafeByCafeNo(cafeNo));
-	}//viewCafeDetail
 	
 	// 카페 간략정보 ajax
 	@RequestMapping("cafe-simple.do")

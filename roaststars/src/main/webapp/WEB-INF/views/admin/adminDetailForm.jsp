@@ -59,14 +59,6 @@
 <body>
 <div class="container shadow-sm p-4 mb-4 bg-white">
 
-	<!-- 성호 : 네비 : 시작 -->
-	<%--<ul class="nav nav-tabs">
-		<li class="nav-item"><a class="nav-link active" href="#">등급관리</a></li>
-		   <li class="nav-item">
-    <a class="nav-link" href="${pageContext.request.contextPath}/beanspick-detail-form.do">Bean's Pick관리</a>
-   </li> 
-	</ul>--%>
-	<%-- 성호 : 네비 : 종료 --%>
 	<%-- 성호 : 등급테이블 : 시작 --%>
 	<form class="grantAuthority">
 		<table class="table table-hover">
