@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Beans Pick Form</title>
 
-<%--  --%>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style type="text/css">
@@ -81,14 +80,13 @@
 
 			});//ready
 </script>
-<%--  --%>
 
 </head>
 <body>
 	<div class="shadow-sm p-4 mb-4 bg-white">
 		<div class="container" style="width: 800px; float: center; margin-left: 130px;">
 			<h2>BeansPick 수정하기</h2>
-			<form method="post" action="${pageContext.request.contextPath}/register-result-beansPick.do" id="registerForm" enctype="multipart/form-data">
+			<form method="post" action="${pageContext.request.contextPath}/update-result-beansPick.do" id="registerForm" enctype="multipart/form-data">
 				<input type="hidden" name="beansNo" value="${beansPickVO.beansNo}">
 				<sec:csrfInput />
 				<table class="table table-sm">
@@ -114,7 +112,7 @@
 							<br> <span id="infoCheckResultSpan"><span id="infoCheckResult"></span>/500</span></td>
 						</tr>
 						<tr>
-							<td colspan="3" align="center"><input type="submit" class="btn btn-success" value="등록하기"></td>
+							<td colspan="3" align="center"><input type="submit" class="btn btn-success" value="수정하기"></td>
 						</tr>
 					</tbody>
 				</table>
