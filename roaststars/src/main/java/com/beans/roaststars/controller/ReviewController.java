@@ -33,7 +33,7 @@ public class ReviewController {
 		return reviewService.checkDuplicatedReview(cafeNo, id);
 	}
 	
-	// 리뷰 등록 시 1)리뷰 등록, 2)해당 카페에 평점 추가
+	// 리뷰 등록 시 1)리뷰 등록, 2)해당 카페에 평점 추가, 3) 평가 특성 추가
 	@Secured("ROLE_MEMBER")
 	@PostMapping("register-review.do")
 	public String registerReviewAndupdateProperty(ReviewVO reviewVO, PropertyVO propertyVO,

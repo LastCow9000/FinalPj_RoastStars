@@ -66,7 +66,7 @@ public class CafeController {
 		
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
-	
+
 	// 카페 간략정보 ajax
 	@RequestMapping("cafe-simple.do")
 	@ResponseBody

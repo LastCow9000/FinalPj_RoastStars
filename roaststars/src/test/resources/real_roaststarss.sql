@@ -3,19 +3,20 @@
 drop table menu_kind;
 DROP TABLE my_pick;
 DROP TABLE evaluated_property;
+drop table menu_espresso;
 
 /* 한번만 실행하고 		
 DROP TABLE order_detail;
 DROP TABLE order_info;
   			 지워도 됨*/
 
-DROP TABLE menu;
 DROP TABLE beans_pick;
 DROP TABLE property;
 DROP TABLE review;
 DROP TABLE operating_time;
-DROP TABLE cafe;
 drop table authorities;
+DROP TABLE menu;
+DROP TABLE cafe;
 DROP TABLE rs_user;
 
 DROP SEQUENCE cafe_seq;
@@ -181,34 +182,34 @@ VALUES('user7', '1234', '정예울7', '파프리카7', '71035959818', '경기도
 
 -- 사장 가입 시 SQL문
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang2', '1234', '스퉐붝스2', '백종원2', '21024752081', '용인2','스타벅스2','no_image.jpg','002');
+VALUES('sajang2', '1234', '스퉐붝스2', '고병철2', '21024752081', '용인2','스타벅스2','no_image.jpg','002');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang3', '1234', '스퉐붝스3', '백종원3', '31024752081', '용인3','스타벅스3','no_image.jpg','003');
+VALUES('sajang3', '1234', '스퉐붝스3', '고병철3', '31024752081', '용인3','스타벅스3','no_image.jpg','003');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang4', '1234', '스퉐붝스4', '백종원4', '41024752081', '용인4','스타벅스4','no_image.jpg','004');
+VALUES('sajang4', '1234', '스퉐붝스4', '고병철4', '41024752081', '용인4','스타벅스4','no_image.jpg','004');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang5', '1234', '스퉐붝스5', '백종원5', '51024752081', '용인5','스타벅스5','no_image.jpg','005');
+VALUES('sajang5', '1234', '스퉐붝스5', '고병철5', '51024752081', '용인5','스타벅스5','no_image.jpg','005');
 
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang6', '1234', '스퉐붝스6', '백종원6', '61024752081', '용인6','스타벅1','no_image.jpg','001');
+VALUES('sajang6', '1234', '스퉐붝스6', '고병철6', '61024752081', '용인6','스타벅1','no_image.jpg','001');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang7', '1234', '스퉐붝스7', '백종원7', '71024752081', '용인7','스타벅스2','no_image.jpg','002');
+VALUES('sajang7', '1234', '스퉐붝스7', '고병철7', '71024752081', '용인7','스타벅스2','no_image.jpg','002');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang8', '1234', '스퉐붝스8', '백종원8', '81024752081', '용인8','스타벅스3','no_image.jpg','003');
+VALUES('sajang8', '1234', '스퉐붝스8', '고병철8', '81024752081', '용인8','스타벅스3','no_image.jpg','003');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang9', '1234', '스퉐붝스9', '백종원9', '91024752081', '용인9','스타벅스4','no_image.jpg','004');
+VALUES('sajang9', '1234', '스퉐붝스9', '고병철9', '91024752081', '용인9','스타벅스4','no_image.jpg','004');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang10', '1234', '스퉐붝스10', '백종원10', '10024752081', '용인10','스타벅스5','no_image.jpg','005');
+VALUES('sajang10', '1234', '스퉐붝스10', '고병철10', '10024752081', '용인10','스타벅스5','no_image.jpg','005');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang11', '1234', '스퉐붝스11', '백종원11', '11024752081', '용인11','스타벅1','no_image.jpg','001');
+VALUES('sajang11', '1234', '스퉐붝스11', '고병철11', '11024752081', '용인11','스타벅1','no_image.jpg','001');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang12', '1234', '스퉐붝스12', '백종원12', '12024752081', '용인12','스타벅스2','no_image.jpg','002');
+VALUES('sajang12', '1234', '스퉐붝스12', '고병철12', '12024752081', '용인12','스타벅스2','no_image.jpg','002');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang13', '1234', '스퉐붝스13', '백종원13', '13024752081', '용인13','스타벅스3','no_image.jpg','003');
+VALUES('sajang13', '1234', '스퉐붝스13', '고병철13', '13024752081', '용인13','스타벅스3','no_image.jpg','003');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang14', '1234', '스퉐붝스14', '백종원14', '14024752081', '용인14','스타벅스4','no_image.jpg','004');
+VALUES('sajang14', '1234', '스퉐붝스14', '고병철14', '14024752081', '용인14','스타벅스4','no_image.jpg','004');
 INSERT INTO rs_user(id, password, name, nickname, tel, address,business_name,business_pic,business_no)
-VALUES('sajang15', '1234', '스퉐붝스15', '백종원15', '15024752081', '용인15','스타벅스5','no_image.jpg','005');
+VALUES('sajang15', '1234', '스퉐붝스15', '고병철15', '15024752081', '용인15','스타벅스5','no_image.jpg','005');
 -- 관리자 권한 부여 (admin) --authorities
 --회원가입 admin으로 한 후에 권한 줘야함
 
@@ -457,8 +458,8 @@ insert into menu_kind values('카페라떼(ICE)',1,1);
 insert into menu_kind values('카페라떼(HOT)',1,1);
 insert into menu_kind values('바닐라라떼(ICE)',1,1);
 
------------------------------------------------------------------------------------------
--- 예울
+
+------------------------------------------------------
 -- 카페 더미 데이터(실 주소) 추가
 
 -- cafe table
@@ -486,31 +487,6 @@ VALUES (cafe_seq.nextval, '카페그랑주', '경기 성남시 분당구 판교�
 '"편안하고 향이 좋은 커피를 매일 마시고 싶다" 라는 생각에서 카페그랑떼는 시작되었습니다. 아침마다 새롭고, 식후엔 고소하고, 휴식땐 나를 달래 줄 커피와 음료를 제공합니다.', 
 '031-705-8882', 'cafe_img_5.jpg', 'sajang1');
 
--- cafe operating time table
-INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(31, '08:00~20:00', '10:00~15:00','공휴일휴무');
-
-INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(32, '10:00~22:00', '10:00~22:00','12:00~18:00');
-
-INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(33, '10:00~22:00', '10:00~15:00','10:00~15:00');
-
-INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(34, '08:00~20:00', '10:00~20:00','10:00~20:00');
-
-INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
-VALUES(35, '08:00~22:00', '10:00~20:00','공휴일휴무');
-
-
--- property table
-INSERT INTO property VALUES (31, 10, 8, 8, 10, 4);
-INSERT INTO property VALUES (32, 5, 4, 12, 11, 3);
-INSERT INTO property VALUES (33, 9, 10, 8, 5, 8);
-INSERT INTO property VALUES (34, 8, 2, 7, 4, 12);
-INSERT INTO property VALUES (35, 2, 7, 3, 12, 9);
------------------------------------------------------------------------------------------
-
 insert into CAFE
 values (cafe_seq.nextval, '수하담', '경기 성남시 분당구 판교로 190-8', 'cafe_img_6.jpg', '어텀라이프는 품질과 혁신에 최선을 다하여 더카페를 찾는 모든 고객에게 최고의 커피 경험을 제공함으로
 누구나 마음껏 커피를 즐길 수 있는 커피 대중화의 선도적 역할을 수행하겠습니다.', '031-8016-6170', 'sajang1');
@@ -529,6 +505,23 @@ values (cafe_seq.nextval, '알레그리아 판교테크노밸리점', '경기 �
 insert into CAFE
 values (cafe_seq.nextval, '올덴브라운', '경기 성남시 분당구 동판교로52번길 17-7', 'cafe_img_10.jpg', '"편안하고 향이 좋은 커피를 매일 마시고 싶다" 라는 생각에서 카페그랑떼는 시작되었습니다. 아침마다 새롭고, 식후엔 고소하고, 휴식땐 나를 달래 줄 커피와 음료를 제공합니다.', '031-000-0000', 'sajang1');
 
+
+-- cafe operating time table
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(31, '08:00~20:00', '10:00~15:00','공휴일휴무');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(32, '10:00~22:00', '10:00~22:00','12:00~18:00');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(33, '10:00~22:00', '10:00~15:00','10:00~15:00');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(34, '08:00~20:00', '10:00~20:00','10:00~20:00');
+
+INSERT INTO operating_time(cafe_no, weekday_time,weekend_time,holiday_time)
+VALUES(35, '08:00~22:00', '10:00~20:00','공휴일휴무');
+
 insert into OPERATING_TIME
 values(36, '08:00~22:01', '10:00~20:00','10:00~20:00');
 insert into OPERATING_TIME
@@ -539,6 +532,14 @@ insert into OPERATING_TIME
 values (39, '08:00~22:01', '10:00~20:00','공휴일휴무');
 insert into OPERATING_TIME
 values (40, '08:00~22:01', '10:00~20:00','10:00~20:00'); 
+
+-- property table
+INSERT INTO property VALUES (31, 10, 8, 8, 10, 4);
+INSERT INTO property VALUES (32, 5, 4, 12, 11, 3);
+INSERT INTO property VALUES (33, 9, 10, 8, 5, 8);
+INSERT INTO property VALUES (34, 8, 2, 7, 4, 12);
+INSERT INTO property VALUES (35, 2, 7, 3, 12, 9);
+
 insert into PROPERTY
 VALUES (36, 3, 8, 9, 4, 4);   
 insert into PROPERTY
@@ -551,7 +552,69 @@ insert into PROPERTY
 VALUES (40, 8, 3, 5, 1, 7);
 
 
-
 select * from cafe order by cafe_no desc
 
-select * from rs_user where id='user2'
+
+-- 리뷰 더미데이터
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'user1', review_seq.nextval, '정말 맛있어요. 매일 가는 곳입니다!', sysdate);
+
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang5', review_seq.nextval, '바쁜 아침 출근길에 커피 사가기 아주 좋아요. 아메리카노 짱!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'user2', review_seq.nextval, '가끔 사장님이 바쁘신지 불친절합니다..', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang6', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'user3', review_seq.nextval, '정말 맛있어요. 매일 가는 곳입니다!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang7', review_seq.nextval, '바쁜 아침 출근길에 커피 사가기 아주 좋아요. 아메리카노 짱!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'user4', review_seq.nextval, '가끔 사장님이 바쁘신지 불친절합니다..', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang8', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'user5', review_seq.nextval, '정말 맛있어요. 매일 가는 곳입니다!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang9', review_seq.nextval, '바쁜 아침 출근길에 커피 사가기 아주 좋아요. 아메리카노 짱!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'user6', review_seq.nextval, '가끔 사장님이 바쁘신지 불친절합니다..!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang14', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang11', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang12', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang13', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang15', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+insert into review(cafe_no, id, review_no, review_content, review_regdate)
+values(32, 'sajang10', review_seq.nextval, '카페가 너무 예뻐요! 소개팅 장소로 추천!', sysdate);
+
+-- 메뉴 더미데이터
+--메뉴 insert
+insert into menu values('아메리카노(ICE)',3000,32);
+insert into menu values('아메리카노(HOT)',2500,32);
+insert into menu values('카페라떼(ICE)',3500,32);
+insert into menu values('카페라떼(HOT)',3000,32);
+insert into menu values('바닐라라떼(ICE)',4000,32);
+insert into menu values('바닐라라떼(HOT)',4000,32);
+
+
+insert into menu values('그린티라떼(ICE)',3500,32);
+insert into menu values('그린티라떼(HOT)',3500,32);
+insert into menu values('밀크티(ICE)',4000,32);
+insert into menu values('밀크티(HOT)',4000,32);
+
+-- MENU_KIND
+insert into menu_kind(menu_name, cafe_no, espresso) values('그린티라떼(ICE)',32, 0);
+insert into menu_kind(menu_name, cafe_no, espresso) values('그린티라떼(HOT)',32,0);
+insert into menu_kind(menu_name, cafe_no, espresso) values('밀크티(ICE)',32,0);
+insert into menu_kind(menu_name, cafe_no, espresso) values('밀크티(HOT)',32,0);
+insert into menu_kind values('아메리카노(ICE)',32,1);
+insert into menu_kind values('아메리카노(HOT)',32,1);
+insert into menu_kind values('카페라떼(ICE)',32,1);
+insert into menu_kind values('카페라떼(HOT)',32,1);
+insert into menu_kind values('바닐라라떼(ICE)',32,1);
+insert into menu_kind values('바닐라라떼(HOT)',32,1);

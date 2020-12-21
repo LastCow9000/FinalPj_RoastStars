@@ -361,8 +361,8 @@ img {
 
 /*성호 CSS 추가 사항 시작 */
 .beansPickimg {
-  width: 100%;
-  height: 100%;
+  width: 540px;
+  height: 400px;
   object-fit: cover;
 }
 /*성호 CSS 추가 사항 끝*/

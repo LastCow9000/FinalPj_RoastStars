@@ -52,6 +52,7 @@ public class BeansPickServiceImpl implements BeansPickService{
 	public void registerBeansPick(BeansPickVO beansPickVO) {
 		beansPickMapper.registerBeansPick(beansPickVO);
 	}
+	
 	//빈즈픽 수정하기
 	@Override
 	public void updateBeansPick(BeansPickVO beansPickVO) {
@@ -63,6 +64,7 @@ public class BeansPickServiceImpl implements BeansPickService{
 	public void deleteBeansPick(String beansNo) {
 		beansPickMapper.deleteBeansPick(beansNo);
 	}
+	
 	//빈즈픽 총 수량
 	@Override
 	public int getTotalCountBeansPick() {
