@@ -6,7 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Beans Pick Form</title>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<style type="text/css">
+.timeBox {
+	text-align: center;
+	width: 200px;
+}
+</style>
 <script type="text/javascript">
 	/* 길이 체크 공간 */
 	$(document).ready(
