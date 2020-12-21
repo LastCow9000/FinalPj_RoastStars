@@ -12,8 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</sql>
 
    <!-- has a 관계를 위한 cafeOperatingTime resultMap 
-       : CafeOperatingTimeVO has a CafeVO
-         CafeVO has a UserVO
+       : CafeOperatingTimeVO has a CafeVO && CafeVO has a UserVO
    -->   
    <resultMap type="cafeOperatingTimeVO" id="CafeRM" >
       <result property="cafeVO.userVO.id" column="id"/>

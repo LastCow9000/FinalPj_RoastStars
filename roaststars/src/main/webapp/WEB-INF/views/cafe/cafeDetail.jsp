@@ -154,7 +154,6 @@
          <!-- 카페 상세정보 영역 -->
          <div class="col-sm-6">
             <div style="margin-top: 10px; margin-bottom: 0px;" class="shadow-sm p-4 mb-4 bg-white">
-            
             &nbsp;<p id="cafeDetailCafeTitle" class="font-weight-bolder">${cafeTotal.cafeVO.cafeName}</p> 
             <sec:authorize access="hasRole('ROLE_MEMBER')">
             <c:if test="${flag==true}">
@@ -165,34 +164,18 @@
             </c:if>
             </sec:authorize>
             <br>
-            
             <div>
-               <img src="resources/upload/${cafeTotal.cafeVO.cafePic}" alt="no image"
-                    width="473" height="300" style="margin-left: 3px; margin-top: 0px;">
+               <img src="resources/upload/${cafeTotal.cafeVO.cafePic}" alt="no image" width="473" height="300" style="margin-left: 3px; margin-top: 0px;">
             </div>
-           	
-           	<pre class="cafe-detail-info" >
-           		<span>${cafeTotal.cafeVO.cafeInfo}</span>
-           	</pre>
-            
+           	<pre class="cafe-detail-info" ><span>${cafeTotal.cafeVO.cafeInfo}</span></pre>
             <table class="table">
-               <tr>
-                  <td>전화번호</td>
-                  <td>${cafeTotal.cafeVO.cafeTel}</td>
+               <tr><td>전화번호</td><td>${cafeTotal.cafeVO.cafeTel}</td>
                </tr>
-               <tr>
-                  <td>운영시간</td>
-                  <td>
-	                  평일 : ${cafeTotal.weekdayTime} <br>
-	                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}
-                  </td>
+               <tr><td>운영시간</td><td>평일 : ${cafeTotal.weekdayTime} <br>
+	                  주말 : ${cafeTotal.weekendTime} | 공휴일 : ${cafeTotal.holidayTime}</td>
                </tr>
-               
-               <tr>
-                  <td>주소</td>
-                  <td>${cafeTotal.cafeVO.cafeLoc}</td>
+               <tr><td>주소</td><td>${cafeTotal.cafeVO.cafeLoc}</td>
                </tr>
-               
                <tr>
                	  <%-- 메뉴보기 모달 버튼 --%>
                   <td colspan="2" align="center"><button type="button" id="reviewModalBtn" class="btn btn-success" data-toggle="modal" data-target="#menuModal"><strong>메뉴 보기</strong></button></td>

@@ -54,7 +54,8 @@ public class CafeController {
 		boolean flag=false;
 		if(id!=null) { //로그인 했을 시 마이픽 리스트 불러오기
 			List<MyPickVO> myPickList=myPickService.findMyPickListById(id);
-			for (int i = 0; i < myPickList.size(); i++) {//로그인한 id에 마이픽 리스트가 있을시 채워진 별표 표시를 위해 true반환
+			for (int i = 0; i < myPickList.size(); i++) {
+				//로그인한 id에 마이픽 리스트가 있을시 채워진 별표 표시를 위해 true반환
 				if(myPickList.get(i).getCafeVO().getCafeNo().equals(cafeNo))
 					flag=true;
 			}
@@ -68,11 +69,6 @@ public class CafeController {
 		return "cafe/cafeDetail.tiles";
 	}// viewCafeDetail
 
-
-	public ModelAndView viewCafeDetail(String cafeNo) {
-		return new ModelAndView("cafe/cafeDetail.tiles",
-				"cafeTotal", cafeService.findCafeByCafeNo(cafeNo));
-	}//viewCafeDetail
 	
 	// 카페 간략정보 ajax
 	@RequestMapping("cafe-simple.do")
