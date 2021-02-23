@@ -18,10 +18,11 @@
 <div markdown="1">
 
 - 초기 개발 일정 계획
-!img1차 개발 일정
+![초기 개발 일정 계획](https://user-images.githubusercontent.com/68089565/108833785-aa152980-7610-11eb-9b8f-607865fdd9a3.png)
 
 - 최종 개발 일정
-!img최종 개발 일정
+![최종 개발 일정](https://user-images.githubusercontent.com/68089565/108833790-abdeed00-7610-11eb-8b4f-4150839d3b0d.png)
+
 </div>
 </details>
 
@@ -84,33 +85,33 @@
 <div markdown="1">
 
 - 토의
->
+> ![유즈케이스_1차](https://user-images.githubusercontent.com/68089565/108833872-c1ecad80-7610-11eb-9e11-c23ca772c3c7.jpg)
 
 - 초기 UseCase Diagram
 > 비회원
->
+> ![1차_UserCaseDiagram_포폴용_비회원](https://user-images.githubusercontent.com/68089565/108833886-c4e79e00-7610-11eb-86a2-5d128085213d.jpg)
 
 > 고객
->
+> ![1차_UserCaseDiagram_포폴용_고객](https://user-images.githubusercontent.com/68089565/108833882-c3b67100-7610-11eb-9946-9bf60ea5eaee.jpg)
 
 > 사장
->
+> ![1차_UserCaseDiagram_포폴용_사장](https://user-images.githubusercontent.com/68089565/108833867-c1541700-7610-11eb-9dd6-2a993313ee6f.jpg)
 
 > 관리자
->
+> ![1차_UserCaseDiagram_포폴용_관리자](https://user-images.githubusercontent.com/68089565/108833884-c44f0780-7610-11eb-8f76-7ce4a28cfb1a.jpg)
 
 - 최종 UseCase Diagram
 > 비회원
->
+> ![최종_UsecaseDiagram_비회원](https://user-images.githubusercontent.com/68089565/108833879-c31dda80-7610-11eb-8d65-79b594548d20.jpg)
 
 > 고객
->
+> ![최종_UsecaseDiagram_고객](https://user-images.githubusercontent.com/68089565/108833874-c2854400-7610-11eb-83b1-ef94ab095696.jpg)
 
 > 사장
->
+> ![최종_UsecaseDiagram_사장](https://user-images.githubusercontent.com/68089565/108833880-c3b67100-7610-11eb-9853-639f2a78ab0c.jpg)
 
 > 관리자
->
+> ![최종_UsecaseDiagram_관리자](https://user-images.githubusercontent.com/68089565/108833877-c31dda80-7610-11eb-88d1-031e9f3eec78.jpg)
 
 </div>
 </details>
@@ -119,17 +120,20 @@
 <summary>💶ERD</summary>
 <div markdown="1">
 
+- 토의
+> ![ERD_1차](https://user-images.githubusercontent.com/68089565/108834278-5820d380-7611-11eb-9b61-b8b6f0aa516d.jpg)
+
 - 초기 논리 ERD
->
+> ![1차_논리ERD](https://user-images.githubusercontent.com/68089565/108834290-5b1bc400-7611-11eb-809c-55583ea759af.jpeg)
 
 - 초기 물리 ERD
->
+> ![1차_물리ERD](https://user-images.githubusercontent.com/68089565/108834291-5bb45a80-7611-11eb-97d6-509a8f7646bf.jpeg)
 
 - 최종 논리 ERD
->
+> ![최종_논리ERD](https://user-images.githubusercontent.com/68089565/108834285-5a832d80-7611-11eb-9296-2d356dda3e40.jpeg)
 
 - 최종 물리
->
+> ![최종_물리ERD](https://user-images.githubusercontent.com/68089565/108834286-5a832d80-7611-11eb-9c57-b07142fde5cf.jpeg)
 
 </div>
 </details>
@@ -139,14 +143,14 @@
 <div markdown="1">
 
 - 토의
->
->
+> ![CD1](https://user-images.githubusercontent.com/68089565/108834449-8a323580-7611-11eb-9e12-31cec132157f.jpg)
+> ![CD2](https://user-images.githubusercontent.com/68089565/108834454-8bfbf900-7611-11eb-9d01-5df6434f6c0a.jpg)
 
 - 초기 Class Diagram
->
+> ![1차 ClassDiagram](https://user-images.githubusercontent.com/68089565/108834509-9d450580-7611-11eb-85fc-a73695455f32.jpg)
 
 - 최종 Class Diagram
->
+> ![ClassDiagram](https://user-images.githubusercontent.com/68089565/108834515-9e763280-7611-11eb-9f6c-14f25e5e991e.jpg)
 
 </div>
 </details>
@@ -156,10 +160,11 @@
 <div markdown="1">
 
 - 토의
->
+> ![FileList](https://user-images.githubusercontent.com/68089565/108834545-a8983100-7611-11eb-8422-ea52c4a0dbef.jpg)
 
 - 최종 File List
->
+> ![최종 파일리스트1](https://user-images.githubusercontent.com/68089565/108834548-a9c95e00-7611-11eb-99a2-67753242793f.png)
+> ![최종 파일리스트2](https://user-images.githubusercontent.com/68089565/108834551-aa61f480-7611-11eb-9aa0-6cf344f054e3.png)
 
 </div>
 </details>
