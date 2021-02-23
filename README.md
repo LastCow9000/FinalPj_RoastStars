@@ -1,5 +1,3 @@
-[toc]
-
 # ☕RoastStars
 
 - 판교에서 교육을 받으며 이용한 수 많은 카페들로 시작한 아이디어.
@@ -16,18 +14,19 @@
 약 1개월 (20.11.15 ~ 20.12.22)
 
 <details>
-<summary>접기/펼치기 버튼</summary>
+<summary>개발 일정</summary>
 <div markdown="1">
+- 초기 개발 일정 계획
+!img1차 개발 일정
 
-- 개발 일정
-- 
-
+- 최종 개발 일정
+!img최종 개발 일정
 </div>
 </details>
 
 
 
-### 🗃기술스택
+### 📚기술스택
 
 ----
 
@@ -52,7 +51,7 @@
 
 `송영섭` : 메인 개발자 겸 PL
 
-- 임시 비밀번호 발급, 지역검색, 선호 리스트순으로 정렬, 지도에서 위치 표시, 카페 간략 정보, 관리자 페이지의 사장 권한 부여, 마이픽 추가/삭제, 
+- 임시 비밀번호 발급, 지역검색, 선호 리스트순으로 정렬, 지도에서 위치 표시, 카페 간략 정보, 관리자 페이지의 사장 권한 부여, 마이픽 추가/삭제
 
 `신성호` : 메인 개발자 겸 PM
 
@@ -64,7 +63,7 @@
 
 
 
-🎇 각자 자신이 100% 구현하지 않고 **서로 도와가며** 구현했다는 것을 밝힌다.
+🎇 모든 기능을 각자 자신이 100% 구현하지 않고 **서로 도와가며** 구현했다.
 
 
 
@@ -72,13 +71,110 @@
 
 ---
 
-애자일 방식으로 2차 구현으로 나눔
+- 애자일 방식을 채택하여 필요 시 마다 설계, 구현, 테스팅을 반복하였다.
+- 크게 1차, 2차 구현으로 나누었다.
+
+<details>
+<summary>설계 img</summary>
+<div markdown="1">
+
+<details>
+<summary>Usecase Diagram</summary>
+<div markdown="1">
+- 토의
+>
+
+- 초기 UseCase Diagram
+> 비회원
+>
+
+> 고객
+>
+
+> 사장
+>
+
+> 관리자
+>
+
+- 최종 UseCase Diagram
+> 비회원
+>
+
+> 고객
+>
+
+> 사장
+>
+
+> 관리자
+>
+
+</div>
+</details>
+
+<details>
+<summary>ERD</summary>
+<div markdown="1">
+- 초기 논리 ERD
+>
+
+- 초기 물리 ERD
+>
+
+- 최종 논리 ERD
+>
+
+- 최종 물리
+>
+
+</div>
+</details>
+
+<details>
+<summary>Class Diagram</summary>
+<div markdown="1">
+- 토의
+>
+>
+
+- 초기 Class Diagram
+>
+
+- 최종 Class Diagram
+>
+
+</div>
+</details>
+
+<details>
+<summary>File List</summary>
+<div markdown="1">
+- 토의
+>
+
+- 최종 File List
+>
+
+</div>
+</details>
+
+</div>
+</details>
 
 
 
 ### 프로젝트내용
 
 ---
+
+
+
+### 번외 : 기록들
+
+----
+
+[Trello](https://trello.com/b/fMGKsYuT/roast-stars-project)
 
 
 
