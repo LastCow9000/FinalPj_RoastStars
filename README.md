@@ -16,6 +16,7 @@
 <details>
 <summary>개발 일정</summary>
 <div markdown="1">
+
 - 초기 개발 일정 계획
 !img1차 개발 일정
 
@@ -78,86 +79,90 @@
 <summary>설계 img</summary>
 <div markdown="1">
 
-<details>
-<summary>Usecase Diagram</summary>
-<div markdown="1">
-- 토의
->
-
-- 초기 UseCase Diagram
-> 비회원
->
-
-> 고객
->
-
-> 사장
->
-
-> 관리자
->
-
-- 최종 UseCase Diagram
-> 비회원
->
-
-> 고객
->
-
-> 사장
->
-
-> 관리자
->
-
-</div>
-</details>
-
-<details>
-<summary>ERD</summary>
-<div markdown="1">
-- 초기 논리 ERD
->
-
-- 초기 물리 ERD
->
-
-- 최종 논리 ERD
->
-
-- 최종 물리
->
-
-</div>
-</details>
-
-<details>
-<summary>Class Diagram</summary>
-<div markdown="1">
-- 토의
->
->
-
-- 초기 Class Diagram
->
-
-- 최종 Class Diagram
->
-
-</div>
-</details>
-
-<details>
-<summary>File List</summary>
-<div markdown="1">
-- 토의
->
-
-- 최종 File List
->
-
-</div>
-</details>
+    <details>
+    <summary>Usecase Diagram</summary>
+    <div markdown="1">
+    
+    - 토의
+    >
+    
+    - 초기 UseCase Diagram
+    > 비회원
+    >
+    
+    > 고객
+    >
+    
+    > 사장
+    >
+    
+    > 관리자
+    >
+    
+    - 최종 UseCase Diagram
+    > 비회원
+    >
+    
+    > 고객
+    >
+    
+    > 사장
+    >
+    
+    > 관리자
+    >
+    
+    </div>
+    </details>
+    
+    <details>
+    <summary>ERD</summary>
+    <div markdown="1">
+    
+    - 초기 논리 ERD
+    >
+    
+    - 초기 물리 ERD
+    >
+    
+    - 최종 논리 ERD
+    >
+    
+    - 최종 물리
+    >
+    
+    </div>
+    </details>
+    
+    <details>
+    <summary>Class Diagram</summary>
+    <div markdown="1">
+    
+    - 토의
+    >
+    >
+    
+    - 초기 Class Diagram
+    >
+    
+    - 최종 Class Diagram
+    >
+    
+    </div>
+    </details>
+    
+    <details>
+    <summary>File List</summary>
+    <div markdown="1">
+    
+    - 토의
+    >
+    
+    - 최종 File List
+    >
+    
+    </div>
+    </details>
 
 </div>
 </details>
