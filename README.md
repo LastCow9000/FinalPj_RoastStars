@@ -222,7 +222,7 @@
 <div markdown="1">
 
 - 회원가입
-> ![1 회원가입](/img for readme/1.회원가입.gif)
+> ![1 회원가입](img for readme/1.회원가입.gif)
 
 - 사장/ 일반유저를 선택해서 가입해야 한다.(관리자에 의해 승인을 받아야 한다)
 > ![2  사장회원가입](/img for readme/2. 사장회원가입.gif)
