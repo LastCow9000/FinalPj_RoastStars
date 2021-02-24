@@ -222,10 +222,10 @@
 <div markdown="1">
 
 - 회원가입
-> ![1 회원가입](img for readme/1.회원가입.gif)
+> ![1 회원가입](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/1.%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif?raw=true)
 
 - 사장/ 일반유저를 선택해서 가입해야 한다.(관리자에 의해 승인을 받아야 한다)
-> ![2  사장회원가입](/img for readme/2. 사장회원가입.gif)
+> ![2  사장회원가입](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/2.%20%EC%82%AC%EC%9E%A5%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif?raw=true)
 
 </div>
 </details>
@@ -235,10 +235,10 @@
 <div markdown="1">
 
 - 임시 비밀번호 발급(아이디와 이름이 **일치**할 시 발급 가능하다) - 난수발생과 아스키코드를 이용
-> ![3  임시 비번 발급](/img for readme/3. 임시 비번 발급.gif)
+> ![3  임시 비번 발급](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/3.%20%EC%9E%84%EC%8B%9C%20%EB%B9%84%EB%B2%88%20%EB%B0%9C%EA%B8%89.gif?raw=true)
 
 - 비밀번호 변경
-> ![3.5 비번변경](/img for readme/3.5 비번변경.gif)
+> ![3.5 비번변경](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/3.5%20%EB%B9%84%EB%B2%88%EB%B3%80%EA%B2%BD.gif?raw=true)
 
 </div>
 </details>
@@ -249,7 +249,7 @@
 
 - 지역 검색 후 선호 항목(1, 2, 3순위)으로 지역 검색된 리스트가 **정렬**된다.(Ajax)
 - 지도는 `카카오맵api`를 이용하였다.
-> ![4 지역검색 및 카페 간략정보, 선호도 정렬, 지도](/img for readme/4. 지역검색 및 카페 간략정보, 선호도 정렬, 지도.gif)
+> ![4 지역검색 및 카페 간략정보, 선호도 정렬, 지도](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/4.%20%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89%20%EB%B0%8F%20%EC%B9%B4%ED%8E%98%20%EA%B0%84%EB%9E%B5%EC%A0%95%EB%B3%B4,%20%EC%84%A0%ED%98%B8%EB%8F%84%20%EC%A0%95%EB%A0%AC,%20%EC%A7%80%EB%8F%84.gif?raw=true)
 
 </div>
 </details>
@@ -259,7 +259,7 @@
 <div markdown="1">
 
 - 카페 간략정보, 마이픽 등의 경로를 통해 선택된 카페에 대한 상세정보와 메뉴를 볼 수 있다.
-> ![5 카페 상세보기, 메뉴보기](/img for readme/5. 카페 상세보기, 메뉴보기.gif)
+> ![5 카페 상세보기, 메뉴보기](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/5.%20%EC%B9%B4%ED%8E%98%20%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0,%20%EB%A9%94%EB%89%B4%EB%B3%B4%EA%B8%B0.gif?raw=true)
 
 </div>
 </details>
@@ -270,7 +270,7 @@
 
 - 리뷰 작성 시, 특성값에 포인트로 평가하여, 카페 특성에 점수가 추가된다.(이 점수로 **선호도 정렬**)
 - 본인이 작성한 리뷰만 삭제할 수 있다. 삭제하면 추가되었던 카페의 특성값이 다시 사라진다.
-> ![6 리뷰작성 및 삭제](/img for readme/6. 리뷰작성 및 삭제.gif)
+> ![6 리뷰작성 및 삭제](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/6.%20%EB%A6%AC%EB%B7%B0%EC%9E%91%EC%84%B1%20%EB%B0%8F%20%EC%82%AD%EC%A0%9C.gif?raw=true)
 
 
 </div>
@@ -281,7 +281,7 @@
 <div markdown="1">
 
 - 관리자 전용 기능으로서 사장으로 회원 가입한 고객들의 정보를 확인하고 사장(매니저)**권한을 부여**할 수 있다.
-> ![7 사장권한부여](/img for readme/7. 사장권한부여.gif)
+> ![7 사장권한부여](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/7.%20%EC%82%AC%EC%9E%A5%EA%B6%8C%ED%95%9C%EB%B6%80%EC%97%AC.gif?raw=true)
 
 </div>
 </details>
@@ -291,7 +291,7 @@
 <div markdown="1">
 
 - 카페 간략정보 or  상세정보에서 추가할 수 있다. **Ajax**로 구현하여  ☆을 클릭 시 실시간으로 추가, 제거된다.
-> ![8 마이픽](/img for readme/8. 마이픽.gif)
+> ![8 마이픽](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/8.%20%EB%A7%88%EC%9D%B4%ED%94%BD.gif?raw=true)
 
 </div>
 </details>
@@ -302,7 +302,7 @@
 
 - 많은 카페들 중에서 홍보나 이벤트를 위해 에디터(관리자)가 직접 고른 카페의 정보를 전달하는 게시판
 - 모든 유저(비회원 포함)가 볼 수 있으나, 수정/삭제는 **관리자만** 가능하다.
-> ![9 빈즈픽](/img for readme/9. 빈즈픽.gif)
+> ![9 빈즈픽](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/9.%20%EB%B9%88%EC%A6%88%ED%94%BD.gif?raw=true)
 
 </div>
 </details>
@@ -315,7 +315,7 @@
 - 공휴일에도 운영을 하는 회원은 ‘운영함’에 체크를 하면 공휴일 등록폼이 **동적**으로 생성된다.
 - 카페기본정보와 운영시간은 다른 테이블이므로 **트랜잭션**처리를 하였다.
 
-> ![10 카페 등록](/img for readme/10. 카페 등록.gif)
+> ![10 카페 등록](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/10.%20%EC%B9%B4%ED%8E%98%20%EB%93%B1%EB%A1%9D.gif?raw=true)
 
 </div>
 </details>
@@ -325,7 +325,7 @@
 <div markdown="1">
 
 - 가격은 최소 **100원 단위**로 설정했다.
-> ![11 메뉴 추가 및 확인](/img for readme/11메뉴 추가 및 확인.gif)
+> ![11 메뉴 추가 및 확인](https://github.com/LastCow9000/FinalPj_RoastStars/blob/main/img%20for%20readme/11%EB%A9%94%EB%89%B4%20%EC%B6%94%EA%B0%80%20%EB%B0%8F%20%ED%99%95%EC%9D%B8.gif?raw=true)
 
 </div>
 </details>
